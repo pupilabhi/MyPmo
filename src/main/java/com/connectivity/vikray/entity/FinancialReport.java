@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,9 +34,7 @@ public class FinancialReport implements java.io.Serializable {
 	private String guid;
 	private Date createdDate;
 	private Set<Payable> payables = new HashSet<Payable>(0);
-	private Set<Payable> payables_1 = new HashSet<Payable>(0);
 	private Set<Recievable> recievables = new HashSet<Recievable>(0);
-	private Set<Recievable> recievables_1 = new HashSet<Recievable>(0);
 
 	public FinancialReport() {
 	}
@@ -47,8 +45,7 @@ public class FinancialReport implements java.io.Serializable {
 
 	public FinancialReport(long id, Domain domain, Organisation organisation, SalesOrderHeader salesOrderHeader,
 			UserDetails userDetails, String accManager, String customerName, String org, String sosName, String guid,
-			Date createdDate, Set<Payable> payables, Set<Payable> payables_1, Set<Recievable> recievables,
-			Set<Recievable> recievables_1) {
+			Date createdDate, Set<Payable> payables, Set<Recievable> recievables) {
 		this.id = id;
 		this.domain = domain;
 		this.organisation = organisation;
@@ -61,9 +58,7 @@ public class FinancialReport implements java.io.Serializable {
 		this.guid = guid;
 		this.createdDate = createdDate;
 		this.payables = payables;
-		this.payables_1 = payables_1;
 		this.recievables = recievables;
-		this.recievables_1 = recievables_1;
 	}
 
 	@Id
@@ -182,30 +177,12 @@ public class FinancialReport implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "financialReport")
-	public Set<Payable> getPayables_1() {
-		return this.payables_1;
-	}
-
-	public void setPayables_1(Set<Payable> payables_1) {
-		this.payables_1 = payables_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "financialReport")
 	public Set<Recievable> getRecievables() {
 		return this.recievables;
 	}
 
 	public void setRecievables(Set<Recievable> recievables) {
 		this.recievables = recievables;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "financialReport")
-	public Set<Recievable> getRecievables_1() {
-		return this.recievables_1;
-	}
-
-	public void setRecievables_1(Set<Recievable> recievables_1) {
-		this.recievables_1 = recievables_1;
 	}
 
 }

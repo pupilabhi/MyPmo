@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -37,8 +37,6 @@ public class Warehouse implements java.io.Serializable {
 	private Date createdDate;
 	private Set<GrnItem> grnItems = new HashSet<GrnItem>(0);
 	private Set<InventoryItem> inventoryItems = new HashSet<InventoryItem>(0);
-	private Set<GrnItem> grnItems_1 = new HashSet<GrnItem>(0);
-	private Set<InventoryItem> inventoryItems_1 = new HashSet<InventoryItem>(0);
 
 	public Warehouse() {
 	}
@@ -49,8 +47,7 @@ public class Warehouse implements java.io.Serializable {
 
 	public Warehouse(long id, AccountDetail accountDetail, Domain domain, UserDetails userDetails, String addressLine1,
 			String addressLine2, String city, String country, String state, String zipCode, String name,
-			String description, Date createdDate, Set<GrnItem> grnItems, Set<InventoryItem> inventoryItems,
-			Set<GrnItem> grnItems_1, Set<InventoryItem> inventoryItems_1) {
+			String description, Date createdDate, Set<GrnItem> grnItems, Set<InventoryItem> inventoryItems) {
 		this.id = id;
 		this.accountDetail = accountDetail;
 		this.domain = domain;
@@ -66,8 +63,6 @@ public class Warehouse implements java.io.Serializable {
 		this.createdDate = createdDate;
 		this.grnItems = grnItems;
 		this.inventoryItems = inventoryItems;
-		this.grnItems_1 = grnItems_1;
-		this.inventoryItems_1 = inventoryItems_1;
 	}
 
 	@Id
@@ -209,24 +204,6 @@ public class Warehouse implements java.io.Serializable {
 
 	public void setInventoryItems(Set<InventoryItem> inventoryItems) {
 		this.inventoryItems = inventoryItems;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "warehouse")
-	public Set<GrnItem> getGrnItems_1() {
-		return this.grnItems_1;
-	}
-
-	public void setGrnItems_1(Set<GrnItem> grnItems_1) {
-		this.grnItems_1 = grnItems_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "warehouse")
-	public Set<InventoryItem> getInventoryItems_1() {
-		return this.inventoryItems_1;
-	}
-
-	public void setInventoryItems_1(Set<InventoryItem> inventoryItems_1) {
-		this.inventoryItems_1 = inventoryItems_1;
 	}
 
 }

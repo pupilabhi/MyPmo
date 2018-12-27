@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,8 +28,8 @@ public class Product implements java.io.Serializable {
 	private Domain domain;
 	private ProductCategory productCategoryByProductCategoryFk;
 	private ProductCategory productCategoryByParentcategoryIdOid;
-	private UserDetails userDetailsByLastModifiedByUserFk;
 	private UserDetails userDetailsByCreatedByUserFk;
+	private UserDetails userDetailsByLastModifiedByUserFk;
 	private Date createdDate;
 	private String guid;
 	private String itemDescription;
@@ -46,8 +46,6 @@ public class Product implements java.io.Serializable {
 	private boolean isDisabled;
 	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
 	private Set<InventoryItem> inventoryItems = new HashSet<InventoryItem>(0);
-	private Set<InventoryItem> inventoryItems_1 = new HashSet<InventoryItem>(0);
-	private Set<OrderItem> orderItems_1 = new HashSet<OrderItem>(0);
 
 	public Product() {
 	}
@@ -62,18 +60,17 @@ public class Product implements java.io.Serializable {
 	}
 
 	public Product(long id, Domain domain, ProductCategory productCategoryByProductCategoryFk,
-			ProductCategory productCategoryByParentcategoryIdOid, UserDetails userDetailsByLastModifiedByUserFk,
-			UserDetails userDetailsByCreatedByUserFk, Date createdDate, String guid, String itemDescription,
+			ProductCategory productCategoryByParentcategoryIdOid, UserDetails userDetailsByCreatedByUserFk,
+			UserDetails userDetailsByLastModifiedByUserFk, Date createdDate, String guid, String itemDescription,
 			Date lastModifiedDate, String productName, double taxPercentage, String taxType, double unitPrice,
 			String slNo, double totalPrice, String uom, String hsn, double gst, boolean isDisabled,
-			Set<OrderItem> orderItems, Set<InventoryItem> inventoryItems, Set<InventoryItem> inventoryItems_1,
-			Set<OrderItem> orderItems_1) {
+			Set<OrderItem> orderItems, Set<InventoryItem> inventoryItems) {
 		this.id = id;
 		this.domain = domain;
 		this.productCategoryByProductCategoryFk = productCategoryByProductCategoryFk;
 		this.productCategoryByParentcategoryIdOid = productCategoryByParentcategoryIdOid;
-		this.userDetailsByLastModifiedByUserFk = userDetailsByLastModifiedByUserFk;
 		this.userDetailsByCreatedByUserFk = userDetailsByCreatedByUserFk;
+		this.userDetailsByLastModifiedByUserFk = userDetailsByLastModifiedByUserFk;
 		this.createdDate = createdDate;
 		this.guid = guid;
 		this.itemDescription = itemDescription;
@@ -90,8 +87,6 @@ public class Product implements java.io.Serializable {
 		this.isDisabled = isDisabled;
 		this.orderItems = orderItems;
 		this.inventoryItems = inventoryItems;
-		this.inventoryItems_1 = inventoryItems_1;
-		this.orderItems_1 = orderItems_1;
 	}
 
 	@Id
@@ -136,16 +131,6 @@ public class Product implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "LAST_MODIFIED_BY_USER_FK")
-	public UserDetails getUserDetailsByLastModifiedByUserFk() {
-		return this.userDetailsByLastModifiedByUserFk;
-	}
-
-	public void setUserDetailsByLastModifiedByUserFk(UserDetails userDetailsByLastModifiedByUserFk) {
-		this.userDetailsByLastModifiedByUserFk = userDetailsByLastModifiedByUserFk;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CREATED_BY_USER_FK")
 	public UserDetails getUserDetailsByCreatedByUserFk() {
 		return this.userDetailsByCreatedByUserFk;
@@ -153,6 +138,16 @@ public class Product implements java.io.Serializable {
 
 	public void setUserDetailsByCreatedByUserFk(UserDetails userDetailsByCreatedByUserFk) {
 		this.userDetailsByCreatedByUserFk = userDetailsByCreatedByUserFk;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "LAST_MODIFIED_BY_USER_FK")
+	public UserDetails getUserDetailsByLastModifiedByUserFk() {
+		return this.userDetailsByLastModifiedByUserFk;
+	}
+
+	public void setUserDetailsByLastModifiedByUserFk(UserDetails userDetailsByLastModifiedByUserFk) {
+		this.userDetailsByLastModifiedByUserFk = userDetailsByLastModifiedByUserFk;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -299,24 +294,6 @@ public class Product implements java.io.Serializable {
 
 	public void setInventoryItems(Set<InventoryItem> inventoryItems) {
 		this.inventoryItems = inventoryItems;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-	public Set<InventoryItem> getInventoryItems_1() {
-		return this.inventoryItems_1;
-	}
-
-	public void setInventoryItems_1(Set<InventoryItem> inventoryItems_1) {
-		this.inventoryItems_1 = inventoryItems_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-	public Set<OrderItem> getOrderItems_1() {
-		return this.orderItems_1;
-	}
-
-	public void setOrderItems_1(Set<OrderItem> orderItems_1) {
-		this.orderItems_1 = orderItems_1;
 	}
 
 }

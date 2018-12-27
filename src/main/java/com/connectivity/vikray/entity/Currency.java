@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,16 +24,10 @@ public class Currency implements java.io.Serializable {
 	private String minorName;
 	private Set<SalesOrderHeader> salesOrderHeaders = new HashSet<SalesOrderHeader>(0);
 	private Set<QuoteHeader> quoteHeaders = new HashSet<QuoteHeader>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeaders = new HashSet<PurchaseOrderHeader>(0);
 	private Set<BusinessDeal> businessDeals = new HashSet<BusinessDeal>(0);
 	private Set<PurchaseEntry> purchaseEntries = new HashSet<PurchaseEntry>(0);
-	private Set<PurchaseEntry> purchaseEntries_1 = new HashSet<PurchaseEntry>(0);
 	private Set<InvoiceHeader> invoiceHeaders = new HashSet<InvoiceHeader>(0);
-	private Set<QuoteHeader> quoteHeaders_1 = new HashSet<QuoteHeader>(0);
-	private Set<SalesOrderHeader> salesOrderHeaders_1 = new HashSet<SalesOrderHeader>(0);
-	private Set<BusinessDeal> businessDeals_1 = new HashSet<BusinessDeal>(0);
-	private Set<InvoiceHeader> invoiceHeaders_1 = new HashSet<InvoiceHeader>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeaders_1 = new HashSet<PurchaseOrderHeader>(0);
+	private Set<PurchaseOrderHeader> purchaseOrderHeaders = new HashSet<PurchaseOrderHeader>(0);
 
 	public Currency() {
 	}
@@ -43,12 +37,9 @@ public class Currency implements java.io.Serializable {
 	}
 
 	public Currency(long id, String description, String shortName, String majorName, String minorName,
-			Set<SalesOrderHeader> salesOrderHeaders, Set<QuoteHeader> quoteHeaders,
-			Set<PurchaseOrderHeader> purchaseOrderHeaders, Set<BusinessDeal> businessDeals,
-			Set<PurchaseEntry> purchaseEntries, Set<PurchaseEntry> purchaseEntries_1, Set<InvoiceHeader> invoiceHeaders,
-			Set<QuoteHeader> quoteHeaders_1, Set<SalesOrderHeader> salesOrderHeaders_1,
-			Set<BusinessDeal> businessDeals_1, Set<InvoiceHeader> invoiceHeaders_1,
-			Set<PurchaseOrderHeader> purchaseOrderHeaders_1) {
+			Set<SalesOrderHeader> salesOrderHeaders, Set<QuoteHeader> quoteHeaders, Set<BusinessDeal> businessDeals,
+			Set<PurchaseEntry> purchaseEntries, Set<InvoiceHeader> invoiceHeaders,
+			Set<PurchaseOrderHeader> purchaseOrderHeaders) {
 		this.id = id;
 		this.description = description;
 		this.shortName = shortName;
@@ -56,16 +47,10 @@ public class Currency implements java.io.Serializable {
 		this.minorName = minorName;
 		this.salesOrderHeaders = salesOrderHeaders;
 		this.quoteHeaders = quoteHeaders;
-		this.purchaseOrderHeaders = purchaseOrderHeaders;
 		this.businessDeals = businessDeals;
 		this.purchaseEntries = purchaseEntries;
-		this.purchaseEntries_1 = purchaseEntries_1;
 		this.invoiceHeaders = invoiceHeaders;
-		this.quoteHeaders_1 = quoteHeaders_1;
-		this.salesOrderHeaders_1 = salesOrderHeaders_1;
-		this.businessDeals_1 = businessDeals_1;
-		this.invoiceHeaders_1 = invoiceHeaders_1;
-		this.purchaseOrderHeaders_1 = purchaseOrderHeaders_1;
+		this.purchaseOrderHeaders = purchaseOrderHeaders;
 	}
 
 	@Id
@@ -134,15 +119,6 @@ public class Currency implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeaders() {
-		return this.purchaseOrderHeaders;
-	}
-
-	public void setPurchaseOrderHeaders(Set<PurchaseOrderHeader> purchaseOrderHeaders) {
-		this.purchaseOrderHeaders = purchaseOrderHeaders;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
 	public Set<BusinessDeal> getBusinessDeals() {
 		return this.businessDeals;
 	}
@@ -161,15 +137,6 @@ public class Currency implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
-	public Set<PurchaseEntry> getPurchaseEntries_1() {
-		return this.purchaseEntries_1;
-	}
-
-	public void setPurchaseEntries_1(Set<PurchaseEntry> purchaseEntries_1) {
-		this.purchaseEntries_1 = purchaseEntries_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
 	public Set<InvoiceHeader> getInvoiceHeaders() {
 		return this.invoiceHeaders;
 	}
@@ -179,48 +146,12 @@ public class Currency implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
-	public Set<QuoteHeader> getQuoteHeaders_1() {
-		return this.quoteHeaders_1;
+	public Set<PurchaseOrderHeader> getPurchaseOrderHeaders() {
+		return this.purchaseOrderHeaders;
 	}
 
-	public void setQuoteHeaders_1(Set<QuoteHeader> quoteHeaders_1) {
-		this.quoteHeaders_1 = quoteHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
-	public Set<SalesOrderHeader> getSalesOrderHeaders_1() {
-		return this.salesOrderHeaders_1;
-	}
-
-	public void setSalesOrderHeaders_1(Set<SalesOrderHeader> salesOrderHeaders_1) {
-		this.salesOrderHeaders_1 = salesOrderHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
-	public Set<BusinessDeal> getBusinessDeals_1() {
-		return this.businessDeals_1;
-	}
-
-	public void setBusinessDeals_1(Set<BusinessDeal> businessDeals_1) {
-		this.businessDeals_1 = businessDeals_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
-	public Set<InvoiceHeader> getInvoiceHeaders_1() {
-		return this.invoiceHeaders_1;
-	}
-
-	public void setInvoiceHeaders_1(Set<InvoiceHeader> invoiceHeaders_1) {
-		this.invoiceHeaders_1 = invoiceHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeaders_1() {
-		return this.purchaseOrderHeaders_1;
-	}
-
-	public void setPurchaseOrderHeaders_1(Set<PurchaseOrderHeader> purchaseOrderHeaders_1) {
-		this.purchaseOrderHeaders_1 = purchaseOrderHeaders_1;
+	public void setPurchaseOrderHeaders(Set<PurchaseOrderHeader> purchaseOrderHeaders) {
+		this.purchaseOrderHeaders = purchaseOrderHeaders;
 	}
 
 }

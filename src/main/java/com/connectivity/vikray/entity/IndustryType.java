@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,6 @@ public class IndustryType implements java.io.Serializable {
 	private long id;
 	private String description;
 	private Set<AccountDetail> accountDetails = new HashSet<AccountDetail>(0);
-	private Set<AccountDetail> accountDetails_1 = new HashSet<AccountDetail>(0);
 
 	public IndustryType() {
 	}
@@ -29,12 +28,10 @@ public class IndustryType implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public IndustryType(long id, String description, Set<AccountDetail> accountDetails,
-			Set<AccountDetail> accountDetails_1) {
+	public IndustryType(long id, String description, Set<AccountDetail> accountDetails) {
 		this.id = id;
 		this.description = description;
 		this.accountDetails = accountDetails;
-		this.accountDetails_1 = accountDetails_1;
 	}
 
 	@Id
@@ -64,15 +61,6 @@ public class IndustryType implements java.io.Serializable {
 
 	public void setAccountDetails(Set<AccountDetail> accountDetails) {
 		this.accountDetails = accountDetails;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "industryType")
-	public Set<AccountDetail> getAccountDetails_1() {
-		return this.accountDetails_1;
-	}
-
-	public void setAccountDetails_1(Set<AccountDetail> accountDetails_1) {
-		this.accountDetails_1 = accountDetails_1;
 	}
 
 }

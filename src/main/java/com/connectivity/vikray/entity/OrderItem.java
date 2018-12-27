@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -62,10 +62,13 @@ public class OrderItem implements java.io.Serializable {
 	private int pendingPoQuantity;
 	private Date serviceStartDate;
 	private Date serviceEndDate;
+	private String productSlNo;
+	private String productSerialNo;
+	private Set<ReserveActivity> reserveActivities = new HashSet<ReserveActivity>(0);
+	private Set<InvoiceHistory> invoiceHistories = new HashSet<InvoiceHistory>(0);
 	private Set<QuoteItem> quoteItems = new HashSet<QuoteItem>(0);
-	private Set<QuoteItem> quoteItems_1 = new HashSet<QuoteItem>(0);
 	private Set<GrnItem> grnItems = new HashSet<GrnItem>(0);
-	private Set<GrnItem> grnItems_1 = new HashSet<GrnItem>(0);
+	private Set<Activity> activities = new HashSet<Activity>(0);
 
 	public OrderItem() {
 	}
@@ -110,8 +113,9 @@ public class OrderItem implements java.io.Serializable {
 			double taxAmount, double taxPercentage, String taxType, String uom, int vendorPaymentTermsDays,
 			String vendorQuoteNo, String slNo, double profit, double sgstRate, double igstRate, int reservedquantity,
 			double cgstRate, double cgstAmount, String hsnCode, double igstAmount, double sgstAmount, int poQuantiy,
-			int pendingPoQuantity, Date serviceStartDate, Date serviceEndDate, Set<QuoteItem> quoteItems,
-			Set<QuoteItem> quoteItems_1, Set<GrnItem> grnItems, Set<GrnItem> grnItems_1) {
+			int pendingPoQuantity, Date serviceStartDate, Date serviceEndDate, String productSlNo,
+			String productSerialNo, Set<ReserveActivity> reserveActivities, Set<InvoiceHistory> invoiceHistories,
+			Set<QuoteItem> quoteItems, Set<GrnItem> grnItems, Set<Activity> activities) {
 		this.id = id;
 		this.accountDetail = accountDetail;
 		this.inventoryItem = inventoryItem;
@@ -152,10 +156,13 @@ public class OrderItem implements java.io.Serializable {
 		this.pendingPoQuantity = pendingPoQuantity;
 		this.serviceStartDate = serviceStartDate;
 		this.serviceEndDate = serviceEndDate;
+		this.productSlNo = productSlNo;
+		this.productSerialNo = productSerialNo;
+		this.reserveActivities = reserveActivities;
+		this.invoiceHistories = invoiceHistories;
 		this.quoteItems = quoteItems;
-		this.quoteItems_1 = quoteItems_1;
 		this.grnItems = grnItems;
-		this.grnItems_1 = grnItems_1;
+		this.activities = activities;
 	}
 
 	@Id
@@ -529,6 +536,42 @@ public class OrderItem implements java.io.Serializable {
 		this.serviceEndDate = serviceEndDate;
 	}
 
+	@Column(name = "PRODUCT_SL_NO")
+	public String getProductSlNo() {
+		return this.productSlNo;
+	}
+
+	public void setProductSlNo(String productSlNo) {
+		this.productSlNo = productSlNo;
+	}
+
+	@Column(name = "PRODUCT_SERIAL_NO", length = 65535)
+	public String getProductSerialNo() {
+		return this.productSerialNo;
+	}
+
+	public void setProductSerialNo(String productSerialNo) {
+		this.productSerialNo = productSerialNo;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderItem")
+	public Set<ReserveActivity> getReserveActivities() {
+		return this.reserveActivities;
+	}
+
+	public void setReserveActivities(Set<ReserveActivity> reserveActivities) {
+		this.reserveActivities = reserveActivities;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderItem")
+	public Set<InvoiceHistory> getInvoiceHistories() {
+		return this.invoiceHistories;
+	}
+
+	public void setInvoiceHistories(Set<InvoiceHistory> invoiceHistories) {
+		this.invoiceHistories = invoiceHistories;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderItem")
 	public Set<QuoteItem> getQuoteItems() {
 		return this.quoteItems;
@@ -536,15 +579,6 @@ public class OrderItem implements java.io.Serializable {
 
 	public void setQuoteItems(Set<QuoteItem> quoteItems) {
 		this.quoteItems = quoteItems;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderItem")
-	public Set<QuoteItem> getQuoteItems_1() {
-		return this.quoteItems_1;
-	}
-
-	public void setQuoteItems_1(Set<QuoteItem> quoteItems_1) {
-		this.quoteItems_1 = quoteItems_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderItem")
@@ -557,12 +591,12 @@ public class OrderItem implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderItem")
-	public Set<GrnItem> getGrnItems_1() {
-		return this.grnItems_1;
+	public Set<Activity> getActivities() {
+		return this.activities;
 	}
 
-	public void setGrnItems_1(Set<GrnItem> grnItems_1) {
-		this.grnItems_1 = grnItems_1;
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
 	}
 
 }

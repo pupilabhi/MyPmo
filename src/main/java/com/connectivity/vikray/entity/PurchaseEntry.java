@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -48,7 +48,6 @@ public class PurchaseEntry implements java.io.Serializable {
 	private String vendorInvoiceNo;
 	private double convertionRate;
 	private Set<GrnItem> grnItems = new HashSet<GrnItem>(0);
-	private Set<GrnItem> grnItems_1 = new HashSet<GrnItem>(0);
 
 	public PurchaseEntry() {
 	}
@@ -65,8 +64,7 @@ public class PurchaseEntry implements java.io.Serializable {
 			SalesOrderHeader salesOrderHeader, StatusItem statusItem, UserDetails userDetailsByLastModifiedByUserFk,
 			UserDetails userDetailsByCreatedBy, Date createdDate, Double freightInferred, String guid,
 			Date lastModifiedDate, Double miscellaneousAmount, String purchaseEntryName, double vendorInvoiceAmt,
-			Date vendorInvoiceDate, String vendorInvoiceNo, double convertionRate, Set<GrnItem> grnItems,
-			Set<GrnItem> grnItems_1) {
+			Date vendorInvoiceDate, String vendorInvoiceNo, double convertionRate, Set<GrnItem> grnItems) {
 		this.id = id;
 		this.accountAddress = accountAddress;
 		this.accountDetail = accountDetail;
@@ -93,7 +91,6 @@ public class PurchaseEntry implements java.io.Serializable {
 		this.vendorInvoiceNo = vendorInvoiceNo;
 		this.convertionRate = convertionRate;
 		this.grnItems = grnItems;
-		this.grnItems_1 = grnItems_1;
 	}
 
 	@Id
@@ -347,15 +344,6 @@ public class PurchaseEntry implements java.io.Serializable {
 
 	public void setGrnItems(Set<GrnItem> grnItems) {
 		this.grnItems = grnItems;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseEntry")
-	public Set<GrnItem> getGrnItems_1() {
-		return this.grnItems_1;
-	}
-
-	public void setGrnItems_1(Set<GrnItem> grnItems_1) {
-		this.grnItems_1 = grnItems_1;
 	}
 
 }

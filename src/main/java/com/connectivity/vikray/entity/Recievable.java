@@ -1,13 +1,16 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,6 +43,7 @@ public class Recievable implements java.io.Serializable {
 	private double cgstAmount;
 	private double igstAmount;
 	private double totalForeignGainLoss;
+	private Set<RecievableHistory> recievableHistories = new HashSet<RecievableHistory>(0);
 
 	public Recievable() {
 	}
@@ -66,7 +70,7 @@ public class Recievable implements java.io.Serializable {
 			Date customerInvDate, String customerInvNumber, String customerName, boolean isRecieved,
 			double pendingRecievableAmt, String remarks, double totalRecieved, double totalTdsAmount, String currency,
 			double totalBankCharges, double sgstAmount, double cgstAmount, double igstAmount,
-			double totalForeignGainLoss) {
+			double totalForeignGainLoss, Set<RecievableHistory> recievableHistories) {
 		this.id = id;
 		this.accountDetail = accountDetail;
 		this.financialReport = financialReport;
@@ -88,6 +92,7 @@ public class Recievable implements java.io.Serializable {
 		this.cgstAmount = cgstAmount;
 		this.igstAmount = igstAmount;
 		this.totalForeignGainLoss = totalForeignGainLoss;
+		this.recievableHistories = recievableHistories;
 	}
 
 	@Id
@@ -283,6 +288,15 @@ public class Recievable implements java.io.Serializable {
 
 	public void setTotalForeignGainLoss(double totalForeignGainLoss) {
 		this.totalForeignGainLoss = totalForeignGainLoss;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "recievable")
+	public Set<RecievableHistory> getRecievableHistories() {
+		return this.recievableHistories;
+	}
+
+	public void setRecievableHistories(Set<RecievableHistory> recievableHistories) {
+		this.recievableHistories = recievableHistories;
 	}
 
 }

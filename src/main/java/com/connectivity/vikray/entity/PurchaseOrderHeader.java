@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -64,11 +64,8 @@ public class PurchaseOrderHeader implements java.io.Serializable {
 	private double conversionRateInr;
 	private boolean needVerification;
 	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
-	private Set<GrnHeader> grnHeaders = new HashSet<GrnHeader>(0);
 	private Set<PurchaseEntry> purchaseEntries = new HashSet<PurchaseEntry>(0);
-	private Set<PurchaseEntry> purchaseEntries_1 = new HashSet<PurchaseEntry>(0);
-	private Set<OrderItem> orderItems_1 = new HashSet<OrderItem>(0);
-	private Set<GrnHeader> grnHeaders_1 = new HashSet<GrnHeader>(0);
+	private Set<GrnHeader> grnHeaders = new HashSet<GrnHeader>(0);
 
 	public PurchaseOrderHeader() {
 	}
@@ -95,9 +92,8 @@ public class PurchaseOrderHeader implements java.io.Serializable {
 			String location, String orderName, String personEmail, String personPhone, int poPaymentTermsDays,
 			String remarks, Date shipmentDate, Date vendorCommitDate, int vendorPaymentTermsDays, String vendorQuote,
 			String approveRejectReason, Date approveRejectDate, String cancelReason, double conversionRateInr,
-			boolean needVerification, Set<OrderItem> orderItems, Set<GrnHeader> grnHeaders,
-			Set<PurchaseEntry> purchaseEntries, Set<PurchaseEntry> purchaseEntries_1, Set<OrderItem> orderItems_1,
-			Set<GrnHeader> grnHeaders_1) {
+			boolean needVerification, Set<OrderItem> orderItems, Set<PurchaseEntry> purchaseEntries,
+			Set<GrnHeader> grnHeaders) {
 		this.id = id;
 		this.accountAddress = accountAddress;
 		this.accountDetailByAccountId = accountDetailByAccountId;
@@ -140,11 +136,8 @@ public class PurchaseOrderHeader implements java.io.Serializable {
 		this.conversionRateInr = conversionRateInr;
 		this.needVerification = needVerification;
 		this.orderItems = orderItems;
-		this.grnHeaders = grnHeaders;
 		this.purchaseEntries = purchaseEntries;
-		this.purchaseEntries_1 = purchaseEntries_1;
-		this.orderItems_1 = orderItems_1;
-		this.grnHeaders_1 = grnHeaders_1;
+		this.grnHeaders = grnHeaders;
 	}
 
 	@Id
@@ -550,15 +543,6 @@ public class PurchaseOrderHeader implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrderHeader")
-	public Set<GrnHeader> getGrnHeaders() {
-		return this.grnHeaders;
-	}
-
-	public void setGrnHeaders(Set<GrnHeader> grnHeaders) {
-		this.grnHeaders = grnHeaders;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrderHeader")
 	public Set<PurchaseEntry> getPurchaseEntries() {
 		return this.purchaseEntries;
 	}
@@ -568,30 +552,12 @@ public class PurchaseOrderHeader implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrderHeader")
-	public Set<PurchaseEntry> getPurchaseEntries_1() {
-		return this.purchaseEntries_1;
+	public Set<GrnHeader> getGrnHeaders() {
+		return this.grnHeaders;
 	}
 
-	public void setPurchaseEntries_1(Set<PurchaseEntry> purchaseEntries_1) {
-		this.purchaseEntries_1 = purchaseEntries_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrderHeader")
-	public Set<OrderItem> getOrderItems_1() {
-		return this.orderItems_1;
-	}
-
-	public void setOrderItems_1(Set<OrderItem> orderItems_1) {
-		this.orderItems_1 = orderItems_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrderHeader")
-	public Set<GrnHeader> getGrnHeaders_1() {
-		return this.grnHeaders_1;
-	}
-
-	public void setGrnHeaders_1(Set<GrnHeader> grnHeaders_1) {
-		this.grnHeaders_1 = grnHeaders_1;
+	public void setGrnHeaders(Set<GrnHeader> grnHeaders) {
+		this.grnHeaders = grnHeaders;
 	}
 
 }

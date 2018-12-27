@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,9 +21,7 @@ public class RoleType implements java.io.Serializable {
 	private String description;
 	private String parentTypeId;
 	private Set<AccountDetail> accountDetails = new HashSet<AccountDetail>(0);
-	private Set<AccountDetail> accountDetails_1 = new HashSet<AccountDetail>(0);
 	private Set<PersonDetail> personDetails = new HashSet<PersonDetail>(0);
-	private Set<PersonDetail> personDetails_1 = new HashSet<PersonDetail>(0);
 
 	public RoleType() {
 	}
@@ -33,14 +31,12 @@ public class RoleType implements java.io.Serializable {
 	}
 
 	public RoleType(long id, String description, String parentTypeId, Set<AccountDetail> accountDetails,
-			Set<AccountDetail> accountDetails_1, Set<PersonDetail> personDetails, Set<PersonDetail> personDetails_1) {
+			Set<PersonDetail> personDetails) {
 		this.id = id;
 		this.description = description;
 		this.parentTypeId = parentTypeId;
 		this.accountDetails = accountDetails;
-		this.accountDetails_1 = accountDetails_1;
 		this.personDetails = personDetails;
-		this.personDetails_1 = personDetails_1;
 	}
 
 	@Id
@@ -82,30 +78,12 @@ public class RoleType implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "roleType")
-	public Set<AccountDetail> getAccountDetails_1() {
-		return this.accountDetails_1;
-	}
-
-	public void setAccountDetails_1(Set<AccountDetail> accountDetails_1) {
-		this.accountDetails_1 = accountDetails_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "roleType")
 	public Set<PersonDetail> getPersonDetails() {
 		return this.personDetails;
 	}
 
 	public void setPersonDetails(Set<PersonDetail> personDetails) {
 		this.personDetails = personDetails;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "roleType")
-	public Set<PersonDetail> getPersonDetails_1() {
-		return this.personDetails_1;
-	}
-
-	public void setPersonDetails_1(Set<PersonDetail> personDetails_1) {
-		this.personDetails_1 = personDetails_1;
 	}
 
 }

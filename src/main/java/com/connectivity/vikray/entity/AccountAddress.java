@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,22 +31,14 @@ public class AccountAddress implements java.io.Serializable {
 	private String zipCode;
 	private Integer addrdetailsIntegerIdx;
 	private boolean isDisabled;
-	private Set<DeliveryChallan> deliveryChallansForBillingFk = new HashSet<DeliveryChallan>(0);
 	private Set<DeliveryChallan> deliveryChallansForShippingFk = new HashSet<DeliveryChallan>(0);
-	private Set<InvoiceHeader> invoiceHeadersForBillingFk = new HashSet<InvoiceHeader>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForShippingFk = new HashSet<SalesOrderHeader>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeaders = new HashSet<PurchaseOrderHeader>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForBillingFk = new HashSet<SalesOrderHeader>(0);
-	private Set<InvoiceHeader> invoiceHeadersForBillingFk_1 = new HashSet<InvoiceHeader>(0);
 	private Set<PurchaseEntry> purchaseEntries = new HashSet<PurchaseEntry>(0);
+	private Set<PurchaseOrderHeader> purchaseOrderHeaders = new HashSet<PurchaseOrderHeader>(0);
+	private Set<SalesOrderHeader> salesOrderHeadersForShippingFk = new HashSet<SalesOrderHeader>(0);
+	private Set<DeliveryChallan> deliveryChallansForBillingFk = new HashSet<DeliveryChallan>(0);
 	private Set<InvoiceHeader> invoiceHeadersForShippingFk = new HashSet<InvoiceHeader>(0);
-	private Set<PurchaseEntry> purchaseEntries_1 = new HashSet<PurchaseEntry>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeaders_1 = new HashSet<PurchaseOrderHeader>(0);
-	private Set<DeliveryChallan> deliveryChallansForBillingFk_1 = new HashSet<DeliveryChallan>(0);
-	private Set<InvoiceHeader> invoiceHeadersForShippingFk_1 = new HashSet<InvoiceHeader>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForShippingFk_1 = new HashSet<SalesOrderHeader>(0);
-	private Set<DeliveryChallan> deliveryChallansForShippingFk_1 = new HashSet<DeliveryChallan>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForBillingFk_1 = new HashSet<SalesOrderHeader>(0);
+	private Set<SalesOrderHeader> salesOrderHeadersForBillingFk = new HashSet<SalesOrderHeader>(0);
+	private Set<InvoiceHeader> invoiceHeadersForBillingFk = new HashSet<InvoiceHeader>(0);
 
 	public AccountAddress() {
 	}
@@ -59,16 +51,11 @@ public class AccountAddress implements java.io.Serializable {
 
 	public AccountAddress(long id, AccountDetail accountDetail, String addressLine1, String addressLine2,
 			String addressType, String city, String country, boolean isDefault, String state, String zipCode,
-			Integer addrdetailsIntegerIdx, boolean isDisabled, Set<DeliveryChallan> deliveryChallansForBillingFk,
-			Set<DeliveryChallan> deliveryChallansForShippingFk, Set<InvoiceHeader> invoiceHeadersForBillingFk,
-			Set<SalesOrderHeader> salesOrderHeadersForShippingFk, Set<PurchaseOrderHeader> purchaseOrderHeaders,
-			Set<SalesOrderHeader> salesOrderHeadersForBillingFk, Set<InvoiceHeader> invoiceHeadersForBillingFk_1,
-			Set<PurchaseEntry> purchaseEntries, Set<InvoiceHeader> invoiceHeadersForShippingFk,
-			Set<PurchaseEntry> purchaseEntries_1, Set<PurchaseOrderHeader> purchaseOrderHeaders_1,
-			Set<DeliveryChallan> deliveryChallansForBillingFk_1, Set<InvoiceHeader> invoiceHeadersForShippingFk_1,
-			Set<SalesOrderHeader> salesOrderHeadersForShippingFk_1,
-			Set<DeliveryChallan> deliveryChallansForShippingFk_1,
-			Set<SalesOrderHeader> salesOrderHeadersForBillingFk_1) {
+			Integer addrdetailsIntegerIdx, boolean isDisabled, Set<DeliveryChallan> deliveryChallansForShippingFk,
+			Set<PurchaseEntry> purchaseEntries, Set<PurchaseOrderHeader> purchaseOrderHeaders,
+			Set<SalesOrderHeader> salesOrderHeadersForShippingFk, Set<DeliveryChallan> deliveryChallansForBillingFk,
+			Set<InvoiceHeader> invoiceHeadersForShippingFk, Set<SalesOrderHeader> salesOrderHeadersForBillingFk,
+			Set<InvoiceHeader> invoiceHeadersForBillingFk) {
 		this.id = id;
 		this.accountDetail = accountDetail;
 		this.addressLine1 = addressLine1;
@@ -81,22 +68,14 @@ public class AccountAddress implements java.io.Serializable {
 		this.zipCode = zipCode;
 		this.addrdetailsIntegerIdx = addrdetailsIntegerIdx;
 		this.isDisabled = isDisabled;
-		this.deliveryChallansForBillingFk = deliveryChallansForBillingFk;
 		this.deliveryChallansForShippingFk = deliveryChallansForShippingFk;
-		this.invoiceHeadersForBillingFk = invoiceHeadersForBillingFk;
-		this.salesOrderHeadersForShippingFk = salesOrderHeadersForShippingFk;
-		this.purchaseOrderHeaders = purchaseOrderHeaders;
-		this.salesOrderHeadersForBillingFk = salesOrderHeadersForBillingFk;
-		this.invoiceHeadersForBillingFk_1 = invoiceHeadersForBillingFk_1;
 		this.purchaseEntries = purchaseEntries;
+		this.purchaseOrderHeaders = purchaseOrderHeaders;
+		this.salesOrderHeadersForShippingFk = salesOrderHeadersForShippingFk;
+		this.deliveryChallansForBillingFk = deliveryChallansForBillingFk;
 		this.invoiceHeadersForShippingFk = invoiceHeadersForShippingFk;
-		this.purchaseEntries_1 = purchaseEntries_1;
-		this.purchaseOrderHeaders_1 = purchaseOrderHeaders_1;
-		this.deliveryChallansForBillingFk_1 = deliveryChallansForBillingFk_1;
-		this.invoiceHeadersForShippingFk_1 = invoiceHeadersForShippingFk_1;
-		this.salesOrderHeadersForShippingFk_1 = salesOrderHeadersForShippingFk_1;
-		this.deliveryChallansForShippingFk_1 = deliveryChallansForShippingFk_1;
-		this.salesOrderHeadersForBillingFk_1 = salesOrderHeadersForBillingFk_1;
+		this.salesOrderHeadersForBillingFk = salesOrderHeadersForBillingFk;
+		this.invoiceHeadersForBillingFk = invoiceHeadersForBillingFk;
 	}
 
 	@Id
@@ -210,15 +189,6 @@ public class AccountAddress implements java.io.Serializable {
 		this.isDisabled = isDisabled;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByBillingFk")
-	public Set<DeliveryChallan> getDeliveryChallansForBillingFk() {
-		return this.deliveryChallansForBillingFk;
-	}
-
-	public void setDeliveryChallansForBillingFk(Set<DeliveryChallan> deliveryChallansForBillingFk) {
-		this.deliveryChallansForBillingFk = deliveryChallansForBillingFk;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByShippingFk")
 	public Set<DeliveryChallan> getDeliveryChallansForShippingFk() {
 		return this.deliveryChallansForShippingFk;
@@ -228,13 +198,22 @@ public class AccountAddress implements java.io.Serializable {
 		this.deliveryChallansForShippingFk = deliveryChallansForShippingFk;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByBillingFk")
-	public Set<InvoiceHeader> getInvoiceHeadersForBillingFk() {
-		return this.invoiceHeadersForBillingFk;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddress")
+	public Set<PurchaseEntry> getPurchaseEntries() {
+		return this.purchaseEntries;
 	}
 
-	public void setInvoiceHeadersForBillingFk(Set<InvoiceHeader> invoiceHeadersForBillingFk) {
-		this.invoiceHeadersForBillingFk = invoiceHeadersForBillingFk;
+	public void setPurchaseEntries(Set<PurchaseEntry> purchaseEntries) {
+		this.purchaseEntries = purchaseEntries;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddress")
+	public Set<PurchaseOrderHeader> getPurchaseOrderHeaders() {
+		return this.purchaseOrderHeaders;
+	}
+
+	public void setPurchaseOrderHeaders(Set<PurchaseOrderHeader> purchaseOrderHeaders) {
+		this.purchaseOrderHeaders = purchaseOrderHeaders;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByShippingFk")
@@ -246,13 +225,22 @@ public class AccountAddress implements java.io.Serializable {
 		this.salesOrderHeadersForShippingFk = salesOrderHeadersForShippingFk;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddress")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeaders() {
-		return this.purchaseOrderHeaders;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByBillingFk")
+	public Set<DeliveryChallan> getDeliveryChallansForBillingFk() {
+		return this.deliveryChallansForBillingFk;
 	}
 
-	public void setPurchaseOrderHeaders(Set<PurchaseOrderHeader> purchaseOrderHeaders) {
-		this.purchaseOrderHeaders = purchaseOrderHeaders;
+	public void setDeliveryChallansForBillingFk(Set<DeliveryChallan> deliveryChallansForBillingFk) {
+		this.deliveryChallansForBillingFk = deliveryChallansForBillingFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByShippingFk")
+	public Set<InvoiceHeader> getInvoiceHeadersForShippingFk() {
+		return this.invoiceHeadersForShippingFk;
+	}
+
+	public void setInvoiceHeadersForShippingFk(Set<InvoiceHeader> invoiceHeadersForShippingFk) {
+		this.invoiceHeadersForShippingFk = invoiceHeadersForShippingFk;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByBillingFk")
@@ -265,93 +253,12 @@ public class AccountAddress implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByBillingFk")
-	public Set<InvoiceHeader> getInvoiceHeadersForBillingFk_1() {
-		return this.invoiceHeadersForBillingFk_1;
+	public Set<InvoiceHeader> getInvoiceHeadersForBillingFk() {
+		return this.invoiceHeadersForBillingFk;
 	}
 
-	public void setInvoiceHeadersForBillingFk_1(Set<InvoiceHeader> invoiceHeadersForBillingFk_1) {
-		this.invoiceHeadersForBillingFk_1 = invoiceHeadersForBillingFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddress")
-	public Set<PurchaseEntry> getPurchaseEntries() {
-		return this.purchaseEntries;
-	}
-
-	public void setPurchaseEntries(Set<PurchaseEntry> purchaseEntries) {
-		this.purchaseEntries = purchaseEntries;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByShippingFk")
-	public Set<InvoiceHeader> getInvoiceHeadersForShippingFk() {
-		return this.invoiceHeadersForShippingFk;
-	}
-
-	public void setInvoiceHeadersForShippingFk(Set<InvoiceHeader> invoiceHeadersForShippingFk) {
-		this.invoiceHeadersForShippingFk = invoiceHeadersForShippingFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddress")
-	public Set<PurchaseEntry> getPurchaseEntries_1() {
-		return this.purchaseEntries_1;
-	}
-
-	public void setPurchaseEntries_1(Set<PurchaseEntry> purchaseEntries_1) {
-		this.purchaseEntries_1 = purchaseEntries_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddress")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeaders_1() {
-		return this.purchaseOrderHeaders_1;
-	}
-
-	public void setPurchaseOrderHeaders_1(Set<PurchaseOrderHeader> purchaseOrderHeaders_1) {
-		this.purchaseOrderHeaders_1 = purchaseOrderHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByBillingFk")
-	public Set<DeliveryChallan> getDeliveryChallansForBillingFk_1() {
-		return this.deliveryChallansForBillingFk_1;
-	}
-
-	public void setDeliveryChallansForBillingFk_1(Set<DeliveryChallan> deliveryChallansForBillingFk_1) {
-		this.deliveryChallansForBillingFk_1 = deliveryChallansForBillingFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByShippingFk")
-	public Set<InvoiceHeader> getInvoiceHeadersForShippingFk_1() {
-		return this.invoiceHeadersForShippingFk_1;
-	}
-
-	public void setInvoiceHeadersForShippingFk_1(Set<InvoiceHeader> invoiceHeadersForShippingFk_1) {
-		this.invoiceHeadersForShippingFk_1 = invoiceHeadersForShippingFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByShippingFk")
-	public Set<SalesOrderHeader> getSalesOrderHeadersForShippingFk_1() {
-		return this.salesOrderHeadersForShippingFk_1;
-	}
-
-	public void setSalesOrderHeadersForShippingFk_1(Set<SalesOrderHeader> salesOrderHeadersForShippingFk_1) {
-		this.salesOrderHeadersForShippingFk_1 = salesOrderHeadersForShippingFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByShippingFk")
-	public Set<DeliveryChallan> getDeliveryChallansForShippingFk_1() {
-		return this.deliveryChallansForShippingFk_1;
-	}
-
-	public void setDeliveryChallansForShippingFk_1(Set<DeliveryChallan> deliveryChallansForShippingFk_1) {
-		this.deliveryChallansForShippingFk_1 = deliveryChallansForShippingFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountAddressByBillingFk")
-	public Set<SalesOrderHeader> getSalesOrderHeadersForBillingFk_1() {
-		return this.salesOrderHeadersForBillingFk_1;
-	}
-
-	public void setSalesOrderHeadersForBillingFk_1(Set<SalesOrderHeader> salesOrderHeadersForBillingFk_1) {
-		this.salesOrderHeadersForBillingFk_1 = salesOrderHeadersForBillingFk_1;
+	public void setInvoiceHeadersForBillingFk(Set<InvoiceHeader> invoiceHeadersForBillingFk) {
+		this.invoiceHeadersForBillingFk = invoiceHeadersForBillingFk;
 	}
 
 }

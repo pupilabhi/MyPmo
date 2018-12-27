@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -63,10 +63,9 @@ public class QuoteItem implements java.io.Serializable {
 	private Date serviceEndDate;
 	private int pendingDcQunatity;
 	private int dcQuantity;
-	private Set<InvoiceItem> invoiceItems = new HashSet<InvoiceItem>(0);
+	private Set<DeliveryChallanItem> deliveryChallanItems = new HashSet<DeliveryChallanItem>(0);
 	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
-	private Set<OrderItem> orderItems_1 = new HashSet<OrderItem>(0);
-	private Set<InvoiceItem> invoiceItems_1 = new HashSet<InvoiceItem>(0);
+	private Set<InvoiceItem> invoiceItems = new HashSet<InvoiceItem>(0);
 
 	public QuoteItem() {
 	}
@@ -114,8 +113,7 @@ public class QuoteItem implements java.io.Serializable {
 			String slNo, double taxamount, double sgstRate, double igstRate, double cgstRate, double cgstAmount,
 			String hsnCode, double igstAmount, double sgstAmount, String productType, long productId,
 			Date serviceStartDate, Date serviceEndDate, int pendingDcQunatity, int dcQuantity,
-			Set<InvoiceItem> invoiceItems, Set<OrderItem> orderItems, Set<OrderItem> orderItems_1,
-			Set<InvoiceItem> invoiceItems_1) {
+			Set<DeliveryChallanItem> deliveryChallanItems, Set<OrderItem> orderItems, Set<InvoiceItem> invoiceItems) {
 		this.id = id;
 		this.invoiceItem = invoiceItem;
 		this.orderItem = orderItem;
@@ -157,10 +155,9 @@ public class QuoteItem implements java.io.Serializable {
 		this.serviceEndDate = serviceEndDate;
 		this.pendingDcQunatity = pendingDcQunatity;
 		this.dcQuantity = dcQuantity;
-		this.invoiceItems = invoiceItems;
+		this.deliveryChallanItems = deliveryChallanItems;
 		this.orderItems = orderItems;
-		this.orderItems_1 = orderItems_1;
-		this.invoiceItems_1 = invoiceItems_1;
+		this.invoiceItems = invoiceItems;
 	}
 
 	@Id
@@ -540,12 +537,12 @@ public class QuoteItem implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteItem")
-	public Set<InvoiceItem> getInvoiceItems() {
-		return this.invoiceItems;
+	public Set<DeliveryChallanItem> getDeliveryChallanItems() {
+		return this.deliveryChallanItems;
 	}
 
-	public void setInvoiceItems(Set<InvoiceItem> invoiceItems) {
-		this.invoiceItems = invoiceItems;
+	public void setDeliveryChallanItems(Set<DeliveryChallanItem> deliveryChallanItems) {
+		this.deliveryChallanItems = deliveryChallanItems;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteItem")
@@ -558,21 +555,12 @@ public class QuoteItem implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteItem")
-	public Set<OrderItem> getOrderItems_1() {
-		return this.orderItems_1;
+	public Set<InvoiceItem> getInvoiceItems() {
+		return this.invoiceItems;
 	}
 
-	public void setOrderItems_1(Set<OrderItem> orderItems_1) {
-		this.orderItems_1 = orderItems_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteItem")
-	public Set<InvoiceItem> getInvoiceItems_1() {
-		return this.invoiceItems_1;
-	}
-
-	public void setInvoiceItems_1(Set<InvoiceItem> invoiceItems_1) {
-		this.invoiceItems_1 = invoiceItems_1;
+	public void setInvoiceItems(Set<InvoiceItem> invoiceItems) {
+		this.invoiceItems = invoiceItems;
 	}
 
 }

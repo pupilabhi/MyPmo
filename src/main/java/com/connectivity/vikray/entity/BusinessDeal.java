@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -35,10 +35,10 @@ public class BusinessDeal implements java.io.Serializable {
 	private QuoteHeader quoteHeader;
 	private SalesOrderHeader salesOrderHeader;
 	private StatusItem statusItem;
-	private UserDetails userDetailsByCreatedBy;
+	private UserDetails userDetailsByOwnerFk;
 	private UserDetails userDetailsByLastModifiedBy;
 	private UserDetails userDetailsBySponsorUserFk;
-	private UserDetails userDetailsByOwnerFk;
+	private UserDetails userDetailsByCreatedBy;
 	private double convertionRate;
 	private Date dateCreated;
 	private String dealName;
@@ -54,12 +54,13 @@ public class BusinessDeal implements java.io.Serializable {
 	private int lastSaleCommitYear;
 	private Set<PurchaseOrderHeader> purchaseOrderHeaders = new HashSet<PurchaseOrderHeader>(0);
 	private Set<Task> tasks = new HashSet<Task>(0);
+	private Set<SaleCommit> saleCommits = new HashSet<SaleCommit>(0);
 	private Set<DealActivity> dealActivities = new HashSet<DealActivity>(0);
-	private Set<DealActivity> dealActivities_1 = new HashSet<DealActivity>(0);
+	private Set<DealFollower> dealFollowers = new HashSet<DealFollower>(0);
+	private Set<Research> researches = new HashSet<Research>(0);
+	private Set<BusinessDealHistory> businessDealHistories = new HashSet<BusinessDealHistory>(0);
 	private Set<QuoteHeader> quoteHeaders = new HashSet<QuoteHeader>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeaders_1 = new HashSet<PurchaseOrderHeader>(0);
-	private Set<QuoteHeader> quoteHeaders_1 = new HashSet<QuoteHeader>(0);
-	private Set<Task> tasks_1 = new HashSet<Task>(0);
+	private Set<DealDoc> dealDocs = new HashSet<DealDoc>(0);
 
 	public BusinessDeal() {
 	}
@@ -77,14 +78,14 @@ public class BusinessDeal implements java.io.Serializable {
 	public BusinessDeal(long id, AccountDetail accountDetail, CrmType crmTypeByBuTypeFk, CrmType crmTypeByCrmTypeFk,
 			Currency currency, DealActivity dealActivity, DealSource dealSource, Domain domain,
 			PersonDetail personDetail, QuoteHeader quoteHeader, SalesOrderHeader salesOrderHeader,
-			StatusItem statusItem, UserDetails userDetailsByCreatedBy, UserDetails userDetailsByLastModifiedBy,
-			UserDetails userDetailsBySponsorUserFk, UserDetails userDetailsByOwnerFk, double convertionRate,
+			StatusItem statusItem, UserDetails userDetailsByOwnerFk, UserDetails userDetailsByLastModifiedBy,
+			UserDetails userDetailsBySponsorUserFk, UserDetails userDetailsByCreatedBy, double convertionRate,
 			Date dateCreated, String dealName, double estimatedAmount, String guid, String remarks,
 			int lastSaleCommitWeek, Date lastUpsidedOn, Date lastModifiedOn, String lostReason,
 			Date estimatedClosureDate, long businessVerticle, int lastSaleCommitYear,
-			Set<PurchaseOrderHeader> purchaseOrderHeaders, Set<Task> tasks, Set<DealActivity> dealActivities,
-			Set<DealActivity> dealActivities_1, Set<QuoteHeader> quoteHeaders,
-			Set<PurchaseOrderHeader> purchaseOrderHeaders_1, Set<QuoteHeader> quoteHeaders_1, Set<Task> tasks_1) {
+			Set<PurchaseOrderHeader> purchaseOrderHeaders, Set<Task> tasks, Set<SaleCommit> saleCommits,
+			Set<DealActivity> dealActivities, Set<DealFollower> dealFollowers, Set<Research> researches,
+			Set<BusinessDealHistory> businessDealHistories, Set<QuoteHeader> quoteHeaders, Set<DealDoc> dealDocs) {
 		this.id = id;
 		this.accountDetail = accountDetail;
 		this.crmTypeByBuTypeFk = crmTypeByBuTypeFk;
@@ -97,10 +98,10 @@ public class BusinessDeal implements java.io.Serializable {
 		this.quoteHeader = quoteHeader;
 		this.salesOrderHeader = salesOrderHeader;
 		this.statusItem = statusItem;
-		this.userDetailsByCreatedBy = userDetailsByCreatedBy;
+		this.userDetailsByOwnerFk = userDetailsByOwnerFk;
 		this.userDetailsByLastModifiedBy = userDetailsByLastModifiedBy;
 		this.userDetailsBySponsorUserFk = userDetailsBySponsorUserFk;
-		this.userDetailsByOwnerFk = userDetailsByOwnerFk;
+		this.userDetailsByCreatedBy = userDetailsByCreatedBy;
 		this.convertionRate = convertionRate;
 		this.dateCreated = dateCreated;
 		this.dealName = dealName;
@@ -116,12 +117,13 @@ public class BusinessDeal implements java.io.Serializable {
 		this.lastSaleCommitYear = lastSaleCommitYear;
 		this.purchaseOrderHeaders = purchaseOrderHeaders;
 		this.tasks = tasks;
+		this.saleCommits = saleCommits;
 		this.dealActivities = dealActivities;
-		this.dealActivities_1 = dealActivities_1;
+		this.dealFollowers = dealFollowers;
+		this.researches = researches;
+		this.businessDealHistories = businessDealHistories;
 		this.quoteHeaders = quoteHeaders;
-		this.purchaseOrderHeaders_1 = purchaseOrderHeaders_1;
-		this.quoteHeaders_1 = quoteHeaders_1;
-		this.tasks_1 = tasks_1;
+		this.dealDocs = dealDocs;
 	}
 
 	@Id
@@ -246,13 +248,13 @@ public class BusinessDeal implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CREATED_BY")
-	public UserDetails getUserDetailsByCreatedBy() {
-		return this.userDetailsByCreatedBy;
+	@JoinColumn(name = "OWNER_FK")
+	public UserDetails getUserDetailsByOwnerFk() {
+		return this.userDetailsByOwnerFk;
 	}
 
-	public void setUserDetailsByCreatedBy(UserDetails userDetailsByCreatedBy) {
-		this.userDetailsByCreatedBy = userDetailsByCreatedBy;
+	public void setUserDetailsByOwnerFk(UserDetails userDetailsByOwnerFk) {
+		this.userDetailsByOwnerFk = userDetailsByOwnerFk;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -276,13 +278,13 @@ public class BusinessDeal implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "OWNER_FK")
-	public UserDetails getUserDetailsByOwnerFk() {
-		return this.userDetailsByOwnerFk;
+	@JoinColumn(name = "CREATED_BY")
+	public UserDetails getUserDetailsByCreatedBy() {
+		return this.userDetailsByCreatedBy;
 	}
 
-	public void setUserDetailsByOwnerFk(UserDetails userDetailsByOwnerFk) {
-		this.userDetailsByOwnerFk = userDetailsByOwnerFk;
+	public void setUserDetailsByCreatedBy(UserDetails userDetailsByCreatedBy) {
+		this.userDetailsByCreatedBy = userDetailsByCreatedBy;
 	}
 
 	@Column(name = "CONVERTION_RATE", nullable = false, precision = 22, scale = 0)
@@ -425,6 +427,15 @@ public class BusinessDeal implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "businessDeal")
+	public Set<SaleCommit> getSaleCommits() {
+		return this.saleCommits;
+	}
+
+	public void setSaleCommits(Set<SaleCommit> saleCommits) {
+		this.saleCommits = saleCommits;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "businessDeal")
 	public Set<DealActivity> getDealActivities() {
 		return this.dealActivities;
 	}
@@ -434,12 +445,30 @@ public class BusinessDeal implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "businessDeal")
-	public Set<DealActivity> getDealActivities_1() {
-		return this.dealActivities_1;
+	public Set<DealFollower> getDealFollowers() {
+		return this.dealFollowers;
 	}
 
-	public void setDealActivities_1(Set<DealActivity> dealActivities_1) {
-		this.dealActivities_1 = dealActivities_1;
+	public void setDealFollowers(Set<DealFollower> dealFollowers) {
+		this.dealFollowers = dealFollowers;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "businessDeal")
+	public Set<Research> getResearches() {
+		return this.researches;
+	}
+
+	public void setResearches(Set<Research> researches) {
+		this.researches = researches;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "businessDeal")
+	public Set<BusinessDealHistory> getBusinessDealHistories() {
+		return this.businessDealHistories;
+	}
+
+	public void setBusinessDealHistories(Set<BusinessDealHistory> businessDealHistories) {
+		this.businessDealHistories = businessDealHistories;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "businessDeal")
@@ -452,30 +481,12 @@ public class BusinessDeal implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "businessDeal")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeaders_1() {
-		return this.purchaseOrderHeaders_1;
+	public Set<DealDoc> getDealDocs() {
+		return this.dealDocs;
 	}
 
-	public void setPurchaseOrderHeaders_1(Set<PurchaseOrderHeader> purchaseOrderHeaders_1) {
-		this.purchaseOrderHeaders_1 = purchaseOrderHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "businessDeal")
-	public Set<QuoteHeader> getQuoteHeaders_1() {
-		return this.quoteHeaders_1;
-	}
-
-	public void setQuoteHeaders_1(Set<QuoteHeader> quoteHeaders_1) {
-		this.quoteHeaders_1 = quoteHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "businessDeal")
-	public Set<Task> getTasks_1() {
-		return this.tasks_1;
-	}
-
-	public void setTasks_1(Set<Task> tasks_1) {
-		this.tasks_1 = tasks_1;
+	public void setDealDocs(Set<DealDoc> dealDocs) {
+		this.dealDocs = dealDocs;
 	}
 
 }

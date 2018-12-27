@@ -1,9 +1,13 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,6 +21,7 @@ public class CollabRoom implements java.io.Serializable {
 	private String roomName;
 	private String sparkRoomId;
 	private String teamName;
+	private Set<CollabRoomMember> collabRoomMembers = new HashSet<CollabRoomMember>(0);
 
 	public CollabRoom() {
 	}
@@ -25,11 +30,13 @@ public class CollabRoom implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public CollabRoom(long id, String roomName, String sparkRoomId, String teamName) {
+	public CollabRoom(long id, String roomName, String sparkRoomId, String teamName,
+			Set<CollabRoomMember> collabRoomMembers) {
 		this.id = id;
 		this.roomName = roomName;
 		this.sparkRoomId = sparkRoomId;
 		this.teamName = teamName;
+		this.collabRoomMembers = collabRoomMembers;
 	}
 
 	@Id
@@ -68,6 +75,15 @@ public class CollabRoom implements java.io.Serializable {
 
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "collabRoom")
+	public Set<CollabRoomMember> getCollabRoomMembers() {
+		return this.collabRoomMembers;
+	}
+
+	public void setCollabRoomMembers(Set<CollabRoomMember> collabRoomMembers) {
+		this.collabRoomMembers = collabRoomMembers;
 	}
 
 }

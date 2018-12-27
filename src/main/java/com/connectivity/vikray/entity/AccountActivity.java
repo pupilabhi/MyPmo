@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -30,7 +30,6 @@ public class AccountActivity implements java.io.Serializable {
 	private String medium;
 	private String sincedays;
 	private Set<AccountDetail> accountDetails = new HashSet<AccountDetail>(0);
-	private Set<AccountDetail> accountDetails_1 = new HashSet<AccountDetail>(0);
 
 	public AccountActivity() {
 	}
@@ -40,8 +39,7 @@ public class AccountActivity implements java.io.Serializable {
 	}
 
 	public AccountActivity(long id, AccountDetail accountDetail, UserDetails userDetails, Date activityOn,
-			String comment, String medium, String sincedays, Set<AccountDetail> accountDetails,
-			Set<AccountDetail> accountDetails_1) {
+			String comment, String medium, String sincedays, Set<AccountDetail> accountDetails) {
 		this.id = id;
 		this.accountDetail = accountDetail;
 		this.userDetails = userDetails;
@@ -50,7 +48,6 @@ public class AccountActivity implements java.io.Serializable {
 		this.medium = medium;
 		this.sincedays = sincedays;
 		this.accountDetails = accountDetails;
-		this.accountDetails_1 = accountDetails_1;
 	}
 
 	@Id
@@ -128,15 +125,6 @@ public class AccountActivity implements java.io.Serializable {
 
 	public void setAccountDetails(Set<AccountDetail> accountDetails) {
 		this.accountDetails = accountDetails;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountActivity")
-	public Set<AccountDetail> getAccountDetails_1() {
-		return this.accountDetails_1;
-	}
-
-	public void setAccountDetails_1(Set<AccountDetail> accountDetails_1) {
-		this.accountDetails_1 = accountDetails_1;
 	}
 
 }

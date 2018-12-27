@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,68 +41,51 @@ public class UserDetails implements java.io.Serializable {
 	private boolean isInactive;
 	private long expertise;
 	private String accessToken;
-	private Set<QuoteHeader> quoteHeadersForCreatedByUserFk = new HashSet<QuoteHeader>(0);
-	private Set<QuoteHeader> quoteHeadersForLastModifiedUserFk = new HashSet<QuoteHeader>(0);
-	private Set<DeliveryChallan> deliveryChallansForLastModifiedByUserFk = new HashSet<DeliveryChallan>(0);
+	private Set<AccountDetail> accountDetails = new HashSet<AccountDetail>(0);
+	private Set<TaskComment> taskComments = new HashSet<TaskComment>(0);
 	private Set<GrnHeader> grnHeadersForCreatedByUserFk = new HashSet<GrnHeader>(0);
 	private Set<UserDetails> userDetailses = new HashSet<UserDetails>(0);
-	private Set<BusinessDeal> businessDealsForCreatedBy = new HashSet<BusinessDeal>(0);
 	private Set<Warehouse> warehouses = new HashSet<Warehouse>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeadersForCreatedBy = new HashSet<PurchaseOrderHeader>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForCreatedByUserFk = new HashSet<SalesOrderHeader>(0);
+	private Set<TaskCcUser> taskCcUsers = new HashSet<TaskCcUser>(0);
+	private Set<InvoiceHistory> invoiceHistoriesForLastModifiedByUserFk = new HashSet<InvoiceHistory>(0);
 	private Set<DeliveryChallan> deliveryChallansForCreatedByUserFk = new HashSet<DeliveryChallan>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeadersForLastModifiedBy = new HashSet<PurchaseOrderHeader>(0);
+	private Set<SalesOrderHeader> salesOrderHeadersForOwnerFk = new HashSet<SalesOrderHeader>(0);
+	private Set<InvoiceHistory> invoiceHistoriesForCreatedByUserFk = new HashSet<InvoiceHistory>(0);
 	private Set<GrnHeader> grnHeadersForLastModifiedByUserFk = new HashSet<GrnHeader>(0);
-	private Set<DeliveryChallan> deliveryChallansForCreatedByUserFk_1 = new HashSet<DeliveryChallan>(0);
-	private Set<Task> tasksForCreatorUserFk = new HashSet<Task>(0);
-	private Set<InvoiceHeader> invoiceHeadersForCreatedBy = new HashSet<InvoiceHeader>(0);
+	private Set<PurchaseOrderHeader> purchaseOrderHeadersForCreatedBy = new HashSet<PurchaseOrderHeader>(0);
+	private Set<PurchaseOrderHeader> purchaseOrderHeadersForLastModifiedBy = new HashSet<PurchaseOrderHeader>(0);
 	private Set<Task> tasksForAssigneeUserFk = new HashSet<Task>(0);
-	private Set<Task> tasksForCreatorUserFk_1 = new HashSet<Task>(0);
-	private Set<AccountDetail> accountDetails = new HashSet<AccountDetail>(0);
-	private Set<BusinessDeal> businessDealsForLastModifiedBy = new HashSet<BusinessDeal>(0);
+	private Set<WeeklySalesCommits> weeklySalesCommitses = new HashSet<WeeklySalesCommits>(0);
+	private Set<Activity> activitiesForLastModifiedByUserFk = new HashSet<Activity>(0);
+	private Set<DealFollower> dealFollowers = new HashSet<DealFollower>(0);
+	private Set<Task> tasksForCreatorUserFk = new HashSet<Task>(0);
+	private Set<Activity> activitiesForCreatedByUserFk = new HashSet<Activity>(0);
+	private Set<ReserveActivity> reserveActivitiesForCreatedByUserFk = new HashSet<ReserveActivity>(0);
+	private Set<ReserveActivity> reserveActivitiesForLastModifiedByUserFk = new HashSet<ReserveActivity>(0);
+	private Set<SalesOrderHeader> salesOrderHeadersForLastModifiedByUserFk = new HashSet<SalesOrderHeader>(0);
 	private Set<FinancialReport> financialReports = new HashSet<FinancialReport>(0);
-	private Set<BusinessDeal> businessDealsForSponsorUserFk = new HashSet<BusinessDeal>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForCreatedByUserFk_1 = new HashSet<SalesOrderHeader>(0);
-	private Set<QuoteHeader> quoteHeadersForLastModifiedUserFk_1 = new HashSet<QuoteHeader>(0);
-	private Set<AccountActivity> accountActivities = new HashSet<AccountActivity>(0);
-	private Set<FinancialReport> financialReports_1 = new HashSet<FinancialReport>(0);
+	private Set<Product> productsForCreatedByUserFk = new HashSet<Product>(0);
+	private Set<InvoiceHeader> invoiceHeadersForLastModifiedBy = new HashSet<InvoiceHeader>(0);
+	private Set<SalesOrderHeader> salesOrderHeadersForCreatedByUserFk = new HashSet<SalesOrderHeader>(0);
+	private Set<Product> productsForLastModifiedByUserFk = new HashSet<Product>(0);
+	private Set<DeliveryChallan> deliveryChallansForLastModifiedByUserFk = new HashSet<DeliveryChallan>(0);
+	private Set<BusinessDeal> businessDealsForOwnerFk = new HashSet<BusinessDeal>(0);
+	private Set<QuoteHeader> quoteHeadersForLastModifiedUserFk = new HashSet<QuoteHeader>(0);
 	private Set<DealActivity> dealActivities = new HashSet<DealActivity>(0);
-	private Set<QuoteHeader> quoteHeadersForCreatedByUserFk_1 = new HashSet<QuoteHeader>(0);
-	private Set<Warehouse> warehouses_1 = new HashSet<Warehouse>(0);
-	private Set<BusinessDeal> businessDealsForLastModifiedBy_1 = new HashSet<BusinessDeal>(0);
-	private Set<BusinessDeal> businessDealsForSponsorUserFk_1 = new HashSet<BusinessDeal>(0);
-	private Set<BusinessDeal> businessDealsForCreatedBy_1 = new HashSet<BusinessDeal>(0);
+	private Set<QuoteHeader> quoteHeadersForCreatedByUserFk = new HashSet<QuoteHeader>(0);
+	private Set<BusinessDealHistory> businessDealHistories = new HashSet<BusinessDealHistory>(0);
+	private Set<AccountActivity> accountActivities = new HashSet<AccountActivity>(0);
+	private Set<BusinessDeal> businessDealsForLastModifiedBy = new HashSet<BusinessDeal>(0);
+	private Set<InventoryItem> inventoryItemsForCreatedByUserFk = new HashSet<InventoryItem>(0);
+	private Set<BusinessDeal> businessDealsForSponsorUserFk = new HashSet<BusinessDeal>(0);
+	private Set<BusinessDeal> businessDealsForCreatedBy = new HashSet<BusinessDeal>(0);
+	private Set<SalesPerformance> salesPerformances = new HashSet<SalesPerformance>(0);
+	private Set<InvoiceHeader> invoiceHeadersForCreatedBy = new HashSet<InvoiceHeader>(0);
+	private Set<InventoryUniqueItem> inventoryUniqueItemsForCreatedByUserFk = new HashSet<InventoryUniqueItem>(0);
 	private Set<PurchaseEntry> purchaseEntriesForLastModifiedByUserFk = new HashSet<PurchaseEntry>(0);
 	private Set<PurchaseEntry> purchaseEntriesForCreatedBy = new HashSet<PurchaseEntry>(0);
-	private Set<Product> productsForLastModifiedByUserFk = new HashSet<Product>(0);
-	private Set<AccountDetail> accountDetails_1 = new HashSet<AccountDetail>(0);
-	private Set<GrnHeader> grnHeadersForLastModifiedByUserFk_1 = new HashSet<GrnHeader>(0);
-	private Set<BusinessDeal> businessDealsForOwnerFk = new HashSet<BusinessDeal>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForOwnerFk = new HashSet<SalesOrderHeader>(0);
-	private Set<PurchaseEntry> purchaseEntriesForCreatedBy_1 = new HashSet<PurchaseEntry>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeadersForCreatedBy_1 = new HashSet<PurchaseOrderHeader>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeadersForLastModifiedBy_1 = new HashSet<PurchaseOrderHeader>(0);
-	private Set<InventoryItem> inventoryItemsForCreatedByUserFk = new HashSet<InventoryItem>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForLastModifiedByUserFk = new HashSet<SalesOrderHeader>(0);
-	private Set<Product> productsForCreatedByUserFk = new HashSet<Product>(0);
 	private Set<InventoryItem> inventoryItemsForLastModifiedByUserFk = new HashSet<InventoryItem>(0);
-	private Set<InvoiceHeader> invoiceHeadersForLastModifiedBy = new HashSet<InvoiceHeader>(0);
-	private Set<Product> productsForLastModifiedByUserFk_1 = new HashSet<Product>(0);
-	private Set<Task> tasksForAssigneeUserFk_1 = new HashSet<Task>(0);
-	private Set<DeliveryChallan> deliveryChallansForLastModifiedByUserFk_1 = new HashSet<DeliveryChallan>(0);
-	private Set<BusinessDeal> businessDealsForOwnerFk_1 = new HashSet<BusinessDeal>(0);
-	private Set<Product> productsForCreatedByUserFk_1 = new HashSet<Product>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForOwnerFk_1 = new HashSet<SalesOrderHeader>(0);
-	private Set<AccountActivity> accountActivities_1 = new HashSet<AccountActivity>(0);
-	private Set<GrnHeader> grnHeadersForCreatedByUserFk_1 = new HashSet<GrnHeader>(0);
-	private Set<InventoryItem> inventoryItemsForCreatedByUserFk_1 = new HashSet<InventoryItem>(0);
-	private Set<PurchaseEntry> purchaseEntriesForLastModifiedByUserFk_1 = new HashSet<PurchaseEntry>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForLastModifiedByUserFk_1 = new HashSet<SalesOrderHeader>(0);
-	private Set<InvoiceHeader> invoiceHeadersForLastModifiedBy_1 = new HashSet<InvoiceHeader>(0);
-	private Set<InvoiceHeader> invoiceHeadersForCreatedBy_1 = new HashSet<InvoiceHeader>(0);
-	private Set<DealActivity> dealActivities_1 = new HashSet<DealActivity>(0);
-	private Set<UserDetails> userDetailses_1 = new HashSet<UserDetails>(0);
-	private Set<InventoryItem> inventoryItemsForLastModifiedByUserFk_1 = new HashSet<InventoryItem>(0);
+	private Set<InventoryUniqueItem> inventoryUniqueItemsForLastModifiedByUserFk = new HashSet<InventoryUniqueItem>(0);
 
 	public UserDetails() {
 	}
@@ -119,43 +102,31 @@ public class UserDetails implements java.io.Serializable {
 			UserDetails userDetails, String dotPath, String firstName, String forgotPassGuid, String guid,
 			String inviteGuid, String lastName, String userLoginId, String password, String sessionId, String userEmail,
 			String userPhone, long userRole, double salesTarget, boolean isInactive, long expertise, String accessToken,
-			Set<QuoteHeader> quoteHeadersForCreatedByUserFk, Set<QuoteHeader> quoteHeadersForLastModifiedUserFk,
-			Set<DeliveryChallan> deliveryChallansForLastModifiedByUserFk, Set<GrnHeader> grnHeadersForCreatedByUserFk,
-			Set<UserDetails> userDetailses, Set<BusinessDeal> businessDealsForCreatedBy, Set<Warehouse> warehouses,
+			Set<AccountDetail> accountDetails, Set<TaskComment> taskComments,
+			Set<GrnHeader> grnHeadersForCreatedByUserFk, Set<UserDetails> userDetailses, Set<Warehouse> warehouses,
+			Set<TaskCcUser> taskCcUsers, Set<InvoiceHistory> invoiceHistoriesForLastModifiedByUserFk,
+			Set<DeliveryChallan> deliveryChallansForCreatedByUserFk, Set<SalesOrderHeader> salesOrderHeadersForOwnerFk,
+			Set<InvoiceHistory> invoiceHistoriesForCreatedByUserFk, Set<GrnHeader> grnHeadersForLastModifiedByUserFk,
 			Set<PurchaseOrderHeader> purchaseOrderHeadersForCreatedBy,
-			Set<SalesOrderHeader> salesOrderHeadersForCreatedByUserFk,
-			Set<DeliveryChallan> deliveryChallansForCreatedByUserFk,
-			Set<PurchaseOrderHeader> purchaseOrderHeadersForLastModifiedBy,
-			Set<GrnHeader> grnHeadersForLastModifiedByUserFk, Set<DeliveryChallan> deliveryChallansForCreatedByUserFk_1,
-			Set<Task> tasksForCreatorUserFk, Set<InvoiceHeader> invoiceHeadersForCreatedBy,
-			Set<Task> tasksForAssigneeUserFk, Set<Task> tasksForCreatorUserFk_1, Set<AccountDetail> accountDetails,
-			Set<BusinessDeal> businessDealsForLastModifiedBy, Set<FinancialReport> financialReports,
-			Set<BusinessDeal> businessDealsForSponsorUserFk,
-			Set<SalesOrderHeader> salesOrderHeadersForCreatedByUserFk_1,
-			Set<QuoteHeader> quoteHeadersForLastModifiedUserFk_1, Set<AccountActivity> accountActivities,
-			Set<FinancialReport> financialReports_1, Set<DealActivity> dealActivities,
-			Set<QuoteHeader> quoteHeadersForCreatedByUserFk_1, Set<Warehouse> warehouses_1,
-			Set<BusinessDeal> businessDealsForLastModifiedBy_1, Set<BusinessDeal> businessDealsForSponsorUserFk_1,
-			Set<BusinessDeal> businessDealsForCreatedBy_1, Set<PurchaseEntry> purchaseEntriesForLastModifiedByUserFk,
-			Set<PurchaseEntry> purchaseEntriesForCreatedBy, Set<Product> productsForLastModifiedByUserFk,
-			Set<AccountDetail> accountDetails_1, Set<GrnHeader> grnHeadersForLastModifiedByUserFk_1,
-			Set<BusinessDeal> businessDealsForOwnerFk, Set<SalesOrderHeader> salesOrderHeadersForOwnerFk,
-			Set<PurchaseEntry> purchaseEntriesForCreatedBy_1,
-			Set<PurchaseOrderHeader> purchaseOrderHeadersForCreatedBy_1,
-			Set<PurchaseOrderHeader> purchaseOrderHeadersForLastModifiedBy_1,
-			Set<InventoryItem> inventoryItemsForCreatedByUserFk,
-			Set<SalesOrderHeader> salesOrderHeadersForLastModifiedByUserFk, Set<Product> productsForCreatedByUserFk,
+			Set<PurchaseOrderHeader> purchaseOrderHeadersForLastModifiedBy, Set<Task> tasksForAssigneeUserFk,
+			Set<WeeklySalesCommits> weeklySalesCommitses, Set<Activity> activitiesForLastModifiedByUserFk,
+			Set<DealFollower> dealFollowers, Set<Task> tasksForCreatorUserFk,
+			Set<Activity> activitiesForCreatedByUserFk, Set<ReserveActivity> reserveActivitiesForCreatedByUserFk,
+			Set<ReserveActivity> reserveActivitiesForLastModifiedByUserFk,
+			Set<SalesOrderHeader> salesOrderHeadersForLastModifiedByUserFk, Set<FinancialReport> financialReports,
+			Set<Product> productsForCreatedByUserFk, Set<InvoiceHeader> invoiceHeadersForLastModifiedBy,
+			Set<SalesOrderHeader> salesOrderHeadersForCreatedByUserFk, Set<Product> productsForLastModifiedByUserFk,
+			Set<DeliveryChallan> deliveryChallansForLastModifiedByUserFk, Set<BusinessDeal> businessDealsForOwnerFk,
+			Set<QuoteHeader> quoteHeadersForLastModifiedUserFk, Set<DealActivity> dealActivities,
+			Set<QuoteHeader> quoteHeadersForCreatedByUserFk, Set<BusinessDealHistory> businessDealHistories,
+			Set<AccountActivity> accountActivities, Set<BusinessDeal> businessDealsForLastModifiedBy,
+			Set<InventoryItem> inventoryItemsForCreatedByUserFk, Set<BusinessDeal> businessDealsForSponsorUserFk,
+			Set<BusinessDeal> businessDealsForCreatedBy, Set<SalesPerformance> salesPerformances,
+			Set<InvoiceHeader> invoiceHeadersForCreatedBy,
+			Set<InventoryUniqueItem> inventoryUniqueItemsForCreatedByUserFk,
+			Set<PurchaseEntry> purchaseEntriesForLastModifiedByUserFk, Set<PurchaseEntry> purchaseEntriesForCreatedBy,
 			Set<InventoryItem> inventoryItemsForLastModifiedByUserFk,
-			Set<InvoiceHeader> invoiceHeadersForLastModifiedBy, Set<Product> productsForLastModifiedByUserFk_1,
-			Set<Task> tasksForAssigneeUserFk_1, Set<DeliveryChallan> deliveryChallansForLastModifiedByUserFk_1,
-			Set<BusinessDeal> businessDealsForOwnerFk_1, Set<Product> productsForCreatedByUserFk_1,
-			Set<SalesOrderHeader> salesOrderHeadersForOwnerFk_1, Set<AccountActivity> accountActivities_1,
-			Set<GrnHeader> grnHeadersForCreatedByUserFk_1, Set<InventoryItem> inventoryItemsForCreatedByUserFk_1,
-			Set<PurchaseEntry> purchaseEntriesForLastModifiedByUserFk_1,
-			Set<SalesOrderHeader> salesOrderHeadersForLastModifiedByUserFk_1,
-			Set<InvoiceHeader> invoiceHeadersForLastModifiedBy_1, Set<InvoiceHeader> invoiceHeadersForCreatedBy_1,
-			Set<DealActivity> dealActivities_1, Set<UserDetails> userDetailses_1,
-			Set<InventoryItem> inventoryItemsForLastModifiedByUserFk_1) {
+			Set<InventoryUniqueItem> inventoryUniqueItemsForLastModifiedByUserFk) {
 		this.id = id;
 		this.crmType = crmType;
 		this.domain = domain;
@@ -178,68 +149,51 @@ public class UserDetails implements java.io.Serializable {
 		this.isInactive = isInactive;
 		this.expertise = expertise;
 		this.accessToken = accessToken;
-		this.quoteHeadersForCreatedByUserFk = quoteHeadersForCreatedByUserFk;
-		this.quoteHeadersForLastModifiedUserFk = quoteHeadersForLastModifiedUserFk;
-		this.deliveryChallansForLastModifiedByUserFk = deliveryChallansForLastModifiedByUserFk;
+		this.accountDetails = accountDetails;
+		this.taskComments = taskComments;
 		this.grnHeadersForCreatedByUserFk = grnHeadersForCreatedByUserFk;
 		this.userDetailses = userDetailses;
-		this.businessDealsForCreatedBy = businessDealsForCreatedBy;
 		this.warehouses = warehouses;
-		this.purchaseOrderHeadersForCreatedBy = purchaseOrderHeadersForCreatedBy;
-		this.salesOrderHeadersForCreatedByUserFk = salesOrderHeadersForCreatedByUserFk;
+		this.taskCcUsers = taskCcUsers;
+		this.invoiceHistoriesForLastModifiedByUserFk = invoiceHistoriesForLastModifiedByUserFk;
 		this.deliveryChallansForCreatedByUserFk = deliveryChallansForCreatedByUserFk;
-		this.purchaseOrderHeadersForLastModifiedBy = purchaseOrderHeadersForLastModifiedBy;
+		this.salesOrderHeadersForOwnerFk = salesOrderHeadersForOwnerFk;
+		this.invoiceHistoriesForCreatedByUserFk = invoiceHistoriesForCreatedByUserFk;
 		this.grnHeadersForLastModifiedByUserFk = grnHeadersForLastModifiedByUserFk;
-		this.deliveryChallansForCreatedByUserFk_1 = deliveryChallansForCreatedByUserFk_1;
-		this.tasksForCreatorUserFk = tasksForCreatorUserFk;
-		this.invoiceHeadersForCreatedBy = invoiceHeadersForCreatedBy;
+		this.purchaseOrderHeadersForCreatedBy = purchaseOrderHeadersForCreatedBy;
+		this.purchaseOrderHeadersForLastModifiedBy = purchaseOrderHeadersForLastModifiedBy;
 		this.tasksForAssigneeUserFk = tasksForAssigneeUserFk;
-		this.tasksForCreatorUserFk_1 = tasksForCreatorUserFk_1;
-		this.accountDetails = accountDetails;
-		this.businessDealsForLastModifiedBy = businessDealsForLastModifiedBy;
+		this.weeklySalesCommitses = weeklySalesCommitses;
+		this.activitiesForLastModifiedByUserFk = activitiesForLastModifiedByUserFk;
+		this.dealFollowers = dealFollowers;
+		this.tasksForCreatorUserFk = tasksForCreatorUserFk;
+		this.activitiesForCreatedByUserFk = activitiesForCreatedByUserFk;
+		this.reserveActivitiesForCreatedByUserFk = reserveActivitiesForCreatedByUserFk;
+		this.reserveActivitiesForLastModifiedByUserFk = reserveActivitiesForLastModifiedByUserFk;
+		this.salesOrderHeadersForLastModifiedByUserFk = salesOrderHeadersForLastModifiedByUserFk;
 		this.financialReports = financialReports;
-		this.businessDealsForSponsorUserFk = businessDealsForSponsorUserFk;
-		this.salesOrderHeadersForCreatedByUserFk_1 = salesOrderHeadersForCreatedByUserFk_1;
-		this.quoteHeadersForLastModifiedUserFk_1 = quoteHeadersForLastModifiedUserFk_1;
-		this.accountActivities = accountActivities;
-		this.financialReports_1 = financialReports_1;
+		this.productsForCreatedByUserFk = productsForCreatedByUserFk;
+		this.invoiceHeadersForLastModifiedBy = invoiceHeadersForLastModifiedBy;
+		this.salesOrderHeadersForCreatedByUserFk = salesOrderHeadersForCreatedByUserFk;
+		this.productsForLastModifiedByUserFk = productsForLastModifiedByUserFk;
+		this.deliveryChallansForLastModifiedByUserFk = deliveryChallansForLastModifiedByUserFk;
+		this.businessDealsForOwnerFk = businessDealsForOwnerFk;
+		this.quoteHeadersForLastModifiedUserFk = quoteHeadersForLastModifiedUserFk;
 		this.dealActivities = dealActivities;
-		this.quoteHeadersForCreatedByUserFk_1 = quoteHeadersForCreatedByUserFk_1;
-		this.warehouses_1 = warehouses_1;
-		this.businessDealsForLastModifiedBy_1 = businessDealsForLastModifiedBy_1;
-		this.businessDealsForSponsorUserFk_1 = businessDealsForSponsorUserFk_1;
-		this.businessDealsForCreatedBy_1 = businessDealsForCreatedBy_1;
+		this.quoteHeadersForCreatedByUserFk = quoteHeadersForCreatedByUserFk;
+		this.businessDealHistories = businessDealHistories;
+		this.accountActivities = accountActivities;
+		this.businessDealsForLastModifiedBy = businessDealsForLastModifiedBy;
+		this.inventoryItemsForCreatedByUserFk = inventoryItemsForCreatedByUserFk;
+		this.businessDealsForSponsorUserFk = businessDealsForSponsorUserFk;
+		this.businessDealsForCreatedBy = businessDealsForCreatedBy;
+		this.salesPerformances = salesPerformances;
+		this.invoiceHeadersForCreatedBy = invoiceHeadersForCreatedBy;
+		this.inventoryUniqueItemsForCreatedByUserFk = inventoryUniqueItemsForCreatedByUserFk;
 		this.purchaseEntriesForLastModifiedByUserFk = purchaseEntriesForLastModifiedByUserFk;
 		this.purchaseEntriesForCreatedBy = purchaseEntriesForCreatedBy;
-		this.productsForLastModifiedByUserFk = productsForLastModifiedByUserFk;
-		this.accountDetails_1 = accountDetails_1;
-		this.grnHeadersForLastModifiedByUserFk_1 = grnHeadersForLastModifiedByUserFk_1;
-		this.businessDealsForOwnerFk = businessDealsForOwnerFk;
-		this.salesOrderHeadersForOwnerFk = salesOrderHeadersForOwnerFk;
-		this.purchaseEntriesForCreatedBy_1 = purchaseEntriesForCreatedBy_1;
-		this.purchaseOrderHeadersForCreatedBy_1 = purchaseOrderHeadersForCreatedBy_1;
-		this.purchaseOrderHeadersForLastModifiedBy_1 = purchaseOrderHeadersForLastModifiedBy_1;
-		this.inventoryItemsForCreatedByUserFk = inventoryItemsForCreatedByUserFk;
-		this.salesOrderHeadersForLastModifiedByUserFk = salesOrderHeadersForLastModifiedByUserFk;
-		this.productsForCreatedByUserFk = productsForCreatedByUserFk;
 		this.inventoryItemsForLastModifiedByUserFk = inventoryItemsForLastModifiedByUserFk;
-		this.invoiceHeadersForLastModifiedBy = invoiceHeadersForLastModifiedBy;
-		this.productsForLastModifiedByUserFk_1 = productsForLastModifiedByUserFk_1;
-		this.tasksForAssigneeUserFk_1 = tasksForAssigneeUserFk_1;
-		this.deliveryChallansForLastModifiedByUserFk_1 = deliveryChallansForLastModifiedByUserFk_1;
-		this.businessDealsForOwnerFk_1 = businessDealsForOwnerFk_1;
-		this.productsForCreatedByUserFk_1 = productsForCreatedByUserFk_1;
-		this.salesOrderHeadersForOwnerFk_1 = salesOrderHeadersForOwnerFk_1;
-		this.accountActivities_1 = accountActivities_1;
-		this.grnHeadersForCreatedByUserFk_1 = grnHeadersForCreatedByUserFk_1;
-		this.inventoryItemsForCreatedByUserFk_1 = inventoryItemsForCreatedByUserFk_1;
-		this.purchaseEntriesForLastModifiedByUserFk_1 = purchaseEntriesForLastModifiedByUserFk_1;
-		this.salesOrderHeadersForLastModifiedByUserFk_1 = salesOrderHeadersForLastModifiedByUserFk_1;
-		this.invoiceHeadersForLastModifiedBy_1 = invoiceHeadersForLastModifiedBy_1;
-		this.invoiceHeadersForCreatedBy_1 = invoiceHeadersForCreatedBy_1;
-		this.dealActivities_1 = dealActivities_1;
-		this.userDetailses_1 = userDetailses_1;
-		this.inventoryItemsForLastModifiedByUserFk_1 = inventoryItemsForLastModifiedByUserFk_1;
+		this.inventoryUniqueItemsForLastModifiedByUserFk = inventoryUniqueItemsForLastModifiedByUserFk;
 	}
 
 	@Id
@@ -447,32 +401,22 @@ public class UserDetails implements java.io.Serializable {
 		this.accessToken = accessToken;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
-	public Set<QuoteHeader> getQuoteHeadersForCreatedByUserFk() {
-		return this.quoteHeadersForCreatedByUserFk;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
+	public Set<AccountDetail> getAccountDetails() {
+		return this.accountDetails;
 	}
 
-	public void setQuoteHeadersForCreatedByUserFk(Set<QuoteHeader> quoteHeadersForCreatedByUserFk) {
-		this.quoteHeadersForCreatedByUserFk = quoteHeadersForCreatedByUserFk;
+	public void setAccountDetails(Set<AccountDetail> accountDetails) {
+		this.accountDetails = accountDetails;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedUserFk")
-	public Set<QuoteHeader> getQuoteHeadersForLastModifiedUserFk() {
-		return this.quoteHeadersForLastModifiedUserFk;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
+	public Set<TaskComment> getTaskComments() {
+		return this.taskComments;
 	}
 
-	public void setQuoteHeadersForLastModifiedUserFk(Set<QuoteHeader> quoteHeadersForLastModifiedUserFk) {
-		this.quoteHeadersForLastModifiedUserFk = quoteHeadersForLastModifiedUserFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
-	public Set<DeliveryChallan> getDeliveryChallansForLastModifiedByUserFk() {
-		return this.deliveryChallansForLastModifiedByUserFk;
-	}
-
-	public void setDeliveryChallansForLastModifiedByUserFk(
-			Set<DeliveryChallan> deliveryChallansForLastModifiedByUserFk) {
-		this.deliveryChallansForLastModifiedByUserFk = deliveryChallansForLastModifiedByUserFk;
+	public void setTaskComments(Set<TaskComment> taskComments) {
+		this.taskComments = taskComments;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
@@ -493,15 +437,6 @@ public class UserDetails implements java.io.Serializable {
 		this.userDetailses = userDetailses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedBy")
-	public Set<BusinessDeal> getBusinessDealsForCreatedBy() {
-		return this.businessDealsForCreatedBy;
-	}
-
-	public void setBusinessDealsForCreatedBy(Set<BusinessDeal> businessDealsForCreatedBy) {
-		this.businessDealsForCreatedBy = businessDealsForCreatedBy;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
 	public Set<Warehouse> getWarehouses() {
 		return this.warehouses;
@@ -511,22 +446,23 @@ public class UserDetails implements java.io.Serializable {
 		this.warehouses = warehouses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedBy")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeadersForCreatedBy() {
-		return this.purchaseOrderHeadersForCreatedBy;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
+	public Set<TaskCcUser> getTaskCcUsers() {
+		return this.taskCcUsers;
 	}
 
-	public void setPurchaseOrderHeadersForCreatedBy(Set<PurchaseOrderHeader> purchaseOrderHeadersForCreatedBy) {
-		this.purchaseOrderHeadersForCreatedBy = purchaseOrderHeadersForCreatedBy;
+	public void setTaskCcUsers(Set<TaskCcUser> taskCcUsers) {
+		this.taskCcUsers = taskCcUsers;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
-	public Set<SalesOrderHeader> getSalesOrderHeadersForCreatedByUserFk() {
-		return this.salesOrderHeadersForCreatedByUserFk;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
+	public Set<InvoiceHistory> getInvoiceHistoriesForLastModifiedByUserFk() {
+		return this.invoiceHistoriesForLastModifiedByUserFk;
 	}
 
-	public void setSalesOrderHeadersForCreatedByUserFk(Set<SalesOrderHeader> salesOrderHeadersForCreatedByUserFk) {
-		this.salesOrderHeadersForCreatedByUserFk = salesOrderHeadersForCreatedByUserFk;
+	public void setInvoiceHistoriesForLastModifiedByUserFk(
+			Set<InvoiceHistory> invoiceHistoriesForLastModifiedByUserFk) {
+		this.invoiceHistoriesForLastModifiedByUserFk = invoiceHistoriesForLastModifiedByUserFk;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
@@ -536,6 +472,42 @@ public class UserDetails implements java.io.Serializable {
 
 	public void setDeliveryChallansForCreatedByUserFk(Set<DeliveryChallan> deliveryChallansForCreatedByUserFk) {
 		this.deliveryChallansForCreatedByUserFk = deliveryChallansForCreatedByUserFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByOwnerFk")
+	public Set<SalesOrderHeader> getSalesOrderHeadersForOwnerFk() {
+		return this.salesOrderHeadersForOwnerFk;
+	}
+
+	public void setSalesOrderHeadersForOwnerFk(Set<SalesOrderHeader> salesOrderHeadersForOwnerFk) {
+		this.salesOrderHeadersForOwnerFk = salesOrderHeadersForOwnerFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
+	public Set<InvoiceHistory> getInvoiceHistoriesForCreatedByUserFk() {
+		return this.invoiceHistoriesForCreatedByUserFk;
+	}
+
+	public void setInvoiceHistoriesForCreatedByUserFk(Set<InvoiceHistory> invoiceHistoriesForCreatedByUserFk) {
+		this.invoiceHistoriesForCreatedByUserFk = invoiceHistoriesForCreatedByUserFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
+	public Set<GrnHeader> getGrnHeadersForLastModifiedByUserFk() {
+		return this.grnHeadersForLastModifiedByUserFk;
+	}
+
+	public void setGrnHeadersForLastModifiedByUserFk(Set<GrnHeader> grnHeadersForLastModifiedByUserFk) {
+		this.grnHeadersForLastModifiedByUserFk = grnHeadersForLastModifiedByUserFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedBy")
+	public Set<PurchaseOrderHeader> getPurchaseOrderHeadersForCreatedBy() {
+		return this.purchaseOrderHeadersForCreatedBy;
+	}
+
+	public void setPurchaseOrderHeadersForCreatedBy(Set<PurchaseOrderHeader> purchaseOrderHeadersForCreatedBy) {
+		this.purchaseOrderHeadersForCreatedBy = purchaseOrderHeadersForCreatedBy;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedBy")
@@ -548,22 +520,40 @@ public class UserDetails implements java.io.Serializable {
 		this.purchaseOrderHeadersForLastModifiedBy = purchaseOrderHeadersForLastModifiedBy;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByAssigneeUserFk")
+	public Set<Task> getTasksForAssigneeUserFk() {
+		return this.tasksForAssigneeUserFk;
+	}
+
+	public void setTasksForAssigneeUserFk(Set<Task> tasksForAssigneeUserFk) {
+		this.tasksForAssigneeUserFk = tasksForAssigneeUserFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
+	public Set<WeeklySalesCommits> getWeeklySalesCommitses() {
+		return this.weeklySalesCommitses;
+	}
+
+	public void setWeeklySalesCommitses(Set<WeeklySalesCommits> weeklySalesCommitses) {
+		this.weeklySalesCommitses = weeklySalesCommitses;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
-	public Set<GrnHeader> getGrnHeadersForLastModifiedByUserFk() {
-		return this.grnHeadersForLastModifiedByUserFk;
+	public Set<Activity> getActivitiesForLastModifiedByUserFk() {
+		return this.activitiesForLastModifiedByUserFk;
 	}
 
-	public void setGrnHeadersForLastModifiedByUserFk(Set<GrnHeader> grnHeadersForLastModifiedByUserFk) {
-		this.grnHeadersForLastModifiedByUserFk = grnHeadersForLastModifiedByUserFk;
+	public void setActivitiesForLastModifiedByUserFk(Set<Activity> activitiesForLastModifiedByUserFk) {
+		this.activitiesForLastModifiedByUserFk = activitiesForLastModifiedByUserFk;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
-	public Set<DeliveryChallan> getDeliveryChallansForCreatedByUserFk_1() {
-		return this.deliveryChallansForCreatedByUserFk_1;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
+	public Set<DealFollower> getDealFollowers() {
+		return this.dealFollowers;
 	}
 
-	public void setDeliveryChallansForCreatedByUserFk_1(Set<DeliveryChallan> deliveryChallansForCreatedByUserFk_1) {
-		this.deliveryChallansForCreatedByUserFk_1 = deliveryChallansForCreatedByUserFk_1;
+	public void setDealFollowers(Set<DealFollower> dealFollowers) {
+		this.dealFollowers = dealFollowers;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatorUserFk")
@@ -575,49 +565,42 @@ public class UserDetails implements java.io.Serializable {
 		this.tasksForCreatorUserFk = tasksForCreatorUserFk;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedBy")
-	public Set<InvoiceHeader> getInvoiceHeadersForCreatedBy() {
-		return this.invoiceHeadersForCreatedBy;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
+	public Set<Activity> getActivitiesForCreatedByUserFk() {
+		return this.activitiesForCreatedByUserFk;
 	}
 
-	public void setInvoiceHeadersForCreatedBy(Set<InvoiceHeader> invoiceHeadersForCreatedBy) {
-		this.invoiceHeadersForCreatedBy = invoiceHeadersForCreatedBy;
+	public void setActivitiesForCreatedByUserFk(Set<Activity> activitiesForCreatedByUserFk) {
+		this.activitiesForCreatedByUserFk = activitiesForCreatedByUserFk;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByAssigneeUserFk")
-	public Set<Task> getTasksForAssigneeUserFk() {
-		return this.tasksForAssigneeUserFk;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
+	public Set<ReserveActivity> getReserveActivitiesForCreatedByUserFk() {
+		return this.reserveActivitiesForCreatedByUserFk;
 	}
 
-	public void setTasksForAssigneeUserFk(Set<Task> tasksForAssigneeUserFk) {
-		this.tasksForAssigneeUserFk = tasksForAssigneeUserFk;
+	public void setReserveActivitiesForCreatedByUserFk(Set<ReserveActivity> reserveActivitiesForCreatedByUserFk) {
+		this.reserveActivitiesForCreatedByUserFk = reserveActivitiesForCreatedByUserFk;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatorUserFk")
-	public Set<Task> getTasksForCreatorUserFk_1() {
-		return this.tasksForCreatorUserFk_1;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
+	public Set<ReserveActivity> getReserveActivitiesForLastModifiedByUserFk() {
+		return this.reserveActivitiesForLastModifiedByUserFk;
 	}
 
-	public void setTasksForCreatorUserFk_1(Set<Task> tasksForCreatorUserFk_1) {
-		this.tasksForCreatorUserFk_1 = tasksForCreatorUserFk_1;
+	public void setReserveActivitiesForLastModifiedByUserFk(
+			Set<ReserveActivity> reserveActivitiesForLastModifiedByUserFk) {
+		this.reserveActivitiesForLastModifiedByUserFk = reserveActivitiesForLastModifiedByUserFk;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
-	public Set<AccountDetail> getAccountDetails() {
-		return this.accountDetails;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
+	public Set<SalesOrderHeader> getSalesOrderHeadersForLastModifiedByUserFk() {
+		return this.salesOrderHeadersForLastModifiedByUserFk;
 	}
 
-	public void setAccountDetails(Set<AccountDetail> accountDetails) {
-		this.accountDetails = accountDetails;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedBy")
-	public Set<BusinessDeal> getBusinessDealsForLastModifiedBy() {
-		return this.businessDealsForLastModifiedBy;
-	}
-
-	public void setBusinessDealsForLastModifiedBy(Set<BusinessDeal> businessDealsForLastModifiedBy) {
-		this.businessDealsForLastModifiedBy = businessDealsForLastModifiedBy;
+	public void setSalesOrderHeadersForLastModifiedByUserFk(
+			Set<SalesOrderHeader> salesOrderHeadersForLastModifiedByUserFk) {
+		this.salesOrderHeadersForLastModifiedByUserFk = salesOrderHeadersForLastModifiedByUserFk;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
@@ -629,49 +612,68 @@ public class UserDetails implements java.io.Serializable {
 		this.financialReports = financialReports;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsBySponsorUserFk")
-	public Set<BusinessDeal> getBusinessDealsForSponsorUserFk() {
-		return this.businessDealsForSponsorUserFk;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
+	public Set<Product> getProductsForCreatedByUserFk() {
+		return this.productsForCreatedByUserFk;
 	}
 
-	public void setBusinessDealsForSponsorUserFk(Set<BusinessDeal> businessDealsForSponsorUserFk) {
-		this.businessDealsForSponsorUserFk = businessDealsForSponsorUserFk;
+	public void setProductsForCreatedByUserFk(Set<Product> productsForCreatedByUserFk) {
+		this.productsForCreatedByUserFk = productsForCreatedByUserFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedBy")
+	public Set<InvoiceHeader> getInvoiceHeadersForLastModifiedBy() {
+		return this.invoiceHeadersForLastModifiedBy;
+	}
+
+	public void setInvoiceHeadersForLastModifiedBy(Set<InvoiceHeader> invoiceHeadersForLastModifiedBy) {
+		this.invoiceHeadersForLastModifiedBy = invoiceHeadersForLastModifiedBy;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
-	public Set<SalesOrderHeader> getSalesOrderHeadersForCreatedByUserFk_1() {
-		return this.salesOrderHeadersForCreatedByUserFk_1;
+	public Set<SalesOrderHeader> getSalesOrderHeadersForCreatedByUserFk() {
+		return this.salesOrderHeadersForCreatedByUserFk;
 	}
 
-	public void setSalesOrderHeadersForCreatedByUserFk_1(Set<SalesOrderHeader> salesOrderHeadersForCreatedByUserFk_1) {
-		this.salesOrderHeadersForCreatedByUserFk_1 = salesOrderHeadersForCreatedByUserFk_1;
+	public void setSalesOrderHeadersForCreatedByUserFk(Set<SalesOrderHeader> salesOrderHeadersForCreatedByUserFk) {
+		this.salesOrderHeadersForCreatedByUserFk = salesOrderHeadersForCreatedByUserFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
+	public Set<Product> getProductsForLastModifiedByUserFk() {
+		return this.productsForLastModifiedByUserFk;
+	}
+
+	public void setProductsForLastModifiedByUserFk(Set<Product> productsForLastModifiedByUserFk) {
+		this.productsForLastModifiedByUserFk = productsForLastModifiedByUserFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
+	public Set<DeliveryChallan> getDeliveryChallansForLastModifiedByUserFk() {
+		return this.deliveryChallansForLastModifiedByUserFk;
+	}
+
+	public void setDeliveryChallansForLastModifiedByUserFk(
+			Set<DeliveryChallan> deliveryChallansForLastModifiedByUserFk) {
+		this.deliveryChallansForLastModifiedByUserFk = deliveryChallansForLastModifiedByUserFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByOwnerFk")
+	public Set<BusinessDeal> getBusinessDealsForOwnerFk() {
+		return this.businessDealsForOwnerFk;
+	}
+
+	public void setBusinessDealsForOwnerFk(Set<BusinessDeal> businessDealsForOwnerFk) {
+		this.businessDealsForOwnerFk = businessDealsForOwnerFk;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedUserFk")
-	public Set<QuoteHeader> getQuoteHeadersForLastModifiedUserFk_1() {
-		return this.quoteHeadersForLastModifiedUserFk_1;
+	public Set<QuoteHeader> getQuoteHeadersForLastModifiedUserFk() {
+		return this.quoteHeadersForLastModifiedUserFk;
 	}
 
-	public void setQuoteHeadersForLastModifiedUserFk_1(Set<QuoteHeader> quoteHeadersForLastModifiedUserFk_1) {
-		this.quoteHeadersForLastModifiedUserFk_1 = quoteHeadersForLastModifiedUserFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
-	public Set<AccountActivity> getAccountActivities() {
-		return this.accountActivities;
-	}
-
-	public void setAccountActivities(Set<AccountActivity> accountActivities) {
-		this.accountActivities = accountActivities;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
-	public Set<FinancialReport> getFinancialReports_1() {
-		return this.financialReports_1;
-	}
-
-	public void setFinancialReports_1(Set<FinancialReport> financialReports_1) {
-		this.financialReports_1 = financialReports_1;
+	public void setQuoteHeadersForLastModifiedUserFk(Set<QuoteHeader> quoteHeadersForLastModifiedUserFk) {
+		this.quoteHeadersForLastModifiedUserFk = quoteHeadersForLastModifiedUserFk;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
@@ -684,48 +686,94 @@ public class UserDetails implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
-	public Set<QuoteHeader> getQuoteHeadersForCreatedByUserFk_1() {
-		return this.quoteHeadersForCreatedByUserFk_1;
+	public Set<QuoteHeader> getQuoteHeadersForCreatedByUserFk() {
+		return this.quoteHeadersForCreatedByUserFk;
 	}
 
-	public void setQuoteHeadersForCreatedByUserFk_1(Set<QuoteHeader> quoteHeadersForCreatedByUserFk_1) {
-		this.quoteHeadersForCreatedByUserFk_1 = quoteHeadersForCreatedByUserFk_1;
+	public void setQuoteHeadersForCreatedByUserFk(Set<QuoteHeader> quoteHeadersForCreatedByUserFk) {
+		this.quoteHeadersForCreatedByUserFk = quoteHeadersForCreatedByUserFk;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
-	public Set<Warehouse> getWarehouses_1() {
-		return this.warehouses_1;
+	public Set<BusinessDealHistory> getBusinessDealHistories() {
+		return this.businessDealHistories;
 	}
 
-	public void setWarehouses_1(Set<Warehouse> warehouses_1) {
-		this.warehouses_1 = warehouses_1;
+	public void setBusinessDealHistories(Set<BusinessDealHistory> businessDealHistories) {
+		this.businessDealHistories = businessDealHistories;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
+	public Set<AccountActivity> getAccountActivities() {
+		return this.accountActivities;
+	}
+
+	public void setAccountActivities(Set<AccountActivity> accountActivities) {
+		this.accountActivities = accountActivities;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedBy")
-	public Set<BusinessDeal> getBusinessDealsForLastModifiedBy_1() {
-		return this.businessDealsForLastModifiedBy_1;
+	public Set<BusinessDeal> getBusinessDealsForLastModifiedBy() {
+		return this.businessDealsForLastModifiedBy;
 	}
 
-	public void setBusinessDealsForLastModifiedBy_1(Set<BusinessDeal> businessDealsForLastModifiedBy_1) {
-		this.businessDealsForLastModifiedBy_1 = businessDealsForLastModifiedBy_1;
+	public void setBusinessDealsForLastModifiedBy(Set<BusinessDeal> businessDealsForLastModifiedBy) {
+		this.businessDealsForLastModifiedBy = businessDealsForLastModifiedBy;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
+	public Set<InventoryItem> getInventoryItemsForCreatedByUserFk() {
+		return this.inventoryItemsForCreatedByUserFk;
+	}
+
+	public void setInventoryItemsForCreatedByUserFk(Set<InventoryItem> inventoryItemsForCreatedByUserFk) {
+		this.inventoryItemsForCreatedByUserFk = inventoryItemsForCreatedByUserFk;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsBySponsorUserFk")
-	public Set<BusinessDeal> getBusinessDealsForSponsorUserFk_1() {
-		return this.businessDealsForSponsorUserFk_1;
+	public Set<BusinessDeal> getBusinessDealsForSponsorUserFk() {
+		return this.businessDealsForSponsorUserFk;
 	}
 
-	public void setBusinessDealsForSponsorUserFk_1(Set<BusinessDeal> businessDealsForSponsorUserFk_1) {
-		this.businessDealsForSponsorUserFk_1 = businessDealsForSponsorUserFk_1;
+	public void setBusinessDealsForSponsorUserFk(Set<BusinessDeal> businessDealsForSponsorUserFk) {
+		this.businessDealsForSponsorUserFk = businessDealsForSponsorUserFk;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedBy")
-	public Set<BusinessDeal> getBusinessDealsForCreatedBy_1() {
-		return this.businessDealsForCreatedBy_1;
+	public Set<BusinessDeal> getBusinessDealsForCreatedBy() {
+		return this.businessDealsForCreatedBy;
 	}
 
-	public void setBusinessDealsForCreatedBy_1(Set<BusinessDeal> businessDealsForCreatedBy_1) {
-		this.businessDealsForCreatedBy_1 = businessDealsForCreatedBy_1;
+	public void setBusinessDealsForCreatedBy(Set<BusinessDeal> businessDealsForCreatedBy) {
+		this.businessDealsForCreatedBy = businessDealsForCreatedBy;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
+	public Set<SalesPerformance> getSalesPerformances() {
+		return this.salesPerformances;
+	}
+
+	public void setSalesPerformances(Set<SalesPerformance> salesPerformances) {
+		this.salesPerformances = salesPerformances;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedBy")
+	public Set<InvoiceHeader> getInvoiceHeadersForCreatedBy() {
+		return this.invoiceHeadersForCreatedBy;
+	}
+
+	public void setInvoiceHeadersForCreatedBy(Set<InvoiceHeader> invoiceHeadersForCreatedBy) {
+		this.invoiceHeadersForCreatedBy = invoiceHeadersForCreatedBy;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
+	public Set<InventoryUniqueItem> getInventoryUniqueItemsForCreatedByUserFk() {
+		return this.inventoryUniqueItemsForCreatedByUserFk;
+	}
+
+	public void setInventoryUniqueItemsForCreatedByUserFk(
+			Set<InventoryUniqueItem> inventoryUniqueItemsForCreatedByUserFk) {
+		this.inventoryUniqueItemsForCreatedByUserFk = inventoryUniqueItemsForCreatedByUserFk;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
@@ -747,107 +795,6 @@ public class UserDetails implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
-	public Set<Product> getProductsForLastModifiedByUserFk() {
-		return this.productsForLastModifiedByUserFk;
-	}
-
-	public void setProductsForLastModifiedByUserFk(Set<Product> productsForLastModifiedByUserFk) {
-		this.productsForLastModifiedByUserFk = productsForLastModifiedByUserFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
-	public Set<AccountDetail> getAccountDetails_1() {
-		return this.accountDetails_1;
-	}
-
-	public void setAccountDetails_1(Set<AccountDetail> accountDetails_1) {
-		this.accountDetails_1 = accountDetails_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
-	public Set<GrnHeader> getGrnHeadersForLastModifiedByUserFk_1() {
-		return this.grnHeadersForLastModifiedByUserFk_1;
-	}
-
-	public void setGrnHeadersForLastModifiedByUserFk_1(Set<GrnHeader> grnHeadersForLastModifiedByUserFk_1) {
-		this.grnHeadersForLastModifiedByUserFk_1 = grnHeadersForLastModifiedByUserFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByOwnerFk")
-	public Set<BusinessDeal> getBusinessDealsForOwnerFk() {
-		return this.businessDealsForOwnerFk;
-	}
-
-	public void setBusinessDealsForOwnerFk(Set<BusinessDeal> businessDealsForOwnerFk) {
-		this.businessDealsForOwnerFk = businessDealsForOwnerFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByOwnerFk")
-	public Set<SalesOrderHeader> getSalesOrderHeadersForOwnerFk() {
-		return this.salesOrderHeadersForOwnerFk;
-	}
-
-	public void setSalesOrderHeadersForOwnerFk(Set<SalesOrderHeader> salesOrderHeadersForOwnerFk) {
-		this.salesOrderHeadersForOwnerFk = salesOrderHeadersForOwnerFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedBy")
-	public Set<PurchaseEntry> getPurchaseEntriesForCreatedBy_1() {
-		return this.purchaseEntriesForCreatedBy_1;
-	}
-
-	public void setPurchaseEntriesForCreatedBy_1(Set<PurchaseEntry> purchaseEntriesForCreatedBy_1) {
-		this.purchaseEntriesForCreatedBy_1 = purchaseEntriesForCreatedBy_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedBy")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeadersForCreatedBy_1() {
-		return this.purchaseOrderHeadersForCreatedBy_1;
-	}
-
-	public void setPurchaseOrderHeadersForCreatedBy_1(Set<PurchaseOrderHeader> purchaseOrderHeadersForCreatedBy_1) {
-		this.purchaseOrderHeadersForCreatedBy_1 = purchaseOrderHeadersForCreatedBy_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedBy")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeadersForLastModifiedBy_1() {
-		return this.purchaseOrderHeadersForLastModifiedBy_1;
-	}
-
-	public void setPurchaseOrderHeadersForLastModifiedBy_1(
-			Set<PurchaseOrderHeader> purchaseOrderHeadersForLastModifiedBy_1) {
-		this.purchaseOrderHeadersForLastModifiedBy_1 = purchaseOrderHeadersForLastModifiedBy_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
-	public Set<InventoryItem> getInventoryItemsForCreatedByUserFk() {
-		return this.inventoryItemsForCreatedByUserFk;
-	}
-
-	public void setInventoryItemsForCreatedByUserFk(Set<InventoryItem> inventoryItemsForCreatedByUserFk) {
-		this.inventoryItemsForCreatedByUserFk = inventoryItemsForCreatedByUserFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
-	public Set<SalesOrderHeader> getSalesOrderHeadersForLastModifiedByUserFk() {
-		return this.salesOrderHeadersForLastModifiedByUserFk;
-	}
-
-	public void setSalesOrderHeadersForLastModifiedByUserFk(
-			Set<SalesOrderHeader> salesOrderHeadersForLastModifiedByUserFk) {
-		this.salesOrderHeadersForLastModifiedByUserFk = salesOrderHeadersForLastModifiedByUserFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
-	public Set<Product> getProductsForCreatedByUserFk() {
-		return this.productsForCreatedByUserFk;
-	}
-
-	public void setProductsForCreatedByUserFk(Set<Product> productsForCreatedByUserFk) {
-		this.productsForCreatedByUserFk = productsForCreatedByUserFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
 	public Set<InventoryItem> getInventoryItemsForLastModifiedByUserFk() {
 		return this.inventoryItemsForLastModifiedByUserFk;
 	}
@@ -856,160 +803,14 @@ public class UserDetails implements java.io.Serializable {
 		this.inventoryItemsForLastModifiedByUserFk = inventoryItemsForLastModifiedByUserFk;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedBy")
-	public Set<InvoiceHeader> getInvoiceHeadersForLastModifiedBy() {
-		return this.invoiceHeadersForLastModifiedBy;
-	}
-
-	public void setInvoiceHeadersForLastModifiedBy(Set<InvoiceHeader> invoiceHeadersForLastModifiedBy) {
-		this.invoiceHeadersForLastModifiedBy = invoiceHeadersForLastModifiedBy;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
-	public Set<Product> getProductsForLastModifiedByUserFk_1() {
-		return this.productsForLastModifiedByUserFk_1;
+	public Set<InventoryUniqueItem> getInventoryUniqueItemsForLastModifiedByUserFk() {
+		return this.inventoryUniqueItemsForLastModifiedByUserFk;
 	}
 
-	public void setProductsForLastModifiedByUserFk_1(Set<Product> productsForLastModifiedByUserFk_1) {
-		this.productsForLastModifiedByUserFk_1 = productsForLastModifiedByUserFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByAssigneeUserFk")
-	public Set<Task> getTasksForAssigneeUserFk_1() {
-		return this.tasksForAssigneeUserFk_1;
-	}
-
-	public void setTasksForAssigneeUserFk_1(Set<Task> tasksForAssigneeUserFk_1) {
-		this.tasksForAssigneeUserFk_1 = tasksForAssigneeUserFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
-	public Set<DeliveryChallan> getDeliveryChallansForLastModifiedByUserFk_1() {
-		return this.deliveryChallansForLastModifiedByUserFk_1;
-	}
-
-	public void setDeliveryChallansForLastModifiedByUserFk_1(
-			Set<DeliveryChallan> deliveryChallansForLastModifiedByUserFk_1) {
-		this.deliveryChallansForLastModifiedByUserFk_1 = deliveryChallansForLastModifiedByUserFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByOwnerFk")
-	public Set<BusinessDeal> getBusinessDealsForOwnerFk_1() {
-		return this.businessDealsForOwnerFk_1;
-	}
-
-	public void setBusinessDealsForOwnerFk_1(Set<BusinessDeal> businessDealsForOwnerFk_1) {
-		this.businessDealsForOwnerFk_1 = businessDealsForOwnerFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
-	public Set<Product> getProductsForCreatedByUserFk_1() {
-		return this.productsForCreatedByUserFk_1;
-	}
-
-	public void setProductsForCreatedByUserFk_1(Set<Product> productsForCreatedByUserFk_1) {
-		this.productsForCreatedByUserFk_1 = productsForCreatedByUserFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByOwnerFk")
-	public Set<SalesOrderHeader> getSalesOrderHeadersForOwnerFk_1() {
-		return this.salesOrderHeadersForOwnerFk_1;
-	}
-
-	public void setSalesOrderHeadersForOwnerFk_1(Set<SalesOrderHeader> salesOrderHeadersForOwnerFk_1) {
-		this.salesOrderHeadersForOwnerFk_1 = salesOrderHeadersForOwnerFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
-	public Set<AccountActivity> getAccountActivities_1() {
-		return this.accountActivities_1;
-	}
-
-	public void setAccountActivities_1(Set<AccountActivity> accountActivities_1) {
-		this.accountActivities_1 = accountActivities_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
-	public Set<GrnHeader> getGrnHeadersForCreatedByUserFk_1() {
-		return this.grnHeadersForCreatedByUserFk_1;
-	}
-
-	public void setGrnHeadersForCreatedByUserFk_1(Set<GrnHeader> grnHeadersForCreatedByUserFk_1) {
-		this.grnHeadersForCreatedByUserFk_1 = grnHeadersForCreatedByUserFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedByUserFk")
-	public Set<InventoryItem> getInventoryItemsForCreatedByUserFk_1() {
-		return this.inventoryItemsForCreatedByUserFk_1;
-	}
-
-	public void setInventoryItemsForCreatedByUserFk_1(Set<InventoryItem> inventoryItemsForCreatedByUserFk_1) {
-		this.inventoryItemsForCreatedByUserFk_1 = inventoryItemsForCreatedByUserFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
-	public Set<PurchaseEntry> getPurchaseEntriesForLastModifiedByUserFk_1() {
-		return this.purchaseEntriesForLastModifiedByUserFk_1;
-	}
-
-	public void setPurchaseEntriesForLastModifiedByUserFk_1(
-			Set<PurchaseEntry> purchaseEntriesForLastModifiedByUserFk_1) {
-		this.purchaseEntriesForLastModifiedByUserFk_1 = purchaseEntriesForLastModifiedByUserFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
-	public Set<SalesOrderHeader> getSalesOrderHeadersForLastModifiedByUserFk_1() {
-		return this.salesOrderHeadersForLastModifiedByUserFk_1;
-	}
-
-	public void setSalesOrderHeadersForLastModifiedByUserFk_1(
-			Set<SalesOrderHeader> salesOrderHeadersForLastModifiedByUserFk_1) {
-		this.salesOrderHeadersForLastModifiedByUserFk_1 = salesOrderHeadersForLastModifiedByUserFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedBy")
-	public Set<InvoiceHeader> getInvoiceHeadersForLastModifiedBy_1() {
-		return this.invoiceHeadersForLastModifiedBy_1;
-	}
-
-	public void setInvoiceHeadersForLastModifiedBy_1(Set<InvoiceHeader> invoiceHeadersForLastModifiedBy_1) {
-		this.invoiceHeadersForLastModifiedBy_1 = invoiceHeadersForLastModifiedBy_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatedBy")
-	public Set<InvoiceHeader> getInvoiceHeadersForCreatedBy_1() {
-		return this.invoiceHeadersForCreatedBy_1;
-	}
-
-	public void setInvoiceHeadersForCreatedBy_1(Set<InvoiceHeader> invoiceHeadersForCreatedBy_1) {
-		this.invoiceHeadersForCreatedBy_1 = invoiceHeadersForCreatedBy_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
-	public Set<DealActivity> getDealActivities_1() {
-		return this.dealActivities_1;
-	}
-
-	public void setDealActivities_1(Set<DealActivity> dealActivities_1) {
-		this.dealActivities_1 = dealActivities_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
-	public Set<UserDetails> getUserDetailses_1() {
-		return this.userDetailses_1;
-	}
-
-	public void setUserDetailses_1(Set<UserDetails> userDetailses_1) {
-		this.userDetailses_1 = userDetailses_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByLastModifiedByUserFk")
-	public Set<InventoryItem> getInventoryItemsForLastModifiedByUserFk_1() {
-		return this.inventoryItemsForLastModifiedByUserFk_1;
-	}
-
-	public void setInventoryItemsForLastModifiedByUserFk_1(Set<InventoryItem> inventoryItemsForLastModifiedByUserFk_1) {
-		this.inventoryItemsForLastModifiedByUserFk_1 = inventoryItemsForLastModifiedByUserFk_1;
+	public void setInventoryUniqueItemsForLastModifiedByUserFk(
+			Set<InventoryUniqueItem> inventoryUniqueItemsForLastModifiedByUserFk) {
+		this.inventoryUniqueItemsForLastModifiedByUserFk = inventoryUniqueItemsForLastModifiedByUserFk;
 	}
 
 }

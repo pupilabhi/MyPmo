@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,8 +23,8 @@ import javax.persistence.TemporalType;
 public class InvoiceHeader implements java.io.Serializable {
 
 	private long id;
-	private AccountAddress accountAddressByBillingFk;
 	private AccountAddress accountAddressByShippingFk;
+	private AccountAddress accountAddressByBillingFk;
 	private AccountDetail accountDetailByToShipAccountFk;
 	private AccountDetail accountDetailByAccountFk;
 	private CrmType crmType;
@@ -35,12 +35,12 @@ public class InvoiceHeader implements java.io.Serializable {
 	private Organisation organisation;
 	private OrgBankDetail orgBankDetail;
 	private OrgLocation orgLocation;
-	private PersonDetail personDetailByPersonFk;
 	private PersonDetail personDetailByFinanceContactFk;
+	private PersonDetail personDetailByPersonFk;
 	private SalesOrderHeader salesOrderHeader;
 	private StatusItem statusItem;
-	private UserDetails userDetailsByCreatedBy;
 	private UserDetails userDetailsByLastModifiedBy;
+	private UserDetails userDetailsByCreatedBy;
 	private Date acceptedDate;
 	private String contactEmail;
 	private String contactPhnNo;
@@ -72,12 +72,11 @@ public class InvoiceHeader implements java.io.Serializable {
 	private String supplierrefno;
 	private double convertionRate;
 	private String recinvoiceName;
-	private Set<InvoiceItem> invoiceItems = new HashSet<InvoiceItem>(0);
-	private Set<Recievable> recievables = new HashSet<Recievable>(0);
+	private String grnno;
 	private Set<InvoiceHeader> invoiceHeaders = new HashSet<InvoiceHeader>(0);
-	private Set<InvoiceHeader> invoiceHeaders_1 = new HashSet<InvoiceHeader>(0);
-	private Set<Recievable> recievables_1 = new HashSet<Recievable>(0);
-	private Set<InvoiceItem> invoiceItems_1 = new HashSet<InvoiceItem>(0);
+	private Set<Recievable> recievables = new HashSet<Recievable>(0);
+	private Set<Activity> activities = new HashSet<Activity>(0);
+	private Set<InvoiceItem> invoiceItems = new HashSet<InvoiceItem>(0);
 
 	public InvoiceHeader() {
 	}
@@ -92,24 +91,24 @@ public class InvoiceHeader implements java.io.Serializable {
 		this.convertionRate = convertionRate;
 	}
 
-	public InvoiceHeader(long id, AccountAddress accountAddressByBillingFk, AccountAddress accountAddressByShippingFk,
+	public InvoiceHeader(long id, AccountAddress accountAddressByShippingFk, AccountAddress accountAddressByBillingFk,
 			AccountDetail accountDetailByToShipAccountFk, AccountDetail accountDetailByAccountFk, CrmType crmType,
 			Currency currency, DeliveryChallan deliveryChallan, Domain domain, InvoiceHeader invoiceHeader,
 			Organisation organisation, OrgBankDetail orgBankDetail, OrgLocation orgLocation,
-			PersonDetail personDetailByPersonFk, PersonDetail personDetailByFinanceContactFk,
-			SalesOrderHeader salesOrderHeader, StatusItem statusItem, UserDetails userDetailsByCreatedBy,
-			UserDetails userDetailsByLastModifiedBy, Date acceptedDate, String contactEmail, String contactPhnNo,
+			PersonDetail personDetailByFinanceContactFk, PersonDetail personDetailByPersonFk,
+			SalesOrderHeader salesOrderHeader, StatusItem statusItem, UserDetails userDetailsByLastModifiedBy,
+			UserDetails userDetailsByCreatedBy, Date acceptedDate, String contactEmail, String contactPhnNo,
 			Date createdDate, String custPoNo, boolean customerAcceptance, String customerRejectReason,
 			Long deliveryTerms, String destination, String dispatchThrough, String docSequence, String financeEmail,
 			String financePhnNo, String guid, String invoiceName, boolean isRevised, Date lastModifiedDate,
 			Long paymnetTerms, String remarks, String approveRejectReason, Date approveRejectDate, Date shipmentDate,
 			String ESugamaNumber, double declaredValue, boolean recurring, String courierName, String courierNo,
-			Date customerPoDate, String supplierrefno, double convertionRate, String recinvoiceName,
-			Set<InvoiceItem> invoiceItems, Set<Recievable> recievables, Set<InvoiceHeader> invoiceHeaders,
-			Set<InvoiceHeader> invoiceHeaders_1, Set<Recievable> recievables_1, Set<InvoiceItem> invoiceItems_1) {
+			Date customerPoDate, String supplierrefno, double convertionRate, String recinvoiceName, String grnno,
+			Set<InvoiceHeader> invoiceHeaders, Set<Recievable> recievables, Set<Activity> activities,
+			Set<InvoiceItem> invoiceItems) {
 		this.id = id;
-		this.accountAddressByBillingFk = accountAddressByBillingFk;
 		this.accountAddressByShippingFk = accountAddressByShippingFk;
+		this.accountAddressByBillingFk = accountAddressByBillingFk;
 		this.accountDetailByToShipAccountFk = accountDetailByToShipAccountFk;
 		this.accountDetailByAccountFk = accountDetailByAccountFk;
 		this.crmType = crmType;
@@ -120,12 +119,12 @@ public class InvoiceHeader implements java.io.Serializable {
 		this.organisation = organisation;
 		this.orgBankDetail = orgBankDetail;
 		this.orgLocation = orgLocation;
-		this.personDetailByPersonFk = personDetailByPersonFk;
 		this.personDetailByFinanceContactFk = personDetailByFinanceContactFk;
+		this.personDetailByPersonFk = personDetailByPersonFk;
 		this.salesOrderHeader = salesOrderHeader;
 		this.statusItem = statusItem;
-		this.userDetailsByCreatedBy = userDetailsByCreatedBy;
 		this.userDetailsByLastModifiedBy = userDetailsByLastModifiedBy;
+		this.userDetailsByCreatedBy = userDetailsByCreatedBy;
 		this.acceptedDate = acceptedDate;
 		this.contactEmail = contactEmail;
 		this.contactPhnNo = contactPhnNo;
@@ -157,12 +156,11 @@ public class InvoiceHeader implements java.io.Serializable {
 		this.supplierrefno = supplierrefno;
 		this.convertionRate = convertionRate;
 		this.recinvoiceName = recinvoiceName;
-		this.invoiceItems = invoiceItems;
-		this.recievables = recievables;
+		this.grnno = grnno;
 		this.invoiceHeaders = invoiceHeaders;
-		this.invoiceHeaders_1 = invoiceHeaders_1;
-		this.recievables_1 = recievables_1;
-		this.invoiceItems_1 = invoiceItems_1;
+		this.recievables = recievables;
+		this.activities = activities;
+		this.invoiceItems = invoiceItems;
 	}
 
 	@Id
@@ -177,16 +175,6 @@ public class InvoiceHeader implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "BILLING_FK")
-	public AccountAddress getAccountAddressByBillingFk() {
-		return this.accountAddressByBillingFk;
-	}
-
-	public void setAccountAddressByBillingFk(AccountAddress accountAddressByBillingFk) {
-		this.accountAddressByBillingFk = accountAddressByBillingFk;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SHIPPING_FK")
 	public AccountAddress getAccountAddressByShippingFk() {
 		return this.accountAddressByShippingFk;
@@ -194,6 +182,16 @@ public class InvoiceHeader implements java.io.Serializable {
 
 	public void setAccountAddressByShippingFk(AccountAddress accountAddressByShippingFk) {
 		this.accountAddressByShippingFk = accountAddressByShippingFk;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "BILLING_FK")
+	public AccountAddress getAccountAddressByBillingFk() {
+		return this.accountAddressByBillingFk;
+	}
+
+	public void setAccountAddressByBillingFk(AccountAddress accountAddressByBillingFk) {
+		this.accountAddressByBillingFk = accountAddressByBillingFk;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -297,16 +295,6 @@ public class InvoiceHeader implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PERSON_FK")
-	public PersonDetail getPersonDetailByPersonFk() {
-		return this.personDetailByPersonFk;
-	}
-
-	public void setPersonDetailByPersonFk(PersonDetail personDetailByPersonFk) {
-		this.personDetailByPersonFk = personDetailByPersonFk;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "FINANCE_CONTACT_FK")
 	public PersonDetail getPersonDetailByFinanceContactFk() {
 		return this.personDetailByFinanceContactFk;
@@ -314,6 +302,16 @@ public class InvoiceHeader implements java.io.Serializable {
 
 	public void setPersonDetailByFinanceContactFk(PersonDetail personDetailByFinanceContactFk) {
 		this.personDetailByFinanceContactFk = personDetailByFinanceContactFk;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PERSON_FK")
+	public PersonDetail getPersonDetailByPersonFk() {
+		return this.personDetailByPersonFk;
+	}
+
+	public void setPersonDetailByPersonFk(PersonDetail personDetailByPersonFk) {
+		this.personDetailByPersonFk = personDetailByPersonFk;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -337,16 +335,6 @@ public class InvoiceHeader implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CREATED_BY")
-	public UserDetails getUserDetailsByCreatedBy() {
-		return this.userDetailsByCreatedBy;
-	}
-
-	public void setUserDetailsByCreatedBy(UserDetails userDetailsByCreatedBy) {
-		this.userDetailsByCreatedBy = userDetailsByCreatedBy;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "LAST_MODIFIED_BY")
 	public UserDetails getUserDetailsByLastModifiedBy() {
 		return this.userDetailsByLastModifiedBy;
@@ -354,6 +342,16 @@ public class InvoiceHeader implements java.io.Serializable {
 
 	public void setUserDetailsByLastModifiedBy(UserDetails userDetailsByLastModifiedBy) {
 		this.userDetailsByLastModifiedBy = userDetailsByLastModifiedBy;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CREATED_BY")
+	public UserDetails getUserDetailsByCreatedBy() {
+		return this.userDetailsByCreatedBy;
+	}
+
+	public void setUserDetailsByCreatedBy(UserDetails userDetailsByCreatedBy) {
+		this.userDetailsByCreatedBy = userDetailsByCreatedBy;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -641,22 +639,13 @@ public class InvoiceHeader implements java.io.Serializable {
 		this.recinvoiceName = recinvoiceName;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "invoiceHeader")
-	public Set<InvoiceItem> getInvoiceItems() {
-		return this.invoiceItems;
+	@Column(name = "GRNNO")
+	public String getGrnno() {
+		return this.grnno;
 	}
 
-	public void setInvoiceItems(Set<InvoiceItem> invoiceItems) {
-		this.invoiceItems = invoiceItems;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "invoiceHeader")
-	public Set<Recievable> getRecievables() {
-		return this.recievables;
-	}
-
-	public void setRecievables(Set<Recievable> recievables) {
-		this.recievables = recievables;
+	public void setGrnno(String grnno) {
+		this.grnno = grnno;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "invoiceHeader")
@@ -669,30 +658,30 @@ public class InvoiceHeader implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "invoiceHeader")
-	public Set<InvoiceHeader> getInvoiceHeaders_1() {
-		return this.invoiceHeaders_1;
+	public Set<Recievable> getRecievables() {
+		return this.recievables;
 	}
 
-	public void setInvoiceHeaders_1(Set<InvoiceHeader> invoiceHeaders_1) {
-		this.invoiceHeaders_1 = invoiceHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "invoiceHeader")
-	public Set<Recievable> getRecievables_1() {
-		return this.recievables_1;
-	}
-
-	public void setRecievables_1(Set<Recievable> recievables_1) {
-		this.recievables_1 = recievables_1;
+	public void setRecievables(Set<Recievable> recievables) {
+		this.recievables = recievables;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "invoiceHeader")
-	public Set<InvoiceItem> getInvoiceItems_1() {
-		return this.invoiceItems_1;
+	public Set<Activity> getActivities() {
+		return this.activities;
 	}
 
-	public void setInvoiceItems_1(Set<InvoiceItem> invoiceItems_1) {
-		this.invoiceItems_1 = invoiceItems_1;
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "invoiceHeader")
+	public Set<InvoiceItem> getInvoiceItems() {
+		return this.invoiceItems;
+	}
+
+	public void setInvoiceItems(Set<InvoiceItem> invoiceItems) {
+		this.invoiceItems = invoiceItems;
 	}
 
 }

@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -46,45 +46,26 @@ public class AccountDetail implements java.io.Serializable {
 	private Set<InvoiceHeader> invoiceHeadersForToShipAccountFk = new HashSet<InvoiceHeader>(0);
 	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
 	private Set<SalesOrderHeader> salesOrderHeadersForToShipAccountFk = new HashSet<SalesOrderHeader>(0);
-	private Set<AccountAddress> accountAddresses = new HashSet<AccountAddress>(0);
+	private Set<SalesOrderHeader> salesOrderHeadersForAccountFk = new HashSet<SalesOrderHeader>(0);
+	private Set<DeliveryChallan> deliveryChallansForToShipAccountFk = new HashSet<DeliveryChallan>(0);
 	private Set<Warehouse> warehouses = new HashSet<Warehouse>(0);
+	private Set<AccountTelephone> accountTelephones = new HashSet<AccountTelephone>(0);
 	private Set<AccountDetail> accountDetails = new HashSet<AccountDetail>(0);
-	private Set<PurchaseEntry> purchaseEntries = new HashSet<PurchaseEntry>(0);
 	private Set<DeliveryChallan> deliveryChallansForAccountFk = new HashSet<DeliveryChallan>(0);
 	private Set<GrnHeader> grnHeadersForVendorFk = new HashSet<GrnHeader>(0);
-	private Set<DeliveryChallan> deliveryChallansForToShipAccountFk = new HashSet<DeliveryChallan>(0);
-	private Set<GrnHeader> grnHeadersForVendorFk_1 = new HashSet<GrnHeader>(0);
 	private Set<GrnHeader> grnHeadersForCustomerFk = new HashSet<GrnHeader>(0);
-	private Set<InvoiceHeader> invoiceHeadersForAccountFk = new HashSet<InvoiceHeader>(0);
 	private Set<Payable> payables = new HashSet<Payable>(0);
+	private Set<InvoiceHeader> invoiceHeadersForAccountFk = new HashSet<InvoiceHeader>(0);
 	private Set<QuoteHeader> quoteHeaders = new HashSet<QuoteHeader>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeadersForAccountId = new HashSet<PurchaseOrderHeader>(0);
-	private Set<InvoiceHeader> invoiceHeadersForToShipAccountFk_1 = new HashSet<InvoiceHeader>(0);
-	private Set<PersonDetail> personDetails = new HashSet<PersonDetail>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeadersForToShipAccountFk = new HashSet<PurchaseOrderHeader>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeadersForToShipAccountFk_1 = new HashSet<PurchaseOrderHeader>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForAccountFk = new HashSet<SalesOrderHeader>(0);
-	private Set<AccountDetail> accountDetails_1 = new HashSet<AccountDetail>(0);
-	private Set<DeliveryChallan> deliveryChallansForToShipAccountFk_1 = new HashSet<DeliveryChallan>(0);
-	private Set<InvoiceHeader> invoiceHeadersForAccountFk_1 = new HashSet<InvoiceHeader>(0);
-	private Set<Payable> payables_1 = new HashSet<Payable>(0);
-	private Set<DeliveryChallan> deliveryChallansForAccountFk_1 = new HashSet<DeliveryChallan>(0);
 	private Set<AccountActivity> accountActivities = new HashSet<AccountActivity>(0);
-	private Set<Warehouse> warehouses_1 = new HashSet<Warehouse>(0);
-	private Set<QuoteHeader> quoteHeaders_1 = new HashSet<QuoteHeader>(0);
-	private Set<OrderItem> orderItems_1 = new HashSet<OrderItem>(0);
-	private Set<AccountActivity> accountActivities_1 = new HashSet<AccountActivity>(0);
-	private Set<GrnHeader> grnHeadersForCustomerFk_1 = new HashSet<GrnHeader>(0);
-	private Set<Recievable> recievables = new HashSet<Recievable>(0);
+	private Set<PurchaseOrderHeader> purchaseOrderHeadersForAccountId = new HashSet<PurchaseOrderHeader>(0);
 	private Set<BusinessDeal> businessDeals = new HashSet<BusinessDeal>(0);
-	private Set<PersonDetail> personDetails_1 = new HashSet<PersonDetail>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForAccountFk_1 = new HashSet<SalesOrderHeader>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeadersForAccountId_1 = new HashSet<PurchaseOrderHeader>(0);
-	private Set<PurchaseEntry> purchaseEntries_1 = new HashSet<PurchaseEntry>(0);
-	private Set<Recievable> recievables_1 = new HashSet<Recievable>(0);
-	private Set<SalesOrderHeader> salesOrderHeadersForToShipAccountFk_1 = new HashSet<SalesOrderHeader>(0);
-	private Set<BusinessDeal> businessDeals_1 = new HashSet<BusinessDeal>(0);
-	private Set<AccountAddress> accountAddresses_1 = new HashSet<AccountAddress>(0);
+	private Set<PersonDetail> personDetails = new HashSet<PersonDetail>(0);
+	private Set<PurchaseEntry> purchaseEntries = new HashSet<PurchaseEntry>(0);
+	private Set<Recievable> recievables = new HashSet<Recievable>(0);
+	private Set<AccountAddress> accountAddresses = new HashSet<AccountAddress>(0);
+	private Set<PurchaseOrderHeader> purchaseOrderHeadersForToShipAccountFk = new HashSet<PurchaseOrderHeader>(0);
+	private Set<AccountEmail> accountEmails = new HashSet<AccountEmail>(0);
 
 	public AccountDetail() {
 	}
@@ -102,25 +83,16 @@ public class AccountDetail implements java.io.Serializable {
 			String bankAccountNo, String bankName, String ifscCode, String gstNo, String stateCode, boolean isDisabled,
 			String state, String country, boolean isOrganisation, Set<InvoiceHeader> invoiceHeadersForToShipAccountFk,
 			Set<OrderItem> orderItems, Set<SalesOrderHeader> salesOrderHeadersForToShipAccountFk,
-			Set<AccountAddress> accountAddresses, Set<Warehouse> warehouses, Set<AccountDetail> accountDetails,
-			Set<PurchaseEntry> purchaseEntries, Set<DeliveryChallan> deliveryChallansForAccountFk,
-			Set<GrnHeader> grnHeadersForVendorFk, Set<DeliveryChallan> deliveryChallansForToShipAccountFk,
-			Set<GrnHeader> grnHeadersForVendorFk_1, Set<GrnHeader> grnHeadersForCustomerFk,
-			Set<InvoiceHeader> invoiceHeadersForAccountFk, Set<Payable> payables, Set<QuoteHeader> quoteHeaders,
-			Set<PurchaseOrderHeader> purchaseOrderHeadersForAccountId,
-			Set<InvoiceHeader> invoiceHeadersForToShipAccountFk_1, Set<PersonDetail> personDetails,
-			Set<PurchaseOrderHeader> purchaseOrderHeadersForToShipAccountFk,
-			Set<PurchaseOrderHeader> purchaseOrderHeadersForToShipAccountFk_1,
-			Set<SalesOrderHeader> salesOrderHeadersForAccountFk, Set<AccountDetail> accountDetails_1,
-			Set<DeliveryChallan> deliveryChallansForToShipAccountFk_1, Set<InvoiceHeader> invoiceHeadersForAccountFk_1,
-			Set<Payable> payables_1, Set<DeliveryChallan> deliveryChallansForAccountFk_1,
-			Set<AccountActivity> accountActivities, Set<Warehouse> warehouses_1, Set<QuoteHeader> quoteHeaders_1,
-			Set<OrderItem> orderItems_1, Set<AccountActivity> accountActivities_1,
-			Set<GrnHeader> grnHeadersForCustomerFk_1, Set<Recievable> recievables, Set<BusinessDeal> businessDeals,
-			Set<PersonDetail> personDetails_1, Set<SalesOrderHeader> salesOrderHeadersForAccountFk_1,
-			Set<PurchaseOrderHeader> purchaseOrderHeadersForAccountId_1, Set<PurchaseEntry> purchaseEntries_1,
-			Set<Recievable> recievables_1, Set<SalesOrderHeader> salesOrderHeadersForToShipAccountFk_1,
-			Set<BusinessDeal> businessDeals_1, Set<AccountAddress> accountAddresses_1) {
+			Set<SalesOrderHeader> salesOrderHeadersForAccountFk,
+			Set<DeliveryChallan> deliveryChallansForToShipAccountFk, Set<Warehouse> warehouses,
+			Set<AccountTelephone> accountTelephones, Set<AccountDetail> accountDetails,
+			Set<DeliveryChallan> deliveryChallansForAccountFk, Set<GrnHeader> grnHeadersForVendorFk,
+			Set<GrnHeader> grnHeadersForCustomerFk, Set<Payable> payables,
+			Set<InvoiceHeader> invoiceHeadersForAccountFk, Set<QuoteHeader> quoteHeaders,
+			Set<AccountActivity> accountActivities, Set<PurchaseOrderHeader> purchaseOrderHeadersForAccountId,
+			Set<BusinessDeal> businessDeals, Set<PersonDetail> personDetails, Set<PurchaseEntry> purchaseEntries,
+			Set<Recievable> recievables, Set<AccountAddress> accountAddresses,
+			Set<PurchaseOrderHeader> purchaseOrderHeadersForToShipAccountFk, Set<AccountEmail> accountEmails) {
 		this.id = id;
 		this.accountActivity = accountActivity;
 		this.accountDetail = accountDetail;
@@ -148,45 +120,26 @@ public class AccountDetail implements java.io.Serializable {
 		this.invoiceHeadersForToShipAccountFk = invoiceHeadersForToShipAccountFk;
 		this.orderItems = orderItems;
 		this.salesOrderHeadersForToShipAccountFk = salesOrderHeadersForToShipAccountFk;
-		this.accountAddresses = accountAddresses;
+		this.salesOrderHeadersForAccountFk = salesOrderHeadersForAccountFk;
+		this.deliveryChallansForToShipAccountFk = deliveryChallansForToShipAccountFk;
 		this.warehouses = warehouses;
+		this.accountTelephones = accountTelephones;
 		this.accountDetails = accountDetails;
-		this.purchaseEntries = purchaseEntries;
 		this.deliveryChallansForAccountFk = deliveryChallansForAccountFk;
 		this.grnHeadersForVendorFk = grnHeadersForVendorFk;
-		this.deliveryChallansForToShipAccountFk = deliveryChallansForToShipAccountFk;
-		this.grnHeadersForVendorFk_1 = grnHeadersForVendorFk_1;
 		this.grnHeadersForCustomerFk = grnHeadersForCustomerFk;
-		this.invoiceHeadersForAccountFk = invoiceHeadersForAccountFk;
 		this.payables = payables;
+		this.invoiceHeadersForAccountFk = invoiceHeadersForAccountFk;
 		this.quoteHeaders = quoteHeaders;
-		this.purchaseOrderHeadersForAccountId = purchaseOrderHeadersForAccountId;
-		this.invoiceHeadersForToShipAccountFk_1 = invoiceHeadersForToShipAccountFk_1;
-		this.personDetails = personDetails;
-		this.purchaseOrderHeadersForToShipAccountFk = purchaseOrderHeadersForToShipAccountFk;
-		this.purchaseOrderHeadersForToShipAccountFk_1 = purchaseOrderHeadersForToShipAccountFk_1;
-		this.salesOrderHeadersForAccountFk = salesOrderHeadersForAccountFk;
-		this.accountDetails_1 = accountDetails_1;
-		this.deliveryChallansForToShipAccountFk_1 = deliveryChallansForToShipAccountFk_1;
-		this.invoiceHeadersForAccountFk_1 = invoiceHeadersForAccountFk_1;
-		this.payables_1 = payables_1;
-		this.deliveryChallansForAccountFk_1 = deliveryChallansForAccountFk_1;
 		this.accountActivities = accountActivities;
-		this.warehouses_1 = warehouses_1;
-		this.quoteHeaders_1 = quoteHeaders_1;
-		this.orderItems_1 = orderItems_1;
-		this.accountActivities_1 = accountActivities_1;
-		this.grnHeadersForCustomerFk_1 = grnHeadersForCustomerFk_1;
-		this.recievables = recievables;
+		this.purchaseOrderHeadersForAccountId = purchaseOrderHeadersForAccountId;
 		this.businessDeals = businessDeals;
-		this.personDetails_1 = personDetails_1;
-		this.salesOrderHeadersForAccountFk_1 = salesOrderHeadersForAccountFk_1;
-		this.purchaseOrderHeadersForAccountId_1 = purchaseOrderHeadersForAccountId_1;
-		this.purchaseEntries_1 = purchaseEntries_1;
-		this.recievables_1 = recievables_1;
-		this.salesOrderHeadersForToShipAccountFk_1 = salesOrderHeadersForToShipAccountFk_1;
-		this.businessDeals_1 = businessDeals_1;
-		this.accountAddresses_1 = accountAddresses_1;
+		this.personDetails = personDetails;
+		this.purchaseEntries = purchaseEntries;
+		this.recievables = recievables;
+		this.accountAddresses = accountAddresses;
+		this.purchaseOrderHeadersForToShipAccountFk = purchaseOrderHeadersForToShipAccountFk;
+		this.accountEmails = accountEmails;
 	}
 
 	@Id
@@ -440,13 +393,22 @@ public class AccountDetail implements java.io.Serializable {
 		this.salesOrderHeadersForToShipAccountFk = salesOrderHeadersForToShipAccountFk;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<AccountAddress> getAccountAddresses() {
-		return this.accountAddresses;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByAccountFk")
+	public Set<SalesOrderHeader> getSalesOrderHeadersForAccountFk() {
+		return this.salesOrderHeadersForAccountFk;
 	}
 
-	public void setAccountAddresses(Set<AccountAddress> accountAddresses) {
-		this.accountAddresses = accountAddresses;
+	public void setSalesOrderHeadersForAccountFk(Set<SalesOrderHeader> salesOrderHeadersForAccountFk) {
+		this.salesOrderHeadersForAccountFk = salesOrderHeadersForAccountFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByToShipAccountFk")
+	public Set<DeliveryChallan> getDeliveryChallansForToShipAccountFk() {
+		return this.deliveryChallansForToShipAccountFk;
+	}
+
+	public void setDeliveryChallansForToShipAccountFk(Set<DeliveryChallan> deliveryChallansForToShipAccountFk) {
+		this.deliveryChallansForToShipAccountFk = deliveryChallansForToShipAccountFk;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
@@ -459,21 +421,21 @@ public class AccountDetail implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
+	public Set<AccountTelephone> getAccountTelephones() {
+		return this.accountTelephones;
+	}
+
+	public void setAccountTelephones(Set<AccountTelephone> accountTelephones) {
+		this.accountTelephones = accountTelephones;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
 	public Set<AccountDetail> getAccountDetails() {
 		return this.accountDetails;
 	}
 
 	public void setAccountDetails(Set<AccountDetail> accountDetails) {
 		this.accountDetails = accountDetails;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<PurchaseEntry> getPurchaseEntries() {
-		return this.purchaseEntries;
-	}
-
-	public void setPurchaseEntries(Set<PurchaseEntry> purchaseEntries) {
-		this.purchaseEntries = purchaseEntries;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByAccountFk")
@@ -494,24 +456,6 @@ public class AccountDetail implements java.io.Serializable {
 		this.grnHeadersForVendorFk = grnHeadersForVendorFk;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByToShipAccountFk")
-	public Set<DeliveryChallan> getDeliveryChallansForToShipAccountFk() {
-		return this.deliveryChallansForToShipAccountFk;
-	}
-
-	public void setDeliveryChallansForToShipAccountFk(Set<DeliveryChallan> deliveryChallansForToShipAccountFk) {
-		this.deliveryChallansForToShipAccountFk = deliveryChallansForToShipAccountFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByVendorFk")
-	public Set<GrnHeader> getGrnHeadersForVendorFk_1() {
-		return this.grnHeadersForVendorFk_1;
-	}
-
-	public void setGrnHeadersForVendorFk_1(Set<GrnHeader> grnHeadersForVendorFk_1) {
-		this.grnHeadersForVendorFk_1 = grnHeadersForVendorFk_1;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByCustomerFk")
 	public Set<GrnHeader> getGrnHeadersForCustomerFk() {
 		return this.grnHeadersForCustomerFk;
@@ -519,6 +463,15 @@ public class AccountDetail implements java.io.Serializable {
 
 	public void setGrnHeadersForCustomerFk(Set<GrnHeader> grnHeadersForCustomerFk) {
 		this.grnHeadersForCustomerFk = grnHeadersForCustomerFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
+	public Set<Payable> getPayables() {
+		return this.payables;
+	}
+
+	public void setPayables(Set<Payable> payables) {
+		this.payables = payables;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByAccountFk")
@@ -531,122 +484,12 @@ public class AccountDetail implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<Payable> getPayables() {
-		return this.payables;
-	}
-
-	public void setPayables(Set<Payable> payables) {
-		this.payables = payables;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
 	public Set<QuoteHeader> getQuoteHeaders() {
 		return this.quoteHeaders;
 	}
 
 	public void setQuoteHeaders(Set<QuoteHeader> quoteHeaders) {
 		this.quoteHeaders = quoteHeaders;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByAccountId")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeadersForAccountId() {
-		return this.purchaseOrderHeadersForAccountId;
-	}
-
-	public void setPurchaseOrderHeadersForAccountId(Set<PurchaseOrderHeader> purchaseOrderHeadersForAccountId) {
-		this.purchaseOrderHeadersForAccountId = purchaseOrderHeadersForAccountId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByToShipAccountFk")
-	public Set<InvoiceHeader> getInvoiceHeadersForToShipAccountFk_1() {
-		return this.invoiceHeadersForToShipAccountFk_1;
-	}
-
-	public void setInvoiceHeadersForToShipAccountFk_1(Set<InvoiceHeader> invoiceHeadersForToShipAccountFk_1) {
-		this.invoiceHeadersForToShipAccountFk_1 = invoiceHeadersForToShipAccountFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<PersonDetail> getPersonDetails() {
-		return this.personDetails;
-	}
-
-	public void setPersonDetails(Set<PersonDetail> personDetails) {
-		this.personDetails = personDetails;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByToShipAccountFk")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeadersForToShipAccountFk() {
-		return this.purchaseOrderHeadersForToShipAccountFk;
-	}
-
-	public void setPurchaseOrderHeadersForToShipAccountFk(
-			Set<PurchaseOrderHeader> purchaseOrderHeadersForToShipAccountFk) {
-		this.purchaseOrderHeadersForToShipAccountFk = purchaseOrderHeadersForToShipAccountFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByToShipAccountFk")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeadersForToShipAccountFk_1() {
-		return this.purchaseOrderHeadersForToShipAccountFk_1;
-	}
-
-	public void setPurchaseOrderHeadersForToShipAccountFk_1(
-			Set<PurchaseOrderHeader> purchaseOrderHeadersForToShipAccountFk_1) {
-		this.purchaseOrderHeadersForToShipAccountFk_1 = purchaseOrderHeadersForToShipAccountFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByAccountFk")
-	public Set<SalesOrderHeader> getSalesOrderHeadersForAccountFk() {
-		return this.salesOrderHeadersForAccountFk;
-	}
-
-	public void setSalesOrderHeadersForAccountFk(Set<SalesOrderHeader> salesOrderHeadersForAccountFk) {
-		this.salesOrderHeadersForAccountFk = salesOrderHeadersForAccountFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<AccountDetail> getAccountDetails_1() {
-		return this.accountDetails_1;
-	}
-
-	public void setAccountDetails_1(Set<AccountDetail> accountDetails_1) {
-		this.accountDetails_1 = accountDetails_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByToShipAccountFk")
-	public Set<DeliveryChallan> getDeliveryChallansForToShipAccountFk_1() {
-		return this.deliveryChallansForToShipAccountFk_1;
-	}
-
-	public void setDeliveryChallansForToShipAccountFk_1(Set<DeliveryChallan> deliveryChallansForToShipAccountFk_1) {
-		this.deliveryChallansForToShipAccountFk_1 = deliveryChallansForToShipAccountFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByAccountFk")
-	public Set<InvoiceHeader> getInvoiceHeadersForAccountFk_1() {
-		return this.invoiceHeadersForAccountFk_1;
-	}
-
-	public void setInvoiceHeadersForAccountFk_1(Set<InvoiceHeader> invoiceHeadersForAccountFk_1) {
-		this.invoiceHeadersForAccountFk_1 = invoiceHeadersForAccountFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<Payable> getPayables_1() {
-		return this.payables_1;
-	}
-
-	public void setPayables_1(Set<Payable> payables_1) {
-		this.payables_1 = payables_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByAccountFk")
-	public Set<DeliveryChallan> getDeliveryChallansForAccountFk_1() {
-		return this.deliveryChallansForAccountFk_1;
-	}
-
-	public void setDeliveryChallansForAccountFk_1(Set<DeliveryChallan> deliveryChallansForAccountFk_1) {
-		this.deliveryChallansForAccountFk_1 = deliveryChallansForAccountFk_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
@@ -658,58 +501,13 @@ public class AccountDetail implements java.io.Serializable {
 		this.accountActivities = accountActivities;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<Warehouse> getWarehouses_1() {
-		return this.warehouses_1;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByAccountId")
+	public Set<PurchaseOrderHeader> getPurchaseOrderHeadersForAccountId() {
+		return this.purchaseOrderHeadersForAccountId;
 	}
 
-	public void setWarehouses_1(Set<Warehouse> warehouses_1) {
-		this.warehouses_1 = warehouses_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<QuoteHeader> getQuoteHeaders_1() {
-		return this.quoteHeaders_1;
-	}
-
-	public void setQuoteHeaders_1(Set<QuoteHeader> quoteHeaders_1) {
-		this.quoteHeaders_1 = quoteHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<OrderItem> getOrderItems_1() {
-		return this.orderItems_1;
-	}
-
-	public void setOrderItems_1(Set<OrderItem> orderItems_1) {
-		this.orderItems_1 = orderItems_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<AccountActivity> getAccountActivities_1() {
-		return this.accountActivities_1;
-	}
-
-	public void setAccountActivities_1(Set<AccountActivity> accountActivities_1) {
-		this.accountActivities_1 = accountActivities_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByCustomerFk")
-	public Set<GrnHeader> getGrnHeadersForCustomerFk_1() {
-		return this.grnHeadersForCustomerFk_1;
-	}
-
-	public void setGrnHeadersForCustomerFk_1(Set<GrnHeader> grnHeadersForCustomerFk_1) {
-		this.grnHeadersForCustomerFk_1 = grnHeadersForCustomerFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<Recievable> getRecievables() {
-		return this.recievables;
-	}
-
-	public void setRecievables(Set<Recievable> recievables) {
-		this.recievables = recievables;
+	public void setPurchaseOrderHeadersForAccountId(Set<PurchaseOrderHeader> purchaseOrderHeadersForAccountId) {
+		this.purchaseOrderHeadersForAccountId = purchaseOrderHeadersForAccountId;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
@@ -722,75 +520,58 @@ public class AccountDetail implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<PersonDetail> getPersonDetails_1() {
-		return this.personDetails_1;
+	public Set<PersonDetail> getPersonDetails() {
+		return this.personDetails;
 	}
 
-	public void setPersonDetails_1(Set<PersonDetail> personDetails_1) {
-		this.personDetails_1 = personDetails_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByAccountFk")
-	public Set<SalesOrderHeader> getSalesOrderHeadersForAccountFk_1() {
-		return this.salesOrderHeadersForAccountFk_1;
-	}
-
-	public void setSalesOrderHeadersForAccountFk_1(Set<SalesOrderHeader> salesOrderHeadersForAccountFk_1) {
-		this.salesOrderHeadersForAccountFk_1 = salesOrderHeadersForAccountFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByAccountId")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeadersForAccountId_1() {
-		return this.purchaseOrderHeadersForAccountId_1;
-	}
-
-	public void setPurchaseOrderHeadersForAccountId_1(Set<PurchaseOrderHeader> purchaseOrderHeadersForAccountId_1) {
-		this.purchaseOrderHeadersForAccountId_1 = purchaseOrderHeadersForAccountId_1;
+	public void setPersonDetails(Set<PersonDetail> personDetails) {
+		this.personDetails = personDetails;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<PurchaseEntry> getPurchaseEntries_1() {
-		return this.purchaseEntries_1;
+	public Set<PurchaseEntry> getPurchaseEntries() {
+		return this.purchaseEntries;
 	}
 
-	public void setPurchaseEntries_1(Set<PurchaseEntry> purchaseEntries_1) {
-		this.purchaseEntries_1 = purchaseEntries_1;
+	public void setPurchaseEntries(Set<PurchaseEntry> purchaseEntries) {
+		this.purchaseEntries = purchaseEntries;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<Recievable> getRecievables_1() {
-		return this.recievables_1;
+	public Set<Recievable> getRecievables() {
+		return this.recievables;
 	}
 
-	public void setRecievables_1(Set<Recievable> recievables_1) {
-		this.recievables_1 = recievables_1;
+	public void setRecievables(Set<Recievable> recievables) {
+		this.recievables = recievables;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
+	public Set<AccountAddress> getAccountAddresses() {
+		return this.accountAddresses;
+	}
+
+	public void setAccountAddresses(Set<AccountAddress> accountAddresses) {
+		this.accountAddresses = accountAddresses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetailByToShipAccountFk")
-	public Set<SalesOrderHeader> getSalesOrderHeadersForToShipAccountFk_1() {
-		return this.salesOrderHeadersForToShipAccountFk_1;
+	public Set<PurchaseOrderHeader> getPurchaseOrderHeadersForToShipAccountFk() {
+		return this.purchaseOrderHeadersForToShipAccountFk;
 	}
 
-	public void setSalesOrderHeadersForToShipAccountFk_1(Set<SalesOrderHeader> salesOrderHeadersForToShipAccountFk_1) {
-		this.salesOrderHeadersForToShipAccountFk_1 = salesOrderHeadersForToShipAccountFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<BusinessDeal> getBusinessDeals_1() {
-		return this.businessDeals_1;
-	}
-
-	public void setBusinessDeals_1(Set<BusinessDeal> businessDeals_1) {
-		this.businessDeals_1 = businessDeals_1;
+	public void setPurchaseOrderHeadersForToShipAccountFk(
+			Set<PurchaseOrderHeader> purchaseOrderHeadersForToShipAccountFk) {
+		this.purchaseOrderHeadersForToShipAccountFk = purchaseOrderHeadersForToShipAccountFk;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDetail")
-	public Set<AccountAddress> getAccountAddresses_1() {
-		return this.accountAddresses_1;
+	public Set<AccountEmail> getAccountEmails() {
+		return this.accountEmails;
 	}
 
-	public void setAccountAddresses_1(Set<AccountAddress> accountAddresses_1) {
-		this.accountAddresses_1 = accountAddresses_1;
+	public void setAccountEmails(Set<AccountEmail> accountEmails) {
+		this.accountEmails = accountEmails;
 	}
 
 }

@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -41,12 +41,14 @@ public class InventoryItem implements java.io.Serializable {
 	private String slNo;
 	private double totalPrice;
 	private String itemdescription;
+	private Set<DeliveryChallanItem> deliveryChallanItems = new HashSet<DeliveryChallanItem>(0);
+	private Set<Activity> activities = new HashSet<Activity>(0);
+	private Set<ReserveActivity> reserveActivities = new HashSet<ReserveActivity>(0);
 	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
-	private Set<InvoiceItem> invoiceItems = new HashSet<InvoiceItem>(0);
-	private Set<OrderItem> orderItems_1 = new HashSet<OrderItem>(0);
+	private Set<InvoiceHistory> invoiceHistories = new HashSet<InvoiceHistory>(0);
 	private Set<GrnItem> grnItems = new HashSet<GrnItem>(0);
-	private Set<GrnItem> grnItems_1 = new HashSet<GrnItem>(0);
-	private Set<InvoiceItem> invoiceItems_1 = new HashSet<InvoiceItem>(0);
+	private Set<InvoiceItem> invoiceItems = new HashSet<InvoiceItem>(0);
+	private Set<InventoryUniqueItem> inventoryUniqueItems = new HashSet<InventoryUniqueItem>(0);
 
 	public InventoryItem() {
 	}
@@ -65,9 +67,9 @@ public class InventoryItem implements java.io.Serializable {
 			UserDetails userDetailsByCreatedByUserFk, UserDetails userDetailsByLastModifiedByUserFk,
 			Warehouse warehouse, Date createdDate, String guid, Date lastModifiedDate, int quantity, double unitPrice,
 			String uom, int mitquantity, String itemname, int reservedquantity, String slNo, double totalPrice,
-			String itemdescription, Set<OrderItem> orderItems, Set<InvoiceItem> invoiceItems,
-			Set<OrderItem> orderItems_1, Set<GrnItem> grnItems, Set<GrnItem> grnItems_1,
-			Set<InvoiceItem> invoiceItems_1) {
+			String itemdescription, Set<DeliveryChallanItem> deliveryChallanItems, Set<Activity> activities,
+			Set<ReserveActivity> reserveActivities, Set<OrderItem> orderItems, Set<InvoiceHistory> invoiceHistories,
+			Set<GrnItem> grnItems, Set<InvoiceItem> invoiceItems, Set<InventoryUniqueItem> inventoryUniqueItems) {
 		this.id = id;
 		this.domain = domain;
 		this.inventoryType = inventoryType;
@@ -87,12 +89,14 @@ public class InventoryItem implements java.io.Serializable {
 		this.slNo = slNo;
 		this.totalPrice = totalPrice;
 		this.itemdescription = itemdescription;
+		this.deliveryChallanItems = deliveryChallanItems;
+		this.activities = activities;
+		this.reserveActivities = reserveActivities;
 		this.orderItems = orderItems;
-		this.invoiceItems = invoiceItems;
-		this.orderItems_1 = orderItems_1;
+		this.invoiceHistories = invoiceHistories;
 		this.grnItems = grnItems;
-		this.grnItems_1 = grnItems_1;
-		this.invoiceItems_1 = invoiceItems_1;
+		this.invoiceItems = invoiceItems;
+		this.inventoryUniqueItems = inventoryUniqueItems;
 	}
 
 	@Id
@@ -277,6 +281,33 @@ public class InventoryItem implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventoryItem")
+	public Set<DeliveryChallanItem> getDeliveryChallanItems() {
+		return this.deliveryChallanItems;
+	}
+
+	public void setDeliveryChallanItems(Set<DeliveryChallanItem> deliveryChallanItems) {
+		this.deliveryChallanItems = deliveryChallanItems;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventoryItem")
+	public Set<Activity> getActivities() {
+		return this.activities;
+	}
+
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventoryItem")
+	public Set<ReserveActivity> getReserveActivities() {
+		return this.reserveActivities;
+	}
+
+	public void setReserveActivities(Set<ReserveActivity> reserveActivities) {
+		this.reserveActivities = reserveActivities;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventoryItem")
 	public Set<OrderItem> getOrderItems() {
 		return this.orderItems;
 	}
@@ -286,21 +317,12 @@ public class InventoryItem implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventoryItem")
-	public Set<InvoiceItem> getInvoiceItems() {
-		return this.invoiceItems;
+	public Set<InvoiceHistory> getInvoiceHistories() {
+		return this.invoiceHistories;
 	}
 
-	public void setInvoiceItems(Set<InvoiceItem> invoiceItems) {
-		this.invoiceItems = invoiceItems;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventoryItem")
-	public Set<OrderItem> getOrderItems_1() {
-		return this.orderItems_1;
-	}
-
-	public void setOrderItems_1(Set<OrderItem> orderItems_1) {
-		this.orderItems_1 = orderItems_1;
+	public void setInvoiceHistories(Set<InvoiceHistory> invoiceHistories) {
+		this.invoiceHistories = invoiceHistories;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventoryItem")
@@ -313,21 +335,21 @@ public class InventoryItem implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventoryItem")
-	public Set<GrnItem> getGrnItems_1() {
-		return this.grnItems_1;
+	public Set<InvoiceItem> getInvoiceItems() {
+		return this.invoiceItems;
 	}
 
-	public void setGrnItems_1(Set<GrnItem> grnItems_1) {
-		this.grnItems_1 = grnItems_1;
+	public void setInvoiceItems(Set<InvoiceItem> invoiceItems) {
+		this.invoiceItems = invoiceItems;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventoryItem")
-	public Set<InvoiceItem> getInvoiceItems_1() {
-		return this.invoiceItems_1;
+	public Set<InventoryUniqueItem> getInventoryUniqueItems() {
+		return this.inventoryUniqueItems;
 	}
 
-	public void setInvoiceItems_1(Set<InvoiceItem> invoiceItems_1) {
-		this.invoiceItems_1 = invoiceItems_1;
+	public void setInventoryUniqueItems(Set<InventoryUniqueItem> inventoryUniqueItems) {
+		this.inventoryUniqueItems = inventoryUniqueItems;
 	}
 
 }

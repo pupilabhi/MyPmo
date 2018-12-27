@@ -1,13 +1,16 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,8 +27,8 @@ public class Task implements java.io.Serializable {
 	private Domain domain;
 	private TaskPriority taskPriority;
 	private TaskStatus taskStatus;
-	private UserDetails userDetailsByCreatorUserFk;
 	private UserDetails userDetailsByAssigneeUserFk;
+	private UserDetails userDetailsByCreatorUserFk;
 	private Date completedOn;
 	private Date createdOn;
 	private Date dueDate;
@@ -34,6 +37,8 @@ public class Task implements java.io.Serializable {
 	private String taskName;
 	private String taskUrl;
 	private Date verifiedOn;
+	private Set<TaskComment> taskComments = new HashSet<TaskComment>(0);
+	private Set<TaskCcUser> taskCcUsers = new HashSet<TaskCcUser>(0);
 
 	public Task() {
 	}
@@ -43,16 +48,16 @@ public class Task implements java.io.Serializable {
 	}
 
 	public Task(long id, BusinessDeal businessDeal, Domain domain, TaskPriority taskPriority, TaskStatus taskStatus,
-			UserDetails userDetailsByCreatorUserFk, UserDetails userDetailsByAssigneeUserFk, Date completedOn,
+			UserDetails userDetailsByAssigneeUserFk, UserDetails userDetailsByCreatorUserFk, Date completedOn,
 			Date createdOn, Date dueDate, String guid, Date lastUpdatedOn, String taskName, String taskUrl,
-			Date verifiedOn) {
+			Date verifiedOn, Set<TaskComment> taskComments, Set<TaskCcUser> taskCcUsers) {
 		this.id = id;
 		this.businessDeal = businessDeal;
 		this.domain = domain;
 		this.taskPriority = taskPriority;
 		this.taskStatus = taskStatus;
-		this.userDetailsByCreatorUserFk = userDetailsByCreatorUserFk;
 		this.userDetailsByAssigneeUserFk = userDetailsByAssigneeUserFk;
+		this.userDetailsByCreatorUserFk = userDetailsByCreatorUserFk;
 		this.completedOn = completedOn;
 		this.createdOn = createdOn;
 		this.dueDate = dueDate;
@@ -61,6 +66,8 @@ public class Task implements java.io.Serializable {
 		this.taskName = taskName;
 		this.taskUrl = taskUrl;
 		this.verifiedOn = verifiedOn;
+		this.taskComments = taskComments;
+		this.taskCcUsers = taskCcUsers;
 	}
 
 	@Id
@@ -115,16 +122,6 @@ public class Task implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CREATOR_USER_FK")
-	public UserDetails getUserDetailsByCreatorUserFk() {
-		return this.userDetailsByCreatorUserFk;
-	}
-
-	public void setUserDetailsByCreatorUserFk(UserDetails userDetailsByCreatorUserFk) {
-		this.userDetailsByCreatorUserFk = userDetailsByCreatorUserFk;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ASSIGNEE_USER_FK")
 	public UserDetails getUserDetailsByAssigneeUserFk() {
 		return this.userDetailsByAssigneeUserFk;
@@ -132,6 +129,16 @@ public class Task implements java.io.Serializable {
 
 	public void setUserDetailsByAssigneeUserFk(UserDetails userDetailsByAssigneeUserFk) {
 		this.userDetailsByAssigneeUserFk = userDetailsByAssigneeUserFk;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CREATOR_USER_FK")
+	public UserDetails getUserDetailsByCreatorUserFk() {
+		return this.userDetailsByCreatorUserFk;
+	}
+
+	public void setUserDetailsByCreatorUserFk(UserDetails userDetailsByCreatorUserFk) {
+		this.userDetailsByCreatorUserFk = userDetailsByCreatorUserFk;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -209,6 +216,24 @@ public class Task implements java.io.Serializable {
 
 	public void setVerifiedOn(Date verifiedOn) {
 		this.verifiedOn = verifiedOn;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "task")
+	public Set<TaskComment> getTaskComments() {
+		return this.taskComments;
+	}
+
+	public void setTaskComments(Set<TaskComment> taskComments) {
+		this.taskComments = taskComments;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "task")
+	public Set<TaskCcUser> getTaskCcUsers() {
+		return this.taskCcUsers;
+	}
+
+	public void setTaskCcUsers(Set<TaskCcUser> taskCcUsers) {
+		this.taskCcUsers = taskCcUsers;
 	}
 
 }

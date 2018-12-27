@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,21 +30,14 @@ public class OrgLocation implements java.io.Serializable {
 	private String vatTinNum;
 	private long accountId;
 	private Set<UserDetails> userDetailses = new HashSet<UserDetails>(0);
-	private Set<QuoteHeader> quoteHeaders = new HashSet<QuoteHeader>(0);
-	private Set<DeliveryChallan> deliveryChallans = new HashSet<DeliveryChallan>(0);
-	private Set<QuoteHeader> quoteHeaders_1 = new HashSet<QuoteHeader>(0);
-	private Set<PurchaseEntry> purchaseEntries = new HashSet<PurchaseEntry>(0);
 	private Set<OrganisationAddress> organisationAddresses = new HashSet<OrganisationAddress>(0);
-	private Set<UserDetails> userDetailses_1 = new HashSet<UserDetails>(0);
-	private Set<OrganisationAddress> organisationAddresses_1 = new HashSet<OrganisationAddress>(0);
+	private Set<QuoteHeader> quoteHeaders = new HashSet<QuoteHeader>(0);
+	private Set<PurchaseEntry> purchaseEntries = new HashSet<PurchaseEntry>(0);
+	private Set<OrganisationEmail> organisationEmails = new HashSet<OrganisationEmail>(0);
 	private Set<InvoiceHeader> invoiceHeaders = new HashSet<InvoiceHeader>(0);
-	private Set<PurchaseEntry> purchaseEntries_1 = new HashSet<PurchaseEntry>(0);
-	private Set<InvoiceHeader> invoiceHeaders_1 = new HashSet<InvoiceHeader>(0);
 	private Set<OrgBankDetail> orgBankDetails = new HashSet<OrgBankDetail>(0);
 	private Set<PurchaseOrderHeader> purchaseOrderHeaders = new HashSet<PurchaseOrderHeader>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeaders_1 = new HashSet<PurchaseOrderHeader>(0);
-	private Set<OrgBankDetail> orgBankDetails_1 = new HashSet<OrgBankDetail>(0);
-	private Set<DeliveryChallan> deliveryChallans_1 = new HashSet<DeliveryChallan>(0);
+	private Set<DeliveryChallan> deliveryChallans = new HashSet<DeliveryChallan>(0);
 
 	public OrgLocation() {
 	}
@@ -56,14 +49,11 @@ public class OrgLocation implements java.io.Serializable {
 
 	public OrgLocation(long id, Organisation organisation, String cstNum, String gstNum, String locationId,
 			String panNum, String registrationNum, String serviceTaxNum, String vatTinNum, long accountId,
-			Set<UserDetails> userDetailses, Set<QuoteHeader> quoteHeaders, Set<DeliveryChallan> deliveryChallans,
-			Set<QuoteHeader> quoteHeaders_1, Set<PurchaseEntry> purchaseEntries,
-			Set<OrganisationAddress> organisationAddresses, Set<UserDetails> userDetailses_1,
-			Set<OrganisationAddress> organisationAddresses_1, Set<InvoiceHeader> invoiceHeaders,
-			Set<PurchaseEntry> purchaseEntries_1, Set<InvoiceHeader> invoiceHeaders_1,
+			Set<UserDetails> userDetailses, Set<OrganisationAddress> organisationAddresses,
+			Set<QuoteHeader> quoteHeaders, Set<PurchaseEntry> purchaseEntries,
+			Set<OrganisationEmail> organisationEmails, Set<InvoiceHeader> invoiceHeaders,
 			Set<OrgBankDetail> orgBankDetails, Set<PurchaseOrderHeader> purchaseOrderHeaders,
-			Set<PurchaseOrderHeader> purchaseOrderHeaders_1, Set<OrgBankDetail> orgBankDetails_1,
-			Set<DeliveryChallan> deliveryChallans_1) {
+			Set<DeliveryChallan> deliveryChallans) {
 		this.id = id;
 		this.organisation = organisation;
 		this.cstNum = cstNum;
@@ -75,21 +65,14 @@ public class OrgLocation implements java.io.Serializable {
 		this.vatTinNum = vatTinNum;
 		this.accountId = accountId;
 		this.userDetailses = userDetailses;
-		this.quoteHeaders = quoteHeaders;
-		this.deliveryChallans = deliveryChallans;
-		this.quoteHeaders_1 = quoteHeaders_1;
-		this.purchaseEntries = purchaseEntries;
 		this.organisationAddresses = organisationAddresses;
-		this.userDetailses_1 = userDetailses_1;
-		this.organisationAddresses_1 = organisationAddresses_1;
+		this.quoteHeaders = quoteHeaders;
+		this.purchaseEntries = purchaseEntries;
+		this.organisationEmails = organisationEmails;
 		this.invoiceHeaders = invoiceHeaders;
-		this.purchaseEntries_1 = purchaseEntries_1;
-		this.invoiceHeaders_1 = invoiceHeaders_1;
 		this.orgBankDetails = orgBankDetails;
 		this.purchaseOrderHeaders = purchaseOrderHeaders;
-		this.purchaseOrderHeaders_1 = purchaseOrderHeaders_1;
-		this.orgBankDetails_1 = orgBankDetails_1;
-		this.deliveryChallans_1 = deliveryChallans_1;
+		this.deliveryChallans = deliveryChallans;
 	}
 
 	@Id
@@ -195,30 +178,21 @@ public class OrgLocation implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
+	public Set<OrganisationAddress> getOrganisationAddresses() {
+		return this.organisationAddresses;
+	}
+
+	public void setOrganisationAddresses(Set<OrganisationAddress> organisationAddresses) {
+		this.organisationAddresses = organisationAddresses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
 	public Set<QuoteHeader> getQuoteHeaders() {
 		return this.quoteHeaders;
 	}
 
 	public void setQuoteHeaders(Set<QuoteHeader> quoteHeaders) {
 		this.quoteHeaders = quoteHeaders;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
-	public Set<DeliveryChallan> getDeliveryChallans() {
-		return this.deliveryChallans;
-	}
-
-	public void setDeliveryChallans(Set<DeliveryChallan> deliveryChallans) {
-		this.deliveryChallans = deliveryChallans;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
-	public Set<QuoteHeader> getQuoteHeaders_1() {
-		return this.quoteHeaders_1;
-	}
-
-	public void setQuoteHeaders_1(Set<QuoteHeader> quoteHeaders_1) {
-		this.quoteHeaders_1 = quoteHeaders_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
@@ -231,30 +205,12 @@ public class OrgLocation implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
-	public Set<OrganisationAddress> getOrganisationAddresses() {
-		return this.organisationAddresses;
+	public Set<OrganisationEmail> getOrganisationEmails() {
+		return this.organisationEmails;
 	}
 
-	public void setOrganisationAddresses(Set<OrganisationAddress> organisationAddresses) {
-		this.organisationAddresses = organisationAddresses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
-	public Set<UserDetails> getUserDetailses_1() {
-		return this.userDetailses_1;
-	}
-
-	public void setUserDetailses_1(Set<UserDetails> userDetailses_1) {
-		this.userDetailses_1 = userDetailses_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
-	public Set<OrganisationAddress> getOrganisationAddresses_1() {
-		return this.organisationAddresses_1;
-	}
-
-	public void setOrganisationAddresses_1(Set<OrganisationAddress> organisationAddresses_1) {
-		this.organisationAddresses_1 = organisationAddresses_1;
+	public void setOrganisationEmails(Set<OrganisationEmail> organisationEmails) {
+		this.organisationEmails = organisationEmails;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
@@ -264,24 +220,6 @@ public class OrgLocation implements java.io.Serializable {
 
 	public void setInvoiceHeaders(Set<InvoiceHeader> invoiceHeaders) {
 		this.invoiceHeaders = invoiceHeaders;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
-	public Set<PurchaseEntry> getPurchaseEntries_1() {
-		return this.purchaseEntries_1;
-	}
-
-	public void setPurchaseEntries_1(Set<PurchaseEntry> purchaseEntries_1) {
-		this.purchaseEntries_1 = purchaseEntries_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
-	public Set<InvoiceHeader> getInvoiceHeaders_1() {
-		return this.invoiceHeaders_1;
-	}
-
-	public void setInvoiceHeaders_1(Set<InvoiceHeader> invoiceHeaders_1) {
-		this.invoiceHeaders_1 = invoiceHeaders_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
@@ -303,30 +241,12 @@ public class OrgLocation implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeaders_1() {
-		return this.purchaseOrderHeaders_1;
+	public Set<DeliveryChallan> getDeliveryChallans() {
+		return this.deliveryChallans;
 	}
 
-	public void setPurchaseOrderHeaders_1(Set<PurchaseOrderHeader> purchaseOrderHeaders_1) {
-		this.purchaseOrderHeaders_1 = purchaseOrderHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
-	public Set<OrgBankDetail> getOrgBankDetails_1() {
-		return this.orgBankDetails_1;
-	}
-
-	public void setOrgBankDetails_1(Set<OrgBankDetail> orgBankDetails_1) {
-		this.orgBankDetails_1 = orgBankDetails_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgLocation")
-	public Set<DeliveryChallan> getDeliveryChallans_1() {
-		return this.deliveryChallans_1;
-	}
-
-	public void setDeliveryChallans_1(Set<DeliveryChallan> deliveryChallans_1) {
-		this.deliveryChallans_1 = deliveryChallans_1;
+	public void setDeliveryChallans(Set<DeliveryChallan> deliveryChallans) {
+		this.deliveryChallans = deliveryChallans;
 	}
 
 }

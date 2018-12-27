@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -30,7 +30,6 @@ public class DealActivity implements java.io.Serializable {
 	private String medium;
 	private String sincedays;
 	private Set<BusinessDeal> businessDeals = new HashSet<BusinessDeal>(0);
-	private Set<BusinessDeal> businessDeals_1 = new HashSet<BusinessDeal>(0);
 
 	public DealActivity() {
 	}
@@ -40,7 +39,7 @@ public class DealActivity implements java.io.Serializable {
 	}
 
 	public DealActivity(long id, BusinessDeal businessDeal, UserDetails userDetails, Date activityOn, String comment,
-			String medium, String sincedays, Set<BusinessDeal> businessDeals, Set<BusinessDeal> businessDeals_1) {
+			String medium, String sincedays, Set<BusinessDeal> businessDeals) {
 		this.id = id;
 		this.businessDeal = businessDeal;
 		this.userDetails = userDetails;
@@ -49,7 +48,6 @@ public class DealActivity implements java.io.Serializable {
 		this.medium = medium;
 		this.sincedays = sincedays;
 		this.businessDeals = businessDeals;
-		this.businessDeals_1 = businessDeals_1;
 	}
 
 	@Id
@@ -127,15 +125,6 @@ public class DealActivity implements java.io.Serializable {
 
 	public void setBusinessDeals(Set<BusinessDeal> businessDeals) {
 		this.businessDeals = businessDeals;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dealActivity")
-	public Set<BusinessDeal> getBusinessDeals_1() {
-		return this.businessDeals_1;
-	}
-
-	public void setBusinessDeals_1(Set<BusinessDeal> businessDeals_1) {
-		this.businessDeals_1 = businessDeals_1;
 	}
 
 }

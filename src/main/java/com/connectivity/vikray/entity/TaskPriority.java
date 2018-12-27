@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +21,6 @@ public class TaskPriority implements java.io.Serializable {
 	private String color;
 	private String name;
 	private Set<Task> tasks = new HashSet<Task>(0);
-	private Set<Task> tasks_1 = new HashSet<Task>(0);
 
 	public TaskPriority() {
 	}
@@ -30,12 +29,11 @@ public class TaskPriority implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public TaskPriority(long id, String color, String name, Set<Task> tasks, Set<Task> tasks_1) {
+	public TaskPriority(long id, String color, String name, Set<Task> tasks) {
 		this.id = id;
 		this.color = color;
 		this.name = name;
 		this.tasks = tasks;
-		this.tasks_1 = tasks_1;
 	}
 
 	@Id
@@ -74,15 +72,6 @@ public class TaskPriority implements java.io.Serializable {
 
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "taskPriority")
-	public Set<Task> getTasks_1() {
-		return this.tasks_1;
-	}
-
-	public void setTasks_1(Set<Task> tasks_1) {
-		this.tasks_1 = tasks_1;
 	}
 
 }

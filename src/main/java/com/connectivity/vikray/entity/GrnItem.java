@@ -1,12 +1,15 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -42,6 +45,7 @@ public class GrnItem implements java.io.Serializable {
 	private double igstAmount;
 	private double sgstAmount;
 	private boolean isServiceItem;
+	private Set<InventoryUniqueItem> inventoryUniqueItems = new HashSet<InventoryUniqueItem>(0);
 
 	public GrnItem() {
 	}
@@ -71,7 +75,7 @@ public class GrnItem implements java.io.Serializable {
 			String itemDescription, String itemName, double priceWithTax, int recievedQuantity, int rejectedQuantity,
 			double taxAmount, double taxPercentage, double unitPrice, String uom, String slNo, String productSerialNo,
 			double sgstRate, double igstRate, double cgstRate, double cgstAmount, double igstAmount, double sgstAmount,
-			boolean isServiceItem) {
+			boolean isServiceItem, Set<InventoryUniqueItem> inventoryUniqueItems) {
 		this.id = id;
 		this.grnHeader = grnHeader;
 		this.inventoryItem = inventoryItem;
@@ -98,6 +102,7 @@ public class GrnItem implements java.io.Serializable {
 		this.igstAmount = igstAmount;
 		this.sgstAmount = sgstAmount;
 		this.isServiceItem = isServiceItem;
+		this.inventoryUniqueItems = inventoryUniqueItems;
 	}
 
 	@Id
@@ -339,6 +344,15 @@ public class GrnItem implements java.io.Serializable {
 
 	public void setIsServiceItem(boolean isServiceItem) {
 		this.isServiceItem = isServiceItem;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "grnItem")
+	public Set<InventoryUniqueItem> getInventoryUniqueItems() {
+		return this.inventoryUniqueItems;
+	}
+
+	public void setInventoryUniqueItems(Set<InventoryUniqueItem> inventoryUniqueItems) {
+		this.inventoryUniqueItems = inventoryUniqueItems;
 	}
 
 }

@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +24,6 @@ public class InventoryType implements java.io.Serializable {
 	private String description;
 	private String inventoryType;
 	private Set<InventoryItem> inventoryItems = new HashSet<InventoryItem>(0);
-	private Set<InventoryItem> inventoryItems_1 = new HashSet<InventoryItem>(0);
 
 	public InventoryType() {
 	}
@@ -34,13 +33,12 @@ public class InventoryType implements java.io.Serializable {
 	}
 
 	public InventoryType(long id, Domain domain, String description, String inventoryType,
-			Set<InventoryItem> inventoryItems, Set<InventoryItem> inventoryItems_1) {
+			Set<InventoryItem> inventoryItems) {
 		this.id = id;
 		this.domain = domain;
 		this.description = description;
 		this.inventoryType = inventoryType;
 		this.inventoryItems = inventoryItems;
-		this.inventoryItems_1 = inventoryItems_1;
 	}
 
 	@Id
@@ -89,15 +87,6 @@ public class InventoryType implements java.io.Serializable {
 
 	public void setInventoryItems(Set<InventoryItem> inventoryItems) {
 		this.inventoryItems = inventoryItems;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventoryType")
-	public Set<InventoryItem> getInventoryItems_1() {
-		return this.inventoryItems_1;
-	}
-
-	public void setInventoryItems_1(Set<InventoryItem> inventoryItems_1) {
-		this.inventoryItems_1 = inventoryItems_1;
 	}
 
 }

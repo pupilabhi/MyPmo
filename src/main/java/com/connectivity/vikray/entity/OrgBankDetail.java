@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,10 +30,8 @@ public class OrgBankDetail implements java.io.Serializable {
 	private String micrCode;
 	private String swiftCode;
 	private String description;
-	private Set<QuoteHeader> quoteHeaders = new HashSet<QuoteHeader>(0);
 	private Set<InvoiceHeader> invoiceHeaders = new HashSet<InvoiceHeader>(0);
-	private Set<QuoteHeader> quoteHeaders_1 = new HashSet<QuoteHeader>(0);
-	private Set<InvoiceHeader> invoiceHeaders_1 = new HashSet<InvoiceHeader>(0);
+	private Set<QuoteHeader> quoteHeaders = new HashSet<QuoteHeader>(0);
 
 	public OrgBankDetail() {
 	}
@@ -44,8 +42,7 @@ public class OrgBankDetail implements java.io.Serializable {
 
 	public OrgBankDetail(long id, OrgLocation orgLocation, String accountNumber, String accountType, String bankAddress,
 			String bankBranch, String bankName, String ifscCode, String micrCode, String swiftCode, String description,
-			Set<QuoteHeader> quoteHeaders, Set<InvoiceHeader> invoiceHeaders, Set<QuoteHeader> quoteHeaders_1,
-			Set<InvoiceHeader> invoiceHeaders_1) {
+			Set<InvoiceHeader> invoiceHeaders, Set<QuoteHeader> quoteHeaders) {
 		this.id = id;
 		this.orgLocation = orgLocation;
 		this.accountNumber = accountNumber;
@@ -57,10 +54,8 @@ public class OrgBankDetail implements java.io.Serializable {
 		this.micrCode = micrCode;
 		this.swiftCode = swiftCode;
 		this.description = description;
-		this.quoteHeaders = quoteHeaders;
 		this.invoiceHeaders = invoiceHeaders;
-		this.quoteHeaders_1 = quoteHeaders_1;
-		this.invoiceHeaders_1 = invoiceHeaders_1;
+		this.quoteHeaders = quoteHeaders;
 	}
 
 	@Id
@@ -166,15 +161,6 @@ public class OrgBankDetail implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgBankDetail")
-	public Set<QuoteHeader> getQuoteHeaders() {
-		return this.quoteHeaders;
-	}
-
-	public void setQuoteHeaders(Set<QuoteHeader> quoteHeaders) {
-		this.quoteHeaders = quoteHeaders;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgBankDetail")
 	public Set<InvoiceHeader> getInvoiceHeaders() {
 		return this.invoiceHeaders;
 	}
@@ -184,21 +170,12 @@ public class OrgBankDetail implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgBankDetail")
-	public Set<QuoteHeader> getQuoteHeaders_1() {
-		return this.quoteHeaders_1;
+	public Set<QuoteHeader> getQuoteHeaders() {
+		return this.quoteHeaders;
 	}
 
-	public void setQuoteHeaders_1(Set<QuoteHeader> quoteHeaders_1) {
-		this.quoteHeaders_1 = quoteHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgBankDetail")
-	public Set<InvoiceHeader> getInvoiceHeaders_1() {
-		return this.invoiceHeaders_1;
-	}
-
-	public void setInvoiceHeaders_1(Set<InvoiceHeader> invoiceHeaders_1) {
-		this.invoiceHeaders_1 = invoiceHeaders_1;
+	public void setQuoteHeaders(Set<QuoteHeader> quoteHeaders) {
+		this.quoteHeaders = quoteHeaders;
 	}
 
 }

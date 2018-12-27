@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -45,10 +45,8 @@ public class GrnHeader implements java.io.Serializable {
 	private boolean recurring;
 	private Set<GrnItem> grnItems = new HashSet<GrnItem>(0);
 	private Set<Payable> payables = new HashSet<Payable>(0);
+	private Set<Activity> activities = new HashSet<Activity>(0);
 	private Set<PurchaseEntry> purchaseEntries = new HashSet<PurchaseEntry>(0);
-	private Set<PurchaseEntry> purchaseEntries_1 = new HashSet<PurchaseEntry>(0);
-	private Set<GrnItem> grnItems_1 = new HashSet<GrnItem>(0);
-	private Set<Payable> payables_1 = new HashSet<Payable>(0);
 
 	public GrnHeader() {
 	}
@@ -64,8 +62,7 @@ public class GrnHeader implements java.io.Serializable {
 			UserDetails userDetailsByLastModifiedByUserFk, Date createdDate, Double freightInferred, String grnName,
 			String guid, Date lastModifiedDate, Double miscellaneousAmount, Date vendorInvoiceDate,
 			String vendorInvoiceNo, String remarks, boolean recurring, Set<GrnItem> grnItems, Set<Payable> payables,
-			Set<PurchaseEntry> purchaseEntries, Set<PurchaseEntry> purchaseEntries_1, Set<GrnItem> grnItems_1,
-			Set<Payable> payables_1) {
+			Set<Activity> activities, Set<PurchaseEntry> purchaseEntries) {
 		this.id = id;
 		this.accountDetailByVendorFk = accountDetailByVendorFk;
 		this.accountDetailByCustomerFk = accountDetailByCustomerFk;
@@ -89,10 +86,8 @@ public class GrnHeader implements java.io.Serializable {
 		this.recurring = recurring;
 		this.grnItems = grnItems;
 		this.payables = payables;
+		this.activities = activities;
 		this.purchaseEntries = purchaseEntries;
-		this.purchaseEntries_1 = purchaseEntries_1;
-		this.grnItems_1 = grnItems_1;
-		this.payables_1 = payables_1;
 	}
 
 	@Id
@@ -318,39 +313,21 @@ public class GrnHeader implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "grnHeader")
+	public Set<Activity> getActivities() {
+		return this.activities;
+	}
+
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "grnHeader")
 	public Set<PurchaseEntry> getPurchaseEntries() {
 		return this.purchaseEntries;
 	}
 
 	public void setPurchaseEntries(Set<PurchaseEntry> purchaseEntries) {
 		this.purchaseEntries = purchaseEntries;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "grnHeader")
-	public Set<PurchaseEntry> getPurchaseEntries_1() {
-		return this.purchaseEntries_1;
-	}
-
-	public void setPurchaseEntries_1(Set<PurchaseEntry> purchaseEntries_1) {
-		this.purchaseEntries_1 = purchaseEntries_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "grnHeader")
-	public Set<GrnItem> getGrnItems_1() {
-		return this.grnItems_1;
-	}
-
-	public void setGrnItems_1(Set<GrnItem> grnItems_1) {
-		this.grnItems_1 = grnItems_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "grnHeader")
-	public Set<Payable> getPayables_1() {
-		return this.payables_1;
-	}
-
-	public void setPayables_1(Set<Payable> payables_1) {
-		this.payables_1 = payables_1;
 	}
 
 }

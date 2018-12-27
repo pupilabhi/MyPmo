@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,12 +23,12 @@ import javax.persistence.TemporalType;
 public class DeliveryChallan implements java.io.Serializable {
 
 	private long id;
-	private AccountAddress accountAddressByBillingFk;
 	private AccountAddress accountAddressByShippingFk;
-	private AccountDetail accountDetailByAccountFk;
+	private AccountAddress accountAddressByBillingFk;
 	private AccountDetail accountDetailByToShipAccountFk;
-	private CrmType crmTypeByDcPurposeTypeFk;
+	private AccountDetail accountDetailByAccountFk;
 	private CrmType crmTypeByDcTypeFk;
+	private CrmType crmTypeByDcPurposeTypeFk;
 	private DeliveryChallan deliveryChallan;
 	private Domain domain;
 	private Organisation organisation;
@@ -39,8 +39,8 @@ public class DeliveryChallan implements java.io.Serializable {
 	private QuoteHeader quoteHeader;
 	private SalesOrderHeader salesOrderHeader;
 	private StatusItem statusItem;
-	private UserDetails userDetailsByLastModifiedByUserFk;
 	private UserDetails userDetailsByCreatedByUserFk;
+	private UserDetails userDetailsByLastModifiedByUserFk;
 	private Date acceptRejectDate;
 	private String courierName;
 	private String courierNo;
@@ -71,9 +71,9 @@ public class DeliveryChallan implements java.io.Serializable {
 	private String location;
 	private String rdcName;
 	private Set<InvoiceHeader> invoiceHeaders = new HashSet<InvoiceHeader>(0);
-	private Set<InvoiceHeader> invoiceHeaders_1 = new HashSet<InvoiceHeader>(0);
+	private Set<DeliveryChallanItem> deliveryChallanItems = new HashSet<DeliveryChallanItem>(0);
+	private Set<Activity> activities = new HashSet<Activity>(0);
 	private Set<DeliveryChallan> deliveryChallans = new HashSet<DeliveryChallan>(0);
-	private Set<DeliveryChallan> deliveryChallans_1 = new HashSet<DeliveryChallan>(0);
 
 	public DeliveryChallan() {
 	}
@@ -85,27 +85,28 @@ public class DeliveryChallan implements java.io.Serializable {
 		this.isRevised = isRevised;
 	}
 
-	public DeliveryChallan(long id, AccountAddress accountAddressByBillingFk, AccountAddress accountAddressByShippingFk,
-			AccountDetail accountDetailByAccountFk, AccountDetail accountDetailByToShipAccountFk,
-			CrmType crmTypeByDcPurposeTypeFk, CrmType crmTypeByDcTypeFk, DeliveryChallan deliveryChallan, Domain domain,
+	public DeliveryChallan(long id, AccountAddress accountAddressByShippingFk, AccountAddress accountAddressByBillingFk,
+			AccountDetail accountDetailByToShipAccountFk, AccountDetail accountDetailByAccountFk,
+			CrmType crmTypeByDcTypeFk, CrmType crmTypeByDcPurposeTypeFk, DeliveryChallan deliveryChallan, Domain domain,
 			Organisation organisation, OrganisationAddress organisationAddress, OrgLocation orgLocation,
 			PersonDetail personDetailByShippingContactFk, PersonDetail personDetailByPersonFk, QuoteHeader quoteHeader,
-			SalesOrderHeader salesOrderHeader, StatusItem statusItem, UserDetails userDetailsByLastModifiedByUserFk,
-			UserDetails userDetailsByCreatedByUserFk, Date acceptRejectDate, String courierName, String courierNo,
+			SalesOrderHeader salesOrderHeader, StatusItem statusItem, UserDetails userDetailsByCreatedByUserFk,
+			UserDetails userDetailsByLastModifiedByUserFk, Date acceptRejectDate, String courierName, String courierNo,
 			Date createdDate, boolean customerAcceptance, String customerPoNo, String customerRejectReason,
 			double declaredValue, String destination, String dispatchThrough, String ESugamaNumber, String guid,
 			boolean isRevised, Date lastModifiedDate, String name, String personEmail, String personPhone,
 			String shippingEmail, String shippingPhone, Long termOfDelivery, Long termOfPayment, String remarks,
 			String approveRejectReason, Date approveRejectDate, String docSequence, Date shipmentDate, String soName,
-			String location, String rdcName, Set<InvoiceHeader> invoiceHeaders, Set<InvoiceHeader> invoiceHeaders_1,
-			Set<DeliveryChallan> deliveryChallans, Set<DeliveryChallan> deliveryChallans_1) {
+			String location, String rdcName, Set<InvoiceHeader> invoiceHeaders,
+			Set<DeliveryChallanItem> deliveryChallanItems, Set<Activity> activities,
+			Set<DeliveryChallan> deliveryChallans) {
 		this.id = id;
-		this.accountAddressByBillingFk = accountAddressByBillingFk;
 		this.accountAddressByShippingFk = accountAddressByShippingFk;
-		this.accountDetailByAccountFk = accountDetailByAccountFk;
+		this.accountAddressByBillingFk = accountAddressByBillingFk;
 		this.accountDetailByToShipAccountFk = accountDetailByToShipAccountFk;
-		this.crmTypeByDcPurposeTypeFk = crmTypeByDcPurposeTypeFk;
+		this.accountDetailByAccountFk = accountDetailByAccountFk;
 		this.crmTypeByDcTypeFk = crmTypeByDcTypeFk;
+		this.crmTypeByDcPurposeTypeFk = crmTypeByDcPurposeTypeFk;
 		this.deliveryChallan = deliveryChallan;
 		this.domain = domain;
 		this.organisation = organisation;
@@ -116,8 +117,8 @@ public class DeliveryChallan implements java.io.Serializable {
 		this.quoteHeader = quoteHeader;
 		this.salesOrderHeader = salesOrderHeader;
 		this.statusItem = statusItem;
-		this.userDetailsByLastModifiedByUserFk = userDetailsByLastModifiedByUserFk;
 		this.userDetailsByCreatedByUserFk = userDetailsByCreatedByUserFk;
+		this.userDetailsByLastModifiedByUserFk = userDetailsByLastModifiedByUserFk;
 		this.acceptRejectDate = acceptRejectDate;
 		this.courierName = courierName;
 		this.courierNo = courierNo;
@@ -148,9 +149,9 @@ public class DeliveryChallan implements java.io.Serializable {
 		this.location = location;
 		this.rdcName = rdcName;
 		this.invoiceHeaders = invoiceHeaders;
-		this.invoiceHeaders_1 = invoiceHeaders_1;
+		this.deliveryChallanItems = deliveryChallanItems;
+		this.activities = activities;
 		this.deliveryChallans = deliveryChallans;
-		this.deliveryChallans_1 = deliveryChallans_1;
 	}
 
 	@Id
@@ -165,16 +166,6 @@ public class DeliveryChallan implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "BILLING_FK")
-	public AccountAddress getAccountAddressByBillingFk() {
-		return this.accountAddressByBillingFk;
-	}
-
-	public void setAccountAddressByBillingFk(AccountAddress accountAddressByBillingFk) {
-		this.accountAddressByBillingFk = accountAddressByBillingFk;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SHIPPING_FK")
 	public AccountAddress getAccountAddressByShippingFk() {
 		return this.accountAddressByShippingFk;
@@ -185,13 +176,13 @@ public class DeliveryChallan implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ACCOUNT_FK")
-	public AccountDetail getAccountDetailByAccountFk() {
-		return this.accountDetailByAccountFk;
+	@JoinColumn(name = "BILLING_FK")
+	public AccountAddress getAccountAddressByBillingFk() {
+		return this.accountAddressByBillingFk;
 	}
 
-	public void setAccountDetailByAccountFk(AccountDetail accountDetailByAccountFk) {
-		this.accountDetailByAccountFk = accountDetailByAccountFk;
+	public void setAccountAddressByBillingFk(AccountAddress accountAddressByBillingFk) {
+		this.accountAddressByBillingFk = accountAddressByBillingFk;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -205,13 +196,13 @@ public class DeliveryChallan implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DC_PURPOSE_TYPE_FK")
-	public CrmType getCrmTypeByDcPurposeTypeFk() {
-		return this.crmTypeByDcPurposeTypeFk;
+	@JoinColumn(name = "ACCOUNT_FK")
+	public AccountDetail getAccountDetailByAccountFk() {
+		return this.accountDetailByAccountFk;
 	}
 
-	public void setCrmTypeByDcPurposeTypeFk(CrmType crmTypeByDcPurposeTypeFk) {
-		this.crmTypeByDcPurposeTypeFk = crmTypeByDcPurposeTypeFk;
+	public void setAccountDetailByAccountFk(AccountDetail accountDetailByAccountFk) {
+		this.accountDetailByAccountFk = accountDetailByAccountFk;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -222,6 +213,16 @@ public class DeliveryChallan implements java.io.Serializable {
 
 	public void setCrmTypeByDcTypeFk(CrmType crmTypeByDcTypeFk) {
 		this.crmTypeByDcTypeFk = crmTypeByDcTypeFk;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DC_PURPOSE_TYPE_FK")
+	public CrmType getCrmTypeByDcPurposeTypeFk() {
+		return this.crmTypeByDcPurposeTypeFk;
+	}
+
+	public void setCrmTypeByDcPurposeTypeFk(CrmType crmTypeByDcPurposeTypeFk) {
+		this.crmTypeByDcPurposeTypeFk = crmTypeByDcPurposeTypeFk;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -325,16 +326,6 @@ public class DeliveryChallan implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "LAST_MODIFIED_BY_USER_FK")
-	public UserDetails getUserDetailsByLastModifiedByUserFk() {
-		return this.userDetailsByLastModifiedByUserFk;
-	}
-
-	public void setUserDetailsByLastModifiedByUserFk(UserDetails userDetailsByLastModifiedByUserFk) {
-		this.userDetailsByLastModifiedByUserFk = userDetailsByLastModifiedByUserFk;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CREATED_BY_USER_FK")
 	public UserDetails getUserDetailsByCreatedByUserFk() {
 		return this.userDetailsByCreatedByUserFk;
@@ -342,6 +333,16 @@ public class DeliveryChallan implements java.io.Serializable {
 
 	public void setUserDetailsByCreatedByUserFk(UserDetails userDetailsByCreatedByUserFk) {
 		this.userDetailsByCreatedByUserFk = userDetailsByCreatedByUserFk;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "LAST_MODIFIED_BY_USER_FK")
+	public UserDetails getUserDetailsByLastModifiedByUserFk() {
+		return this.userDetailsByLastModifiedByUserFk;
+	}
+
+	public void setUserDetailsByLastModifiedByUserFk(UserDetails userDetailsByLastModifiedByUserFk) {
+		this.userDetailsByLastModifiedByUserFk = userDetailsByLastModifiedByUserFk;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -620,12 +621,21 @@ public class DeliveryChallan implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "deliveryChallan")
-	public Set<InvoiceHeader> getInvoiceHeaders_1() {
-		return this.invoiceHeaders_1;
+	public Set<DeliveryChallanItem> getDeliveryChallanItems() {
+		return this.deliveryChallanItems;
 	}
 
-	public void setInvoiceHeaders_1(Set<InvoiceHeader> invoiceHeaders_1) {
-		this.invoiceHeaders_1 = invoiceHeaders_1;
+	public void setDeliveryChallanItems(Set<DeliveryChallanItem> deliveryChallanItems) {
+		this.deliveryChallanItems = deliveryChallanItems;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "deliveryChallan")
+	public Set<Activity> getActivities() {
+		return this.activities;
+	}
+
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "deliveryChallan")
@@ -635,15 +645,6 @@ public class DeliveryChallan implements java.io.Serializable {
 
 	public void setDeliveryChallans(Set<DeliveryChallan> deliveryChallans) {
 		this.deliveryChallans = deliveryChallans;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "deliveryChallan")
-	public Set<DeliveryChallan> getDeliveryChallans_1() {
-		return this.deliveryChallans_1;
-	}
-
-	public void setDeliveryChallans_1(Set<DeliveryChallan> deliveryChallans_1) {
-		this.deliveryChallans_1 = deliveryChallans_1;
 	}
 
 }

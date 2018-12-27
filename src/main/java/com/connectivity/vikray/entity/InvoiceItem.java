@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -47,7 +47,7 @@ public class InvoiceItem implements java.io.Serializable {
 	private double discount;
 	private Integer recievedQty;
 	private Set<QuoteItem> quoteItems = new HashSet<QuoteItem>(0);
-	private Set<QuoteItem> quoteItems_1 = new HashSet<QuoteItem>(0);
+	private Set<InvoiceHistory> invoiceHistories = new HashSet<InvoiceHistory>(0);
 
 	public InvoiceItem() {
 	}
@@ -77,7 +77,7 @@ public class InvoiceItem implements java.io.Serializable {
 			double outGoingUnitPrice, double priceWithTax, int quantity, double taxAmount, double taxPercentage,
 			String taxType, String uom, String slNo, String productSerialNo, double sgstRate, double igstRate,
 			double cgstRate, String hsnCode, double cgstAmount, double igstAmount, double sgstAmount, byte[] listofitem,
-			double discount, Integer recievedQty, Set<QuoteItem> quoteItems, Set<QuoteItem> quoteItems_1) {
+			double discount, Integer recievedQty, Set<QuoteItem> quoteItems, Set<InvoiceHistory> invoiceHistories) {
 		this.id = id;
 		this.inventoryItem = inventoryItem;
 		this.invoiceHeader = invoiceHeader;
@@ -106,7 +106,7 @@ public class InvoiceItem implements java.io.Serializable {
 		this.discount = discount;
 		this.recievedQty = recievedQty;
 		this.quoteItems = quoteItems;
-		this.quoteItems_1 = quoteItems_1;
+		this.invoiceHistories = invoiceHistories;
 	}
 
 	@Id
@@ -367,12 +367,12 @@ public class InvoiceItem implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "invoiceItem")
-	public Set<QuoteItem> getQuoteItems_1() {
-		return this.quoteItems_1;
+	public Set<InvoiceHistory> getInvoiceHistories() {
+		return this.invoiceHistories;
 	}
 
-	public void setQuoteItems_1(Set<QuoteItem> quoteItems_1) {
-		this.quoteItems_1 = quoteItems_1;
+	public void setInvoiceHistories(Set<InvoiceHistory> invoiceHistories) {
+		this.invoiceHistories = invoiceHistories;
 	}
 
 }

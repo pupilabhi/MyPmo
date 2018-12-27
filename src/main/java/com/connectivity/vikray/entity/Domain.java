@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,41 +23,28 @@ public class Domain implements java.io.Serializable {
 	private Set<UserDetails> userDetailses = new HashSet<UserDetails>(0);
 	private Set<AccountDetail> accountDetails = new HashSet<AccountDetail>(0);
 	private Set<GrnHeader> grnHeaders = new HashSet<GrnHeader>(0);
-	private Set<PurchaseEntry> purchaseEntries = new HashSet<PurchaseEntry>(0);
 	private Set<Warehouse> warehouses = new HashSet<Warehouse>(0);
 	private Set<DeliveryChallan> deliveryChallans = new HashSet<DeliveryChallan>(0);
-	private Set<InventoryType> inventoryTypes = new HashSet<InventoryType>(0);
-	private Set<Product> products = new HashSet<Product>(0);
 	private Set<Organisation> organisations = new HashSet<Organisation>(0);
 	private Set<PurchaseOrderHeader> purchaseOrderHeaders = new HashSet<PurchaseOrderHeader>(0);
-	private Set<Task> tasks = new HashSet<Task>(0);
-	private Set<InventoryType> inventoryTypes_1 = new HashSet<InventoryType>(0);
+	private Set<InventoryType> inventoryTypes = new HashSet<InventoryType>(0);
+	private Set<WeeklySalesCommits> weeklySalesCommitses = new HashSet<WeeklySalesCommits>(0);
 	private Set<FinancialReport> financialReports = new HashSet<FinancialReport>(0);
-	private Set<Task> tasks_1 = new HashSet<Task>(0);
+	private Set<Task> tasks = new HashSet<Task>(0);
+	private Set<Activity> activities = new HashSet<Activity>(0);
 	private Set<ProductCategory> productCategories = new HashSet<ProductCategory>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeaders_1 = new HashSet<PurchaseOrderHeader>(0);
-	private Set<UserDetails> userDetailses_1 = new HashSet<UserDetails>(0);
-	private Set<AccountDetail> accountDetails_1 = new HashSet<AccountDetail>(0);
-	private Set<Product> products_1 = new HashSet<Product>(0);
-	private Set<ProductCategory> productCategories_1 = new HashSet<ProductCategory>(0);
+	private Set<Product> products = new HashSet<Product>(0);
+	private Set<DocSequence> docSequences = new HashSet<DocSequence>(0);
 	private Set<SalesOrderHeader> salesOrderHeaders = new HashSet<SalesOrderHeader>(0);
-	private Set<InventoryItem> inventoryItems = new HashSet<InventoryItem>(0);
 	private Set<BusinessDeal> businessDeals = new HashSet<BusinessDeal>(0);
-	private Set<DeliveryChallan> deliveryChallans_1 = new HashSet<DeliveryChallan>(0);
-	private Set<BusinessDeal> businessDeals_1 = new HashSet<BusinessDeal>(0);
+	private Set<ReserveActivity> reserveActivities = new HashSet<ReserveActivity>(0);
 	private Set<QuoteHeader> quoteHeaders = new HashSet<QuoteHeader>(0);
-	private Set<FinancialReport> financialReports_1 = new HashSet<FinancialReport>(0);
-	private Set<Warehouse> warehouses_1 = new HashSet<Warehouse>(0);
-	private Set<GrnHeader> grnHeaders_1 = new HashSet<GrnHeader>(0);
+	private Set<SalesPerformance> salesPerformances = new HashSet<SalesPerformance>(0);
 	private Set<PersonDetail> personDetails = new HashSet<PersonDetail>(0);
-	private Set<PersonDetail> personDetails_1 = new HashSet<PersonDetail>(0);
 	private Set<InvoiceHeader> invoiceHeaders = new HashSet<InvoiceHeader>(0);
-	private Set<QuoteHeader> quoteHeaders_1 = new HashSet<QuoteHeader>(0);
-	private Set<SalesOrderHeader> salesOrderHeaders_1 = new HashSet<SalesOrderHeader>(0);
-	private Set<InventoryItem> inventoryItems_1 = new HashSet<InventoryItem>(0);
-	private Set<InvoiceHeader> invoiceHeaders_1 = new HashSet<InvoiceHeader>(0);
-	private Set<PurchaseEntry> purchaseEntries_1 = new HashSet<PurchaseEntry>(0);
-	private Set<Organisation> organisations_1 = new HashSet<Organisation>(0);
+	private Set<InventoryItem> inventoryItems = new HashSet<InventoryItem>(0);
+	private Set<InventoryUniqueItem> inventoryUniqueItems = new HashSet<InventoryUniqueItem>(0);
+	private Set<PurchaseEntry> purchaseEntries = new HashSet<PurchaseEntry>(0);
 
 	public Domain() {
 	}
@@ -67,61 +54,44 @@ public class Domain implements java.io.Serializable {
 	}
 
 	public Domain(long id, String domainName, String sparkTeamId, Set<UserDetails> userDetailses,
-			Set<AccountDetail> accountDetails, Set<GrnHeader> grnHeaders, Set<PurchaseEntry> purchaseEntries,
-			Set<Warehouse> warehouses, Set<DeliveryChallan> deliveryChallans, Set<InventoryType> inventoryTypes,
-			Set<Product> products, Set<Organisation> organisations, Set<PurchaseOrderHeader> purchaseOrderHeaders,
-			Set<Task> tasks, Set<InventoryType> inventoryTypes_1, Set<FinancialReport> financialReports,
-			Set<Task> tasks_1, Set<ProductCategory> productCategories, Set<PurchaseOrderHeader> purchaseOrderHeaders_1,
-			Set<UserDetails> userDetailses_1, Set<AccountDetail> accountDetails_1, Set<Product> products_1,
-			Set<ProductCategory> productCategories_1, Set<SalesOrderHeader> salesOrderHeaders,
-			Set<InventoryItem> inventoryItems, Set<BusinessDeal> businessDeals, Set<DeliveryChallan> deliveryChallans_1,
-			Set<BusinessDeal> businessDeals_1, Set<QuoteHeader> quoteHeaders, Set<FinancialReport> financialReports_1,
-			Set<Warehouse> warehouses_1, Set<GrnHeader> grnHeaders_1, Set<PersonDetail> personDetails,
-			Set<PersonDetail> personDetails_1, Set<InvoiceHeader> invoiceHeaders, Set<QuoteHeader> quoteHeaders_1,
-			Set<SalesOrderHeader> salesOrderHeaders_1, Set<InventoryItem> inventoryItems_1,
-			Set<InvoiceHeader> invoiceHeaders_1, Set<PurchaseEntry> purchaseEntries_1,
-			Set<Organisation> organisations_1) {
+			Set<AccountDetail> accountDetails, Set<GrnHeader> grnHeaders, Set<Warehouse> warehouses,
+			Set<DeliveryChallan> deliveryChallans, Set<Organisation> organisations,
+			Set<PurchaseOrderHeader> purchaseOrderHeaders, Set<InventoryType> inventoryTypes,
+			Set<WeeklySalesCommits> weeklySalesCommitses, Set<FinancialReport> financialReports, Set<Task> tasks,
+			Set<Activity> activities, Set<ProductCategory> productCategories, Set<Product> products,
+			Set<DocSequence> docSequences, Set<SalesOrderHeader> salesOrderHeaders, Set<BusinessDeal> businessDeals,
+			Set<ReserveActivity> reserveActivities, Set<QuoteHeader> quoteHeaders,
+			Set<SalesPerformance> salesPerformances, Set<PersonDetail> personDetails, Set<InvoiceHeader> invoiceHeaders,
+			Set<InventoryItem> inventoryItems, Set<InventoryUniqueItem> inventoryUniqueItems,
+			Set<PurchaseEntry> purchaseEntries) {
 		this.id = id;
 		this.domainName = domainName;
 		this.sparkTeamId = sparkTeamId;
 		this.userDetailses = userDetailses;
 		this.accountDetails = accountDetails;
 		this.grnHeaders = grnHeaders;
-		this.purchaseEntries = purchaseEntries;
 		this.warehouses = warehouses;
 		this.deliveryChallans = deliveryChallans;
-		this.inventoryTypes = inventoryTypes;
-		this.products = products;
 		this.organisations = organisations;
 		this.purchaseOrderHeaders = purchaseOrderHeaders;
-		this.tasks = tasks;
-		this.inventoryTypes_1 = inventoryTypes_1;
+		this.inventoryTypes = inventoryTypes;
+		this.weeklySalesCommitses = weeklySalesCommitses;
 		this.financialReports = financialReports;
-		this.tasks_1 = tasks_1;
+		this.tasks = tasks;
+		this.activities = activities;
 		this.productCategories = productCategories;
-		this.purchaseOrderHeaders_1 = purchaseOrderHeaders_1;
-		this.userDetailses_1 = userDetailses_1;
-		this.accountDetails_1 = accountDetails_1;
-		this.products_1 = products_1;
-		this.productCategories_1 = productCategories_1;
+		this.products = products;
+		this.docSequences = docSequences;
 		this.salesOrderHeaders = salesOrderHeaders;
-		this.inventoryItems = inventoryItems;
 		this.businessDeals = businessDeals;
-		this.deliveryChallans_1 = deliveryChallans_1;
-		this.businessDeals_1 = businessDeals_1;
+		this.reserveActivities = reserveActivities;
 		this.quoteHeaders = quoteHeaders;
-		this.financialReports_1 = financialReports_1;
-		this.warehouses_1 = warehouses_1;
-		this.grnHeaders_1 = grnHeaders_1;
+		this.salesPerformances = salesPerformances;
 		this.personDetails = personDetails;
-		this.personDetails_1 = personDetails_1;
 		this.invoiceHeaders = invoiceHeaders;
-		this.quoteHeaders_1 = quoteHeaders_1;
-		this.salesOrderHeaders_1 = salesOrderHeaders_1;
-		this.inventoryItems_1 = inventoryItems_1;
-		this.invoiceHeaders_1 = invoiceHeaders_1;
-		this.purchaseEntries_1 = purchaseEntries_1;
-		this.organisations_1 = organisations_1;
+		this.inventoryItems = inventoryItems;
+		this.inventoryUniqueItems = inventoryUniqueItems;
+		this.purchaseEntries = purchaseEntries;
 	}
 
 	@Id
@@ -181,15 +151,6 @@ public class Domain implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<PurchaseEntry> getPurchaseEntries() {
-		return this.purchaseEntries;
-	}
-
-	public void setPurchaseEntries(Set<PurchaseEntry> purchaseEntries) {
-		this.purchaseEntries = purchaseEntries;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
 	public Set<Warehouse> getWarehouses() {
 		return this.warehouses;
 	}
@@ -205,24 +166,6 @@ public class Domain implements java.io.Serializable {
 
 	public void setDeliveryChallans(Set<DeliveryChallan> deliveryChallans) {
 		this.deliveryChallans = deliveryChallans;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<InventoryType> getInventoryTypes() {
-		return this.inventoryTypes;
-	}
-
-	public void setInventoryTypes(Set<InventoryType> inventoryTypes) {
-		this.inventoryTypes = inventoryTypes;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<Product> getProducts() {
-		return this.products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
@@ -244,21 +187,21 @@ public class Domain implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<Task> getTasks() {
-		return this.tasks;
+	public Set<InventoryType> getInventoryTypes() {
+		return this.inventoryTypes;
 	}
 
-	public void setTasks(Set<Task> tasks) {
-		this.tasks = tasks;
+	public void setInventoryTypes(Set<InventoryType> inventoryTypes) {
+		this.inventoryTypes = inventoryTypes;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<InventoryType> getInventoryTypes_1() {
-		return this.inventoryTypes_1;
+	public Set<WeeklySalesCommits> getWeeklySalesCommitses() {
+		return this.weeklySalesCommitses;
 	}
 
-	public void setInventoryTypes_1(Set<InventoryType> inventoryTypes_1) {
-		this.inventoryTypes_1 = inventoryTypes_1;
+	public void setWeeklySalesCommitses(Set<WeeklySalesCommits> weeklySalesCommitses) {
+		this.weeklySalesCommitses = weeklySalesCommitses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
@@ -271,12 +214,21 @@ public class Domain implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<Task> getTasks_1() {
-		return this.tasks_1;
+	public Set<Task> getTasks() {
+		return this.tasks;
 	}
 
-	public void setTasks_1(Set<Task> tasks_1) {
-		this.tasks_1 = tasks_1;
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
+	public Set<Activity> getActivities() {
+		return this.activities;
+	}
+
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
@@ -289,48 +241,21 @@ public class Domain implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeaders_1() {
-		return this.purchaseOrderHeaders_1;
+	public Set<Product> getProducts() {
+		return this.products;
 	}
 
-	public void setPurchaseOrderHeaders_1(Set<PurchaseOrderHeader> purchaseOrderHeaders_1) {
-		this.purchaseOrderHeaders_1 = purchaseOrderHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<UserDetails> getUserDetailses_1() {
-		return this.userDetailses_1;
-	}
-
-	public void setUserDetailses_1(Set<UserDetails> userDetailses_1) {
-		this.userDetailses_1 = userDetailses_1;
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<AccountDetail> getAccountDetails_1() {
-		return this.accountDetails_1;
+	public Set<DocSequence> getDocSequences() {
+		return this.docSequences;
 	}
 
-	public void setAccountDetails_1(Set<AccountDetail> accountDetails_1) {
-		this.accountDetails_1 = accountDetails_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<Product> getProducts_1() {
-		return this.products_1;
-	}
-
-	public void setProducts_1(Set<Product> products_1) {
-		this.products_1 = products_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<ProductCategory> getProductCategories_1() {
-		return this.productCategories_1;
-	}
-
-	public void setProductCategories_1(Set<ProductCategory> productCategories_1) {
-		this.productCategories_1 = productCategories_1;
+	public void setDocSequences(Set<DocSequence> docSequences) {
+		this.docSequences = docSequences;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
@@ -343,15 +268,6 @@ public class Domain implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<InventoryItem> getInventoryItems() {
-		return this.inventoryItems;
-	}
-
-	public void setInventoryItems(Set<InventoryItem> inventoryItems) {
-		this.inventoryItems = inventoryItems;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
 	public Set<BusinessDeal> getBusinessDeals() {
 		return this.businessDeals;
 	}
@@ -361,21 +277,12 @@ public class Domain implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<DeliveryChallan> getDeliveryChallans_1() {
-		return this.deliveryChallans_1;
+	public Set<ReserveActivity> getReserveActivities() {
+		return this.reserveActivities;
 	}
 
-	public void setDeliveryChallans_1(Set<DeliveryChallan> deliveryChallans_1) {
-		this.deliveryChallans_1 = deliveryChallans_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<BusinessDeal> getBusinessDeals_1() {
-		return this.businessDeals_1;
-	}
-
-	public void setBusinessDeals_1(Set<BusinessDeal> businessDeals_1) {
-		this.businessDeals_1 = businessDeals_1;
+	public void setReserveActivities(Set<ReserveActivity> reserveActivities) {
+		this.reserveActivities = reserveActivities;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
@@ -388,30 +295,12 @@ public class Domain implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<FinancialReport> getFinancialReports_1() {
-		return this.financialReports_1;
+	public Set<SalesPerformance> getSalesPerformances() {
+		return this.salesPerformances;
 	}
 
-	public void setFinancialReports_1(Set<FinancialReport> financialReports_1) {
-		this.financialReports_1 = financialReports_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<Warehouse> getWarehouses_1() {
-		return this.warehouses_1;
-	}
-
-	public void setWarehouses_1(Set<Warehouse> warehouses_1) {
-		this.warehouses_1 = warehouses_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<GrnHeader> getGrnHeaders_1() {
-		return this.grnHeaders_1;
-	}
-
-	public void setGrnHeaders_1(Set<GrnHeader> grnHeaders_1) {
-		this.grnHeaders_1 = grnHeaders_1;
+	public void setSalesPerformances(Set<SalesPerformance> salesPerformances) {
+		this.salesPerformances = salesPerformances;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
@@ -424,15 +313,6 @@ public class Domain implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<PersonDetail> getPersonDetails_1() {
-		return this.personDetails_1;
-	}
-
-	public void setPersonDetails_1(Set<PersonDetail> personDetails_1) {
-		this.personDetails_1 = personDetails_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
 	public Set<InvoiceHeader> getInvoiceHeaders() {
 		return this.invoiceHeaders;
 	}
@@ -442,57 +322,30 @@ public class Domain implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<QuoteHeader> getQuoteHeaders_1() {
-		return this.quoteHeaders_1;
+	public Set<InventoryItem> getInventoryItems() {
+		return this.inventoryItems;
 	}
 
-	public void setQuoteHeaders_1(Set<QuoteHeader> quoteHeaders_1) {
-		this.quoteHeaders_1 = quoteHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<SalesOrderHeader> getSalesOrderHeaders_1() {
-		return this.salesOrderHeaders_1;
-	}
-
-	public void setSalesOrderHeaders_1(Set<SalesOrderHeader> salesOrderHeaders_1) {
-		this.salesOrderHeaders_1 = salesOrderHeaders_1;
+	public void setInventoryItems(Set<InventoryItem> inventoryItems) {
+		this.inventoryItems = inventoryItems;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<InventoryItem> getInventoryItems_1() {
-		return this.inventoryItems_1;
+	public Set<InventoryUniqueItem> getInventoryUniqueItems() {
+		return this.inventoryUniqueItems;
 	}
 
-	public void setInventoryItems_1(Set<InventoryItem> inventoryItems_1) {
-		this.inventoryItems_1 = inventoryItems_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<InvoiceHeader> getInvoiceHeaders_1() {
-		return this.invoiceHeaders_1;
-	}
-
-	public void setInvoiceHeaders_1(Set<InvoiceHeader> invoiceHeaders_1) {
-		this.invoiceHeaders_1 = invoiceHeaders_1;
+	public void setInventoryUniqueItems(Set<InventoryUniqueItem> inventoryUniqueItems) {
+		this.inventoryUniqueItems = inventoryUniqueItems;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<PurchaseEntry> getPurchaseEntries_1() {
-		return this.purchaseEntries_1;
+	public Set<PurchaseEntry> getPurchaseEntries() {
+		return this.purchaseEntries;
 	}
 
-	public void setPurchaseEntries_1(Set<PurchaseEntry> purchaseEntries_1) {
-		this.purchaseEntries_1 = purchaseEntries_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "domain")
-	public Set<Organisation> getOrganisations_1() {
-		return this.organisations_1;
-	}
-
-	public void setOrganisations_1(Set<Organisation> organisations_1) {
-		this.organisations_1 = organisations_1;
+	public void setPurchaseEntries(Set<PurchaseEntry> purchaseEntries) {
+		this.purchaseEntries = purchaseEntries;
 	}
 
 }

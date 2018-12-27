@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,8 +34,8 @@ public class QuoteHeader implements java.io.Serializable {
 	private OrgLocation orgLocation;
 	private PersonDetail personDetail;
 	private StatusItem statusItem;
-	private UserDetails userDetailsByCreatedByUserFk;
 	private UserDetails userDetailsByLastModifiedUserFk;
+	private UserDetails userDetailsByCreatedByUserFk;
 	private String accountPhone;
 	private Date createdDate;
 	private int deliveryTermsDays;
@@ -69,16 +69,11 @@ public class QuoteHeader implements java.io.Serializable {
 	private String docPath;
 	private Date serviceStartDate;
 	private Date serviceEndDate;
-	private Set<QuoteItem> quoteItems = new HashSet<QuoteItem>(0);
 	private Set<SalesOrderHeader> salesOrderHeaders = new HashSet<SalesOrderHeader>(0);
-	private Set<SalesOrderHeader> salesOrderHeaders_1 = new HashSet<SalesOrderHeader>(0);
 	private Set<DeliveryChallan> deliveryChallans = new HashSet<DeliveryChallan>(0);
-	private Set<BusinessDeal> businessDeals = new HashSet<BusinessDeal>(0);
 	private Set<PurchaseOrderHeader> purchaseOrderHeaders = new HashSet<PurchaseOrderHeader>(0);
-	private Set<BusinessDeal> businessDeals_1 = new HashSet<BusinessDeal>(0);
-	private Set<QuoteItem> quoteItems_1 = new HashSet<QuoteItem>(0);
-	private Set<PurchaseOrderHeader> purchaseOrderHeaders_1 = new HashSet<PurchaseOrderHeader>(0);
-	private Set<DeliveryChallan> deliveryChallans_1 = new HashSet<DeliveryChallan>(0);
+	private Set<BusinessDeal> businessDeals = new HashSet<BusinessDeal>(0);
+	private Set<QuoteItem> quoteItems = new HashSet<QuoteItem>(0);
 
 	public QuoteHeader() {
 	}
@@ -102,18 +97,15 @@ public class QuoteHeader implements java.io.Serializable {
 	public QuoteHeader(long id, AccountDetail accountDetail, BusinessDeal businessDeal, CrmType crmTypeByCrmTypeFk,
 			CrmType crmTypeByFreightTypeCrmFk, Currency currency, Domain domain, Organisation organisation,
 			OrgBankDetail orgBankDetail, OrgLocation orgLocation, PersonDetail personDetail, StatusItem statusItem,
-			UserDetails userDetailsByCreatedByUserFk, UserDetails userDetailsByLastModifiedUserFk, String accountPhone,
+			UserDetails userDetailsByLastModifiedUserFk, UserDetails userDetailsByCreatedByUserFk, String accountPhone,
 			Date createdDate, int deliveryTermsDays, String docSequence, String guid, String installation,
 			boolean isRevised, Date lastModifiedDate, String location, int paymentTermsDays, String personEmail,
 			String personPhone, String quoteMainHeadDetails, String quoteName, String rejectReason, String remarks,
 			Date rentalFrom, Date rentalTo, int rentalDuration, Date validFrom, Date validTo, int validityTermsDays,
 			String warranty, double freightChargePercent, double quotedAmount, int rentalUot, boolean needVerification,
 			double advanceAmount, String paymentTermPeriod, String paymentType, String docPath, Date serviceStartDate,
-			Date serviceEndDate, Set<QuoteItem> quoteItems, Set<SalesOrderHeader> salesOrderHeaders,
-			Set<SalesOrderHeader> salesOrderHeaders_1, Set<DeliveryChallan> deliveryChallans,
-			Set<BusinessDeal> businessDeals, Set<PurchaseOrderHeader> purchaseOrderHeaders,
-			Set<BusinessDeal> businessDeals_1, Set<QuoteItem> quoteItems_1,
-			Set<PurchaseOrderHeader> purchaseOrderHeaders_1, Set<DeliveryChallan> deliveryChallans_1) {
+			Date serviceEndDate, Set<SalesOrderHeader> salesOrderHeaders, Set<DeliveryChallan> deliveryChallans,
+			Set<PurchaseOrderHeader> purchaseOrderHeaders, Set<BusinessDeal> businessDeals, Set<QuoteItem> quoteItems) {
 		this.id = id;
 		this.accountDetail = accountDetail;
 		this.businessDeal = businessDeal;
@@ -126,8 +118,8 @@ public class QuoteHeader implements java.io.Serializable {
 		this.orgLocation = orgLocation;
 		this.personDetail = personDetail;
 		this.statusItem = statusItem;
-		this.userDetailsByCreatedByUserFk = userDetailsByCreatedByUserFk;
 		this.userDetailsByLastModifiedUserFk = userDetailsByLastModifiedUserFk;
+		this.userDetailsByCreatedByUserFk = userDetailsByCreatedByUserFk;
 		this.accountPhone = accountPhone;
 		this.createdDate = createdDate;
 		this.deliveryTermsDays = deliveryTermsDays;
@@ -161,16 +153,11 @@ public class QuoteHeader implements java.io.Serializable {
 		this.docPath = docPath;
 		this.serviceStartDate = serviceStartDate;
 		this.serviceEndDate = serviceEndDate;
-		this.quoteItems = quoteItems;
 		this.salesOrderHeaders = salesOrderHeaders;
-		this.salesOrderHeaders_1 = salesOrderHeaders_1;
 		this.deliveryChallans = deliveryChallans;
-		this.businessDeals = businessDeals;
 		this.purchaseOrderHeaders = purchaseOrderHeaders;
-		this.businessDeals_1 = businessDeals_1;
-		this.quoteItems_1 = quoteItems_1;
-		this.purchaseOrderHeaders_1 = purchaseOrderHeaders_1;
-		this.deliveryChallans_1 = deliveryChallans_1;
+		this.businessDeals = businessDeals;
+		this.quoteItems = quoteItems;
 	}
 
 	@Id
@@ -295,16 +282,6 @@ public class QuoteHeader implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CREATED_BY_USER_FK")
-	public UserDetails getUserDetailsByCreatedByUserFk() {
-		return this.userDetailsByCreatedByUserFk;
-	}
-
-	public void setUserDetailsByCreatedByUserFk(UserDetails userDetailsByCreatedByUserFk) {
-		this.userDetailsByCreatedByUserFk = userDetailsByCreatedByUserFk;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "LAST_MODIFIED_USER_FK")
 	public UserDetails getUserDetailsByLastModifiedUserFk() {
 		return this.userDetailsByLastModifiedUserFk;
@@ -312,6 +289,16 @@ public class QuoteHeader implements java.io.Serializable {
 
 	public void setUserDetailsByLastModifiedUserFk(UserDetails userDetailsByLastModifiedUserFk) {
 		this.userDetailsByLastModifiedUserFk = userDetailsByLastModifiedUserFk;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CREATED_BY_USER_FK")
+	public UserDetails getUserDetailsByCreatedByUserFk() {
+		return this.userDetailsByCreatedByUserFk;
+	}
+
+	public void setUserDetailsByCreatedByUserFk(UserDetails userDetailsByCreatedByUserFk) {
+		this.userDetailsByCreatedByUserFk = userDetailsByCreatedByUserFk;
 	}
 
 	@Column(name = "ACCOUNT_PHONE")
@@ -620,30 +607,12 @@ public class QuoteHeader implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteHeader")
-	public Set<QuoteItem> getQuoteItems() {
-		return this.quoteItems;
-	}
-
-	public void setQuoteItems(Set<QuoteItem> quoteItems) {
-		this.quoteItems = quoteItems;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteHeader")
 	public Set<SalesOrderHeader> getSalesOrderHeaders() {
 		return this.salesOrderHeaders;
 	}
 
 	public void setSalesOrderHeaders(Set<SalesOrderHeader> salesOrderHeaders) {
 		this.salesOrderHeaders = salesOrderHeaders;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteHeader")
-	public Set<SalesOrderHeader> getSalesOrderHeaders_1() {
-		return this.salesOrderHeaders_1;
-	}
-
-	public void setSalesOrderHeaders_1(Set<SalesOrderHeader> salesOrderHeaders_1) {
-		this.salesOrderHeaders_1 = salesOrderHeaders_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteHeader")
@@ -656,15 +625,6 @@ public class QuoteHeader implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteHeader")
-	public Set<BusinessDeal> getBusinessDeals() {
-		return this.businessDeals;
-	}
-
-	public void setBusinessDeals(Set<BusinessDeal> businessDeals) {
-		this.businessDeals = businessDeals;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteHeader")
 	public Set<PurchaseOrderHeader> getPurchaseOrderHeaders() {
 		return this.purchaseOrderHeaders;
 	}
@@ -674,39 +634,21 @@ public class QuoteHeader implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteHeader")
-	public Set<BusinessDeal> getBusinessDeals_1() {
-		return this.businessDeals_1;
+	public Set<BusinessDeal> getBusinessDeals() {
+		return this.businessDeals;
 	}
 
-	public void setBusinessDeals_1(Set<BusinessDeal> businessDeals_1) {
-		this.businessDeals_1 = businessDeals_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteHeader")
-	public Set<QuoteItem> getQuoteItems_1() {
-		return this.quoteItems_1;
-	}
-
-	public void setQuoteItems_1(Set<QuoteItem> quoteItems_1) {
-		this.quoteItems_1 = quoteItems_1;
+	public void setBusinessDeals(Set<BusinessDeal> businessDeals) {
+		this.businessDeals = businessDeals;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteHeader")
-	public Set<PurchaseOrderHeader> getPurchaseOrderHeaders_1() {
-		return this.purchaseOrderHeaders_1;
+	public Set<QuoteItem> getQuoteItems() {
+		return this.quoteItems;
 	}
 
-	public void setPurchaseOrderHeaders_1(Set<PurchaseOrderHeader> purchaseOrderHeaders_1) {
-		this.purchaseOrderHeaders_1 = purchaseOrderHeaders_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteHeader")
-	public Set<DeliveryChallan> getDeliveryChallans_1() {
-		return this.deliveryChallans_1;
-	}
-
-	public void setDeliveryChallans_1(Set<DeliveryChallan> deliveryChallans_1) {
-		this.deliveryChallans_1 = deliveryChallans_1;
+	public void setQuoteItems(Set<QuoteItem> quoteItems) {
+		this.quoteItems = quoteItems;
 	}
 
 }

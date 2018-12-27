@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,12 +28,8 @@ public class ProductCategory implements java.io.Serializable {
 	private String type;
 	private Set<Product> productsForProductCategoryFk = new HashSet<Product>(0);
 	private Set<ProductCategory> productCategoriesForParentCategoryFk = new HashSet<ProductCategory>(0);
-	private Set<Product> productsForProductCategoryFk_1 = new HashSet<Product>(0);
 	private Set<Product> productsForParentcategoryIdOid = new HashSet<Product>(0);
 	private Set<ProductCategory> productCategoriesForParentProductFk = new HashSet<ProductCategory>(0);
-	private Set<ProductCategory> productCategoriesForParentCategoryFk_1 = new HashSet<ProductCategory>(0);
-	private Set<Product> productsForParentcategoryIdOid_1 = new HashSet<Product>(0);
-	private Set<ProductCategory> productCategoriesForParentProductFk_1 = new HashSet<ProductCategory>(0);
 
 	public ProductCategory() {
 	}
@@ -45,10 +41,8 @@ public class ProductCategory implements java.io.Serializable {
 	public ProductCategory(long id, Domain domain, ProductCategory productCategoryByParentCategoryFk,
 			ProductCategory productCategoryByParentProductFk, String description, String productCategoryType,
 			String type, Set<Product> productsForProductCategoryFk,
-			Set<ProductCategory> productCategoriesForParentCategoryFk, Set<Product> productsForProductCategoryFk_1,
-			Set<Product> productsForParentcategoryIdOid, Set<ProductCategory> productCategoriesForParentProductFk,
-			Set<ProductCategory> productCategoriesForParentCategoryFk_1, Set<Product> productsForParentcategoryIdOid_1,
-			Set<ProductCategory> productCategoriesForParentProductFk_1) {
+			Set<ProductCategory> productCategoriesForParentCategoryFk, Set<Product> productsForParentcategoryIdOid,
+			Set<ProductCategory> productCategoriesForParentProductFk) {
 		this.id = id;
 		this.domain = domain;
 		this.productCategoryByParentCategoryFk = productCategoryByParentCategoryFk;
@@ -58,12 +52,8 @@ public class ProductCategory implements java.io.Serializable {
 		this.type = type;
 		this.productsForProductCategoryFk = productsForProductCategoryFk;
 		this.productCategoriesForParentCategoryFk = productCategoriesForParentCategoryFk;
-		this.productsForProductCategoryFk_1 = productsForProductCategoryFk_1;
 		this.productsForParentcategoryIdOid = productsForParentcategoryIdOid;
 		this.productCategoriesForParentProductFk = productCategoriesForParentProductFk;
-		this.productCategoriesForParentCategoryFk_1 = productCategoriesForParentCategoryFk_1;
-		this.productsForParentcategoryIdOid_1 = productsForParentcategoryIdOid_1;
-		this.productCategoriesForParentProductFk_1 = productCategoriesForParentProductFk_1;
 	}
 
 	@Id
@@ -152,15 +142,6 @@ public class ProductCategory implements java.io.Serializable {
 		this.productCategoriesForParentCategoryFk = productCategoriesForParentCategoryFk;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCategoryByProductCategoryFk")
-	public Set<Product> getProductsForProductCategoryFk_1() {
-		return this.productsForProductCategoryFk_1;
-	}
-
-	public void setProductsForProductCategoryFk_1(Set<Product> productsForProductCategoryFk_1) {
-		this.productsForProductCategoryFk_1 = productsForProductCategoryFk_1;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCategoryByParentcategoryIdOid")
 	public Set<Product> getProductsForParentcategoryIdOid() {
 		return this.productsForParentcategoryIdOid;
@@ -177,33 +158,6 @@ public class ProductCategory implements java.io.Serializable {
 
 	public void setProductCategoriesForParentProductFk(Set<ProductCategory> productCategoriesForParentProductFk) {
 		this.productCategoriesForParentProductFk = productCategoriesForParentProductFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCategoryByParentCategoryFk")
-	public Set<ProductCategory> getProductCategoriesForParentCategoryFk_1() {
-		return this.productCategoriesForParentCategoryFk_1;
-	}
-
-	public void setProductCategoriesForParentCategoryFk_1(Set<ProductCategory> productCategoriesForParentCategoryFk_1) {
-		this.productCategoriesForParentCategoryFk_1 = productCategoriesForParentCategoryFk_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCategoryByParentcategoryIdOid")
-	public Set<Product> getProductsForParentcategoryIdOid_1() {
-		return this.productsForParentcategoryIdOid_1;
-	}
-
-	public void setProductsForParentcategoryIdOid_1(Set<Product> productsForParentcategoryIdOid_1) {
-		this.productsForParentcategoryIdOid_1 = productsForParentcategoryIdOid_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCategoryByParentProductFk")
-	public Set<ProductCategory> getProductCategoriesForParentProductFk_1() {
-		return this.productCategoriesForParentProductFk_1;
-	}
-
-	public void setProductCategoriesForParentProductFk_1(Set<ProductCategory> productCategoriesForParentProductFk_1) {
-		this.productCategoriesForParentProductFk_1 = productCategoriesForParentProductFk_1;
 	}
 
 }

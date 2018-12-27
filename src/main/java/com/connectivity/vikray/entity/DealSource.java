@@ -1,5 +1,5 @@
 package com.connectivity.vikray.entity;
-// Generated 6 Dec, 2018 11:37:25 AM by Hibernate Tools 5.2.11.Final
+// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,6 @@ public class DealSource implements java.io.Serializable {
 	private long id;
 	private String name;
 	private Set<BusinessDeal> businessDeals = new HashSet<BusinessDeal>(0);
-	private Set<BusinessDeal> businessDeals_1 = new HashSet<BusinessDeal>(0);
 
 	public DealSource() {
 	}
@@ -29,11 +28,10 @@ public class DealSource implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public DealSource(long id, String name, Set<BusinessDeal> businessDeals, Set<BusinessDeal> businessDeals_1) {
+	public DealSource(long id, String name, Set<BusinessDeal> businessDeals) {
 		this.id = id;
 		this.name = name;
 		this.businessDeals = businessDeals;
-		this.businessDeals_1 = businessDeals_1;
 	}
 
 	@Id
@@ -63,15 +61,6 @@ public class DealSource implements java.io.Serializable {
 
 	public void setBusinessDeals(Set<BusinessDeal> businessDeals) {
 		this.businessDeals = businessDeals;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dealSource")
-	public Set<BusinessDeal> getBusinessDeals_1() {
-		return this.businessDeals_1;
-	}
-
-	public void setBusinessDeals_1(Set<BusinessDeal> businessDeals_1) {
-		this.businessDeals_1 = businessDeals_1;
 	}
 
 }
