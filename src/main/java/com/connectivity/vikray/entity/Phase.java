@@ -159,7 +159,7 @@ public class Phase {
 	}
 
 
-	@Access(AccessType.PROPERTY)
+	/*@Access(AccessType.PROPERTY)*/
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "phaseFk")
 	public Set<Task> getTasks() {
 		return tasks;

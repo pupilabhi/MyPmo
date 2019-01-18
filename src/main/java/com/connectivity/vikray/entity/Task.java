@@ -315,7 +315,7 @@ public class Task implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "phase_Fk")
+	@JoinColumn(name = "phaseFk")
 	public Phase getPhaseFk() {
 		return phaseFk;
 	}
