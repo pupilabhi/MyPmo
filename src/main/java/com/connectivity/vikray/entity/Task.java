@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,7 +24,14 @@ import javax.persistence.TemporalType;
 @Table(name = "TASK", catalog = "namcrm")
 public class Task implements java.io.Serializable {
 
-	private long id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private long id;	
+	private String comments;
+	private String replies;
 	private BusinessDeal businessDeal;
 	private Domain domain;
 	private TaskPriority taskPriority;
@@ -37,6 +46,13 @@ public class Task implements java.io.Serializable {
 	private String taskName;
 	private String taskUrl;
 	private Date verifiedOn;
+
+	// New fields added for vikray-PMO by Pawan @18-01-2019
+	private Phase phaseFk;
+	private String description;
+	private String instruction;
+	private AccountAddress accountAddressFk;
+	private Set<Documents> documents = new HashSet<Documents>(0);
 	private Set<TaskComment> taskComments = new HashSet<TaskComment>(0);
 	private Set<TaskCcUser> taskCcUsers = new HashSet<TaskCcUser>(0);
 
@@ -47,11 +63,18 @@ public class Task implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Task(long id, BusinessDeal businessDeal, Domain domain, TaskPriority taskPriority, TaskStatus taskStatus,
-			UserDetails userDetailsByAssigneeUserFk, UserDetails userDetailsByCreatorUserFk, Date completedOn,
-			Date createdOn, Date dueDate, String guid, Date lastUpdatedOn, String taskName, String taskUrl,
-			Date verifiedOn, Set<TaskComment> taskComments, Set<TaskCcUser> taskCcUsers) {
+
+
+	public Task(long id, String comments, String replies, BusinessDeal businessDeal, Domain domain,
+			TaskPriority taskPriority, TaskStatus taskStatus, UserDetails userDetailsByAssigneeUserFk,
+			UserDetails userDetailsByCreatorUserFk, Date completedOn, Date createdOn, Date dueDate, String guid,
+			Date lastUpdatedOn, String taskName, String taskUrl, Date verifiedOn, Phase phaseFk, String description,
+			String instruction, AccountAddress accountAddressFk, Set<Documents> documents,
+			Set<TaskComment> taskComments, Set<TaskCcUser> taskCcUsers) {
+		super();
 		this.id = id;
+		this.comments = comments;
+		this.replies = replies;
 		this.businessDeal = businessDeal;
 		this.domain = domain;
 		this.taskPriority = taskPriority;
@@ -66,19 +89,65 @@ public class Task implements java.io.Serializable {
 		this.taskName = taskName;
 		this.taskUrl = taskUrl;
 		this.verifiedOn = verifiedOn;
+		this.phaseFk = phaseFk;
+		this.description = description;
+		this.instruction = instruction;
+		this.accountAddressFk = accountAddressFk;
+		this.documents = documents;
 		this.taskComments = taskComments;
 		this.taskCcUsers = taskCcUsers;
 	}
 
 	@Id
-
-	@Column(name = "ID", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
 		return this.id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setInstruction(String instruction) {
+		this.instruction = instruction;
+	}
+
+	public String getInstruction() {
+		return instruction;
+	}
+
+	public void setAccountAddressFk(AccountAddress accountAddressFk) {
+		this.accountAddressFk = accountAddressFk;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ADDRESS_FK")
+	public AccountAddress getAccountAddressFk() {
+		return accountAddressFk;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setReplies(String replies) {
+		this.replies = replies;
+	}
+
+	public String getReplies() {
+		return replies;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -235,5 +304,26 @@ public class Task implements java.io.Serializable {
 	public void setTaskCcUsers(Set<TaskCcUser> taskCcUsers) {
 		this.taskCcUsers = taskCcUsers;
 	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "taskFk")
+	public Set<Documents> getDocuments() {
+		return documents;
+	}
+
+	public void setDocuments(Set<Documents> documents) {
+		this.documents = documents;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "phase_Fk")
+	public Phase getPhaseFk() {
+		return phaseFk;
+	}
+
+	public void setPhaseFk(Phase phaseFk) {
+		this.phaseFk = phaseFk;
+	}
+	
+	
 
 }

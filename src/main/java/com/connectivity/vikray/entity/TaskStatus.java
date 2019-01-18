@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,11 +19,16 @@ import javax.persistence.Table;
 @Table(name = "TASK_STATUS", catalog = "namcrm")
 public class TaskStatus implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1695086134588598876L;
+	
 	private long id;
 	private String constByName;
 	private String label;
 	private Set<Task> tasks = new HashSet<Task>(0);
-
+	
 	public TaskStatus() {
 	}
 
@@ -29,7 +36,10 @@ public class TaskStatus implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public TaskStatus(long id, String constByName, String label, Set<Task> tasks) {
+	
+
+	public TaskStatus(long id, String constByName, String label,  Set<Task> tasks) {
+		super();
 		this.id = id;
 		this.constByName = constByName;
 		this.label = label;
@@ -65,6 +75,7 @@ public class TaskStatus implements java.io.Serializable {
 		this.label = label;
 	}
 
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "taskStatus")
 	public Set<Task> getTasks() {
 		return this.tasks;
