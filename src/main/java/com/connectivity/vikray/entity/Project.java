@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,16 +24,18 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.connectivity.vikray.repository.ProjectRepository;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 //New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
-@Table(name = "PROJECT", catalog = "namcrm")
+@Table(name = "PROJECT", catalog = "vikrayPmo")
+@JsonIgnoreProperties(
+        value = {"createdAt", "updatedAt"},
+        allowGetters = true
+)
 public class Project implements Serializable{
 
-	@Autowired
-	ProjectRepository projectRepository;
 	/**
 	 * 
 	 */
@@ -44,13 +47,15 @@ public class Project implements Serializable{
 	private Date createdBy;
 	private Date updatedBy;
 	private Date dueDate;
-	private AccountAddress accountAddressFk;
-	private SalesOrderHeader salesOrderHeaderFk;
+	/*private AccountAddress accountAddressFk;
+	private SalesOrderHeader salesOrderHeaderFk;*/
+	private String accountAddress;
+	private String salesOrder;
 	private UserDetails userDetailsFk;
 	private Set<ProjectFollower> projectFollowers= new HashSet<ProjectFollower>(0);
 	private Set<Phase> phases= new HashSet<Phase>(0);
 	private Set<Documents> documents= new HashSet<Documents>(0);
-	private StatusItem projectStatus;
+	//private StatusItem projectStatus;
 	
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
@@ -69,11 +74,10 @@ public class Project implements Serializable{
 	public Project(long id) {
 		this.id= id;
 	}
-	
+
 	public Project(long id, String projectName, String projectDescription, Date createdBy, Date updatedBy, Date dueDate,
-			AccountAddress accountAddressFk, SalesOrderHeader salesOrderHeaderFk, UserDetails userDetailsFk,
-			Set<ProjectFollower> projectFollowers, Set<Phase> phases, Set<Documents> documents,
-			StatusItem projectStatus, Date createDate, Date modifyDate) {
+			String accountAddress, String salesOrder, UserDetails userDetailsFk, Set<ProjectFollower> projectFollowers,
+			Set<Phase> phases, Set<Documents> documents, Date createDate, Date modifyDate) {
 		super();
 		this.id = id;
 		this.projectName = projectName;
@@ -81,17 +85,17 @@ public class Project implements Serializable{
 		this.createdBy = createdBy;
 		this.updatedBy = updatedBy;
 		this.dueDate = dueDate;
-		this.accountAddressFk = accountAddressFk;
-		this.salesOrderHeaderFk = salesOrderHeaderFk;
+		this.accountAddress = accountAddress;
+		this.salesOrder = salesOrder;
 		this.userDetailsFk = userDetailsFk;
 		this.projectFollowers = projectFollowers;
 		this.phases = phases;
 		this.documents = documents;
-		this.projectStatus = projectStatus;
 		this.createDate = createDate;
 		this.modifyDate = modifyDate;
 	}
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
@@ -142,7 +146,7 @@ public class Project implements Serializable{
 		this.dueDate = dueDate;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	/*@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ACCOUNT_ADDRESS_FK")
 	public AccountAddress getAccountAddressFk() {
 		return accountAddressFk;
@@ -150,9 +154,17 @@ public class Project implements Serializable{
 
 	public void setAccountAddressFk(AccountAddress accountAddressFk) {
 		this.accountAddressFk = accountAddressFk;
+	}*/
+	
+	public String getAccountAddress() {
+		return accountAddress;
+	}
+	
+	public void setAccountAddress(String accountAddress) {
+		this.accountAddress = accountAddress;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	/*@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SALES_ORDER_FK")
 	public SalesOrderHeader getSalesOrderHeaderFk() {
 		return salesOrderHeaderFk;
@@ -160,6 +172,14 @@ public class Project implements Serializable{
 
 	public void setSalesOrderHeaderFk(SalesOrderHeader salesOrderHeaderFk) {
 		this.salesOrderHeaderFk = salesOrderHeaderFk;
+	}*/
+	
+	public String getSalesOrder() {
+		return salesOrder;
+	}
+	
+	public void setSalesOrder(String salesOrder) {
+		this.salesOrder = salesOrder;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -171,7 +191,7 @@ public class Project implements Serializable{
 	public void setUserDetailsFk(UserDetails userDetailsFk) {
 		this.userDetailsFk = userDetailsFk;
 	}
-
+    
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
 	public Set<ProjectFollower> getProjectFollowers() {
 		return projectFollowers;
@@ -200,7 +220,7 @@ public class Project implements Serializable{
 	}
 
 	
-	@OneToOne(fetch=FetchType.LAZY)
+/*	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "project_status")
 	public StatusItem getProjectStatus() {
 		return projectStatus;
@@ -208,7 +228,7 @@ public class Project implements Serializable{
 
 	public void setProjectStatus(StatusItem projectStatus) {
 		this.projectStatus = projectStatus;
-	}
+	}*/
 
 	public Date getCreateDate() {
 		return createDate;
@@ -224,11 +244,6 @@ public class Project implements Serializable{
 
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
-	}
-
-	public List<Project> findAll() {
-		
-		return projectRepository.findAll();
 	}
 
 }

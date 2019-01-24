@@ -1,4 +1,4 @@
-package com.connectivity.vikray.entity;
+	package com.connectivity.vikray.entity;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 //New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
-@Table(name = "PHASE", catalog = "namcrm")
+@Table(name = "DOCUMENTS", catalog = "vikrayPmo")
 public class Documents implements Serializable{
 	
 	/**
@@ -24,7 +24,6 @@ public class Documents implements Serializable{
 	private long id;
 	private String path;
 	private Project projectFk;
-//	private CrmType crmTypeFk;
 	private Phase phaseFk;
 	private Task taskFk;
 	
@@ -38,23 +37,14 @@ public class Documents implements Serializable{
 
 	
 
-	public Documents(long id, String path, Project projectFk, /*CrmType crmTypeFk,*/ Phase phaseFk, Task taskFk) {
+	public Documents(long id, String path, Project projectFk, Phase phaseFk, Task taskFk) {
 		super();
 		this.id = id;
 		this.path = path;
 		this.projectFk = projectFk;
-	//	this.crmTypeFk = crmTypeFk;
 		this.phaseFk = phaseFk;
 		this.taskFk = taskFk;
 	}
-
-/*	public CrmType getCrmTypeFk() {
-		return crmTypeFk;
-	}
-
-	public void setCrmTypeFk(CrmType crmTypeFk) {
-		this.crmTypeFk = crmTypeFk;
-	}*/
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

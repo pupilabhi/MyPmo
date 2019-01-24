@@ -8,6 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,11 +22,18 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 // New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
-@Table(name = "PHASE", catalog = "namcrm")
+@Table(name = "PHASE", catalog = "vikrayPmo")
+@JsonIgnoreProperties(
+        value = {"createdAt", "updatedAt"},
+        allowGetters = true
+)
 public class Phase {
 	
 	private long id;
@@ -34,7 +42,8 @@ public class Phase {
 	private Date dueDate;
 	private Project projectFk;
 	private UserDetails userDetailsFk;
-	private AccountAddress accountAddressFk;
+	//private AccountAddress accountAddressFk;
+	private String accountAddress;
 	private Set<Documents> documents= new HashSet<Documents>(0);
 	private Set<PhaseFollower> phaseFollowers= new HashSet<PhaseFollower>(0);
 	private Set<Task> tasks= new HashSet<Task>(0);
@@ -56,11 +65,10 @@ public class Phase {
 	 public Phase(long id) {
 		 this.id= id;
 	 }
-	 
-	 
+
 	public Phase(long id, Date createdBy, Date updatedBy, Date dueDate, Project projectFk, UserDetails userDetailsFk,
-			AccountAddress accountAddressFk, Set<Documents> documents, Set<PhaseFollower> phaseFollowers,
-			Set<Task> tasks, Date createDate, Date modifyDate) {
+			String accountAddress, Set<Documents> documents, Set<PhaseFollower> phaseFollowers, Set<Task> tasks,
+			Date createDate, Date modifyDate) {
 		super();
 		this.id = id;
 		this.createdBy = createdBy;
@@ -68,7 +76,7 @@ public class Phase {
 		this.dueDate = dueDate;
 		this.projectFk = projectFk;
 		this.userDetailsFk = userDetailsFk;
-		this.accountAddressFk = accountAddressFk;
+		this.accountAddress = accountAddress;
 		this.documents = documents;
 		this.phaseFollowers = phaseFollowers;
 		this.tasks = tasks;
@@ -130,7 +138,7 @@ public class Phase {
 		this.userDetailsFk = userDetailsFk;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+/*	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ACCOUNT_ADDRESS_FK")
 	public AccountAddress getAccountAddressFk() {
 		return accountAddressFk;
@@ -138,8 +146,18 @@ public class Phase {
 
 	public void setAccountAddressFk(AccountAddress accountAddressFk) {
 		this.accountAddressFk = accountAddressFk;
+	}*/
+	
+	
+	@Column(name="ACCOUNT_ADDRESS")
+	public String getAccountAddress() {
+		return accountAddress;
 	}
-
+	
+	public void setAccountAddress(String accountAddress) {
+		this.accountAddress = accountAddress;
+	}
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "phaseFk")
 	public Set<Documents> getDocuments() {
 		return documents;
@@ -159,12 +177,11 @@ public class Phase {
 	}
 
 
-	/*@Access(AccessType.PROPERTY)*/
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "phaseFk")
 	public Set<Task> getTasks() {
 		return tasks;
 	}
-
+	
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
 	}

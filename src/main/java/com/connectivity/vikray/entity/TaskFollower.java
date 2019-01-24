@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 //New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
-@Table(name = "TASK_FOLLOWER", catalog = "namcrm")
+@Table(name = "TASK_FOLLOWER", catalog = "vikrayPmo")
 public class TaskFollower {
 
 	private long id;

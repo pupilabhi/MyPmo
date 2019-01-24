@@ -1,4 +1,4 @@
-package com.connectivity.vikray;
+/*package com.connectivity.vikray;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,3 +15,4 @@ public class JpaApplicationTests {
 
 }
 
+*/
