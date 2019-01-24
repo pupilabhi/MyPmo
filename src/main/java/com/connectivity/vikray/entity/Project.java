@@ -24,6 +24,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "PROJECT", catalog = "vikrayPmo")
 @JsonIgnoreProperties(
-        value = {"createdAt", "updatedAt"},
+        value = {"createDate", "modifyDate"},
         allowGetters = true
 )
 public class Project implements Serializable{
@@ -44,8 +46,8 @@ public class Project implements Serializable{
 	private long id;
 	private String projectName;
 	private String projectDescription;
-	private Date createdBy;
-	private Date updatedBy;
+	private UserDetails createdByFk;
+	private UserDetails updatedByFk;
 	private Date dueDate;
 	/*private AccountAddress accountAddressFk;
 	private SalesOrderHeader salesOrderHeaderFk;*/
@@ -57,14 +59,14 @@ public class Project implements Serializable{
 	private Set<Documents> documents= new HashSet<Documents>(0);
 	//private StatusItem projectStatus;
 	
-	@CreationTimestamp
+	@Column(name = "create_date", nullable = false, updatable = false) 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_date")
+	@CreatedDate
 	private Date createDate;
 	
-	@UpdateTimestamp
+	@Column(name = "modify_date", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modify_date")
+	@LastModifiedDate
 	private Date modifyDate;
 
 	public Project() {
@@ -74,16 +76,17 @@ public class Project implements Serializable{
 	public Project(long id) {
 		this.id= id;
 	}
-
-	public Project(long id, String projectName, String projectDescription, Date createdBy, Date updatedBy, Date dueDate,
-			String accountAddress, String salesOrder, UserDetails userDetailsFk, Set<ProjectFollower> projectFollowers,
-			Set<Phase> phases, Set<Documents> documents, Date createDate, Date modifyDate) {
+	
+	public Project(long id, String projectName, String projectDescription, UserDetails createdByFk,
+			UserDetails updatedByFk, Date dueDate, String accountAddress, String salesOrder, UserDetails userDetailsFk,
+			Set<ProjectFollower> projectFollowers, Set<Phase> phases, Set<Documents> documents, Date createDate,
+			Date modifyDate) {
 		super();
 		this.id = id;
 		this.projectName = projectName;
 		this.projectDescription = projectDescription;
-		this.createdBy = createdBy;
-		this.updatedBy = updatedBy;
+		this.createdByFk = createdByFk;
+		this.updatedByFk = updatedByFk;
 		this.dueDate = dueDate;
 		this.accountAddress = accountAddress;
 		this.salesOrder = salesOrder;
@@ -95,7 +98,27 @@ public class Project implements Serializable{
 		this.modifyDate = modifyDate;
 	}
 
-	
+
+	@ManyToOne(fetch= FetchType.LAZY)
+	@JoinColumn(name= "CREATED_BYFK")
+	public UserDetails getCreatedByFk() {
+		return createdByFk;
+	}
+
+	public void setCreatedByFk(UserDetails createdByFk) {
+		this.createdByFk = createdByFk;
+	}
+
+	@ManyToOne(fetch= FetchType.LAZY)
+	@JoinColumn(name= "UPDATED_BYFK")
+	public UserDetails getUpdatedByFk() {
+		return updatedByFk;
+	}
+
+	public void setUpdatedByFk(UserDetails updatedByFk) {
+		this.updatedByFk = updatedByFk;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
@@ -122,22 +145,9 @@ public class Project implements Serializable{
 		this.projectDescription = projectDescription;
 	}
 
-	public Date getCreatedBy() {
-		return createdBy;
-	}
 
-	public void setCreatedBy(Date createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Date getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(Date updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DUE_DATE", length = 19)
 	public Date getDueDate() {
 		return dueDate;
 	}
@@ -230,6 +240,7 @@ public class Project implements Serializable{
 		this.projectStatus = projectStatus;
 	}*/
 
+	
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -238,6 +249,7 @@ public class Project implements Serializable{
 		this.createDate = createDate;
 	}
 
+	
 	public Date getModifyDate() {
 		return modifyDate;
 	}

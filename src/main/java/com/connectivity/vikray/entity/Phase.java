@@ -16,12 +16,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -31,14 +34,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "PHASE", catalog = "vikrayPmo")
 @JsonIgnoreProperties(
-        value = {"createdAt", "updatedAt"},
+        value = {"createDate", "modifyon"},
         allowGetters = true
 )
 public class Phase {
 	
 	private long id;
-	private Date createdBy;
-	private Date updatedBy;
+	private UserDetails createdByFk;
+	private UserDetails updatedByFk;
 	private Date dueDate;
 	private Project projectFk;
 	private UserDetails userDetailsFk;
@@ -48,14 +51,14 @@ public class Phase {
 	private Set<PhaseFollower> phaseFollowers= new HashSet<PhaseFollower>(0);
 	private Set<Task> tasks= new HashSet<Task>(0);
 	
-	@CreationTimestamp
+	@Column(name = "create_date", nullable = false, updatable = false) 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_date")
+	@CreatedDate
 	private Date createDate;
 	
-	@UpdateTimestamp
+	@Column(name = "modify_date", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modify_date")
+	@LastModifiedDate
 	private Date modifyDate;
 
 	 public Phase() {
@@ -66,13 +69,15 @@ public class Phase {
 		 this.id= id;
 	 }
 
-	public Phase(long id, Date createdBy, Date updatedBy, Date dueDate, Project projectFk, UserDetails userDetailsFk,
-			String accountAddress, Set<Documents> documents, Set<PhaseFollower> phaseFollowers, Set<Task> tasks,
-			Date createDate, Date modifyDate) {
+	
+
+	public Phase(long id, UserDetails createdByFk, UserDetails updatedByFk, Date dueDate, Project projectFk,
+			UserDetails userDetailsFk, String accountAddress, Set<Documents> documents,
+			Set<PhaseFollower> phaseFollowers, Set<Task> tasks, Date createDate, Date modifyDate) {
 		super();
 		this.id = id;
-		this.createdBy = createdBy;
-		this.updatedBy = updatedBy;
+		this.createdByFk = createdByFk;
+		this.updatedByFk = updatedByFk;
 		this.dueDate = dueDate;
 		this.projectFk = projectFk;
 		this.userDetailsFk = userDetailsFk;
@@ -94,22 +99,28 @@ public class Phase {
 		this.id = id;
 	}
 
-	public Date getCreatedBy() {
-		return createdBy;
+	@ManyToOne(fetch= FetchType.LAZY)
+	@JoinColumn(name= "CREATED_BYFK")
+	public UserDetails getCreatedByFk() {
+		return createdByFk;
 	}
 
-	public void setCreatedBy(Date createdBy) {
-		this.createdBy = createdBy;
+	public void setCreatedByFk(UserDetails createdByFk) {
+		this.createdByFk = createdByFk;
 	}
 
-	public Date getUpdatedBy() {
-		return updatedBy;
+	@ManyToOne(fetch= FetchType.LAZY)
+	@JoinColumn(name= "UPDATED_BYFK")
+	public UserDetails getUpdatedByFk() {
+		return updatedByFk;
 	}
 
-	public void setUpdatedBy(Date updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setUpdatedByFk(UserDetails updatedByFk) {
+		this.updatedByFk = updatedByFk;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DUE_DATE", length = 19)
 	public Date getDueDate() {
 		return dueDate;
 	}

@@ -3,6 +3,8 @@ package com.connectivity.vikray.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,7 +25,7 @@ public class UserDetails implements java.io.Serializable {
 	private long id;
 	private Domain domain;
 	private String organisation;
-	//private OrgLocation orgLocation;
+	// private OrgLocation orgLocation;
 	private String orgLocation;
 	private UserDetails userDetails;
 	private String dotPath;
@@ -40,10 +43,17 @@ public class UserDetails implements java.io.Serializable {
 	private boolean isInactive;
 	private long expertise;
 	private String accessToken;
-	//private Set<AccountDetail> accountDetails = new HashSet<AccountDetail>(0);
+	// private Set<AccountDetail> accountDetails = new HashSet<AccountDetail>(0);
 	private String accountDetails;
+	private Set<Phase> createPhases = new HashSet<Phase>();
+	private Set<Phase> updatePhases = new HashSet<Phase>();
+	private Set<Project> createProject = new HashSet<Project>();
+	private Set<Project> updateProject = new HashSet<Project>();
+	private Set<Project> projects = new HashSet<Project>();
 	private Set<TaskComment> taskComments = new HashSet<TaskComment>(0);
 	private Set<TaskCcUser> taskCcUsers = new HashSet<TaskCcUser>(0);
+	private Set<Task> createTask = new HashSet<Task>(0);
+	private Set<Task> updateTask = new HashSet<Task>(0);
 	private Set<Task> tasksForAssigneeUserFk = new HashSet<Task>(0);
 	private Set<Task> tasksForCreatorUserFk = new HashSet<Task>(0);
 
@@ -51,21 +61,21 @@ public class UserDetails implements java.io.Serializable {
 	}
 
 	public UserDetails(long id) {
-		this.id= id;
-	}
-	/*public UserDetails(long id, long userRole, boolean isInactive, long expertise) {
 		this.id = id;
-		this.userRole = userRole;
-		this.isInactive = isInactive;
-		this.expertise = expertise;
-	}*/
-
+	}
+	/*
+	 * public UserDetails(long id, long userRole, boolean isInactive, long
+	 * expertise) { this.id = id; this.userRole = userRole; this.isInactive =
+	 * isInactive; this.expertise = expertise; }
+	 */
+	
 	public UserDetails(long id, Domain domain, String organisation, String orgLocation, UserDetails userDetails,
 			String dotPath, String firstName, String forgotPassGuid, String guid, String inviteGuid, String lastName,
 			String userLoginId, String password, String sessionId, String userEmail, String userPhone, long userRole,
-			boolean isInactive, long expertise, String accessToken, String accountDetails,
-			Set<TaskComment> taskComments, Set<TaskCcUser> taskCcUsers, Set<Task> tasksForAssigneeUserFk,
-			Set<Task> tasksForCreatorUserFk) {
+			boolean isInactive, long expertise, String accessToken, String accountDetails, Set<Phase> createPhases,
+			Set<Phase> updatePhases, Set<Project> createProject, Set<Project> updateProject, Set<Project> projects,
+			Set<TaskComment> taskComments, Set<TaskCcUser> taskCcUsers, Set<Task> createTask, Set<Task> updateTask,
+			Set<Task> tasksForAssigneeUserFk, Set<Task> tasksForCreatorUserFk) {
 		super();
 		this.id = id;
 		this.domain = domain;
@@ -88,8 +98,15 @@ public class UserDetails implements java.io.Serializable {
 		this.expertise = expertise;
 		this.accessToken = accessToken;
 		this.accountDetails = accountDetails;
+		this.createPhases = createPhases;
+		this.updatePhases = updatePhases;
+		this.createProject = createProject;
+		this.updateProject = updateProject;
+		this.projects = projects;
 		this.taskComments = taskComments;
 		this.taskCcUsers = taskCcUsers;
+		this.createTask = createTask;
+		this.updateTask = updateTask;
 		this.tasksForAssigneeUserFk = tasksForAssigneeUserFk;
 		this.tasksForCreatorUserFk = tasksForCreatorUserFk;
 	}
@@ -99,21 +116,92 @@ public class UserDetails implements java.io.Serializable {
 	public long getId() {
 		return this.id;
 	}
-
+	
 	public void setId(long id) {
 		this.id = id;
 	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "createdBy")
+	public Set<Task> getCreateTask() {
+		return createTask;
+	}
 
-	@Column(name= "ORG_LOCATION")
+	public void setCreateTask(Set<Task> createTask) {
+		this.createTask = createTask;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "updatedBy")
+	public Set<Task> getUpdateTask() {
+		return updateTask;
+	}
+
+	public void setUpdateTask(Set<Task> updateTask) {
+		this.updateTask = updateTask;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "createdByFk")
+	public Set<Project> getCreateProject() {
+		return createProject;
+	}
+
+	public void setCreateProject(Set<Project> createProject) {
+		this.createProject = createProject;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "updatedByFk")
+	public Set<Project> getUpdateProject() {
+		return updateProject;
+	}
+
+	public void setUpdateProject(Set<Project> updateProject) {
+		this.updateProject = updateProject;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "createdByFk")
+	public Set<Phase> getCreatePhases() {
+		return createPhases;
+	}
+
+	public void setCreatePhases(Set<Phase> createPhases) {
+		this.createPhases = createPhases;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "updatedByFk")
+	public Set<Phase> getUpdatePhases() {
+		return updatePhases;
+	}
+
+	public void setUpdatePhases(Set<Phase> updatePhases) {
+		this.updatePhases = updatePhases;
+	}
+
+	public boolean isInactive() {
+		return isInactive;
+	}
+
+	public void setInactive(boolean isInactive) {
+		this.isInactive = isInactive;
+	}
+    
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsFk")
+	public Set<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(Set<Project> projects) {
+		this.projects = projects;
+	}
+
+	@Column(name = "ORG_LOCATION")
 	public String getOrgLocation() {
 		return orgLocation;
 	}
-	
+
 	public void setOrganisation(String organisation) {
 		this.organisation = organisation;
 	}
 
-	@Column(name= "ACCOUNT_DETAILS")
+	@Column(name = "ACCOUNT_DETAILS")
 	public String getAccountDetails() {
 		return accountDetails;
 	}
@@ -121,16 +209,16 @@ public class UserDetails implements java.io.Serializable {
 	public void setAccountDetails(String accountDetails) {
 		this.accountDetails = accountDetails;
 	}
-	
-	@Column(name= "ORGANISATION")
+
+	@Column(name = "ORGANISATION")
 	public String getOrganisation() {
 		return organisation;
 	}
-	
+
 	public void setOrgLocation(String orgLocation) {
 		this.orgLocation = orgLocation;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DOMAIN_FK")
 	public Domain getDomain() {
@@ -303,6 +391,8 @@ public class UserDetails implements java.io.Serializable {
 	public void setTaskCcUsers(Set<TaskCcUser> taskCcUsers) {
 		this.taskCcUsers = taskCcUsers;
 	}
+	
+	
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByAssigneeUserFk")
 	public Set<Task> getTasksForAssigneeUserFk() {
@@ -313,8 +403,6 @@ public class UserDetails implements java.io.Serializable {
 		this.tasksForAssigneeUserFk = tasksForAssigneeUserFk;
 	}
 
-
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatorUserFk")
 	public Set<Task> getTasksForCreatorUserFk() {
 		return this.tasksForCreatorUserFk;
@@ -323,6 +411,5 @@ public class UserDetails implements java.io.Serializable {
 	public void setTasksForCreatorUserFk(Set<Task> tasksForCreatorUserFk) {
 		this.tasksForCreatorUserFk = tasksForCreatorUserFk;
 	}
-
 
 }

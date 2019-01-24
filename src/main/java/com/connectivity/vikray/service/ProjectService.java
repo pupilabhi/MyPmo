@@ -1,4 +1,4 @@
-/*package com.connectivity.vikray.service;
+package com.connectivity.vikray.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +37,11 @@ public class ProjectService {
 		result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
 		return result;
 	}
+
+	/*public ValidResult getAllProject() {
+		result.data = projectServiceImpl.getAllProject();
+		result.ErrorCode = (long) 101;
+		result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
+		return result;
+	}*/
 }
-*/

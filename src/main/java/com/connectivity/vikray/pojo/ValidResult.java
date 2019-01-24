@@ -1,4 +1,4 @@
-/*package com.connectivity.vikray.pojo;
+package com.connectivity.vikray.pojo;
 
 import java.io.Serializable;
 
@@ -13,4 +13,3 @@ public class ValidResult implements Serializable{
 	public Object data;
 	public Object user;
 }
-*/
