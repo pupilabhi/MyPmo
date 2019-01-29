@@ -1,6 +1,7 @@
 package com.connectivity.vikray.entity;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,11 +11,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 //New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
 @Table(name = "PHASE_FOLLOWER", catalog = "vikrayPmo")
-public class PhaseFollower {
+public class PhaseFollower implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	private long id;
 	private Phase phaseFk;
 	private UserDetails userDetailsFk;
@@ -49,6 +58,7 @@ public class PhaseFollower {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "phaseFk")
+	@JsonBackReference
 	public Phase getPhaseFk() {
 		return phaseFk;
 	}

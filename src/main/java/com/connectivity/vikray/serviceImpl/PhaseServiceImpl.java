@@ -1,4 +1,4 @@
-/*package com.connectivity.vikray.serviceImpl;
+package com.connectivity.vikray.serviceImpl;
 
 import java.util.List;
 
@@ -26,4 +26,3 @@ public class PhaseServiceImpl{
 		return phaseRepository.findAll();
 	}
 }
-*/

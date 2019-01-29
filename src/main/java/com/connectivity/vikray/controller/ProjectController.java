@@ -12,7 +12,7 @@ import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.service.ProjectService;
 
 @RestController
-@RequestMapping(value="/pmo")
+@RequestMapping(value= "/pmo")
 public class ProjectController {
 
 	@Autowired
@@ -28,4 +28,8 @@ public class ProjectController {
 		return ProjectService.createProject(project);
 	}
 	
+	@PostMapping("/updateProject")
+	public ValidResult updateProjects(@RequestBody Project project) {
+		return ProjectService.updateProject(project);
+	}
 }

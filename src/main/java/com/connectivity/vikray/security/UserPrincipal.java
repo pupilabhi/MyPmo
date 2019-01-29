@@ -42,7 +42,7 @@ public class UserPrincipal implements UserDetails {
 
     public static UserPrincipal create(com.connectivity.vikray.entity.UserDetails user) {
         List<GrantedAuthority> authorities = 
-        		user.getUserRole().stream().map(role ->
+        
                 new SimpleGrantedAuthority(role.getName().name())
         ).collect(Collectors.toList());
 

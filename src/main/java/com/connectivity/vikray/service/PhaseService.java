@@ -1,4 +1,4 @@
-/*package com.connectivity.vikray.service;
+package com.connectivity.vikray.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,14 +7,12 @@ import com.connectivity.vikray.constant.VikrayPmoMessageConstant;
 import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.serviceImpl.PhaseServiceImpl;
-import com.connectivity.vikray.serviceImpl.ProjectServiceImpl;
-
 
 @Service("PhaseService")
-public interface PhaseService {
-	
+public class PhaseService {
+
 	@Autowired
-	ProjectServiceImpl projectServiceImpl;
+	PhaseServiceImpl PhaseServiceImpl;
 	
 	@Autowired
 	ValidResult result;
@@ -31,5 +29,11 @@ public interface PhaseService {
 		}
 		return result;
 	}
+	
+	public ValidResult getAllPhase() {
+		result.data = PhaseServiceImpl.getAllPhase();
+		result.ErrorCode = (long) 101;
+		result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
+		return result;
+	}
 }
-*/

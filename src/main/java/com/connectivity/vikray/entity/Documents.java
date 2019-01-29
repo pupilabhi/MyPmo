@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 //New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
 @Table(name = "DOCUMENTS", catalog = "vikrayPmo")
@@ -66,6 +68,7 @@ public class Documents implements Serializable{
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "project_Fk")
+	@JsonBackReference
 	public Project getProjectFk() {
 		return projectFk;
 	}
@@ -76,6 +79,7 @@ public class Documents implements Serializable{
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "phaseFk")
+	@JsonBackReference(value="phase_ref")
 	public Phase getPhaseFk() {
 		return phaseFk;
 	}

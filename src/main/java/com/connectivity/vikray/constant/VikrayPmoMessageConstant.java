@@ -7,4 +7,6 @@ public abstract class VikrayPmoMessageConstant {
     
 	public static final Object LOGIN_101 = "Login Successful";
 	public static final Object LOGIN_102 = "Login Failure";
+	
+	public static final String KEY_103 = "Number of documents exceeds the limit";
 }

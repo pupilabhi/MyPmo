@@ -40,6 +40,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Phase {
 	
 	private long id;
+	private String phaseName;
 	private UserDetails createdByFk;
 	private UserDetails updatedByFk;
 	private Date dueDate;
@@ -69,13 +70,12 @@ public class Phase {
 		 this.id= id;
 	 }
 
-	
-
-	public Phase(long id, UserDetails createdByFk, UserDetails updatedByFk, Date dueDate, Project projectFk,
-			UserDetails userDetailsFk, String accountAddress, Set<Documents> documents,
+	public Phase(long id, String phaseName, UserDetails createdByFk, UserDetails updatedByFk, Date dueDate,
+			Project projectFk, UserDetails userDetailsFk, String accountAddress, Set<Documents> documents,
 			Set<PhaseFollower> phaseFollowers, Set<Task> tasks, Date createDate, Date modifyDate) {
 		super();
 		this.id = id;
+		this.phaseName = phaseName;
 		this.createdByFk = createdByFk;
 		this.updatedByFk = updatedByFk;
 		this.dueDate = dueDate;
@@ -99,6 +99,15 @@ public class Phase {
 		this.id = id;
 	}
 
+	public void setPhaseName(String phaseName) {
+		this.phaseName = phaseName;
+	}
+	
+	@Column(name="PHASE_NAME")
+	public String getPhaseName() {
+		return phaseName;
+	}
+	
 	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn(name= "CREATED_BYFK")
 	public UserDetails getCreatedByFk() {
