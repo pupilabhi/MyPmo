@@ -69,8 +69,12 @@ public class ProjectServiceImpl {
 		while (itr.hasNext()) {
 			Phase phaseTodb = new Phase();
 			phaseTodb = (Phase) itr.next();
-			phaseRepository.save(phaseTodb);
-			newPhases.add(phaseTodb);
+			if (phaseTodb.getProjectFk() != null) {
+				phaseTodb.setProjectFk(projectRepository.getOne(phaseTodb.getProjectFk().getId()));
+				phaseRepository.save(phaseTodb);
+				newPhases.add(phaseTodb);
+			}
+			
 		}
 		return newPhases;
 	}
@@ -83,8 +87,12 @@ public class ProjectServiceImpl {
 		while (itr.hasNext()) {
 			Documents docsTodb = new Documents();
 			docsTodb = (Documents) itr.next();
-			documentRepository.save(docsTodb);
-			newDocuments.add(docsTodb);
+			if (docsTodb.getProjectFk() != null) {
+				docsTodb.setProjectFk(projectRepository.getOne(docsTodb.getProjectFk().getId()));
+				documentRepository.save(docsTodb);
+				newDocuments.add(docsTodb);
+			}
+			
 		}
 		return newDocuments;
 	}
@@ -200,11 +208,6 @@ public class ProjectServiceImpl {
 
 	// getListOfProjects
 	public List<Project> getAllProject() {
-		/*List<Project> list = new ArrayList<Project>();
-		for (Project project : list) {
-			Set<Phase> p = project.getPhases();
-		}
-		*/
 		return projectRepository.findAll();
 	}
 }
