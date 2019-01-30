@@ -1,5 +1,6 @@
 package com.connectivity.vikray.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +28,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -37,8 +39,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
         value = {"createDate", "modifyon"},
         allowGetters = true
 )
-public class Phase {
+public class Phase implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String phaseName;
 	private UserDetails createdByFk;
@@ -140,6 +146,7 @@ public class Phase {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PROJECT_FK")
+	@JsonBackReference(value="project_ref")
 	public Project getProjectFk() {
 		return projectFk;
 	}

@@ -36,9 +36,7 @@ public class TaskStatus implements java.io.Serializable {
 		this.id = id;
 	}
 
-	
-
-	public TaskStatus(long id, String constByName, String label,  Set<Task> tasks) {
+	public TaskStatus(long id, String constByName, String label, Set<Task> tasks) {
 		super();
 		this.id = id;
 		this.constByName = constByName;

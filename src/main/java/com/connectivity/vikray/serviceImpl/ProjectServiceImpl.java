@@ -200,10 +200,11 @@ public class ProjectServiceImpl {
 
 	// getListOfProjects
 	public List<Project> getAllProject() {
-		List<Project> list = new ArrayList<Project>();
+		/*List<Project> list = new ArrayList<Project>();
 		for (Project project : list) {
 			Set<Phase> p = project.getPhases();
 		}
+		*/
 		return projectRepository.findAll();
 	}
 }

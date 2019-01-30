@@ -16,6 +16,10 @@ import javax.persistence.Table;
 @Table(name = "TASK_CC_USER", catalog = "vikrayPmo")
 public class TaskCcUser implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private Task task;
 	private UserDetails userDetails;
@@ -28,6 +32,7 @@ public class TaskCcUser implements java.io.Serializable {
 	}
 
 	public TaskCcUser(long id, Task task, UserDetails userDetails) {
+		super();
 		this.id = id;
 		this.task = task;
 		this.userDetails = userDetails;

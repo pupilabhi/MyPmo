@@ -16,6 +16,10 @@ import javax.persistence.Table;
 @Table(name = "TASK_COMMENT", catalog = "vikrayPmo")
 public class TaskComment implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private Task task;
 	private UserDetails userDetails;
@@ -33,6 +37,7 @@ public class TaskComment implements java.io.Serializable {
 
 	public TaskComment(long id, Task task, UserDetails userDetails, String comment, long dateTime,
 			Integer commentsIntegerIdx) {
+		super();
 		this.id = id;
 		this.task = task;
 		this.userDetails = userDetails;

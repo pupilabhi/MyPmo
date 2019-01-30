@@ -17,6 +17,10 @@ import javax.persistence.Table;
 @Table(name = "TASK_PRIORITY", catalog = "vikrayPmo")
 public class TaskPriority implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String color;
 	private String name;
@@ -30,6 +34,7 @@ public class TaskPriority implements java.io.Serializable {
 	}
 
 	public TaskPriority(long id, String color, String name, Set<Task> tasks) {
+		super();
 		this.id = id;
 		this.color = color;
 		this.name = name;

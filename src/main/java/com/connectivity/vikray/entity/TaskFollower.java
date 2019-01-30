@@ -1,5 +1,7 @@
 package com.connectivity.vikray.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,8 +16,12 @@ import javax.persistence.Table;
 //New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
 @Table(name = "TASK_FOLLOWER", catalog = "vikrayPmo")
-public class TaskFollower {
+public class TaskFollower implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private Task task;
 	private UserDetails userDetails;
@@ -26,6 +32,13 @@ public class TaskFollower {
 	
 	public TaskFollower(long id) {
 		this.id= id;
+	}
+
+	public TaskFollower(long id, Task task, UserDetails userDetails) {
+		super();
+		this.id = id;
+		this.task = task;
+		this.userDetails = userDetails;
 	}
 
 	@Id

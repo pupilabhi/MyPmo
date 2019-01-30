@@ -17,6 +17,10 @@ import javax.persistence.Table;
 @Table(name = "DOMAIN", catalog = "vikrayPmo")
 public class Domain implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String domainName;
 	private String sparkTeamId;
@@ -29,8 +33,6 @@ public class Domain implements java.io.Serializable {
 	public Domain(long id) {
 		this.id = id;
 	}
-
-	
 
 	public Domain(long id, String domainName, String sparkTeamId, Set<UserDetails> userDetailses, Set<Task> tasks) {
 		super();

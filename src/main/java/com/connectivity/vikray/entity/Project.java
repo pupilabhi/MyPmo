@@ -105,7 +105,7 @@ public class Project implements Serializable {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UPDATED_BYFK")
-	@JsonBackReference
+	@JsonBackReference(value="updatedBy_ref")
 	public UserDetails getUpdatedByFk() {
 		return updatedByFk;
 	}
@@ -188,6 +188,7 @@ public class Project implements Serializable {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "OWNER_FK")
+	@JsonBackReference(value="owner_ref")
 	public UserDetails getOwner() {
 		return owner;
 	}

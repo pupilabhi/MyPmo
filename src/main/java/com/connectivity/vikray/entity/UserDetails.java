@@ -62,13 +62,13 @@ public class UserDetails implements java.io.Serializable {
 		this.id = id;
 	}
 	
+	
 	public UserDetails(long id, Domain domain, String organisation, String orgLocation, UserDetails userDetails,
 			String dotPath, String firstName, String forgotPassGuid, String guid, String inviteGuid, String lastName,
 			String userLoginId, String password, String sessionId, String userEmail, String userPhone, long userRole,
-			boolean isInactive, long expertise, String accessToken, String accountDetails, Set<Phase> createPhases,
-			Set<Phase> updatePhases, Set<Project> createProject, Set<Project> updateProject, Set<Project> projects,
-			Set<TaskComment> taskComments, Set<TaskCcUser> taskCcUsers, Set<Task> createTask, Set<Task> updateTask,
-			Set<Task> tasksForAssigneeUserFk, Set<Task> tasksForCreatorUserFk) {
+			boolean isInactive, long expertise, String accessToken, String accountDetails,
+			Set<TaskComment> taskComments, Set<TaskCcUser> taskCcUsers, Set<Task> tasksForAssigneeUserFk,
+			Set<Task> tasksForCreatorUserFk) {
 		super();
 		this.id = id;
 		this.domain = domain;
@@ -112,7 +112,16 @@ public class UserDetails implements java.io.Serializable {
 	public String getOrgLocation() {
 		return orgLocation;
 	}
+	
+	public void setOrgLocation(String orgLocation) {
+		this.orgLocation = orgLocation;
+	}
 
+	@Column(name = "ORGANISATION")
+	public String getOrganisation() {
+		return organisation;
+	}
+	
 	public void setOrganisation(String organisation) {
 		this.organisation = organisation;
 	}
@@ -124,15 +133,6 @@ public class UserDetails implements java.io.Serializable {
 
 	public void setAccountDetails(String accountDetails) {
 		this.accountDetails = accountDetails;
-	}
-
-	@Column(name = "ORGANISATION")
-	public String getOrganisation() {
-		return organisation;
-	}
-
-	public void setOrgLocation(String orgLocation) {
-		this.orgLocation = orgLocation;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -36,9 +36,7 @@ public class PhaseFollower implements Serializable{
 		this.id= id;
 	}
 	
-	
-	
-	
+
 	public PhaseFollower(long id, Phase phaseFk, UserDetails userDetailsFk) {
 		super();
 		this.id = id;
@@ -69,12 +67,12 @@ public class PhaseFollower implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userFk")
-	public UserDetails getUserDetails() {
+	public UserDetails getUserDetailsFk() {
 		return userDetailsFk;
 	}
-	
-	public void setUserDetails(UserDetails userDetails) {
-		this.userDetailsFk = userDetails;
+
+	public void setUserDetailsFk(UserDetails userDetailsFk) {
+		this.userDetailsFk = userDetailsFk;
 	}
 	
 	

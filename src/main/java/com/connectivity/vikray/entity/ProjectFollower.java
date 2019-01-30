@@ -33,6 +33,13 @@ public class ProjectFollower implements Serializable{
 		this.id= id;
 	}
 
+	public ProjectFollower(long id, Project project, UserDetails userDetails) {
+		super();
+		this.id = id;
+		this.project = project;
+		this.userDetails = userDetails;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
@@ -45,7 +52,7 @@ public class ProjectFollower implements Serializable{
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PROJECT_FK")
-	@JsonBackReference
+	@JsonBackReference(value="project_ref")
 	public Project getProject() {
 		return project;
 	}
@@ -56,6 +63,7 @@ public class ProjectFollower implements Serializable{
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_FK")
+	@JsonBackReference(value="user_ref")
 	public UserDetails getUserDetails() {
 		return userDetails;
 	}
