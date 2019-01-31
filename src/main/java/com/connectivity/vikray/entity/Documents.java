@@ -26,22 +26,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "DOCUMENTS", catalog = "vikrayPmo")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
-public class Documents implements Serializable{
+//@EntityListeners(AuditingEntityListener.class)
+//@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
+public class Documents extends Auditable<String> implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1864896037038317087L;
+	
 	private long id;
 	private String path;
 	private Project projectFk;
 	private Phase phaseFk;
 	private Task taskFk;
 	
-	private Date createdAt;
-	private Date updatedAt;
+//	private Date createdAt;
+//	private Date updatedAt;
 	
 	public Documents() {
 		
@@ -112,7 +113,7 @@ public class Documents implements Serializable{
 		this.taskFk = taskFk;
 	}
 
-	@Column(nullable = true, updatable = false)
+/*	@Column(nullable = true, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
 	public Date getCreatedAt() {
@@ -133,7 +134,7 @@ public class Documents implements Serializable{
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+*/	
 	
 	
 }

@@ -20,19 +20,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-// New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
 @Table(name = "PHASE", catalog = "vikrayPmo")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "createDate", "modifyon" }, allowGetters = true)
-public class Phase implements Serializable {
+//@JsonIgnoreProperties(value = { "createDate", "modifyon" }, allowGetters = true)
+public class Phase extends Auditable<String> implements Serializable {
 
 	/**
 	 * 
@@ -51,15 +47,15 @@ public class Phase implements Serializable {
 	private Set<PhaseFollower> phaseFollowers = new HashSet<PhaseFollower>(0);
 	private Set<Task> tasks = new HashSet<Task>(0);
 
-	@Column(name = "create_date", nullable = false, updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	@CreatedDate
-	private Date createDate;
-
-	@Column(name = "modify_date", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	@LastModifiedDate
-	private Date modifyDate;
+//	@Column(name = "create_date", nullable = false, updatable = false)
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@CreatedDate
+//	private Date createDate;
+//
+//	@Column(name = "modify_date", nullable = false)
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@LastModifiedDate
+//	private Date modifyDate;
 
 	public Phase() {
 
@@ -84,8 +80,8 @@ public class Phase implements Serializable {
 		this.documents = documents;
 		this.phaseFollowers = phaseFollowers;
 		this.tasks = tasks;
-		this.createDate = createDate;
-		this.modifyDate = modifyDate;
+//		this.createDate = createDate;
+//		this.modifyDate = modifyDate;
 	}
 
 	@Id
@@ -204,7 +200,7 @@ public class Phase implements Serializable {
 		this.tasks = tasks;
 	}
 
-	public Date getCreateDate() {
+/*	public Date getCreateDate() {
 		return createDate;
 	}
 
@@ -219,5 +215,5 @@ public class Phase implements Serializable {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
-
+*/
 }

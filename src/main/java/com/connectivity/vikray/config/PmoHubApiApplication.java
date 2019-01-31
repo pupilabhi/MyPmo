@@ -17,17 +17,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
 
-
 @SpringBootApplication
-@EnableJpaAuditing
-@EnableConfigurationProperties({
-	//proj.pupils.pojo.FileStorageProperties.class
-})
-@EntityScan(basePackageClasses = {
-		PmoHubApiApplication.class,
-		Jsr310JpaConverters.class
-})
-//@Configuration
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class PmoHubApiApplication extends SpringBootServletInitializer{
 	
 	public static void main(String[] args) {

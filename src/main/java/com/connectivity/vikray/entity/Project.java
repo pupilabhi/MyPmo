@@ -20,19 +20,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
 @Table(name = "PROJECT", catalog = "vikrayPmo")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "createDate", "modifyDate" }, allowGetters = true)
-public class Project implements Serializable {
+//@JsonIgnoreProperties(value = { "createDate", "modifyDate" }, allowGetters = true)
+public class Project extends Auditable<String> implements Serializable {
 
 	/**
 	 * 
@@ -57,7 +53,7 @@ public class Project implements Serializable {
 	private Set<Documents> documents = new HashSet<Documents>(0);
 	// private StatusItem projectStatus;
 
-	@Column(name = "create_date", nullable = false, updatable = false)
+	/*@Column(name = "create_date", nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
 	private Date createDate;
@@ -65,7 +61,7 @@ public class Project implements Serializable {
 	@Column(name = "modify_date", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
-	private Date modifyDate;
+	private Date modifyDate;*/
 
 	public Project() {
 
@@ -92,8 +88,8 @@ public class Project implements Serializable {
 		this.projectFollowers = projectFollowers;
 		this.phases = phases;
 		this.documents = documents;
-		this.createDate = createDate;
-		this.modifyDate = modifyDate;
+//		this.createDate = createDate;
+//		this.modifyDate = modifyDate;
 	}
 
 	@OneToOne(fetch = FetchType.LAZY)
@@ -238,7 +234,7 @@ public class Project implements Serializable {
 	 * projectStatus; }
 	 */
 
-	public Date getCreateDate() {
+/*	public Date getCreateDate() {
 		return createDate;
 	}
 
@@ -253,5 +249,5 @@ public class Project implements Serializable {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
-
+*/
 }

@@ -65,8 +65,8 @@ public class ProjectServiceImpl {
 		if (projectFrmClent.getOwner() != null) {
 			toDb.setOwner(userDetailsRepository.getOne(projectFrmClent.getOwner().getId()));
 		}
-		toDb.setCreateDate(projectFrmClent.getCreateDate());
-		toDb.setModifyDate(projectFrmClent.getModifyDate());
+//		toDb.setCreateDate(projectFrmClent.getCreateDate());
+//		toDb.setModifyDate(projectFrmClent.getModifyDate());
 		projectRepository.save(toDb);
 		Set<ProjectFollower> pf = createProjectFollower(projectFrmClent,toDb);
 		Set<Phase>	ph = createPhase(projectFrmClent,toDb);
@@ -150,8 +150,8 @@ public class ProjectServiceImpl {
 			}
 		}
 		projectfromdb.setDueDate(projectFromClient.getDueDate());
-		projectfromdb.setCreateDate(projectFromClient.getCreateDate());
-		projectfromdb.setModifyDate(projectFromClient.getModifyDate());
+//		projectfromdb.setCreateDate(projectFromClient.getCreateDate());
+//		projectfromdb.setModifyDate(projectFromClient.getModifyDate());
 		projectfromdb.setAccountAddress(projectFromClient.getAccountAddress());
 		projectfromdb.setSalesOrder(projectFromClient.getSalesOrder());
 

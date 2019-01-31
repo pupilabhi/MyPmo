@@ -1,4 +1,4 @@
-/*package com.connectivity.vikray.jwt;
+package com.connectivity.vikray.jwt;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -67,4 +67,3 @@ public class JwtUtil {
 	    }
 	}
 }
-*/
