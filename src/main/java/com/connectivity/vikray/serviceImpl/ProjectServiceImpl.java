@@ -1,27 +1,18 @@
 package com.connectivity.vikray.serviceImpl;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import com.connectivity.vikray.entity.Documents;
 import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.Project;
 import com.connectivity.vikray.entity.ProjectFollower;
 import com.connectivity.vikray.entity.UserDetails;
-import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
 import com.connectivity.vikray.repository.ProjectFollwerRepository;
@@ -46,19 +37,12 @@ public class ProjectServiceImpl {
 	@Autowired
 	DocumentRepository documentRepository;
 
-	
 	// create Project
 	public Project createProject(Project projectFrmClent) {
 		Project toDb = new Project();
 //		projectRepository.save(toDb);
 		toDb.setProjectName(projectFrmClent.getProjectName());
 		toDb.setProjectDescription(projectFrmClent.getProjectDescription());
-		if (projectFrmClent.getCreatedByFk() != null) {
-			toDb.setCreatedByFk(userDetailsRepository.getOne(projectFrmClent.getCreatedByFk().getId()));
-		}
-		if (projectFrmClent.getUpdatedByFk() != null) {
-			toDb.setUpdatedByFk(userDetailsRepository.getOne(projectFrmClent.getUpdatedByFk().getId()));
-		}
 		toDb.setDueDate(projectFrmClent.getDueDate());
 		toDb.setAccountAddress(projectFrmClent.getAccountAddress());
 		toDb.setSalesOrder(projectFrmClent.getSalesOrder());
@@ -68,61 +52,62 @@ public class ProjectServiceImpl {
 //		toDb.setCreateDate(projectFrmClent.getCreateDate());
 //		toDb.setModifyDate(projectFrmClent.getModifyDate());
 		projectRepository.save(toDb);
-		Set<ProjectFollower> pf = createProjectFollower(projectFrmClent,toDb);
-		Set<Phase>	ph = createPhase(projectFrmClent,toDb);
-		Set<Documents> doc = createDocuments(projectFrmClent,toDb);
+		Set<ProjectFollower> pf = createProjectFollower(projectFrmClent, toDb);
+		Set<Phase> ph = createPhase(projectFrmClent, toDb);
+		Set<Documents> doc = createDocuments(projectFrmClent, toDb);
 		toDb.setProjectFollowers(pf);
 		toDb.setPhases(ph);
 		toDb.setDocuments(doc);
 		return toDb;
 
 	}
+
 	// create Project Follower
-		public Set<ProjectFollower> createProjectFollower(Project frmClient,Project project) {
-			Set<ProjectFollower> followerFromClient = frmClient.getProjectFollowers();
-			Set<ProjectFollower> newFollower = new HashSet<ProjectFollower>();
-			Iterator<ProjectFollower> itr = followerFromClient.iterator();
-			while (itr.hasNext()) {
-				ProjectFollower followerToDb = new ProjectFollower();
-				followerToDb = (ProjectFollower) itr.next();
-				followerToDb.setUserDetails(userDetailsRepository.getOne(followerToDb.getUserDetails().getId()));
-				followerToDb.setProject(project);
-				projectFollwerRepository.save(followerToDb);
-				newFollower.add(followerToDb);
-			}
-			return newFollower; 
+	public Set<ProjectFollower> createProjectFollower(Project frmClient, Project project) {
+		Set<ProjectFollower> followerFromClient = frmClient.getProjectFollowers();
+		Set<ProjectFollower> newFollower = new HashSet<ProjectFollower>();
+		Iterator<ProjectFollower> itr = followerFromClient.iterator();
+		while (itr.hasNext()) {
+			ProjectFollower followerToDb = new ProjectFollower();
+			followerToDb = (ProjectFollower) itr.next();
+			followerToDb.setUserDetails(userDetailsRepository.getOne(followerToDb.getUserDetails().getId()));
+			followerToDb.setProject(project);
+			projectFollwerRepository.save(followerToDb);
+			newFollower.add(followerToDb);
 		}
+		return newFollower;
+	}
 
-		// create Phasesset
-		public Set<Phase> createPhase(Project frmClient,Project project) {
-			Set<Phase> phaseFrmClient = frmClient.getPhases();
-			Set<Phase> newPhases = new HashSet<Phase>();
-			Iterator<Phase> itr = phaseFrmClient.iterator();
-			while (itr.hasNext()) {
-				Phase phaseTodb = new Phase();
-				phaseTodb = (Phase) itr.next();
-				phaseTodb.setProjectFk(project);
-				phaseRepository.save(phaseTodb);
-				newPhases.add(phaseTodb);
-			}
-			return newPhases;
+	// create Phasesset
+	public Set<Phase> createPhase(Project frmClient, Project project) {
+		Set<Phase> phaseFrmClient = frmClient.getPhases();
+		Set<Phase> newPhases = new HashSet<Phase>();
+		Iterator<Phase> itr = phaseFrmClient.iterator();
+		while (itr.hasNext()) {
+			Phase phaseTodb = new Phase();
+			phaseTodb = (Phase) itr.next();
+			phaseTodb.setProjectFk(project);
+			phaseRepository.save(phaseTodb);
+			newPhases.add(phaseTodb);
 		}
+		return newPhases;
+	}
 
-		// create Documents
-		public Set<Documents> createDocuments(Project frmClient,Project project) {
-			Set<Documents> documentsFrmClient = frmClient.getDocuments();
-			Set<Documents> newDocuments = new HashSet<Documents>();
-			Iterator<Documents> itr = documentsFrmClient.iterator();
-			while (itr.hasNext()) {
-				Documents docsTodb = new Documents();
-				docsTodb = (Documents) itr.next();
-				docsTodb.setPath(docsTodb.getPath());
-				docsTodb.setProjectFk(project);
-				documentRepository.save(docsTodb);
-				newDocuments.add(docsTodb);
-			}
-			return newDocuments;
+	// create Documents
+	public Set<Documents> createDocuments(Project frmClient, Project project) {
+		Set<Documents> documentsFrmClient = frmClient.getDocuments();
+		Set<Documents> newDocuments = new HashSet<Documents>();
+		Iterator<Documents> itr = documentsFrmClient.iterator();
+		while (itr.hasNext()) {
+			Documents docsTodb = new Documents();
+			docsTodb = (Documents) itr.next();
+			docsTodb.setPath(docsTodb.getPath());
+			docsTodb.setProjectFk(project);
+			documentRepository.save(docsTodb);
+			newDocuments.add(docsTodb);
 		}
+		return newDocuments;
+	}
 
 	// update Project
 	public Project updateProject(Project projectFromClient) {
@@ -132,23 +117,6 @@ public class ProjectServiceImpl {
 		}
 		projectfromdb.setProjectName(projectFromClient.getProjectName());
 		projectfromdb.setProjectDescription(projectFromClient.getProjectDescription());
-		if (projectFromClient.getOwner() != null) {
-			if (projectFromClient.getOwner().getId() == 0) {
-				projectfromdb.setCreatedByFk(projectFromClient.getCreatedByFk());
-			} else {
-				UserDetails details = userDetailsRepository.getOne(projectFromClient.getOwner().getId());
-				details.setUserDetails(projectFromClient.getOwner());
-			}
-		}
-
-		if (projectFromClient.getOwner() != null) {
-			if (projectFromClient.getOwner().getId() == 0) {
-				projectfromdb.setUpdatedByFk(projectFromClient.getUpdatedByFk());
-			} else {
-				UserDetails details = userDetailsRepository.getOne(projectFromClient.getOwner().getId());
-				details.setUserDetails(projectFromClient.getOwner());
-			}
-		}
 		projectfromdb.setDueDate(projectFromClient.getDueDate());
 //		projectfromdb.setCreateDate(projectFromClient.getCreateDate());
 //		projectfromdb.setModifyDate(projectFromClient.getModifyDate());
@@ -209,9 +177,9 @@ public class ProjectServiceImpl {
 	public List<Project> getAllProject() {
 		return projectRepository.findAll();
 	}
-	
+
 	// getListOfAllUsersList
-		public List<UserDetails> getAllUsersList() {
-			return userDetailsRepository.findAll();
-		}
+	public List<UserDetails> getAllUsersList() {
+		return userDetailsRepository.findAll();
+	}
 }

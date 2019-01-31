@@ -1,14 +1,13 @@
 package com.connectivity.vikray.entity;
-// Generated 27 Dec, 2018 3:06:26 PM by Hibernate Tools 5.2.11.Final
+
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 

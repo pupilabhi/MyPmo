@@ -27,7 +27,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "PROJECT", catalog = "vikrayPmo")
 @EntityListeners(AuditingEntityListener.class)
-//@JsonIgnoreProperties(value = { "createDate", "modifyDate" }, allowGetters = true)
 public class Project extends Auditable<String> implements Serializable {
 
 	/**
@@ -38,8 +37,6 @@ public class Project extends Auditable<String> implements Serializable {
 	private long id;
 	private String projectName;
 	private String projectDescription;
-	private UserDetails createdByFk;
-	private UserDetails updatedByFk;
 	private Date dueDate;
 	/*
 	 * private AccountAddress accountAddressFk; private SalesOrderHeader
@@ -71,16 +68,12 @@ public class Project extends Auditable<String> implements Serializable {
 		this.id = id;
 	}
 
-	public Project(long id, String projectName, String projectDescription, UserDetails createdByFk,
-			UserDetails updatedByFk, Date dueDate, String accountAddress, String salesOrder, UserDetails owner,
-			Set<ProjectFollower> projectFollowers, Set<Phase> phases, Set<Documents> documents, Date createDate,
-			Date modifyDate) {
+	public Project(long id, String projectName, String projectDescription, Date dueDate, String accountAddress, String salesOrder, UserDetails owner,
+			Set<ProjectFollower> projectFollowers, Set<Phase> phases, Set<Documents> documents) {
 		super();
 		this.id = id;
 		this.projectName = projectName;
 		this.projectDescription = projectDescription;
-		this.createdByFk = createdByFk;
-		this.updatedByFk = updatedByFk;
 		this.dueDate = dueDate;
 		this.accountAddress = accountAddress;
 		this.salesOrder = salesOrder;
@@ -88,32 +81,9 @@ public class Project extends Auditable<String> implements Serializable {
 		this.projectFollowers = projectFollowers;
 		this.phases = phases;
 		this.documents = documents;
-//		this.createDate = createDate;
-//		this.modifyDate = modifyDate;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CREATED_BYFK")
-	@JsonBackReference(value = "createdBy_ref")
-	public UserDetails getCreatedByFk() {
-		return createdByFk;
-	}
-
-	public void setCreatedByFk(UserDetails createdByFk) {
-		this.createdByFk = createdByFk;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "UPDATED_BYFK")
-	@JsonBackReference(value="updatedBy_ref")
-	public UserDetails getUpdatedByFk() {
-		return updatedByFk;
-	}
-
-	public void setUpdatedByFk(UserDetails updatedByFk) {
-		this.updatedByFk = updatedByFk;
-	}
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
@@ -168,16 +138,6 @@ public class Project extends Auditable<String> implements Serializable {
 		this.accountAddress = accountAddress;
 	}
 
-	/*
-	 * @ManyToOne(fetch = FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name = "SALES_ORDER_FK") public SalesOrderHeader
-	 * getSalesOrderHeaderFk() { return salesOrderHeaderFk; }
-	 * 
-	 * public void setSalesOrderHeaderFk(SalesOrderHeader salesOrderHeaderFk) {
-	 * this.salesOrderHeaderFk = salesOrderHeaderFk; }
-	 */
-
 	public String getSalesOrder() {
 		return salesOrder;
 	}
@@ -223,31 +183,4 @@ public class Project extends Auditable<String> implements Serializable {
 	public void setDocuments(Set<Documents> documents) {
 		this.documents = documents;
 	}
-
-	/*
-	 * @OneToOne(fetch=FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name = "project_status") public StatusItem getProjectStatus() {
-	 * return projectStatus; }
-	 * 
-	 * public void setProjectStatus(StatusItem projectStatus) { this.projectStatus =
-	 * projectStatus; }
-	 */
-
-/*	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public Date getModifyDate() {
-		return modifyDate;
-	}
-
-	public void setModifyDate(Date modifyDate) {
-		this.modifyDate = modifyDate;
-	}
-*/
 }

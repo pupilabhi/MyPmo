@@ -27,7 +27,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "PHASE", catalog = "vikrayPmo")
 @EntityListeners(AuditingEntityListener.class)
-//@JsonIgnoreProperties(value = { "createDate", "modifyon" }, allowGetters = true)
 public class Phase extends Auditable<String> implements Serializable {
 
 	/**
@@ -36,26 +35,12 @@ public class Phase extends Auditable<String> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private long id;
 	private String phaseName;
-	private UserDetails createdByFk;
-	private UserDetails updatedByFk;
 	private Date dueDate;
 	private Project projectFk;
-	private UserDetails userDetailsFk;
-	// private AccountAddress accountAddressFk;
 	private String accountAddress;
 	private Set<Documents> documents = new HashSet<Documents>(0);
 	private Set<PhaseFollower> phaseFollowers = new HashSet<PhaseFollower>(0);
 	private Set<Task> tasks = new HashSet<Task>(0);
-
-//	@Column(name = "create_date", nullable = false, updatable = false)
-//	@Temporal(TemporalType.TIMESTAMP)
-//	@CreatedDate
-//	private Date createDate;
-//
-//	@Column(name = "modify_date", nullable = false)
-//	@Temporal(TemporalType.TIMESTAMP)
-//	@LastModifiedDate
-//	private Date modifyDate;
 
 	public Phase() {
 
@@ -65,23 +50,18 @@ public class Phase extends Auditable<String> implements Serializable {
 		this.id = id;
 	}
 
-	public Phase(long id, String phaseName, UserDetails createdByFk, UserDetails updatedByFk, Date dueDate,
-			Project projectFk, UserDetails userDetailsFk, String accountAddress, Set<Documents> documents,
-			Set<PhaseFollower> phaseFollowers, Set<Task> tasks, Date createDate, Date modifyDate) {
+	public Phase(long id, String phaseName, Date dueDate,
+			Project projectFk, String accountAddress, Set<Documents> documents,
+			Set<PhaseFollower> phaseFollowers, Set<Task> tasks) {
 		super();
 		this.id = id;
 		this.phaseName = phaseName;
-		this.createdByFk = createdByFk;
-		this.updatedByFk = updatedByFk;
 		this.dueDate = dueDate;
 		this.projectFk = projectFk;
-		this.userDetailsFk = userDetailsFk;
 		this.accountAddress = accountAddress;
 		this.documents = documents;
 		this.phaseFollowers = phaseFollowers;
 		this.tasks = tasks;
-//		this.createDate = createDate;
-//		this.modifyDate = modifyDate;
 	}
 
 	@Id
@@ -103,25 +83,6 @@ public class Phase extends Auditable<String> implements Serializable {
 		return phaseName;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CREATED_BYFK")
-	public UserDetails getCreatedByFk() {
-		return createdByFk;
-	}
-
-	public void setCreatedByFk(UserDetails createdByFk) {
-		this.createdByFk = createdByFk;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "UPDATED_BYFK")
-	public UserDetails getUpdatedByFk() {
-		return updatedByFk;
-	}
-
-	public void setUpdatedByFk(UserDetails updatedByFk) {
-		this.updatedByFk = updatedByFk;
-	}
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DUE_DATE", length = 19)
@@ -143,26 +104,6 @@ public class Phase extends Auditable<String> implements Serializable {
 	public void setProjectFk(Project projectFk) {
 		this.projectFk = projectFk;
 	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_DETAILS_FK")
-	public UserDetails getUserDetailsFk() {
-		return userDetailsFk;
-	}
-
-	public void setUserDetailsFk(UserDetails userDetailsFk) {
-		this.userDetailsFk = userDetailsFk;
-	}
-
-	/*
-	 * @ManyToOne(fetch = FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name = "ACCOUNT_ADDRESS_FK") public AccountAddress
-	 * getAccountAddressFk() { return accountAddressFk; }
-	 * 
-	 * public void setAccountAddressFk(AccountAddress accountAddressFk) {
-	 * this.accountAddressFk = accountAddressFk; }
-	 */
 
 	@Column(name = "ACCOUNT_ADDRESS")
 	public String getAccountAddress() {
@@ -200,20 +141,4 @@ public class Phase extends Auditable<String> implements Serializable {
 		this.tasks = tasks;
 	}
 
-/*	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public Date getModifyDate() {
-		return modifyDate;
-	}
-
-	public void setModifyDate(Date modifyDate) {
-		this.modifyDate = modifyDate;
-	}
-*/
 }

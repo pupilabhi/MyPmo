@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
  */
 @Entity
 @Table(name = "USER_DETAILS", catalog = "vikrayPmo")
-public class UserDetails implements java.io.Serializable {
+public class UserDetails extends Auditable<String> implements java.io.Serializable {
 
 	/**
 	 * 
