@@ -23,6 +23,11 @@ public class ProjectController {
 		return ProjectService.getAllProject();
 	}
 	
+	@GetMapping("/getAllUsersList")
+	public ValidResult getAllUserList() {
+		return ProjectService.getAllUserList();
+	}
+	
 	@PostMapping("/creatProject")
 	public ValidResult createProjects(@RequestBody Project project) {
 		return ProjectService.createProject(project);

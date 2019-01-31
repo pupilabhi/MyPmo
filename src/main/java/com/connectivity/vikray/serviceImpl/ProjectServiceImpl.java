@@ -209,4 +209,9 @@ public class ProjectServiceImpl {
 	public List<Project> getAllProject() {
 		return projectRepository.findAll();
 	}
+	
+	// getListOfAllUsersList
+		public List<UserDetails> getAllUsersList() {
+			return userDetailsRepository.findAll();
+		}
 }

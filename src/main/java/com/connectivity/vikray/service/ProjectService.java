@@ -50,4 +50,11 @@ public class ProjectService {
 		result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
 		return result;
 	}
+	
+	public ValidResult getAllUserList() {
+		result.data= projectServiceImpl.getAllUsersList();
+		result.ErrorCode = (long) 101;
+		result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
+		return result;
+	}
 }
