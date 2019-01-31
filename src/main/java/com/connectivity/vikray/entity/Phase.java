@@ -5,8 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -17,13 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -31,16 +27,13 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 // New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
 @Table(name = "PHASE", catalog = "vikrayPmo")
-@JsonIgnoreProperties(
-        value = {"createDate", "modifyon"},
-        allowGetters = true
-)
-public class Phase implements Serializable{
-	
+@EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = { "createDate", "modifyon" }, allowGetters = true)
+public class Phase implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -52,29 +45,29 @@ public class Phase implements Serializable{
 	private Date dueDate;
 	private Project projectFk;
 	private UserDetails userDetailsFk;
-	//private AccountAddress accountAddressFk;
+	// private AccountAddress accountAddressFk;
 	private String accountAddress;
-	private Set<Documents> documents= new HashSet<Documents>(0);
-	private Set<PhaseFollower> phaseFollowers= new HashSet<PhaseFollower>(0);
-	private Set<Task> tasks= new HashSet<Task>(0);
-	
-	@Column(name = "create_date", nullable = false, updatable = false) 
+	private Set<Documents> documents = new HashSet<Documents>(0);
+	private Set<PhaseFollower> phaseFollowers = new HashSet<PhaseFollower>(0);
+	private Set<Task> tasks = new HashSet<Task>(0);
+
+	@Column(name = "create_date", nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
 	private Date createDate;
-	
+
 	@Column(name = "modify_date", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date modifyDate;
 
-	 public Phase() {
-	 
-	 }
-	 
-	 public Phase(long id) {
-		 this.id= id;
-	 }
+	public Phase() {
+
+	}
+
+	public Phase(long id) {
+		this.id = id;
+	}
 
 	public Phase(long id, String phaseName, UserDetails createdByFk, UserDetails updatedByFk, Date dueDate,
 			Project projectFk, UserDetails userDetailsFk, String accountAddress, Set<Documents> documents,
@@ -108,14 +101,14 @@ public class Phase implements Serializable{
 	public void setPhaseName(String phaseName) {
 		this.phaseName = phaseName;
 	}
-	
-	@Column(name="PHASE_NAME")
+
+	@Column(name = "PHASE_NAME")
 	public String getPhaseName() {
 		return phaseName;
 	}
-	
-	@ManyToOne(fetch= FetchType.LAZY)
-	@JoinColumn(name= "CREATED_BYFK")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CREATED_BYFK")
 	public UserDetails getCreatedByFk() {
 		return createdByFk;
 	}
@@ -124,8 +117,8 @@ public class Phase implements Serializable{
 		this.createdByFk = createdByFk;
 	}
 
-	@ManyToOne(fetch= FetchType.LAZY)
-	@JoinColumn(name= "UPDATED_BYFK")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "UPDATED_BYFK")
 	public UserDetails getUpdatedByFk() {
 		return updatedByFk;
 	}
@@ -144,9 +137,9 @@ public class Phase implements Serializable{
 		this.dueDate = dueDate;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT_FK")
-	@JsonBackReference(value="project_ref")
+	@JsonBackReference(value = "project_ref")
 	public Project getProjectFk() {
 		return projectFk;
 	}
@@ -154,7 +147,7 @@ public class Phase implements Serializable{
 	public void setProjectFk(Project projectFk) {
 		this.projectFk = projectFk;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_DETAILS_FK")
 	public UserDetails getUserDetailsFk() {
@@ -165,26 +158,25 @@ public class Phase implements Serializable{
 		this.userDetailsFk = userDetailsFk;
 	}
 
-/*	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ACCOUNT_ADDRESS_FK")
-	public AccountAddress getAccountAddressFk() {
-		return accountAddressFk;
-	}
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "ACCOUNT_ADDRESS_FK") public AccountAddress
+	 * getAccountAddressFk() { return accountAddressFk; }
+	 * 
+	 * public void setAccountAddressFk(AccountAddress accountAddressFk) {
+	 * this.accountAddressFk = accountAddressFk; }
+	 */
 
-	public void setAccountAddressFk(AccountAddress accountAddressFk) {
-		this.accountAddressFk = accountAddressFk;
-	}*/
-	
-	
-	@Column(name="ACCOUNT_ADDRESS")
+	@Column(name = "ACCOUNT_ADDRESS")
 	public String getAccountAddress() {
 		return accountAddress;
 	}
-	
+
 	public void setAccountAddress(String accountAddress) {
 		this.accountAddress = accountAddress;
 	}
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "phaseFk")
 	public Set<Documents> getDocuments() {
 		return documents;
@@ -203,12 +195,11 @@ public class Phase implements Serializable{
 		this.phaseFollowers = phaseFollowers;
 	}
 
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "phaseFk")
 	public Set<Task> getTasks() {
 		return tasks;
 	}
-	
+
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
 	}
@@ -228,5 +219,5 @@ public class Phase implements Serializable{
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
-	
+
 }

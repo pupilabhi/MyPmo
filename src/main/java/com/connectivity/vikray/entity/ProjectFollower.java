@@ -2,6 +2,7 @@ package com.connectivity.vikray.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -50,7 +51,7 @@ public class ProjectFollower implements Serializable{
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT_FK")
 	@JsonBackReference(value="project_ref")
 	public Project getProject() {

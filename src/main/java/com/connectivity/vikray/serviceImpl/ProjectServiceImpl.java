@@ -46,60 +46,11 @@ public class ProjectServiceImpl {
 	@Autowired
 	DocumentRepository documentRepository;
 
-	// create Project Follower
-	public Set<ProjectFollower> createProjectFollower(Project project) {
-		Set<ProjectFollower> followerFromClient = project.getProjectFollowers();
-		Set<ProjectFollower> newFollower = new HashSet<ProjectFollower>();
-		Iterator<ProjectFollower> itr = followerFromClient.iterator();
-		while (itr.hasNext()) {
-			ProjectFollower followerToDb = new ProjectFollower();
-			followerToDb = (ProjectFollower) itr.next();
-			followerToDb.setUserDetails(userDetailsRepository.getOne(followerToDb.getUserDetails().getId()));
-			projectFollwerRepository.save(followerToDb);
-			newFollower.add(followerToDb);
-		}
-		return newFollower;
-	}
-
-	// create Phases
-	public Set<Phase> createPhase(Project project) {
-		Set<Phase> phaseFrmClient = project.getPhases();
-		Set<Phase> newPhases = new HashSet<Phase>();
-		Iterator<Phase> itr = phaseFrmClient.iterator();
-		while (itr.hasNext()) {
-			Phase phaseTodb = new Phase();
-			phaseTodb = (Phase) itr.next();
-			if (phaseTodb.getProjectFk() != null) {
-				phaseTodb.setProjectFk(projectRepository.getOne(phaseTodb.getProjectFk().getId()));
-				phaseRepository.save(phaseTodb);
-				newPhases.add(phaseTodb);
-			}
-			
-		}
-		return newPhases;
-	}
-
-	// create Documents
-	public Set<Documents> createDocuments(Project project) {
-		Set<Documents> documentsFrmClient = project.getDocuments();
-		Set<Documents> newDocuments = new HashSet<Documents>();
-		Iterator<Documents> itr = documentsFrmClient.iterator();
-		while (itr.hasNext()) {
-			Documents docsTodb = new Documents();
-			docsTodb = (Documents) itr.next();
-			if (docsTodb.getProjectFk() != null) {
-				docsTodb.setProjectFk(projectRepository.getOne(docsTodb.getProjectFk().getId()));
-				documentRepository.save(docsTodb);
-				newDocuments.add(docsTodb);
-			}
-			
-		}
-		return newDocuments;
-	}
-
+	
 	// create Project
 	public Project createProject(Project projectFrmClent) {
 		Project toDb = new Project();
+//		projectRepository.save(toDb);
 		toDb.setProjectName(projectFrmClent.getProjectName());
 		toDb.setProjectDescription(projectFrmClent.getProjectDescription());
 		if (projectFrmClent.getCreatedByFk() != null) {
@@ -114,16 +65,64 @@ public class ProjectServiceImpl {
 		if (projectFrmClent.getOwner() != null) {
 			toDb.setOwner(userDetailsRepository.getOne(projectFrmClent.getOwner().getId()));
 		}
-		toDb.setProjectFollowers(createProjectFollower(projectFrmClent));
-		toDb.setPhases(createPhase(projectFrmClent));
-		toDb.setDocuments(createDocuments(projectFrmClent));
 		toDb.setCreateDate(projectFrmClent.getCreateDate());
 		toDb.setModifyDate(projectFrmClent.getModifyDate());
-
-		Project pr = projectRepository.save(toDb);
-		return pr;
+		projectRepository.save(toDb);
+		Set<ProjectFollower> pf = createProjectFollower(projectFrmClent,toDb);
+		Set<Phase>	ph = createPhase(projectFrmClent,toDb);
+		Set<Documents> doc = createDocuments(projectFrmClent,toDb);
+		toDb.setProjectFollowers(pf);
+		toDb.setPhases(ph);
+		toDb.setDocuments(doc);
+		return toDb;
 
 	}
+	// create Project Follower
+		public Set<ProjectFollower> createProjectFollower(Project frmClient,Project project) {
+			Set<ProjectFollower> followerFromClient = frmClient.getProjectFollowers();
+			Set<ProjectFollower> newFollower = new HashSet<ProjectFollower>();
+			Iterator<ProjectFollower> itr = followerFromClient.iterator();
+			while (itr.hasNext()) {
+				ProjectFollower followerToDb = new ProjectFollower();
+				followerToDb = (ProjectFollower) itr.next();
+				followerToDb.setUserDetails(userDetailsRepository.getOne(followerToDb.getUserDetails().getId()));
+				followerToDb.setProject(project);
+				projectFollwerRepository.save(followerToDb);
+				newFollower.add(followerToDb);
+			}
+			return newFollower; 
+		}
+
+		// create Phasesset
+		public Set<Phase> createPhase(Project frmClient,Project project) {
+			Set<Phase> phaseFrmClient = frmClient.getPhases();
+			Set<Phase> newPhases = new HashSet<Phase>();
+			Iterator<Phase> itr = phaseFrmClient.iterator();
+			while (itr.hasNext()) {
+				Phase phaseTodb = new Phase();
+				phaseTodb = (Phase) itr.next();
+				phaseTodb.setProjectFk(project);
+				phaseRepository.save(phaseTodb);
+				newPhases.add(phaseTodb);
+			}
+			return newPhases;
+		}
+
+		// create Documents
+		public Set<Documents> createDocuments(Project frmClient,Project project) {
+			Set<Documents> documentsFrmClient = frmClient.getDocuments();
+			Set<Documents> newDocuments = new HashSet<Documents>();
+			Iterator<Documents> itr = documentsFrmClient.iterator();
+			while (itr.hasNext()) {
+				Documents docsTodb = new Documents();
+				docsTodb = (Documents) itr.next();
+				docsTodb.setPath(docsTodb.getPath());
+				docsTodb.setProjectFk(project);
+				documentRepository.save(docsTodb);
+				newDocuments.add(docsTodb);
+			}
+			return newDocuments;
+		}
 
 	// update Project
 	public Project updateProject(Project projectFromClient) {

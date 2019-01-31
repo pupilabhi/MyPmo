@@ -1,9 +1,12 @@
 	package com.connectivity.vikray.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,12 +14,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
 @Table(name = "DOCUMENTS", catalog = "vikrayPmo")
+@EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
 public class Documents implements Serializable{
 	
 	/**
@@ -28,6 +39,9 @@ public class Documents implements Serializable{
 	private Project projectFk;
 	private Phase phaseFk;
 	private Task taskFk;
+	
+	private Date createdAt;
+	private Date updatedAt;
 	
 	public Documents() {
 		
@@ -97,5 +111,29 @@ public class Documents implements Serializable{
 	public void setTaskFk(Task taskFk) {
 		this.taskFk = taskFk;
 	}
+
+	@Column(nullable = true, updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreatedDate
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	@Column(nullable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	@LastModifiedDate
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	
+	
 	
 }

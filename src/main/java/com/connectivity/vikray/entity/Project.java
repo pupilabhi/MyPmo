@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +22,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,6 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 //New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
 @Table(name = "PROJECT", catalog = "vikrayPmo")
+@EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = { "createDate", "modifyDate" }, allowGetters = true)
 public class Project implements Serializable {
 
@@ -197,7 +201,7 @@ public class Project implements Serializable {
 		this.owner = owner;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project",cascade = CascadeType.ALL)
 	public Set<ProjectFollower> getProjectFollowers() {
 		return projectFollowers;
 	}
@@ -206,7 +210,7 @@ public class Project implements Serializable {
 		this.projectFollowers = projectFollowers;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectFk")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectFk",cascade = CascadeType.ALL)
 	public Set<Phase> getPhases() {
 		return phases;
 	}
@@ -215,7 +219,7 @@ public class Project implements Serializable {
 		this.phases = phases;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectFk")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectFk",cascade = CascadeType.ALL)
 	public Set<Documents> getDocuments() {
 		return documents;
 	}

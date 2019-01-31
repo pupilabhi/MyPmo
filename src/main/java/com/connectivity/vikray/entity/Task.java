@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,10 +29,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @Entity
 @Table(name = "TASK", catalog = "vikrayPmo")
-@JsonIgnoreProperties(
-        value = {"createDate", "modifyDate"},
-        allowGetters = true
-)
+@EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = { "createDate", "modifyDate" }, allowGetters = true)
 public class Task implements java.io.Serializable {
 
 	/**
@@ -38,10 +38,10 @@ public class Task implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private long id;	
+	private long id;
 	private String comments;
 	private String replies;
-	//private BusinessDeal businessDeal;
+	// private BusinessDeal businessDeal;
 	private String buisnessDeal;
 	private Domain domain;
 	private TaskPriority taskPriority;
@@ -61,22 +61,22 @@ public class Task implements java.io.Serializable {
 	private Phase phaseFk;
 	private String description;
 	private String instruction;
-	//private AccountAddress accountAddressFk;
+	// private AccountAddress accountAddressFk;
 	private String accountAddress;
 	private Set<Documents> documents = new HashSet<Documents>(0);
 	private Set<TaskComment> taskComments = new HashSet<TaskComment>(0);
 	private Set<TaskCcUser> taskCcUsers = new HashSet<TaskCcUser>(0);
 
-	@Column(name = "create_date", nullable = false, updatable = false) 
+	@Column(name = "create_date", nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
 	private Date createDate;
-	
+
 	@Column(name = "modify_date", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date modifyDate;
-	
+
 	public Task() {
 	}
 
@@ -145,24 +145,24 @@ public class Task implements java.io.Serializable {
 		return instruction;
 	}
 
-/*	public void setAccountAddressFk(AccountAddress accountAddressFk) {
-		this.accountAddressFk = accountAddressFk;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ADDRESS_FK")
-	public AccountAddress getAccountAddressFk() {
-		return accountAddressFk;
-	}*/
+	/*
+	 * public void setAccountAddressFk(AccountAddress accountAddressFk) {
+	 * this.accountAddressFk = accountAddressFk; }
+	 * 
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "ADDRESS_FK") public AccountAddress getAccountAddressFk()
+	 * { return accountAddressFk; }
+	 */
 
 	public String getAccountAddress() {
 		return accountAddress;
 	}
-	
+
 	public void setAccountAddress(String accountAddress) {
 		this.accountAddress = accountAddress;
 	}
-	
+
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
@@ -179,25 +179,24 @@ public class Task implements java.io.Serializable {
 		return replies;
 	}
 
-	/*@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DEAL_FK")
-	public BusinessDeal getBusinessDeal() {
-		return this.businessDeal;
-	}
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "DEAL_FK") public BusinessDeal getBusinessDeal() { return
+	 * this.businessDeal; }
+	 * 
+	 * public void setBusinessDeal(BusinessDeal businessDeal) { this.businessDeal =
+	 * businessDeal; }
+	 */
 
-	public void setBusinessDeal(BusinessDeal businessDeal) {
-		this.businessDeal = businessDeal;
-	}
-*/
-	
 	public void setBuisnessDeal(String buisnessDeal) {
 		this.buisnessDeal = buisnessDeal;
 	}
-	
+
 	public String getBuisnessDeal() {
 		return buisnessDeal;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DOMAIN_FK")
 	public Domain getDomain() {
@@ -248,8 +247,8 @@ public class Task implements java.io.Serializable {
 		this.userDetailsByCreatorUserFk = userDetailsByCreatorUserFk;
 	}
 
-	@ManyToOne(fetch= FetchType.LAZY)
-	@JoinColumn(name= "CREATED_BYFK")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CREATED_BYFK")
 	public UserDetails getCreatedBy() {
 		return createdBy;
 	}
@@ -258,8 +257,8 @@ public class Task implements java.io.Serializable {
 		this.createdBy = createdBy;
 	}
 
-	@ManyToOne(fetch= FetchType.LAZY)
-	@JoinColumn(name= "UPDATED_BYFK")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "UPDATED_BYFK")
 	public UserDetails getUpdatedBy() {
 		return updatedBy;
 	}
@@ -367,7 +366,7 @@ public class Task implements java.io.Serializable {
 	public void setDocuments(Set<Documents> documents) {
 		this.documents = documents;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Phase_FK")
 	public Phase getPhaseFk() {

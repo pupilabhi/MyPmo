@@ -3,6 +3,7 @@ package com.connectivity.vikray.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,11 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 //New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
 @Table(name = "PHASE_FOLLOWER", catalog = "vikrayPmo")
+@EntityListeners(AuditingEntityListener.class)
 public class PhaseFollower implements Serializable{
 
 	/**
