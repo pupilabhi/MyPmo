@@ -19,6 +19,7 @@ public class PhaseController {
 	@Autowired
 	PhaseService phaseService;
 	
+	@GetMapping("/getAllPhases")
 	public ValidResult getAllPhases() {
 		return phaseService.getAllPhase();
 	}
@@ -28,4 +29,8 @@ public class PhaseController {
 		return phaseService.createPhase(phase);
 	}
 
+	@PostMapping("/updatePhase")
+	public ValidResult updatePhase(@RequestBody Phase phase) {
+		return phaseService.updatePhase(phase);
+	}
 }
