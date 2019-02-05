@@ -118,19 +118,8 @@ public class ProjectServiceImpl {
 		projectfromdb.setProjectName(projectFromClient.getProjectName());
 		projectfromdb.setProjectDescription(projectFromClient.getProjectDescription());
 		projectfromdb.setDueDate(projectFromClient.getDueDate());
-//		projectfromdb.setCreateDate(projectFromClient.getCreateDate());
-//		projectfromdb.setModifyDate(projectFromClient.getModifyDate());
 		projectfromdb.setAccountAddress(projectFromClient.getAccountAddress());
 		projectfromdb.setSalesOrder(projectFromClient.getSalesOrder());
-
-		if (projectFromClient.getOwner() != null) {
-			if (projectFromClient.getOwner().getId() == 0) {
-				projectFromClient.setOwner(projectFromClient.getOwner());
-			} else {
-				UserDetails details = userDetailsRepository.getOne(projectFromClient.getOwner().getId());
-				details.setUserDetails(projectFromClient.getOwner());
-			}
-		}
 
 		// update ProjectFollower
 		for (ProjectFollower follower : projectFromClient.getProjectFollowers()) {

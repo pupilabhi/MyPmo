@@ -30,10 +30,7 @@ public class UserDetails extends Auditable<String> implements java.io.Serializab
 	
 	private long id;
 	private Domain domain;
-	private String organisation;
-	// private OrgLocation orgLocation;
-	private String orgLocation;
-	private UserDetails userDetails;
+	private UserDetails managerFk;
 	private String dotPath;
 	private String firstName;
 	private String forgotPassGuid;
@@ -49,8 +46,7 @@ public class UserDetails extends Auditable<String> implements java.io.Serializab
 	private boolean isInactive;
 	private long expertise;
 	private String accessToken;
-	// private Set<AccountDetail> accountDetails = new HashSet<AccountDetail>(0);
-	private String accountDetails;
+	
 
 	private Set<TaskComment> taskComments = new HashSet<TaskComment>(0);
 	private Set<TaskCcUser> taskCcUsers = new HashSet<TaskCcUser>(0);
@@ -74,9 +70,7 @@ public class UserDetails extends Auditable<String> implements java.io.Serializab
 		super();
 		this.id = id;
 		this.domain = domain;
-		this.organisation = organisation;
-		this.orgLocation = orgLocation;
-		this.userDetails = userDetails;
+		this.managerFk = managerFk;
 		this.dotPath = dotPath;
 		this.firstName = firstName;
 		this.forgotPassGuid = forgotPassGuid;
@@ -92,7 +86,6 @@ public class UserDetails extends Auditable<String> implements java.io.Serializab
 		this.isInactive = isInactive;
 		this.expertise = expertise;
 		this.accessToken = accessToken;
-		this.accountDetails = accountDetails;
 		this.taskComments = taskComments;
 		this.taskCcUsers = taskCcUsers;
 		this.tasksForAssigneeUserFk = tasksForAssigneeUserFk;
@@ -109,33 +102,6 @@ public class UserDetails extends Auditable<String> implements java.io.Serializab
 		this.id = id;
 	}
 	
-    
-	@Column(name = "ORG_LOCATION")
-	public String getOrgLocation() {
-		return orgLocation;
-	}
-	
-	public void setOrgLocation(String orgLocation) {
-		this.orgLocation = orgLocation;
-	}
-
-	@Column(name = "ORGANISATION")
-	public String getOrganisation() {
-		return organisation;
-	}
-	
-	public void setOrganisation(String organisation) {
-		this.organisation = organisation;
-	}
-
-	@Column(name = "ACCOUNT_DETAILS")
-	public String getAccountDetails() {
-		return accountDetails;
-	}
-
-	public void setAccountDetails(String accountDetails) {
-		this.accountDetails = accountDetails;
-	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DOMAIN_FK")
@@ -150,12 +116,12 @@ public class UserDetails extends Auditable<String> implements java.io.Serializab
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MANAGER_FK")
 	@JsonBackReference(value="details_ref")
-	public UserDetails getUserDetails() {
-		return this.userDetails;
+	public UserDetails getManagerFk() {
+		return managerFk;
 	}
 
-	public void setUserDetails(UserDetails userDetails) {
-		this.userDetails = userDetails;
+	public void setManagerFk(UserDetails managerFk) {
+		this.managerFk = managerFk;
 	}
 
 	@Column(name = "DOT_PATH")
