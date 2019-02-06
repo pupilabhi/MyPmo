@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "PROJECT", catalog = "vikrayPmo")
 @EntityListeners(AuditingEntityListener.class)
-public class Project extends Auditable<String> implements Serializable {
+public class Project extends Auditable<Long> implements Serializable {
 
 	/**
 	 * 

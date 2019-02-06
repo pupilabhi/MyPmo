@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "DOCUMENTS", catalog = "vikrayPmo")
 @EntityListeners(AuditingEntityListener.class)
-public class Documents extends Auditable<String> implements Serializable{
+public class Documents extends Auditable<Long> implements Serializable{
 	
 	/**
 	 * 
