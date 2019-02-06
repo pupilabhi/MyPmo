@@ -12,7 +12,7 @@ import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.service.ProjectService;
 
 @RestController
-@RequestMapping(value= "/pmo")
+@RequestMapping(value= "/pmo/project")
 public class ProjectController {
 
 	@Autowired

@@ -1,10 +1,8 @@
-/*package com.connectivity.vikray.exception;
+package com.connectivity.vikray.exception;
 
 public class MyFileNotFoundException extends RuntimeException{
 
-	*//**
-	 * 
-	 *//*
+	
 	private static final long serialVersionUID = 1L;
 	
 	public MyFileNotFoundException(String message) {
@@ -16,4 +14,3 @@ public class MyFileNotFoundException extends RuntimeException{
     }
 
 }
-*/

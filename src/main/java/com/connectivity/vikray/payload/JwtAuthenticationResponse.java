@@ -1,4 +1,4 @@
-/*package com.connectivity.vikray.pojo;
+package com.connectivity.vikray.payload;
 
 
 public class JwtAuthenticationResponse {
@@ -25,4 +25,3 @@ public class JwtAuthenticationResponse {
         this.tokenType = tokenType;
     }
 }
-*/

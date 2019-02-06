@@ -13,7 +13,7 @@ import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.service.PhaseService;
 
 @RestController
-@RequestMapping(value= "/phase")
+@RequestMapping(value= "/pmo/phase")
 public class PhaseController {
 
 	@Autowired

@@ -6,12 +6,17 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -20,7 +25,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
  */
 @Entity
 @Table(name = "USER_DETAILS", catalog = "vikrayPmo")
-public class UserDetails extends Auditable<String> implements java.io.Serializable {
+@EntityListeners(AuditingEntityListener.class)
+public class UserDetails extends Auditable<Long> implements java.io.Serializable {
 
 	/**
 	 * 
@@ -52,6 +58,9 @@ public class UserDetails extends Auditable<String> implements java.io.Serializab
 	private Set<TaskCcUser> taskCcUsers = new HashSet<TaskCcUser>(0);
 	private Set<Task> tasksForAssigneeUserFk = new HashSet<Task>(0);
 	private Set<Task> tasksForCreatorUserFk = new HashSet<Task>(0);
+	
+	
+    private Set<Role> roles = new HashSet<>();
 
 	public UserDetails() {
 	}
@@ -61,7 +70,14 @@ public class UserDetails extends Auditable<String> implements java.io.Serializab
 	}
 	
 	
-	public UserDetails(long id, Domain domain, String organisation, String orgLocation, UserDetails userDetails,
+	public UserDetails(String firstName, String userLoginId, String userEmail, String password) {
+		this.firstName = firstName;
+        this.userLoginId = userLoginId;
+        this.userEmail = userEmail;
+        this.password = password;
+	}
+
+	/*public UserDetails(long id, Domain domain, String organisation, String orgLocation, UserDetails userDetails,
 			String dotPath, String firstName, String forgotPassGuid, String guid, String inviteGuid, String lastName,
 			String userLoginId, String password, String sessionId, String userEmail, String userPhone, long userRole,
 			boolean isInactive, long expertise, String accessToken, String accountDetails,
@@ -91,7 +107,7 @@ public class UserDetails extends Auditable<String> implements java.io.Serializab
 		this.tasksForAssigneeUserFk = tasksForAssigneeUserFk;
 		this.tasksForCreatorUserFk = tasksForCreatorUserFk;
 	}
-
+*/
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	public long getId() {
@@ -299,4 +315,17 @@ public class UserDetails extends Auditable<String> implements java.io.Serializab
 		this.tasksForCreatorUserFk = tasksForCreatorUserFk;
 	}
 
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	
 }
