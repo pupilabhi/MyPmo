@@ -3,6 +3,7 @@ package com.connectivity.vikray.controller;
 
 import java.net.URI;
 import java.util.Collections;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -28,6 +29,7 @@ import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.payload.JwtAuthenticationResponse;
 import com.connectivity.vikray.payload.SignUpRequest;
 import com.connectivity.vikray.pojo.RoleName;
+import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.repository.RoleRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
 
@@ -50,9 +52,12 @@ public class AuthController {
 
     @Autowired
     JwtTokenProvider tokenProvider;
+    
+    @Autowired
+    ValidResult result;
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody UserDetails loginRequest) {
+    public ValidResult authenticateUser(@Valid @RequestBody UserDetails loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -64,7 +69,14 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+        Optional<UserDetails> mem = userRepository.findByUserLoginId(loginRequest.getUserLoginId());
+		result.data = ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+		UserDetails m = mem.get();
+		if(m!=null) {
+			UserDetails user = userRepository.getOne(m.getId());
+			result.user = user;
+		}
+        return result;
     }
 
     @PostMapping("/signup")

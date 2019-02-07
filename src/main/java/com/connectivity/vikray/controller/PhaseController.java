@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.connectivity.vikray.entity.Phase;
-import com.connectivity.vikray.entity.Project;
 import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.service.PhaseService;
 
