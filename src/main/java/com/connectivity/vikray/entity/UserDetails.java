@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -109,7 +111,7 @@ public class UserDetails extends Auditable<Long> implements java.io.Serializable
 	}
 */
 	@Id
-	@Column(name = "ID", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
 		return this.id;
 	}
