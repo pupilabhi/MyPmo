@@ -1,6 +1,11 @@
 package com.connectivity.vikray.controller;
 
 
+import java.net.URI;
+import java.util.Collections;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,15 +26,10 @@ import com.connectivity.vikray.exception.AppException;
 import com.connectivity.vikray.jwt.JwtTokenProvider;
 import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.payload.JwtAuthenticationResponse;
-import com.connectivity.vikray.payload.LoginRequest;
 import com.connectivity.vikray.payload.SignUpRequest;
 import com.connectivity.vikray.pojo.RoleName;
 import com.connectivity.vikray.repository.RoleRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
-
-import javax.validation.Valid;
-import java.net.URI;
-import java.util.Collections;
 
 
 @RestController
