@@ -147,6 +147,7 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DOMAIN_FK")
+	@JsonBackReference(value="domain_ref")
 	public Domain getDomain() {
 		return this.domain;
 	}
@@ -157,6 +158,7 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TASK_PRIORITY_FK")
+	@JsonBackReference(value="priority_ref")
 	public TaskPriority getTaskPriority() {
 		return this.taskPriority;
 	}
@@ -167,6 +169,7 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TASK_STATUS_FK")
+	@JsonBackReference(value="status_ref")
 	public TaskStatus getTaskStatus() {
 		return this.taskStatus;
 	}
