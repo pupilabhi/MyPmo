@@ -12,7 +12,7 @@ import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.service.TaskService;
 
 @RestController
-@RequestMapping(value="/task")
+@RequestMapping(value="/pmo/task")
 public class TaskController {
 
 	@Autowired

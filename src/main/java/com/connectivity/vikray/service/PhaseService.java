@@ -1,5 +1,8 @@
 package com.connectivity.vikray.service;
 
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +21,7 @@ public class PhaseService {
 	ValidResult result;
 	
 	public ValidResult createPhase(Phase phase) {
-		Object cp= PhaseServiceImpl.createPhase(phase);
+			Phase cp= PhaseServiceImpl.createPhase(phase);
 		if (cp != null) {
 			result.ErrorCode = (long) 101;
 			result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;

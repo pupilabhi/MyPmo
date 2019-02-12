@@ -50,15 +50,19 @@ public class Project extends Auditable<Long> implements Serializable {
 	private Set<Documents> documents = new HashSet<Documents>(0);
 	// private StatusItem projectStatus;
 
-	/*@Column(name = "create_date", nullable = false, updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	@CreatedDate
-	private Date createDate;
-
-	@Column(name = "modify_date", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	@LastModifiedDate
-	private Date modifyDate;*/
+	/*
+	 * @Column(name = "create_date", nullable = false, updatable = false)
+	 * 
+	 * @Temporal(TemporalType.TIMESTAMP)
+	 * 
+	 * @CreatedDate private Date createDate;
+	 * 
+	 * @Column(name = "modify_date", nullable = false)
+	 * 
+	 * @Temporal(TemporalType.TIMESTAMP)
+	 * 
+	 * @LastModifiedDate private Date modifyDate;
+	 */
 
 	public Project() {
 
@@ -68,8 +72,9 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.id = id;
 	}
 
-	public Project(long id, String projectName, String projectDescription, Date dueDate, String accountAddress, String salesOrder, UserDetails owner,
-			Set<ProjectFollower> projectFollowers, Set<Phase> phases, Set<Documents> documents) {
+	public Project(long id, String projectName, String projectDescription, Date dueDate, String accountAddress,
+			String salesOrder, UserDetails owner, Set<ProjectFollower> projectFollowers, Set<Phase> phases,
+			Set<Documents> documents) {
 		super();
 		this.id = id;
 		this.projectName = projectName;
@@ -83,7 +88,6 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.documents = documents;
 	}
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
@@ -146,9 +150,9 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.salesOrder = salesOrder;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "OWNER_FK")
-	@JsonBackReference(value="owner_ref")
+	@JsonBackReference(value = "owner_ref")
 	public UserDetails getOwner() {
 		return owner;
 	}
@@ -157,7 +161,7 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.owner = owner;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.ALL)
 	public Set<ProjectFollower> getProjectFollowers() {
 		return projectFollowers;
 	}
@@ -166,7 +170,7 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.projectFollowers = projectFollowers;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectFk",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectFk", cascade = CascadeType.ALL)
 	public Set<Phase> getPhases() {
 		return phases;
 	}
@@ -175,7 +179,7 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.phases = phases;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectFk",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectFk", cascade = CascadeType.ALL)
 	public Set<Documents> getDocuments() {
 		return documents;
 	}

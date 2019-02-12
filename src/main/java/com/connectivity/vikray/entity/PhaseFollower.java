@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "PHASE_FOLLOWER", catalog = "vikrayPmo")
 @EntityListeners(AuditingEntityListener.class)
-public class PhaseFollower implements Serializable{
+public class PhaseFollower extends Auditable<String> implements Serializable{
 
 	/**
 	 * 
@@ -60,7 +60,7 @@ public class PhaseFollower implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "phaseFk")
-	@JsonBackReference
+	@JsonBackReference(value="p_ref")
 	public Phase getPhaseFk() {
 		return phaseFk;
 	}

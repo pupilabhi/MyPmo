@@ -91,6 +91,7 @@ public class TaskServiceImpl {
 		tdob.setInstruction(taskfrmclint.getInstruction());
 		tdob.setAccountAddress(taskfrmclint.getAccountAddress());
 
+		taskRepository.save(tdob);
 		Set<Documents> docs = createDocument(taskfrmclint, tdob);
 		tdob.setDocuments(docs);
 		Set<TaskComment> tcomments = createTaskComments(taskfrmclint, tdob);

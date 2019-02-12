@@ -5,12 +5,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.connectivity.vikray.entity.Documents;
 import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.PhaseFollower;
+import com.connectivity.vikray.entity.Project;
+import com.connectivity.vikray.entity.ProjectFollower;
 import com.connectivity.vikray.entity.Task;
 import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.repository.DocumentRepository;
@@ -43,6 +47,7 @@ public class PhaseServiceImpl {
 	TaskRepository taskRepository;
 
 	// Create Phases
+	@Transactional
 	public Phase createPhase(Phase phaseFrmClent) {
 		Phase todb = new Phase();
 		todb.setPhaseName(phaseFrmClent.getPhaseName());
@@ -51,14 +56,14 @@ public class PhaseServiceImpl {
 			todb.setProjectFk(projectRepository.getOne(phaseFrmClent.getProjectFk().getId()));
 		}
 		todb.setAccountAddress(phaseFrmClent.getAccountAddress());
-		phaseRepository.save(todb);
-
+		
 		Set<Documents> docs = createDocuments(phaseFrmClent, todb);
-		Set<PhaseFollower> pf = createPhaseFollower(phaseFrmClent, todb);
-		Set<Task> tk = createTask(phaseFrmClent, todb);
 		todb.setDocuments(docs);
+		/*Set<PhaseFollower> pf = createPhaseFollower(phaseFrmClent, todb);
 		todb.setPhaseFollowers(pf);
-		todb.setTasks(tk);
+		Set<Task> tk = createTask(phaseFrmClent, todb);
+		todb.setTasks(tk);*/
+		phaseRepository.save(todb);
 		return todb;
 	}
 
@@ -71,14 +76,28 @@ public class PhaseServiceImpl {
 			Documents docsTodb = new Documents();
 			docsTodb = itr.next();
 			docsTodb.setPath(docsTodb.getPath());
-			docsTodb.setPhaseFk(docsTodb.getPhaseFk());
+			docsTodb.setPhaseFk(phase);
 			documentRepository.save(docsTodb);
 			documents.add(docsTodb);
 		}
 		return documents;
-
 	}
+	
 
+	/*public Set<Task> createTask(Phase phasefrmClent, Phase phase){
+		Set<Task> taskfrmClient= phasefrmClent.getTasks();
+		Set<Task> newTask= new HashSet<Task>();
+		Iterator<Task> itr= taskfrmClient.iterator();
+		while (itr.hasNext()) {
+			Task tasktodb= new Task();
+			tasktodb= (Task)itr.next();
+			tasktodb.setPhaseFk(phase);
+			taskRepository.save(tasktodb);
+			newTask.add(tasktodb);
+		}
+		return newTask;
+		
+	}
 	// Create PhaseFollower
 	public Set<PhaseFollower> createPhaseFollower(Phase phaseFrmClent, Phase phase) {
 		Set<PhaseFollower> phasefrmClent = phaseFrmClent.getPhaseFollowers();
@@ -86,34 +105,18 @@ public class PhaseServiceImpl {
 		Iterator<PhaseFollower> itr = phasefrmClent.iterator();
 		while (itr.hasNext()) {
 			PhaseFollower ptodb = new PhaseFollower();
-			ptodb = itr.next();
+			ptodb = (PhaseFollower) itr.next();
 			ptodb.setUserDetailsFk(userDetailsRepository.getOne(ptodb.getUserDetailsFk().getId()));
 			ptodb.setPhaseFk(phase);
 			phaseFollowerRepository.save(ptodb);
 			newPhases.add(ptodb);
 		}
 		return newPhases;
-
 	}
-
-	// Task Set
-	public Set<Task> createTask(Phase phaseFrmClent, Phase phase) {
-		Set<Task> taskfrmClient = phaseFrmClent.getTasks();
-		Set<Task> newTask = new HashSet<Task>();
-		Iterator<Task> itr = taskfrmClient.iterator();
-		while (itr.hasNext()) {
-			Task ttodb = new Task();
-			ttodb = itr.next();
-			ttodb.setPhaseFk(phase);
-			taskRepository.save(ttodb);
-			newTask.add(ttodb);
-		}
-		return newTask;
-
-	}
-
+*/
+	
 	// Update Phases
-	public Object updatePhase(Phase phasefrmclient) {
+	public Phase updatePhase(Phase phasefrmclient) {
 		Phase phasefrmdb = phaseRepository.getOne(phasefrmclient.getId());
 		if (phasefrmdb == null) {
 			return null;

@@ -51,13 +51,14 @@ public class ProjectServiceImpl {
 		}
 //		toDb.setCreateDate(projectFrmClent.getCreateDate());
 //		toDb.setModifyDate(projectFrmClent.getModifyDate());
-		projectRepository.save(toDb);
+		//projectRepository.save(toDb);
 		Set<ProjectFollower> pf = createProjectFollower(projectFrmClent, toDb);
 		Set<Phase> ph = createPhase(projectFrmClent, toDb);
 		Set<Documents> doc = createDocuments(projectFrmClent, toDb);
 		toDb.setProjectFollowers(pf);
 		toDb.setPhases(ph);
 		toDb.setDocuments(doc);
+		projectRepository.save(toDb);
 		return toDb;
 
 	}
@@ -171,4 +172,5 @@ public class ProjectServiceImpl {
 	public List<UserDetails> getAllUsersList() {
 		return userDetailsRepository.findAll();
 	}
+
 }
