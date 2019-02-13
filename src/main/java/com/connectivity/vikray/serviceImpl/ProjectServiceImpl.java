@@ -1,5 +1,6 @@
 package com.connectivity.vikray.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +14,8 @@ import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.Project;
 import com.connectivity.vikray.entity.ProjectFollower;
 import com.connectivity.vikray.entity.UserDetails;
+import com.connectivity.vikray.pojo.ProjectSummary;
+import com.connectivity.vikray.pojo.UserDetailsSummary;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
 import com.connectivity.vikray.repository.ProjectFollwerRepository;
@@ -48,10 +51,15 @@ public class ProjectServiceImpl {
 		toDb.setSalesOrder(projectFrmClent.getSalesOrder());
 		if (projectFrmClent.getOwner() != null) {
 			toDb.setOwner(userDetailsRepository.getOne(projectFrmClent.getOwner().getId()));
+			/*
+			 * UserDetails userDetails= projectFrmClent.getOwner(); UserDetailsSummary
+			 * summary= new UserDetailsSummary(userDetails);
+			 * toDb.setOwner(userDetailsRepository.getOne(summary.getId()));
+			 */
 		}
 //		toDb.setCreateDate(projectFrmClent.getCreateDate());
 //		toDb.setModifyDate(projectFrmClent.getModifyDate());
-		//projectRepository.save(toDb);
+		// projectRepository.save(toDb);
 		Set<ProjectFollower> pf = createProjectFollower(projectFrmClent, toDb);
 		Set<Phase> ph = createPhase(projectFrmClent, toDb);
 		Set<Documents> doc = createDocuments(projectFrmClent, toDb);
@@ -164,13 +172,30 @@ public class ProjectServiceImpl {
 	}
 
 	// getListOfProjects
-	public List<Project> getAllProject() {
-		return projectRepository.findAll();
+	public List<ProjectSummary> getAllProject() {
+		List<Project> projects = null;
+		projects = projectRepository.findAll();
+		List<ProjectSummary> summary = null;
+		summary = new ArrayList<ProjectSummary>();
+		Iterator<Project> itr = projects.iterator();
+		while (itr.hasNext()) {
+			Project project = itr.next();
+			ProjectSummary ps = new ProjectSummary(project);
+			
+			summary.add(ps);
+		}
+		return summary;
+		
 	}
 
 	// getListOfAllUsersList
 	public List<UserDetails> getAllUsersList() {
 		return userDetailsRepository.findAll();
+	}
+
+	//get project  by ID
+	public Object getProjectById(Long id) {
+		return projectRepository.getOne(id);
 	}
 
 }

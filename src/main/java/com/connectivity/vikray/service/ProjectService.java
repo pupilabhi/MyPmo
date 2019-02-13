@@ -21,12 +21,12 @@ public class ProjectService {
 	public ValidResult createProject(Project project) {
 		Project cp = projectServiceImpl.createProject(project);
 		if (cp != null) {
-			result.ErrorCode = (long) 101;
-			result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
-			result.data = cp;
+			result.setErrorCode((long) 101);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(cp);
 		} else {
-			result.ErrorCode = (long) 102;
-			result.ErrorMsg = VikrayPmoMessageConstant.KEY_102;
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
 		}
 		return result;
 	}
@@ -34,27 +34,38 @@ public class ProjectService {
 	public ValidResult updateProject(Project project) {
 		Object rt = projectServiceImpl.updateProject(project);
 		if (rt != null) {
-			result.ErrorCode = (long) 101;
-			result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
-			result.data = rt;
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(rt);
 		} else {
-			result.ErrorCode = (long) 102;
-			result.ErrorMsg = VikrayPmoMessageConstant.KEY_102;
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
 		}
 		return result;
 	}
 
 	public ValidResult getAllProject() {
-		result.data = projectServiceImpl.getAllProject();
-		result.ErrorCode = (long) 101;
-		result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
+		result.setData(projectServiceImpl.getAllProject());
+		result.setErrorCode((long) 101);
+		result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
 		return result;
 	}
 
 	public ValidResult getAllUserList() {
-		result.data = projectServiceImpl.getAllUsersList();
-		result.ErrorCode = (long) 101;
-		result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
+		result.setData(projectServiceImpl.getAllUsersList());
+		result.setErrorCode((long) 101);
+		result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+		return result;
+	}
+
+	public ValidResult getProjectById(Long id) {
+		Object rt = projectServiceImpl.getProjectById(id);
+		if (rt != null) {
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(rt);
+		} else {
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
+		}
 		return result;
 	}
 }
