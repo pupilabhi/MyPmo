@@ -1,4 +1,4 @@
-package com.connectivity.vikray.pojo;
+package com.connectivity.vikray.summary;
 
 import com.connectivity.vikray.entity.UserDetails;
 
