@@ -1,4 +1,4 @@
-package com.connectivity.vikray.pojo;
+package com.connectivity.vikray.summary;
 
 import java.util.Date;
 
@@ -11,13 +11,16 @@ public class ProjectSummary {
 	private String projectDescription;
 	private Date dueDate;
 	private String owner;
-	
+
 	public ProjectSummary(Project project) {
 		this.setId(project.getId());
 		this.setProjectName(project.getProjectName());
 		this.setProjectDescription(project.getProjectDescription());
 		this.setDueDate(project.getDueDate());
-		this.setOwner(project.getOwner().getFirstName()+" "+project.getOwner().getLastName());
+		if (project.getOwner().getLastName() == null)
+			this.setOwner(project.getOwner().getFirstName());
+			this.setOwner(project.getOwner().getFirstName() + " " + project.getOwner().getLastName());
+
 	}
 
 	public long getId() {
@@ -59,6 +62,5 @@ public class ProjectSummary {
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
-	
-	
+
 }
