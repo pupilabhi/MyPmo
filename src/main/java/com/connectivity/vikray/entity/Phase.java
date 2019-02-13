@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,7 +42,8 @@ public class Phase extends Auditable<Long> implements Serializable {
 	private Set<Documents> documents = new HashSet<Documents>(0);
 	private Set<PhaseFollower> phaseFollowers = new HashSet<PhaseFollower>(0);
 	private Set<Task> tasks = new HashSet<Task>(0);
-
+	private StatusItem phaseStatus;
+	
 	public Phase() {
 
 	}
@@ -140,5 +142,15 @@ public class Phase extends Auditable<Long> implements Serializable {
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
 	}
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name = "phase_status")
+	public StatusItem getPhaseStatus() {
+		return phaseStatus;
+	}
 
+	public void setPhaseStatus(StatusItem phaseStatus) {
+		this.phaseStatus = phaseStatus;
+	}
+
+	
 }

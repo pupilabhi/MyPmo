@@ -9,6 +9,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.connectivity.vikray.constant.VikrayPmoConstant;
 import com.connectivity.vikray.entity.Documents;
 import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.Project;
@@ -18,6 +19,7 @@ import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
 import com.connectivity.vikray.repository.ProjectFollwerRepository;
 import com.connectivity.vikray.repository.ProjectRepository;
+import com.connectivity.vikray.repository.StatusRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
 import com.connectivity.vikray.summary.ProjectSummary;
 
@@ -38,6 +40,9 @@ public class ProjectServiceImpl {
 
 	@Autowired
 	DocumentRepository documentRepository;
+	
+	@Autowired
+	StatusRepository statusRepo;
 
 	// create Project
 	public Project createProject(Project projectFrmClent) {
@@ -47,6 +52,7 @@ public class ProjectServiceImpl {
 		toDb.setDueDate(projectFrmClent.getDueDate());
 		toDb.setAccountAddress(projectFrmClent.getAccountAddress());
 		toDb.setSalesOrder(projectFrmClent.getSalesOrder());
+		toDb.setProjectStatus(statusRepo.getOne(VikrayPmoConstant.PROJ_NEW));
 		if (projectFrmClent.getOwner() != null) {
 			toDb.setOwner(userDetailsRepository.getOne(projectFrmClent.getOwner().getId()));
 		}
@@ -86,6 +92,7 @@ public class ProjectServiceImpl {
 			Phase phaseTodb = new Phase();
 			phaseTodb = (Phase) itr.next();
 			phaseTodb.setProjectFk(project);
+			phaseTodb.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PROJ_NEW));
 			phaseRepository.save(phaseTodb);
 			newPhases.add(phaseTodb);
 		}
