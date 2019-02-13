@@ -102,6 +102,7 @@ public class ProjectServiceImpl {
 			docsTodb = (Documents) itr.next();
 			docsTodb.setPath(docsTodb.getPath());
 			docsTodb.setProjectFk(project);
+			docsTodb.setDocType(docsTodb.getDocType());
 			documentRepository.save(docsTodb);
 			newDocuments.add(docsTodb);
 		}

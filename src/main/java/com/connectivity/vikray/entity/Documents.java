@@ -3,6 +3,7 @@
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -32,6 +33,7 @@ public class Documents extends Auditable<Long> implements Serializable{
 	private Project projectFk;
 	private Phase phaseFk;
 	private Task taskFk;
+	private String docType;
 	
 	
 	public Documents() {
@@ -103,6 +105,16 @@ public class Documents extends Auditable<Long> implements Serializable{
 		this.taskFk = taskFk;
 	}
 
+	@Column(name = "doc_type")
+	public String getDocType() {
+		return docType;
+	}
+
+	public void setDocType(String docType) {
+		this.docType = docType;
+	}
+
+	
 	
 	
 }
