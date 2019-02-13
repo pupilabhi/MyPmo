@@ -1,7 +1,5 @@
-/*package com.connectivity.vikray.service;
+package com.connectivity.vikray.service;
 
-
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,34 +21,33 @@ public class PhaseService {
 	public ValidResult createPhase(Phase phase) {
 			Phase cp= PhaseServiceImpl.createPhase(phase);
 		if (cp != null) {
-			result.ErrorCode = (long) 101;
-			result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
-			result.data = cp;
+			result.setErrorCode((long) 101);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(cp);
 		} else {
-			result.ErrorCode = (long) 102;
-			result.ErrorMsg = VikrayPmoMessageConstant.KEY_102;
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
 		}
 		return result;
 	}
 	
 	public ValidResult getAllPhase() {
-		result.data = PhaseServiceImpl.getAllPhase();
-		result.ErrorCode = (long) 101;
-		result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
+		result.setData(PhaseServiceImpl.getAllPhase());
+		result.setErrorCode((long) 101);
+		result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
 		return result;
 	}
 
 	public ValidResult updatePhase(Phase phase) {
 		Object rt= PhaseServiceImpl.updatePhase(phase);
 		if (rt != null) {
-			result.ErrorCode= (long) 101;
-			result.ErrorMsg= VikrayPmoMessageConstant.KEY_101;
-			result.data= rt;
+			result.setErrorCode((long) 101);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(rt);
 		}else {
-			result.ErrorCode= (long) 102;
-			result.ErrorMsg= VikrayPmoMessageConstant.KEY_102;
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
 		}
 		return result;
 	}
 }
-*/

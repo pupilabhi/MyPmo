@@ -1,10 +1,9 @@
-/*package com.connectivity.vikray.service;
+package com.connectivity.vikray.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.connectivity.vikray.constant.VikrayPmoMessageConstant;
-import com.connectivity.vikray.entity.Project;
 import com.connectivity.vikray.entity.Task;
 import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.serviceImpl.TaskServiceImpl;
@@ -19,21 +18,21 @@ public class TaskService {
 	ValidResult result;
 
 	public ValidResult getAllTask() {
-		result.data = taskServiceImpl.getAllTask();
-		result.ErrorCode = (long) 101;
-		result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
+		result.setData(taskServiceImpl.getAllTask());
+		result.setErrorCode((long) 101);
+		result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
 		return result;
 	}
 
 	public ValidResult createTask(Task task) {
 		Task ct = taskServiceImpl.createTask(task);
 		if (ct != null) {
-			result.ErrorCode = (long) 101;
-			result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
-			result.data = ct;
+			result.setErrorCode((long) 101);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(ct);
 		} else {
-			result.ErrorCode = (long) 102;
-			result.ErrorMsg = VikrayPmoMessageConstant.KEY_102;
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
 		}
 		return result;
 	}
@@ -41,15 +40,14 @@ public class TaskService {
 	public ValidResult updateTask(Task task) {
 		Object rt = taskServiceImpl.updateTask(task);
 		if (rt != null) {
-			result.ErrorCode = (long) 101;
-			result.ErrorMsg = VikrayPmoMessageConstant.KEY_101;
-			result.data = rt;
+			result.setErrorCode((long) 101);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(rt);
 		} else {
-			result.ErrorCode = (long) 102;
-			result.ErrorMsg = VikrayPmoMessageConstant.KEY_102;
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
 		}
 		return result;
 	}
 
 }
-*/

@@ -15,7 +15,6 @@ import com.connectivity.vikray.entity.Project;
 import com.connectivity.vikray.entity.ProjectFollower;
 import com.connectivity.vikray.entity.UserDetails;
 import com.connectivity.vikray.pojo.ProjectSummary;
-import com.connectivity.vikray.pojo.UserDetailsSummary;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
 import com.connectivity.vikray.repository.ProjectFollwerRepository;
@@ -50,11 +49,6 @@ public class ProjectServiceImpl {
 		toDb.setSalesOrder(projectFrmClent.getSalesOrder());
 		if (projectFrmClent.getOwner() != null) {
 			toDb.setOwner(userDetailsRepository.getOne(projectFrmClent.getOwner().getId()));
-			/*
-			 * UserDetails userDetails= projectFrmClent.getOwner(); UserDetailsSummary
-			 * summary= new UserDetailsSummary(userDetails);
-			 * toDb.setOwner(userDetailsRepository.getOne(summary.getId()));
-			 */
 		}
 		projectRepository.save(toDb);
 		Set<ProjectFollower> pf = createProjectFollower(projectFrmClent, toDb);
@@ -155,8 +149,6 @@ public class ProjectServiceImpl {
 				documentRepository.save(documents);
 			} else {
 				Documents docFrmDb = documentRepository.getOne(documents.getId());
-				// docFrmDb.setDocu(projectFromClient.getDocuments());
-
 			}
 		}
 		Project updatedProject = projectRepository.save(projectfromdb);
