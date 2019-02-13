@@ -70,11 +70,11 @@ public class AuthController {
 
         String jwt = tokenProvider.generateToken(authentication);
         Optional<UserDetails> mem = userRepository.findByUserLoginId(loginRequest.getUserLoginId());
-		result.data = ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+		result.setData(ResponseEntity.ok(new JwtAuthenticationResponse(jwt)));
 		UserDetails m = mem.get();
 		if(m!=null) {
 			UserDetails user = userRepository.getOne(m.getId());
-			result.user = user;
+			result.setUser(user);
 		}
         return result;
     }

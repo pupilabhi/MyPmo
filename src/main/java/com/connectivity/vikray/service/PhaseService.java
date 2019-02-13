@@ -1,4 +1,4 @@
-package com.connectivity.vikray.service;
+/*package com.connectivity.vikray.service;
 
 
 import javax.transaction.Transactional;
@@ -53,3 +53,4 @@ public class PhaseService {
 		return result;
 	}
 }
+*/
