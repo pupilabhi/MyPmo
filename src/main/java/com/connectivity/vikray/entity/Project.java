@@ -38,10 +38,6 @@ public class Project extends Auditable<Long> implements Serializable {
 	private String projectName;
 	private String projectDescription;
 	private Date dueDate;
-	/*
-	 * private AccountAddress accountAddressFk; private SalesOrderHeader
-	 * salesOrderHeaderFk;
-	 */
 	private String accountAddress;
 	private String salesOrder;
 	private UserDetails owner;
@@ -49,20 +45,6 @@ public class Project extends Auditable<Long> implements Serializable {
 	private Set<Phase> phases = new HashSet<Phase>(0);
 	private Set<Documents> documents = new HashSet<Documents>(0);
 	// private StatusItem projectStatus;
-
-	/*
-	 * @Column(name = "create_date", nullable = false, updatable = false)
-	 * 
-	 * @Temporal(TemporalType.TIMESTAMP)
-	 * 
-	 * @CreatedDate private Date createDate;
-	 * 
-	 * @Column(name = "modify_date", nullable = false)
-	 * 
-	 * @Temporal(TemporalType.TIMESTAMP)
-	 * 
-	 * @LastModifiedDate private Date modifyDate;
-	 */
 
 	public Project() {
 
@@ -124,15 +106,6 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.dueDate = dueDate;
 	}
 
-	/*
-	 * @ManyToOne(fetch = FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name = "ACCOUNT_ADDRESS_FK") public AccountAddress
-	 * getAccountAddressFk() { return accountAddressFk; }
-	 * 
-	 * public void setAccountAddressFk(AccountAddress accountAddressFk) {
-	 * this.accountAddressFk = accountAddressFk; }
-	 */
 
 	public String getAccountAddress() {
 		return accountAddress;
@@ -152,7 +125,7 @@ public class Project extends Auditable<Long> implements Serializable {
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "OWNER_FK")
-	@JsonBackReference(value = "owner_ref")
+//	@JsonBackReference(value = "owner_ref")
 	public UserDetails getOwner() {
 		return owner;
 	}

@@ -43,7 +43,6 @@ public class ProjectServiceImpl {
 	// create Project
 	public Project createProject(Project projectFrmClent) {
 		Project toDb = new Project();
-//		projectRepository.save(toDb);
 		toDb.setProjectName(projectFrmClent.getProjectName());
 		toDb.setProjectDescription(projectFrmClent.getProjectDescription());
 		toDb.setDueDate(projectFrmClent.getDueDate());
@@ -57,16 +56,13 @@ public class ProjectServiceImpl {
 			 * toDb.setOwner(userDetailsRepository.getOne(summary.getId()));
 			 */
 		}
-//		toDb.setCreateDate(projectFrmClent.getCreateDate());
-//		toDb.setModifyDate(projectFrmClent.getModifyDate());
-		// projectRepository.save(toDb);
+		projectRepository.save(toDb);
 		Set<ProjectFollower> pf = createProjectFollower(projectFrmClent, toDb);
 		Set<Phase> ph = createPhase(projectFrmClent, toDb);
 		Set<Documents> doc = createDocuments(projectFrmClent, toDb);
 		toDb.setProjectFollowers(pf);
 		toDb.setPhases(ph);
 		toDb.setDocuments(doc);
-		projectRepository.save(toDb);
 		return toDb;
 
 	}
@@ -87,7 +83,7 @@ public class ProjectServiceImpl {
 		return newFollower;
 	}
 
-	// create Phasesset
+	// create Phaseset
 	public Set<Phase> createPhase(Project frmClient, Project project) {
 		Set<Phase> phaseFrmClient = frmClient.getPhases();
 		Set<Phase> newPhases = new HashSet<Phase>();
