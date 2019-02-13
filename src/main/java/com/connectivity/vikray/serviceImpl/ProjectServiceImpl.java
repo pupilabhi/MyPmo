@@ -14,12 +14,12 @@ import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.Project;
 import com.connectivity.vikray.entity.ProjectFollower;
 import com.connectivity.vikray.entity.UserDetails;
-import com.connectivity.vikray.pojo.ProjectSummary;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
 import com.connectivity.vikray.repository.ProjectFollwerRepository;
 import com.connectivity.vikray.repository.ProjectRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
+import com.connectivity.vikray.summary.ProjectSummary;
 
 @Repository
 public class ProjectServiceImpl {
