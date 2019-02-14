@@ -29,9 +29,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @EntityListeners(AuditingEntityListener.class)
 public class Project extends Auditable<Long> implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5189170718926722438L;
 
 	private long id;
@@ -123,7 +120,7 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.salesOrder = salesOrder;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "OWNER_FK")
 	public UserDetails getOwner() {
 		return owner;

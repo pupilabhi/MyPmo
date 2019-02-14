@@ -59,10 +59,10 @@ public class PhaseServiceImpl {
 		
 		Set<Documents> docs = createDocuments(phaseFrmClent, todb);
 		todb.setDocuments(docs);
-		/*Set<PhaseFollower> pf = createPhaseFollower(phaseFrmClent, todb);
+		Set<PhaseFollower> pf = createPhaseFollower(phaseFrmClent, todb);
 		todb.setPhaseFollowers(pf);
 		Set<Task> tk = createTask(phaseFrmClent, todb);
-		todb.setTasks(tk);*/
+		todb.setTasks(tk);
 		phaseRepository.save(todb);
 		return todb;
 	}
@@ -84,7 +84,7 @@ public class PhaseServiceImpl {
 	}
 	
 
-	/*public Set<Task> createTask(Phase phasefrmClent, Phase phase){
+	public Set<Task> createTask(Phase phasefrmClent, Phase phase){
 		Set<Task> taskfrmClient= phasefrmClent.getTasks();
 		Set<Task> newTask= new HashSet<Task>();
 		Iterator<Task> itr= taskfrmClient.iterator();
@@ -113,7 +113,7 @@ public class PhaseServiceImpl {
 		}
 		return newPhases;
 	}
-*/
+
 	
 	// Update Phases
 	public Phase updatePhase(Phase phasefrmclient) {

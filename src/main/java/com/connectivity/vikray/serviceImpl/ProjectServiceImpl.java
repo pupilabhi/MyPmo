@@ -177,7 +177,6 @@ public class ProjectServiceImpl {
 		while (itr.hasNext()) {
 			Project project = itr.next();
 			ProjectSummary ps = new ProjectSummary(project);
-			
 			summary.add(ps);
 		}
 		return summary;
