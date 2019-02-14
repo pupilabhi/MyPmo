@@ -78,6 +78,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .authorizeRequests()
                     .antMatchers("/",
+                    	"HttpMethod.GET",
+                        "/v2/api-docs",           // swagger
+                        "/webjars/**",            // swagger-ui webjars
+                        "/swagger-resources/**",  // swagger-ui resources
+                        "/configuration/**",      // swagger configuration
                         "/favicon.ico",
                         "/**/*.png",
                         "/**/*.gif",
@@ -88,8 +93,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.js")
                         .permitAll()
                     .antMatchers("/api/auth/**")
-                        .permitAll()
-                    .antMatchers(HttpMethod.GET, "/pmo/**")
                         .permitAll()
                     .anyRequest()
                         .authenticated();
