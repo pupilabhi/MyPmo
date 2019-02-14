@@ -44,7 +44,7 @@ public class Project extends Auditable<Long> implements Serializable {
 	private Set<ProjectFollower> projectFollowers = new HashSet<ProjectFollower>(0);
 	private Set<Phase> phases = new HashSet<Phase>(0);
 	private Set<Documents> documents = new HashSet<Documents>(0);
-	// private StatusItem projectStatus;
+	private StatusItem projectStatus;
 
 	public Project() {
 
@@ -125,7 +125,6 @@ public class Project extends Auditable<Long> implements Serializable {
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "OWNER_FK")
-//	@JsonBackReference(value = "owner_ref")
 	public UserDetails getOwner() {
 		return owner;
 	}
@@ -160,4 +159,15 @@ public class Project extends Auditable<Long> implements Serializable {
 	public void setDocuments(Set<Documents> documents) {
 		this.documents = documents;
 	}
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name = "project_status")
+	public StatusItem getProjectStatus() {
+		return projectStatus;
+	}
+
+	public void setProjectStatus(StatusItem projectStatus) {
+		this.projectStatus = projectStatus;
+	}
+	
 }
