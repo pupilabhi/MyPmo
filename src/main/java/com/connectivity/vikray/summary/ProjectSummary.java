@@ -17,10 +17,13 @@ public class ProjectSummary {
 		this.setProjectName(project.getProjectName());
 		this.setProjectDescription(project.getProjectDescription());
 		this.setDueDate(project.getDueDate());
-		if (project.getOwner().getLastName() == null)
-			this.setOwner(project.getOwner().getFirstName());
+		if (project.getOwner().getLastName() != null) {
 			this.setOwner(project.getOwner().getFirstName() + " " + project.getOwner().getLastName());
-
+		}else {
+			this.setOwner(project.getOwner().getFirstName());
+		}
+			
+			
 	}
 
 	public long getId() {
