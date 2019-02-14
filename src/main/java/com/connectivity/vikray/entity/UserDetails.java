@@ -54,6 +54,8 @@ public class UserDetails extends Auditable<Long> implements java.io.Serializable
 	private boolean isInactive;
 	private long expertise;
 	private String accessToken;
+	
+
 	private Set<TaskComment> taskComments = new HashSet<TaskComment>(0);
 	private Set<TaskCcUser> taskCcUsers = new HashSet<TaskCcUser>(0);
 	private Set<Task> tasksForAssigneeUserFk = new HashSet<Task>(0);
@@ -77,7 +79,7 @@ public class UserDetails extends Auditable<Long> implements java.io.Serializable
         this.password = password;
 	}
 
-	public UserDetails(long id, Domain domain, String organisation, String orgLocation, UserDetails userDetails,
+	/*public UserDetails(long id, Domain domain, String organisation, String orgLocation, UserDetails userDetails,
 			String dotPath, String firstName, String forgotPassGuid, String guid, String inviteGuid, String lastName,
 			String userLoginId, String password, String sessionId, String userEmail, String userPhone, long userRole,
 			boolean isInactive, long expertise, String accessToken, String accountDetails,
@@ -107,7 +109,7 @@ public class UserDetails extends Auditable<Long> implements java.io.Serializable
 		this.tasksForAssigneeUserFk = tasksForAssigneeUserFk;
 		this.tasksForCreatorUserFk = tasksForCreatorUserFk;
 	}
-
+*/
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {

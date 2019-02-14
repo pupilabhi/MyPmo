@@ -1,7 +1,5 @@
 package com.connectivity.vikray.serviceImpl;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -29,14 +27,10 @@ import com.connectivity.vikray.repository.TaskPriorityRepository;
 import com.connectivity.vikray.repository.TaskRepository;
 import com.connectivity.vikray.repository.TaskStatusRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
-import com.connectivity.vikray.util.EventImpl;
 
 @Repository
 public class TaskServiceImpl {
 
-	@Autowired
-	EventImpl eventImpl;
-	
 	@Autowired
 	TaskRepository taskRepository;
 
@@ -66,52 +60,45 @@ public class TaskServiceImpl {
 
 	// create Task
 	public Task createTask(Task taskfrmclint) {
-		Task toDb = new Task();
-		toDb.setComments(taskfrmclint.getComments());
-		toDb.setReplies(taskfrmclint.getReplies());
+		Task tdob = new Task();
+		tdob.setComments(taskfrmclint.getComments());
+		tdob.setReplies(taskfrmclint.getReplies());
 		if (taskfrmclint.getDomain() != null) {
-			toDb.setDomain(domainRepository.getOne(taskfrmclint.getDomain().getId()));
+			tdob.setDomain(domainRepository.getOne(taskfrmclint.getDomain().getId()));
 		}
 
 		if (taskfrmclint.getTaskPriority() != null) {
-			toDb.setTaskPriority(taskPriorityRepository.getOne(taskfrmclint.getTaskPriority().getId()));
+			tdob.setTaskPriority(taskPriorityRepository.getOne(taskfrmclint.getTaskPriority().getId()));
 		}
 
 		if (taskfrmclint.getUserDetailsByAssigneeUserFk() != null) {
-			toDb.setUserDetailsByAssigneeUserFk(
-					userDetailsRepository.getOne(taskfrmclint.getUserDetailsByAssigneeUserFk().getId()));
+			tdob.setUserDetailsByAssigneeUserFk(
+					userDetailsRepository.getOne(taskfrmclint.getUserDetailsByAssigneeUserFk().getExpertise()));
 		}
 		if (taskfrmclint.getUserDetailsByCreatorUserFk() != null) {
-			toDb.setUserDetailsByCreatorUserFk(
+			tdob.setUserDetailsByCreatorUserFk(
 					userDetailsRepository.getOne(taskfrmclint.getUserDetailsByCreatorUserFk().getId()));
 		}
-		toDb.setDueDate(taskfrmclint.getDueDate());
-		toDb.setGuid(taskfrmclint.getGuid());
-		toDb.setTaskName(taskfrmclint.getTaskName());
-		toDb.setTaskUrl(taskfrmclint.getTaskUrl());
-		toDb.setVerifiedOn(taskfrmclint.getVerifiedOn());
+		tdob.setDueDate(taskfrmclint.getDueDate());
+		tdob.setGuid(taskfrmclint.getGuid());
+		tdob.setTaskName(taskfrmclint.getTaskName());
+		tdob.setTaskUrl(taskfrmclint.getTaskUrl());
+		tdob.setVerifiedOn(taskfrmclint.getVerifiedOn());
 		if (taskfrmclint.getPhaseFk() != null) {
-			toDb.setPhaseFk(phaseRepository.getOne(taskfrmclint.getPhaseFk().getId()));
+			tdob.setPhaseFk(phaseRepository.getOne(taskfrmclint.getPhaseFk().getId()));
 		}
-		toDb.setDescription(taskfrmclint.getDescription());
-		toDb.setInstruction(taskfrmclint.getInstruction());
-		toDb.setAccountAddress(taskfrmclint.getAccountAddress());
+		tdob.setDescription(taskfrmclint.getDescription());
+		tdob.setInstruction(taskfrmclint.getInstruction());
+		tdob.setAccountAddress(taskfrmclint.getAccountAddress());
 
-		taskRepository.save(toDb);
-		Set<Documents> docs = createDocument(taskfrmclint, toDb);
-		toDb.setDocuments(docs);
-		Set<TaskComment> tcomments = createTaskComments(taskfrmclint, toDb);
-		toDb.setTaskComments(tcomments);
-		Set<TaskCcUser> taskCcUsers = createTaskCCUser(taskfrmclint, toDb);
-		toDb.setTaskCcUsers(taskCcUsers);
-		
-		try {
-			eventImpl.createEvent(toDb);
-		} catch (GeneralSecurityException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return toDb;
+		taskRepository.save(tdob);
+		Set<Documents> docs = createDocument(taskfrmclint, tdob);
+		tdob.setDocuments(docs);
+		Set<TaskComment> tcomments = createTaskComments(taskfrmclint, tdob);
+		tdob.setTaskComments(tcomments);
+		Set<TaskCcUser> taskCcUsers = createTaskCCUser(taskfrmclint, tdob);
+		tdob.setTaskCcUsers(taskCcUsers);
+		return tdob;
 	}
 
 	// create Documents
