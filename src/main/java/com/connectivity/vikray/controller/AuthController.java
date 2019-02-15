@@ -33,9 +33,13 @@ import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.repository.RoleRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 
 @RestController
 @RequestMapping("/api/auth")
+@Api(value = "Authentication API's" , description = "Authentication Related Apis, Won't require Access Token")
 public class AuthController {
 
     @Autowired
@@ -56,6 +60,8 @@ public class AuthController {
     @Autowired
     ValidResult result;
 
+    @ApiOperation(value = "Returns Access Token" , notes= "Authenticate user based on userId and password"
+    		+ " return the JWT token for accessing Auth API's ")
     @PostMapping("/signin")
     public ValidResult authenticateUser(@Valid @RequestBody UserDetails loginRequest) {
 
@@ -79,6 +85,8 @@ public class AuthController {
         return result;
     }
 
+    @ApiOperation(value="Register new user",
+    		notes = "Validate duplicate user by userId and Email and returns registered user Object")
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if(userRepository.existsByUserLoginId(signUpRequest.getUserLoginId())) {
