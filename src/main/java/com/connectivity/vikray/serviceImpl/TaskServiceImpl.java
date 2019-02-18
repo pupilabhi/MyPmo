@@ -29,6 +29,7 @@ import com.connectivity.vikray.repository.TaskRepository;
 import com.connectivity.vikray.repository.TaskStatusRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
 import com.connectivity.vikray.util.EventImpl;
+import com.google.api.services.calendar.model.Event;
 
 @Repository
 public class TaskServiceImpl {
@@ -95,7 +96,6 @@ public class TaskServiceImpl {
 		toDb.setDescription(taskfrmclint.getDescription());
 		toDb.setInstruction(taskfrmclint.getInstruction());
 		toDb.setAccountAddress(taskfrmclint.getAccountAddress());
-
 		taskRepository.save(toDb);
 		Set<Documents> docs = createDocument(taskfrmclint, toDb);
 		toDb.setDocuments(docs);
@@ -103,13 +103,12 @@ public class TaskServiceImpl {
 		toDb.setTaskComments(tcomments);
 		Set<TaskCcUser> taskCcUsers = createTaskCCUser(taskfrmclint, toDb);
 		toDb.setTaskCcUsers(taskCcUsers);
-		
-	    try { 
-	        eventImpl.createEvent(toDb); 
-	      } catch (GeneralSecurityException | IOException e) { 
-	        // TODO Auto-generated catch block 
-	        e.printStackTrace(); 
-	      } 
+		try {
+			eventImpl.createEvent(toDb);
+		} catch (GeneralSecurityException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return toDb;
 	}
 
@@ -251,6 +250,13 @@ public class TaskServiceImpl {
 					TaskCcUser users = taskCcUserRepository.getOne(taskCcUser.getId());
 				}
 			}
+			taskfromDb.setEventId(taskfromClient.getEventId());
+		}
+		try {
+			eventImpl.updateEvent(taskfromDb);
+		} catch (GeneralSecurityException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		Task updateTask = taskRepository.save(taskfromDb);
 		if (updateTask != null) {

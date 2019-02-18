@@ -59,6 +59,7 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 	private Set<Documents> documents = new HashSet<Documents>(0);
 	private Set<TaskComment> taskComments = new HashSet<TaskComment>(0);
 	private Set<TaskCcUser> taskCcUsers = new HashSet<TaskCcUser>(0);
+	private String eventId;
 
 	public Task() {
 	}
@@ -71,7 +72,7 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 			TaskStatus taskStatus, UserDetails userDetailsByAssigneeUserFk, UserDetails userDetailsByCreatorUserFk,
 			Date dueDate, String guid, String taskName, String taskUrl, Date verifiedOn, Phase phaseFk,
 			String description, String instruction, String accountAddress, Set<Documents> documents,
-			Set<TaskComment> taskComments, Set<TaskCcUser> taskCcUsers) {
+			Set<TaskComment> taskComments, Set<TaskCcUser> taskCcUsers, String eventId) {
 		super();
 		this.id = id;
 		this.comments = comments;
@@ -93,6 +94,7 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 		this.documents = documents;
 		this.taskComments = taskComments;
 		this.taskCcUsers = taskCcUsers;
+		this.eventId = eventId;
 	}
 
 	@Id
@@ -147,7 +149,7 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DOMAIN_FK")
-	@JsonBackReference(value="domain_ref")
+	@JsonBackReference(value = "domain_ref")
 	public Domain getDomain() {
 		return this.domain;
 	}
@@ -158,7 +160,7 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TASK_PRIORITY_FK")
-	@JsonBackReference(value="priority_ref")
+	@JsonBackReference(value = "priority_ref")
 	public TaskPriority getTaskPriority() {
 		return this.taskPriority;
 	}
@@ -169,7 +171,7 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TASK_STATUS_FK")
-	@JsonBackReference(value="status_ref")
+	@JsonBackReference(value = "status_ref")
 	public TaskStatus getTaskStatus() {
 		return this.taskStatus;
 	}
@@ -285,4 +287,11 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 		this.phaseFk = phaseFk;
 	}
 
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
+	}
+
+	public String getEventId() {
+		return eventId;
+	}
 }

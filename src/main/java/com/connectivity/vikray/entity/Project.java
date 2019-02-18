@@ -54,9 +54,11 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.id = id;
 	}
 
+	
+
 	public Project(long id, String projectName, String projectDescription, Date dueDate, String accountAddress,
 			String salesOrder, UserDetails owner, Set<ProjectFollower> projectFollowers, Set<Phase> phases,
-			Set<Documents> documents) {
+			Set<Documents> documents, StatusItem projectStatus) {
 		super();
 		this.id = id;
 		this.projectName = projectName;
@@ -68,6 +70,7 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.projectFollowers = projectFollowers;
 		this.phases = phases;
 		this.documents = documents;
+		this.projectStatus = projectStatus;
 	}
 
 	@Id
@@ -169,5 +172,4 @@ public class Project extends Auditable<Long> implements Serializable {
 	public void setProjectStatus(StatusItem projectStatus) {
 		this.projectStatus = projectStatus;
 	}
-	
 }
