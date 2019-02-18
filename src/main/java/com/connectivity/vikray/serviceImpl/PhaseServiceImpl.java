@@ -177,4 +177,8 @@ public class PhaseServiceImpl {
 		return phaseRepository.findAll();
 	}
 
+	public Object getPhasesByProjectId(Long projectId) {
+		return phaseRepository.findByProjectFk(projectRepository.getOne(projectId));
+	}
+
 }

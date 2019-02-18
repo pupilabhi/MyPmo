@@ -50,4 +50,17 @@ public class PhaseService {
 		}
 		return result;
 	}
+
+	public ValidResult getPhasesByProjectId(Long projectId) {
+		Object rt= PhaseServiceImpl.getPhasesByProjectId(projectId);
+		if (rt != null) {
+			result.setErrorCode((long) 101);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(rt);
+		}else {
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
+		}
+		return result;
+	}
 }

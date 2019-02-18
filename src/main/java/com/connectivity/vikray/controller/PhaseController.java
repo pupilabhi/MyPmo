@@ -1,16 +1,16 @@
 package com.connectivity.vikray.controller;
 
-import javax.transaction.Transactional;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.connectivity.vikray.entity.Phase;
-import com.connectivity.vikray.entity.Project;
 import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.service.PhaseService;
 
@@ -35,5 +35,10 @@ public class PhaseController {
 	@PostMapping("/updatePhase")
 	public ValidResult updatePhase(@RequestBody Phase phase) {
 		return phaseService.updatePhase(phase);
+	}
+	
+	@GetMapping("/phases/{id}")
+	public ValidResult getPhasesByProjectID(@PathVariable(value = "id") Long id) {
+		return phaseService.getPhasesByProjectId(id);
 	}
 }

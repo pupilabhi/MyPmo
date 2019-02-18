@@ -191,7 +191,8 @@ public class ProjectServiceImpl {
 
 	//get project  by ID
 	public Object getProjectById(Long id) {
-		return projectRepository.getOne(id);
+		Project proFrmDb =  projectRepository.getOne(id);
+		return proFrmDb;
 	}
 
 }

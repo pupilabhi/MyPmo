@@ -48,8 +48,7 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/getProjectById/{id}")
-	@ApiOperation(value = "Find Project by id",
-    notes = "Also returns a link to retrieve all students with rel - all-students")
+	@ApiOperation(value = "Find Project by id")
 	public ValidResult getProjectById(@PathVariable("id") Long id) {
 		return ProjectService.getProjectById(id);
 		
