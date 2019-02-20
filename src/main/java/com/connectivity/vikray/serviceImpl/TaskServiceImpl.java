@@ -1,17 +1,14 @@
 package com.connectivity.vikray.serviceImpl;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.transaction.Transactional;
-
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import com.connectivity.vikray.entity.Documents;
@@ -23,7 +20,6 @@ import com.connectivity.vikray.entity.TaskComment;
 import com.connectivity.vikray.entity.TaskPriority;
 import com.connectivity.vikray.entity.TaskStatus;
 import com.connectivity.vikray.entity.UserDetails;
-import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.DomainRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
@@ -34,7 +30,6 @@ import com.connectivity.vikray.repository.TaskRepository;
 import com.connectivity.vikray.repository.TaskStatusRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
 import com.connectivity.vikray.util.EventImpl;
-import com.google.api.services.calendar.model.Event;
 
 @Repository
 public class TaskServiceImpl {
@@ -111,7 +106,6 @@ public class TaskServiceImpl {
 		try {
 			eventImpl.createEvent(toDb);
 		} catch (GeneralSecurityException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return toDb;
