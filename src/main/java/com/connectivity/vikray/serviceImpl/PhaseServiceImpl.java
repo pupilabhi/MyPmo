@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -13,17 +14,13 @@ import org.springframework.stereotype.Repository;
 import com.connectivity.vikray.entity.Documents;
 import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.PhaseFollower;
-import com.connectivity.vikray.entity.Project;
-import com.connectivity.vikray.entity.ProjectFollower;
 import com.connectivity.vikray.entity.Task;
-import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.PhaseFollowerRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
 import com.connectivity.vikray.repository.ProjectRepository;
 import com.connectivity.vikray.repository.TaskRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
-import com.connectivity.vikray.service.PhaseService;
 
 @Repository
 public class PhaseServiceImpl {
@@ -52,6 +49,7 @@ public class PhaseServiceImpl {
 		Phase todb = new Phase();
 		todb.setPhaseName(phaseFrmClent.getPhaseName());
 		todb.setDueDate(phaseFrmClent.getDueDate());
+		todb.setGuid(UUID.randomUUID().toString());
 		if (phaseFrmClent.getProjectFk() != null) {
 			todb.setProjectFk(projectRepository.getOne(phaseFrmClent.getProjectFk().getId()));
 		}
@@ -59,10 +57,7 @@ public class PhaseServiceImpl {
 		
 		Set<Documents> docs = createDocuments(phaseFrmClent, todb);
 		todb.setDocuments(docs);
-		/*Set<PhaseFollower> pf = createPhaseFollower(phaseFrmClent, todb);
-		todb.setPhaseFollowers(pf);
-		Set<Task> tk = createTask(phaseFrmClent, todb);
-		todb.setTasks(tk);*/
+		
 		phaseRepository.save(todb);
 		return todb;
 	}

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -90,9 +91,9 @@ public class TaskServiceImpl {
 					userDetailsRepository.getOne(taskfrmclint.getUserDetailsByCreatorUserFk().getId()));
 		}
 		toDb.setDueDate(taskfrmclint.getDueDate());
-		toDb.setGuid(taskfrmclint.getGuid());
+		toDb.setGuid(UUID.randomUUID().toString());
 		toDb.setTaskName(taskfrmclint.getTaskName());
-		toDb.setTaskUrl(taskfrmclint.getTaskUrl());
+//		toDb.setTaskUrl(taskfrmclint.getTaskUrl());
 		toDb.setVerifiedOn(taskfrmclint.getVerifiedOn());
 		if (taskfrmclint.getPhaseFk() != null) {
 			toDb.setPhaseFk(phaseRepository.getOne(taskfrmclint.getPhaseFk().getId()));

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -56,6 +57,9 @@ public class ProjectServiceImpl {
 		if (projectFrmClent.getOwner() != null) {
 			toDb.setOwner(userDetailsRepository.getOne(projectFrmClent.getOwner().getId()));
 		}
+		toDb.setCustomerId(projectFrmClent.getCustomerId());
+		toDb.setCustomerName(projectFrmClent.getCustomerName());
+		toDb.setGuid(UUID.randomUUID().toString());
 		projectRepository.save(toDb);
 		Set<ProjectFollower> pf = createProjectFollower(projectFrmClent, toDb);
 		Set<Phase> ph = createPhase(projectFrmClent, toDb);

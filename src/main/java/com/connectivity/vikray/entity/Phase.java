@@ -43,7 +43,19 @@ public class Phase extends Auditable<Long> implements Serializable {
 	private Set<PhaseFollower> phaseFollowers = new HashSet<PhaseFollower>(0);
 	private Set<Task> tasks = new HashSet<Task>(0);
 	private StatusItem phaseStatus;
+	private String guid;
 	
+	
+	
+	@Column
+	public String getGuid() {
+		return guid;
+	}
+
+	public void setGuid(String guid) {
+		this.guid = guid;
+	}
+
 	public Phase() {
 
 	}

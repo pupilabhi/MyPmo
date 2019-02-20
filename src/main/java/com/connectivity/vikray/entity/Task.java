@@ -60,7 +60,10 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 	private Set<TaskComment> taskComments = new HashSet<TaskComment>(0);
 	private Set<TaskCcUser> taskCcUsers = new HashSet<TaskCcUser>(0);
 	private String eventId;
+	
 
+	
+	
 	public Task() {
 	}
 

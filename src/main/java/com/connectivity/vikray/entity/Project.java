@@ -22,8 +22,6 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "PROJECT", catalog = "vikrayPmo")
 @EntityListeners(AuditingEntityListener.class)
@@ -45,6 +43,36 @@ public class Project extends Auditable<Long> implements Serializable {
 	private Set<Phase> phases = new HashSet<Phase>(0);
 	private Set<Documents> documents = new HashSet<Documents>(0);
 	private StatusItem projectStatus;
+	private String guid;
+	private String customerName;
+	private long customerId;
+	
+	@Column(name = "customer_name")
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	@Column(name = "customer_id")
+	public long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(long customerId) {
+		this.customerId = customerId;
+	}
+
+	@Column
+	public String getGuid() {
+		return guid;
+	}
+
+	public void setGuid(String guid) {
+		this.guid = guid;
+	}
 
 	public Project() {
 
