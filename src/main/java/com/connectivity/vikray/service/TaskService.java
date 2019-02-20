@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.connectivity.vikray.constant.VikrayPmoMessageConstant;
 import com.connectivity.vikray.entity.Task;
+import com.connectivity.vikray.entity.TaskComment;
 import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.serviceImpl.TaskServiceImpl;
 
@@ -39,6 +40,58 @@ public class TaskService {
 
 	public ValidResult updateTask(Task task) {
 		Object rt = taskServiceImpl.updateTask(task);
+		if (rt != null) {
+			result.setErrorCode((long) 101);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(rt);
+		} else {
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
+		}
+		return result;
+	}
+
+	public ValidResult addTaskComments(TaskComment comments) {
+		TaskComment comm= taskServiceImpl.addTaskComment(comments);
+		if (comm != null) {
+			result.setErrorCode((long) 101);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(comm);
+		} else {
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
+		}
+		return result;
+	}
+
+	public ValidResult updateTaskComments(TaskComment comments) {
+		Object tc= taskServiceImpl.updateTaskComment(comments);
+		if (tc != null) {
+			result.setErrorCode((long) 101);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(tc);
+		} else {
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
+		}
+		return result;
+	}
+
+	public ValidResult getTaskById(Long id) {
+		Object rt= taskServiceImpl.getTaskById(id);
+		if (rt != null) {
+			result.setErrorCode((long) 101);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(rt);
+		} else {
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
+		}
+		return result;
+	}
+
+	public ValidResult getTaskBycreatorUser() {
+		Object rt= taskServiceImpl.getTaskByCreatorUser();
 		if (rt != null) {
 			result.setErrorCode((long) 101);
 			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);

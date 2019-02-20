@@ -4,9 +4,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import javax.transaction.Transactional;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import com.connectivity.vikray.entity.Documents;
@@ -63,7 +67,7 @@ public class TaskServiceImpl {
 
 	@Autowired
 	TaskStatusRepository taskStatusRepository;
-
+	
 	// create Task
 	public Task createTask(Task taskfrmclint) {
 		Task toDb = new Task();
@@ -269,5 +273,61 @@ public class TaskServiceImpl {
 	public List<Task> getAllTask() {
 		return taskRepository.findAll();
 	}
+	
+	public TaskComment addTaskComment(TaskComment commentsFrmClient) {
+		TaskComment toDb= new TaskComment();
+		if (commentsFrmClient.getTask() != null) {
+			toDb.setTask(taskRepository.getOne(commentsFrmClient.getTask().getId()));
+		}
+		if(commentsFrmClient.getUserDetails() != null) {
+			toDb.setUserDetails(userDetailsRepository.getOne(commentsFrmClient.getUserDetails().getId()));
+		}
+		toDb.setComment(commentsFrmClient.getComment());
+		toDb.setDateTime(commentsFrmClient.getDateTime());
+		taskCommentRepository.save(toDb);
+		return toDb;
+		
+	}
+	
+	public TaskComment updateTaskComment(TaskComment commentsFrmClient) {
+		TaskComment fDb= taskCommentRepository.getOne(commentsFrmClient.getId());
+		if (fDb == null) {
+			return null;
+		}
+		if (commentsFrmClient.getTask() != null) {
+			if (commentsFrmClient.getTask().getId() == 0) {
+				commentsFrmClient.setTask(commentsFrmClient.getTask());
+			} else {
+				TaskComment taskToDb = taskCommentRepository.getOne(commentsFrmClient.getTask().getId());
+			}
+		}
+		
+		if (commentsFrmClient.getUserDetails() != null) {
+			if (commentsFrmClient.getUserDetails().getId() == 0) {
+				commentsFrmClient.setUserDetails(commentsFrmClient.getUserDetails());
+			}else {
+				UserDetails userToDb = userDetailsRepository.getOne(commentsFrmClient.getUserDetails().getId());
+			}
+		}
+		fDb.setComment(commentsFrmClient.getComment());
+		fDb.setDateTime(commentsFrmClient.getDateTime());
+		TaskComment updateComment = taskCommentRepository.save(fDb);
+		if (updateComment != null) {
+			return updateComment;
+		} else {
+			return null;
+		}
+	}
 
+	public Object getTaskById(Long id) {
+		Task fromDb= taskRepository.getOne(id);
+		return fromDb;
+	}
+
+	public Object getTaskByCreatorUser() {
+		
+		return null;
+	
+	}
+	
 }
