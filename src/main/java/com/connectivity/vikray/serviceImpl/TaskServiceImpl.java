@@ -29,6 +29,7 @@ import com.connectivity.vikray.repository.TaskPriorityRepository;
 import com.connectivity.vikray.repository.TaskRepository;
 import com.connectivity.vikray.repository.TaskStatusRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
+import com.connectivity.vikray.util.LoggedInUser;
 import com.connectivity.vikray.util.EventImpl;
 
 @Repository
@@ -63,6 +64,9 @@ public class TaskServiceImpl {
 
 	@Autowired
 	TaskStatusRepository taskStatusRepository;
+	
+	@Autowired
+	LoggedInUser currentUser;
 	
 	// create Task
 	public Task createTask(Task taskfrmclint) {
@@ -320,9 +324,8 @@ public class TaskServiceImpl {
 	}
 
 	public Object getTaskByCreatorUser() {
-		
-		return null;
-	
+		long id= LoggedInUser.getCurrentUserId();
+		return taskRepository.findById(id);
 	}
 	
 }

@@ -50,7 +50,7 @@ public class TaskController {
 		return taskService.updateTaskComments(comment);
 	}
 	
-	@GetMapping("/getTaskByCreatorUser/")
+	@GetMapping("/getTaskByCreatorUser")
 	public ValidResult getTaskByCreatorUser() {
 		return taskService.getTaskBycreatorUser();
 	}
