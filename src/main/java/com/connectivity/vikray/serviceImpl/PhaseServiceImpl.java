@@ -129,14 +129,18 @@ public class PhaseServiceImpl {
 		}
 
 		phasefrmdb.setAccountAddress(phasefrmclient.getAccountAddress());
-
+		if(phasefrmclient.getPhaseDescription() != null)
+			phasefrmdb.setPhaseDescription(phasefrmclient.getPhaseDescription());
+		
 		// update Documents
-		for (Documents documents : phasefrmclient.getDocuments()) {
-			if (documents.getId() == 0) {
-				documents.setPhaseFk(phasefrmdb);
-				documentRepository.save(documents);
+		for (Documents doc : phasefrmclient.getDocuments()) {
+			if (doc.getId() == 0) {
+				doc.setPhaseFk(phasefrmdb);
+				documentRepository.save(doc);
 			} else {
-				Documents dtobd = documentRepository.getOne(documents.getId());
+				Documents docToDb = documentRepository.getOne(doc.getId());
+				docToDb.setPath(doc.getPath());
+				docToDb.setDocType(doc.getDocType());
 			}
 		}
 

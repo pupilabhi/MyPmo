@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import org.omg.CORBA.Current;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +17,7 @@ import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.Project;
 import com.connectivity.vikray.entity.ProjectFollower;
 import com.connectivity.vikray.entity.UserDetails;
+import com.connectivity.vikray.jwt.CurrentUser;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
 import com.connectivity.vikray.repository.ProjectFollwerRepository;
@@ -46,11 +48,14 @@ public class ProjectServiceImpl {
 	StatusRepository statusRepo;
 
 	// create Project
+	
 	public Project createProject(Project projectFrmClent) {
 		Project toDb = new Project();
 		toDb.setProjectName(projectFrmClent.getProjectName());
 		toDb.setProjectDescription(projectFrmClent.getProjectDescription());
-		toDb.setDueDate(projectFrmClent.getDueDate());
+		if(projectFrmClent.getDueDate()!=null)
+			toDb.setDueDate(projectFrmClent.getDueDate());
+		
 		toDb.setAccountAddress(projectFrmClent.getAccountAddress());
 		toDb.setSalesOrder(projectFrmClent.getSalesOrder());
 		toDb.setProjectStatus(statusRepo.getOne(VikrayPmoConstant.PROJ_NEW));
@@ -68,7 +73,6 @@ public class ProjectServiceImpl {
 		toDb.setPhases(ph);
 		toDb.setDocuments(doc);
 		return toDb;
-
 	}
 
 	// create Project Follower
@@ -96,7 +100,7 @@ public class ProjectServiceImpl {
 			Phase phaseTodb = new Phase();
 			phaseTodb = (Phase) itr.next();
 			phaseTodb.setProjectFk(project);
-			phaseTodb.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PROJ_NEW));
+			phaseTodb.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PHASE_NEW));
 			phaseRepository.save(phaseTodb);
 			newPhases.add(phaseTodb);
 		}

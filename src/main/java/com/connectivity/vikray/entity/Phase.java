@@ -44,6 +44,7 @@ public class Phase extends Auditable<Long> implements Serializable {
 	private Set<Task> tasks = new HashSet<Task>(0);
 	private StatusItem phaseStatus;
 	private String guid;
+	private String phaseDescription;
 	
 	
 	
@@ -162,6 +163,15 @@ public class Phase extends Auditable<Long> implements Serializable {
 
 	public void setPhaseStatus(StatusItem phaseStatus) {
 		this.phaseStatus = phaseStatus;
+	}
+
+	@Column
+	public String getPhaseDescription() {
+		return phaseDescription;
+	}
+
+	public void setPhaseDescription(String phaseDescription) {
+		this.phaseDescription = phaseDescription;
 	}
 
 	
