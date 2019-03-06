@@ -83,7 +83,9 @@ public class EventImpl {
 
 		String[] recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=2" };
 		event.setRecurrence(Arrays.asList(recurrence));
-		UserDetails user = userRepository.getOne(task.getUserDetailsByAssigneeUserFk().getId());
+		UserDetails user;
+		if (task.getUserDetailsByAssigneeUserFk() != null) {
+			user = userRepository.getOne(task.getUserDetailsByAssigneeUserFk().getId());
 
 		/*
 		 * First EventAttendee is organizer and after all are the Participent(),
@@ -100,7 +102,8 @@ public class EventImpl {
 		Event.Reminders reminders = new Event.Reminders().setUseDefault(false)
 				.setOverrides(Arrays.asList(reminderOverrides));
 		event.setReminders(reminders);
-
+		}
+		
 		String calendarId = "primary";
 		event = service.events().insert(calendarId, event).execute();
 		String evur = event.getHtmlLink();
