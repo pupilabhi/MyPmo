@@ -27,6 +27,7 @@ import com.connectivity.vikray.exception.AppException;
 import com.connectivity.vikray.jwt.JwtTokenProvider;
 import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.payload.JwtAuthenticationResponse;
+import com.connectivity.vikray.payload.LoginRequest;
 import com.connectivity.vikray.payload.SignUpRequest;
 import com.connectivity.vikray.pojo.RoleName;
 import com.connectivity.vikray.pojo.ValidResult;
@@ -63,7 +64,7 @@ public class AuthController {
     @ApiOperation(value = "Returns Access Token" , notes= "Authenticate user based on userId and password"
     		+ " return the JWT token for accessing Auth API's ")
     @PostMapping("/signin")
-    public ValidResult authenticateUser(@Valid @RequestBody UserDetails loginRequest) {
+    public ValidResult authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

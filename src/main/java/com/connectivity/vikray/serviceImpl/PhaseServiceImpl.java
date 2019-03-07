@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.connectivity.vikray.entity.Documents;
 import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.PhaseFollower;
+import com.connectivity.vikray.entity.Project;
 import com.connectivity.vikray.entity.Task;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.PhaseFollowerRepository;
@@ -118,16 +119,6 @@ public class PhaseServiceImpl {
 		}
 		phasefrmdb.setPhaseName(phasefrmclient.getPhaseName());
 		phasefrmdb.setDueDate(phasefrmclient.getDueDate());
-
-		if (phasefrmclient.getProjectFk() != null) {
-			if (phasefrmclient.getProjectFk().getId() == 0) {
-				phasefrmclient.setProjectFk(phasefrmclient.getProjectFk());
-			} else {
-				Phase phase = phaseRepository.getOne(phasefrmclient.getProjectFk().getId());
-				phase.setProjectFk(phasefrmclient.getProjectFk());
-			}
-		}
-
 		phasefrmdb.setAccountAddress(phasefrmclient.getAccountAddress());
 		if(phasefrmclient.getPhaseDescription() != null)
 			phasefrmdb.setPhaseDescription(phasefrmclient.getPhaseDescription());
@@ -135,34 +126,32 @@ public class PhaseServiceImpl {
 		// update Documents
 		for (Documents doc : phasefrmclient.getDocuments()) {
 			if (doc.getId() == 0) {
-				doc.setPhaseFk(phasefrmdb);
-				documentRepository.save(doc);
+				Documents newDoc =  new Documents();
+				newDoc.setPath(doc.getPath());
+				newDoc.setDocType(doc.getDocType());
+				newDoc.setPhaseFk(phasefrmdb);
+				documentRepository.save(newDoc);
 			} else {
-				Documents docToDb = documentRepository.getOne(doc.getId());
-				docToDb.setPath(doc.getPath());
-				docToDb.setDocType(doc.getDocType());
+				Documents docFrmDb = documentRepository.getOne(doc.getId());
+				docFrmDb.setPath(doc.getPath());
+				docFrmDb.setDocType(doc.getDocType());
+				documentRepository.save(docFrmDb);;
 			}
 		}
 
 		// update Phase Followers
 		for (PhaseFollower phaseFollower : phasefrmclient.getPhaseFollowers()) {
 			if (phaseFollower.getId() == 0) {
-				phaseFollower.setPhaseFk(phasefrmdb);
+				PhaseFollower newFollower = new PhaseFollower();
+				newFollower.setPhaseFk(phasefrmdb);
+				newFollower.setUserDetailsFk(userDetailsRepository.getOne(phaseFollower.getUserDetailsFk().getId()));
 				phaseFollowerRepository.save(phaseFollower);
 			} else {
-				PhaseFollower ptodb = phaseFollowerRepository.getOne(phaseFollower.getId());
+				PhaseFollower follFrmDb = phaseFollowerRepository.getOne(phaseFollower.getId());
+				follFrmDb.setUserDetailsFk(userDetailsRepository.getOne(phaseFollower.getUserDetailsFk().getId()));
 			}
 		}
 
-		// Update Task
-		for (Task task : phasefrmclient.getTasks()) {
-			if (task.getId() == 0) {
-				task.setPhaseFk(phasefrmdb);
-				taskRepository.save(task);
-			} else {
-				Task ttodb = taskRepository.getOne(task.getId());
-			}
-		}
 		Phase updatePhase = phaseRepository.save(phasefrmdb);
 		if (updatePhase != null) {
 			return updatePhase;
