@@ -40,6 +40,7 @@ public class PhaseController {
 		return phaseService.getPhasesByProjectId(id);
 	}
 	
+	@GetMapping("/phase/{id}")
 	public ValidResult getPhaseById(@PathVariable(value = "id") Long id) {
 		return phaseService.getPhaseById(id);
 	}
