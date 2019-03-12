@@ -14,8 +14,6 @@ import org.springframework.stereotype.Repository;
 import com.connectivity.vikray.entity.Documents;
 import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.PhaseFollower;
-import com.connectivity.vikray.entity.Project;
-import com.connectivity.vikray.entity.Task;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.PhaseFollowerRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
@@ -168,5 +166,11 @@ public class PhaseServiceImpl {
 	public Object getPhasesByProjectId(Long projectId) {
 		return phaseRepository.findByProjectFk(projectRepository.getOne(projectId));
 	}
+
+	public Object getPhaseById(Long id) {
+		return phaseRepository.getOne(id);
+	}
+
+	
 
 }

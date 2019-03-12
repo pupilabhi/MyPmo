@@ -13,13 +13,13 @@ import com.connectivity.vikray.serviceImpl.PhaseServiceImpl;
 public class PhaseService {
 
 	@Autowired
-	PhaseServiceImpl PhaseServiceImpl;
+	PhaseServiceImpl phaseServiceImpl;
 	
 	@Autowired
 	ValidResult result;
 	
 	public ValidResult createPhase(Phase phase) {
-			Phase cp= PhaseServiceImpl.createPhase(phase);
+			Phase cp= phaseServiceImpl.createPhase(phase);
 		if (cp != null) {
 			result.setErrorCode((long) 101);
 			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
@@ -32,14 +32,14 @@ public class PhaseService {
 	}
 	
 	public ValidResult getAllPhase() {
-		result.setData(PhaseServiceImpl.getAllPhase());
+		result.setData(phaseServiceImpl.getAllPhase());
 		result.setErrorCode((long) 101);
 		result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
 		return result;
 	}
 
 	public ValidResult updatePhase(Phase phase) {
-		Object rt= PhaseServiceImpl.updatePhase(phase);
+		Object rt= phaseServiceImpl.updatePhase(phase);
 		if (rt != null) {
 			result.setErrorCode((long) 101);
 			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
@@ -52,7 +52,20 @@ public class PhaseService {
 	}
 
 	public ValidResult getPhasesByProjectId(Long projectId) {
-		Object rt= PhaseServiceImpl.getPhasesByProjectId(projectId);
+		Object rt= phaseServiceImpl.getPhasesByProjectId(projectId);
+		if (rt != null) {
+			result.setErrorCode((long) 101);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
+			result.setData(rt);
+		}else {
+			result.setErrorCode((long) 102);
+			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
+		}
+		return result;
+	}
+
+	public ValidResult getPhaseById(Long id) {
+		Object rt= phaseServiceImpl.getPhaseById(id);
 		if (rt != null) {
 			result.setErrorCode((long) 101);
 			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);

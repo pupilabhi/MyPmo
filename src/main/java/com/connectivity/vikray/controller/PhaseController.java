@@ -39,4 +39,8 @@ public class PhaseController {
 	public ValidResult getPhasesByProjectID(@PathVariable(value = "id") Long id) {
 		return phaseService.getPhasesByProjectId(id);
 	}
+	
+	public ValidResult getPhaseById(@PathVariable(value = "id") Long id) {
+		return phaseService.getPhaseById(id);
+	}
 }
