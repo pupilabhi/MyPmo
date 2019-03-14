@@ -43,26 +43,26 @@ public class ProjectServiceImpl {
 
 	@Autowired
 	DocumentRepository documentRepository;
-	
+
 	@Autowired
 	StatusRepository statusRepo;
 
 	// create Project
-	
+
 	public Project createProject(Project projectFrmClent) {
 		Project toDb = new Project();
 		toDb.setProjectName(projectFrmClent.getProjectName());
 		toDb.setProjectDescription(projectFrmClent.getProjectDescription());
-		if(projectFrmClent.getDueDate()!=null)
+		if (projectFrmClent.getDueDate() != null)
 			toDb.setDueDate(projectFrmClent.getDueDate());
-		
+
 		toDb.setAccountAddress(projectFrmClent.getAccountAddress());
 		toDb.setSalesOrder(projectFrmClent.getSalesOrder());
 		toDb.setProjectStatus(statusRepo.getOne(VikrayPmoConstant.PROJ_NEW));
 		if (projectFrmClent.getOwner() != null) {
 			toDb.setOwner(userDetailsRepository.getOne(projectFrmClent.getOwner().getId()));
 		}
-		toDb.setCustomerId(projectFrmClent.getCustomerId());
+		// toDb.setCustomerId(projectFrmClent.getCustomerId());
 		toDb.setCustomerName(projectFrmClent.getCustomerName());
 		toDb.setGuid(UUID.randomUUID().toString());
 		projectRepository.save(toDb);
@@ -125,6 +125,7 @@ public class ProjectServiceImpl {
 	}
 
 	// update Project
+	@SuppressWarnings("unlikely-arg-type")
 	public Project updateProject(Project projectFromClient) {
 		Project projectfromdb = projectRepository.getOne(projectFromClient.getId());
 		if (projectfromdb == null) {
@@ -136,16 +137,39 @@ public class ProjectServiceImpl {
 		projectfromdb.setAccountAddress(projectFromClient.getAccountAddress());
 		projectfromdb.setSalesOrder(projectFromClient.getSalesOrder());
 
-		// update ProjectFollower
-		for (ProjectFollower follower : projectFromClient.getProjectFollowers()) {
-			if (follower.getId() == 0) {
-				follower.setProject(projectfromdb);
-				projectRepository.save(follower);
-			} else {
-				ProjectFollower projectsFrmDb = projectFollwerRepository.getOne(follower.getId());
-				projectsFrmDb.setUserDetails(projectFromClient.getOwner());
+		for (ProjectFollower followerToDb : projectfromdb.getProjectFollowers()) {
+			for (ProjectFollower followerToClient : projectFromClient.getProjectFollowers()) {
+				if (followerToClient.getId() == 0) {
+					followerToClient.setProject(projectfromdb);
+					projectRepository.save(followerToClient);
+				} else {
+					if (!followerToDb.equals(followerToClient)) {
+						projectFollwerRepository.delete(followerToClient);
+					} else {
+						projectFollwerRepository.save(followerToClient);
+					}
+
+				}
 			}
 		}
+		/*
+		 * // update ProjectFollower for (ProjectFollower follower :
+		 * projectFromClient.getProjectFollowers()) { if (follower.getId() == 0) {
+		 * follower.setProject(projectfromdb); projectRepository.save(follower); } else
+		 * { ProjectFollower projectsFrmDb =
+		 * projectFollwerRepository.getOne(follower.getId()); if
+		 * (projectFromClient.getProjectFollowers().contains(projectfromdb.
+		 * getProjectFollowers())) {
+		 * projectFollwerRepository.saveAll(projectfromdb.getProjectFollowers());
+		 * 
+		 * } else {
+		 * 
+		 * } if (projectFromClient.getProjectFollowers().contains(projectfromdb.
+		 * getProjectFollowers())) {
+		 * projectFollwerRepository.deleteAll(projectsFrmDb.getProject().
+		 * getProjectFollowers()); } else { projectFollwerRepository.save(follower); } }
+		 * }
+		 */
 
 		// update Phases
 		for (Phase phases : projectFromClient.getPhases()) {
@@ -185,11 +209,11 @@ public class ProjectServiceImpl {
 		while (itr.hasNext()) {
 			Project project = itr.next();
 			ProjectSummary ps = new ProjectSummary(project);
-			
+
 			summary.add(ps);
 		}
 		return summary;
-		
+
 	}
 
 	// getListOfAllUsersList
@@ -197,9 +221,9 @@ public class ProjectServiceImpl {
 		return userDetailsRepository.findAll();
 	}
 
-	//get project  by ID
+	// get project by ID
 	public Object getProjectById(Long id) {
-		Project proFrmDb =  projectRepository.getOne(id);
+		Project proFrmDb = projectRepository.getOne(id);
 		return proFrmDb;
 	}
 

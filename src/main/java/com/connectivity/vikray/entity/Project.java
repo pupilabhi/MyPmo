@@ -45,7 +45,7 @@ public class Project extends Auditable<Long> implements Serializable {
 	private StatusItem projectStatus;
 	private String guid;
 	private String customerName;
-	private long customerId;
+	//private long customerId;
 	
 	@Column(name = "customer_name")
 	public String getCustomerName() {
@@ -56,14 +56,14 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.customerName = customerName;
 	}
 
-	@Column(name = "customer_id")
+/*	@Column(name = "customer_id")
 	public long getCustomerId() {
 		return customerId;
 	}
 
 	public void setCustomerId(long customerId) {
 		this.customerId = customerId;
-	}
+	}*/
 
 	@Column
 	public String getGuid() {
