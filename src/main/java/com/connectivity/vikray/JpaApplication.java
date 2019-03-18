@@ -62,7 +62,7 @@ public class JpaApplication extends SpringBootServletInitializer{
 		Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
 		connector.setScheme("http");
 		connector.setPort(8080);
-		connector.setSecure(true);
+		connector.setSecure(false);
 		connector.setRedirectPort(9999);
 		return connector;
 	}
