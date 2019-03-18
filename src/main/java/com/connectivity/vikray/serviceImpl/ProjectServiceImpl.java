@@ -137,39 +137,16 @@ public class ProjectServiceImpl {
 		projectfromdb.setAccountAddress(projectFromClient.getAccountAddress());
 		projectfromdb.setSalesOrder(projectFromClient.getSalesOrder());
 
-		for (ProjectFollower followerToDb : projectfromdb.getProjectFollowers()) {
-			for (ProjectFollower followerToClient : projectFromClient.getProjectFollowers()) {
-				if (followerToClient.getId() == 0) {
-					followerToClient.setProject(projectfromdb);
-					projectRepository.save(followerToClient);
-				} else {
-					if (!followerToDb.equals(followerToClient)) {
-						projectFollwerRepository.delete(followerToClient);
-					} else {
-						projectFollwerRepository.save(followerToClient);
-					}
-
-				}
+		//update ProjectFollower
+		for(ProjectFollower followerFromClient: projectFromClient.getProjectFollowers()) {
+			if (followerFromClient.getId() == 0) {
+				followerFromClient.setProject(projectfromdb);
+				projectFollwerRepository.save(followerFromClient);
+			} else {
+				projectFollwerRepository.deleteAll(projectfromdb.getProjectFollowers());
+				projectFollwerRepository.saveAll(projectFromClient.getProjectFollowers());
 			}
 		}
-		/*
-		 * // update ProjectFollower for (ProjectFollower follower :
-		 * projectFromClient.getProjectFollowers()) { if (follower.getId() == 0) {
-		 * follower.setProject(projectfromdb); projectRepository.save(follower); } else
-		 * { ProjectFollower projectsFrmDb =
-		 * projectFollwerRepository.getOne(follower.getId()); if
-		 * (projectFromClient.getProjectFollowers().contains(projectfromdb.
-		 * getProjectFollowers())) {
-		 * projectFollwerRepository.saveAll(projectfromdb.getProjectFollowers());
-		 * 
-		 * } else {
-		 * 
-		 * } if (projectFromClient.getProjectFollowers().contains(projectfromdb.
-		 * getProjectFollowers())) {
-		 * projectFollwerRepository.deleteAll(projectsFrmDb.getProject().
-		 * getProjectFollowers()); } else { projectFollwerRepository.save(follower); } }
-		 * }
-		 */
 
 		// update Phases
 		for (Phase phases : projectFromClient.getPhases()) {
