@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.omg.CORBA.Current;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +16,6 @@ import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.Project;
 import com.connectivity.vikray.entity.ProjectFollower;
 import com.connectivity.vikray.entity.UserDetails;
-import com.connectivity.vikray.jwt.CurrentUser;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
 import com.connectivity.vikray.repository.ProjectFollwerRepository;
@@ -91,7 +89,7 @@ public class ProjectServiceImpl {
 		return newFollower;
 	}
 
-	// create Phaseset
+	// create Phases
 	public Set<Phase> createPhase(Project frmClient, Project project) {
 		Set<Phase> phaseFrmClient = frmClient.getPhases();
 		Set<Phase> newPhases = new HashSet<Phase>();
@@ -125,7 +123,6 @@ public class ProjectServiceImpl {
 	}
 
 	// update Project
-	@SuppressWarnings("unlikely-arg-type")
 	public Project updateProject(Project projectFromClient) {
 		Project projectfromdb = projectRepository.getOne(projectFromClient.getId());
 		if (projectfromdb == null) {
@@ -136,17 +133,19 @@ public class ProjectServiceImpl {
 		projectfromdb.setDueDate(projectFromClient.getDueDate());
 		projectfromdb.setAccountAddress(projectFromClient.getAccountAddress());
 		projectfromdb.setSalesOrder(projectFromClient.getSalesOrder());
-
+		projectfromdb.setOwner(userDetailsRepository.getOne(projectFromClient.getOwner().getId()));
 		//update ProjectFollower
-		for(ProjectFollower followerFromClient: projectFromClient.getProjectFollowers()) {
-			if (followerFromClient.getId() == 0) {
-				followerFromClient.setProject(projectfromdb);
-				projectFollwerRepository.save(followerFromClient);
-			} else {
-				projectFollwerRepository.deleteAll(projectfromdb.getProjectFollowers());
-				projectFollwerRepository.saveAll(projectFromClient.getProjectFollowers());
-			}
+		//Removing existing followers
+		if(!projectfromdb.getProjectFollowers().isEmpty())
+			projectFollwerRepository.deleteAll(projectfromdb.getProjectFollowers());
+		
+		//Adding Followers
+		if(!projectFromClient.getProjectFollowers().isEmpty()) {
+			Set<ProjectFollower> pf = createProjectFollower(projectFromClient, projectfromdb);
+			projectfromdb.setProjectFollowers(pf);
 		}
+		
+		
 
 		// update Phases
 		for (Phase phases : projectFromClient.getPhases()) {
