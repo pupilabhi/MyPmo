@@ -51,7 +51,7 @@ public class ProjectFollower implements Serializable{
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PROJECT_FK")
 	@JsonBackReference(value="project_ref")
 	public Project getProject() {

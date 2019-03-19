@@ -80,8 +80,8 @@ public class ProjectServiceImpl {
 		Iterator<ProjectFollower> itr = followerFromClient.iterator();
 		while (itr.hasNext()) {
 			ProjectFollower followerToDb = new ProjectFollower();
-			followerToDb = (ProjectFollower) itr.next();
-			followerToDb.setUserDetails(userDetailsRepository.getOne(followerToDb.getUserDetails().getId()));
+			ProjectFollower	followerfrmClient = (ProjectFollower) itr.next();
+			followerToDb.setUserDetails(userDetailsRepository.getOne(followerfrmClient.getUserDetails().getId()));
 			followerToDb.setProject(project);
 			projectFollwerRepository.save(followerToDb);
 			newFollower.add(followerToDb);

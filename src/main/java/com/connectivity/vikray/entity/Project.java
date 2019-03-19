@@ -164,7 +164,7 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.owner = owner;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
 	public Set<ProjectFollower> getProjectFollowers() {
 		return projectFollowers;
 	}
