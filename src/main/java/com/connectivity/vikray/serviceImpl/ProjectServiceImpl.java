@@ -60,7 +60,6 @@ public class ProjectServiceImpl {
 		if (projectFrmClent.getOwner() != null) {
 			toDb.setOwner(userDetailsRepository.getOne(projectFrmClent.getOwner().getId()));
 		}
-		// toDb.setCustomerId(projectFrmClent.getCustomerId());
 		toDb.setCustomerName(projectFrmClent.getCustomerName());
 		toDb.setGuid(UUID.randomUUID().toString());
 		projectRepository.save(toDb);
@@ -131,6 +130,7 @@ public class ProjectServiceImpl {
 		projectfromdb.setProjectName(projectFromClient.getProjectName());
 		projectfromdb.setProjectDescription(projectFromClient.getProjectDescription());
 		projectfromdb.setDueDate(projectFromClient.getDueDate());
+		projectfromdb.setCustomerName(projectFromClient.getCustomerName());
 		projectfromdb.setAccountAddress(projectFromClient.getAccountAddress());
 		projectfromdb.setSalesOrder(projectFromClient.getSalesOrder());
 		projectfromdb.setOwner(userDetailsRepository.getOne(projectFromClient.getOwner().getId()));
