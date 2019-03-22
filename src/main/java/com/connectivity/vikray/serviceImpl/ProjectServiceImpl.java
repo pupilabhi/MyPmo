@@ -47,25 +47,27 @@ public class ProjectServiceImpl {
 
 	// create Project
 
-	public Project createProject(Project projectFrmClent) {
+	public Project createProject(Project projectFrmClient) {
 		Project toDb = new Project();
-		toDb.setProjectName(projectFrmClent.getProjectName());
-		toDb.setProjectDescription(projectFrmClent.getProjectDescription());
-		if (projectFrmClent.getDueDate() != null)
-			toDb.setDueDate(projectFrmClent.getDueDate());
+		toDb.setProjectName(projectFrmClient.getProjectName());
+		toDb.setProjectDescription(projectFrmClient.getProjectDescription());
+		if (projectFrmClient.getDueDate() != null)
+			toDb.setDueDate(projectFrmClient.getDueDate());
 
-		toDb.setAccountAddress(projectFrmClent.getAccountAddress());
-		toDb.setSalesOrder(projectFrmClent.getSalesOrder());
+		toDb.setAccountAddress(projectFrmClient.getAccountAddress());
+		toDb.setSalesOrder(projectFrmClient.getSalesOrder());
 		toDb.setProjectStatus(statusRepo.getOne(VikrayPmoConstant.PROJ_NEW));
-		if (projectFrmClent.getOwner() != null) {
-			toDb.setOwner(userDetailsRepository.getOne(projectFrmClent.getOwner().getId()));
+		if(projectFrmClient.getOwner()!=null) {
+			if(projectFrmClient.getOwner().getId()!=0) {
+				toDb.setOwner(userDetailsRepository.getOne(projectFrmClient.getOwner().getId()));
+			}
 		}
-		toDb.setCustomerName(projectFrmClent.getCustomerName());
+		toDb.setCustomerName(projectFrmClient.getCustomerName());
 		toDb.setGuid(UUID.randomUUID().toString());
 		projectRepository.save(toDb);
-		Set<ProjectFollower> pf = createProjectFollower(projectFrmClent, toDb);
-		Set<Phase> ph = createPhase(projectFrmClent, toDb);
-		Set<Documents> doc = createDocuments(projectFrmClent, toDb);
+		Set<ProjectFollower> pf = createProjectFollower(projectFrmClient, toDb);
+		Set<Phase> ph = createPhase(projectFrmClient, toDb);
+		Set<Documents> doc = createDocuments(projectFrmClient, toDb);
 		toDb.setProjectFollowers(pf);
 		toDb.setPhases(ph);
 		toDb.setDocuments(doc);
@@ -133,7 +135,13 @@ public class ProjectServiceImpl {
 		projectfromdb.setCustomerName(projectFromClient.getCustomerName());
 		projectfromdb.setAccountAddress(projectFromClient.getAccountAddress());
 		projectfromdb.setSalesOrder(projectFromClient.getSalesOrder());
-		projectfromdb.setOwner(userDetailsRepository.getOne(projectFromClient.getOwner().getId()));
+		if(projectFromClient.getOwner()!=null) {
+			if(projectFromClient.getOwner().getId()!=0) {
+				projectfromdb.setOwner(userDetailsRepository.getOne(projectFromClient.getOwner().getId()));
+			}
+		}
+			
+		
 		//update ProjectFollower
 		//Removing existing followers
 		if(!projectfromdb.getProjectFollowers().isEmpty())
