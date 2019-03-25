@@ -3,7 +3,11 @@ package com.connectivity.vikray.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "status_item")
@@ -14,6 +18,10 @@ public class StatusItem {
 	private String statusConstant;
 	private String description;
 	
+	@Getter 
+	@Setter
+	@OneToOne(mappedBy = "phaseStatus")
+	private Phase phase;
 	
 	
 	@Id

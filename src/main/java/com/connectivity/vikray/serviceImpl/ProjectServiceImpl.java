@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +53,7 @@ public class ProjectServiceImpl {
 	DocumentRepository documentRepository;
 
 	@Autowired
-	StatusRepository statusRepo;
+	StatusRepository statusRepository;
 
 	/**
 	 * @param Project
@@ -69,7 +68,7 @@ public class ProjectServiceImpl {
 
 		toDb.setAccountAddress(projectFrmClient.getAccountAddress());
 		toDb.setSalesOrder(projectFrmClient.getSalesOrder());
-		toDb.setProjectStatus(statusRepo.getOne(VikrayPmoConstant.PROJ_NEW));
+		toDb.setProjectStatus(statusRepository.getOne(VikrayPmoConstant.PROJ_NEW));
 		if (projectFrmClient.getOwner() == null) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Owner Required!", null),
 					HttpStatus.BAD_REQUEST);
@@ -126,7 +125,7 @@ public class ProjectServiceImpl {
 				newPhaseTodb.setPhaseName(phaseFrmClient.getPhaseName());
 				newPhaseTodb.setProjectFk(project);
 				newPhaseTodb.setGuid(UUID.randomUUID().toString());
-//				newPhaseTodb.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PHASE_NEW));
+				newPhaseTodb.setPhaseStatus(statusRepository.getOne(VikrayPmoConstant.PHASE_NEW));
 				phaseRepository.save(newPhaseTodb);
 				newPhases.add(newPhaseTodb);
 			} else {
@@ -177,7 +176,7 @@ public class ProjectServiceImpl {
 		// update ProjectFollower
 		// Removing existing followers
 		if (!projectFromDb.getProjectFollowers().isEmpty())
-			projectFollwerRepository.deleteAll(projectFromDb.getProjectFollowers());
+			projectFollwerRepository.deleteInBatch(projectFromDb.getProjectFollowers());
 
 		// Adding Followers
 		if (!projectFromClient.getProjectFollowers().isEmpty()) {
@@ -187,7 +186,7 @@ public class ProjectServiceImpl {
 		
 		//Removing existing phases
 		if(!projectFromClient.getPhases().isEmpty())
-			phaseRepository.deleteAll(projectFromDb.getPhases());
+			phaseRepository.deleteInBatch(projectFromDb.getPhases());
 		
 		//updating with new phases
 		if(!projectFromClient.getPhases().isEmpty()) {

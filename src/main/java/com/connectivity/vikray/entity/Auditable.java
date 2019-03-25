@@ -32,7 +32,7 @@ public abstract class Auditable<U> {
 
     @LastModifiedBy
     @Column(name = "last_modified_by")
-    @JsonBackReference
+    @JsonBackReference(value = "modified value")
     protected U lastModifiedBy;
 
     @LastModifiedDate

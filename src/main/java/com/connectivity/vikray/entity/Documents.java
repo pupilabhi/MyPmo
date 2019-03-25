@@ -75,7 +75,7 @@ public class Documents extends Auditable<Long> implements Serializable{
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "project_Fk")
-	@JsonBackReference
+	@JsonBackReference(value = "proj_ref")
 	public Project getProjectFk() {
 		return projectFk;
 	}
