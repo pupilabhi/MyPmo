@@ -124,7 +124,7 @@ public class ProjectServiceImpl {
 			if (phaseFrmClient.getId() == 0) {
 				Phase newPhaseTodb = new Phase();
 				newPhaseTodb.setProjectFk(project);
-				newPhaseTodb.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PHASE_NEW));
+//				newPhaseTodb.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PHASE_NEW));
 				phaseRepository.save(newPhaseTodb);
 				newPhases.add(newPhaseTodb);
 			} else {
@@ -193,16 +193,8 @@ public class ProjectServiceImpl {
 			projectFromDb.setPhases(phases);// update Documents
 		}
 		
-		/*for (Documents documents : projectFromClient.getDocuments()) {
-			if (documents.getId() == 0) {
-				documents.setProjectFk(projectfromdb);
-				documentRepository.save(documents);
-			} else {
-				Documents docFrmDb = documentRepository.getOne(documents.getId());
-			}
-		}*/
 		Project updatedProject = projectRepository.save(projectFromDb);
-		if (updatedProject != null) {
+		if (updatedProject == null) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Oops!!, Project Update failed", null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		} else {
