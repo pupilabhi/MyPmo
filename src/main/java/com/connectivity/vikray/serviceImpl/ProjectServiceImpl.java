@@ -124,7 +124,7 @@ public class ProjectServiceImpl {
 			if (phaseFrmClient.getId() == 0) {
 				Phase newPhaseTodb = new Phase();
 				newPhaseTodb.setProjectFk(project);
-				newPhaseTodb.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PHASE_NEW));
+//				newPhaseTodb.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PHASE_NEW));
 				phaseRepository.save(newPhaseTodb);
 				newPhases.add(newPhaseTodb);
 			} else {
