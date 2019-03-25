@@ -14,12 +14,15 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class Auditable<U> {
 
 	@CreatedBy
     @Column(name = "created_by")
+	@JsonBackReference
     protected U createdBy;
 
     @CreatedDate
@@ -29,6 +32,7 @@ public abstract class Auditable<U> {
 
     @LastModifiedBy
     @Column(name = "last_modified_by")
+    @JsonBackReference
     protected U lastModifiedBy;
 
     @LastModifiedDate

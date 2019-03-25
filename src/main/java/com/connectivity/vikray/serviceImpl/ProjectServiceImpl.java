@@ -123,7 +123,9 @@ public class ProjectServiceImpl {
 			Phase phaseFrmClient = (Phase) itr.next();
 			if (phaseFrmClient.getId() == 0) {
 				Phase newPhaseTodb = new Phase();
+				newPhaseTodb.setPhaseName(phaseFrmClient.getPhaseName());
 				newPhaseTodb.setProjectFk(project);
+				newPhaseTodb.setGuid(UUID.randomUUID().toString());
 //				newPhaseTodb.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PHASE_NEW));
 				phaseRepository.save(newPhaseTodb);
 				newPhases.add(newPhaseTodb);
