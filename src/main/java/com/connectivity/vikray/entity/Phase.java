@@ -155,7 +155,7 @@ public class Phase extends Auditable<Long> implements Serializable {
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
 	}
-	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE, orphanRemoval = false)
 	@JoinColumn(name = "phase_status")
 	public StatusItem getPhaseStatus() {
 		return phaseStatus;
