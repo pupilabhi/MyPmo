@@ -128,8 +128,6 @@ public class ProjectServiceImpl {
 				phaseRepository.save(newPhaseTodb);
 				newPhases.add(newPhaseTodb);
 			} else {
-//				phaseFrmClient.setProjectFk(project);
-//				phaseFrmClient.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PHASE_NEW));
 				phaseRepository.save(phaseFrmClient);
 				newPhases.add(phaseFrmClient);
 			}
@@ -161,42 +159,40 @@ public class ProjectServiceImpl {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Not Found!", null),
 					HttpStatus.BAD_REQUEST);
 		}
-		Project projectfromdb = projectRepository.getOne(projectFromClient.getId());
-		projectfromdb.setProjectName(projectFromClient.getProjectName());
-		projectfromdb.setProjectDescription(projectFromClient.getProjectDescription());
-		projectfromdb.setDueDate(projectFromClient.getDueDate());
-		projectfromdb.setCustomerName(projectFromClient.getCustomerName());
-		projectfromdb.setAccountAddress(projectFromClient.getAccountAddress());
-		projectfromdb.setSalesOrder(projectFromClient.getSalesOrder());
+		Project projectFromDb = projectRepository.getOne(projectFromClient.getId());
+		projectFromDb.setProjectName(projectFromClient.getProjectName());
+		projectFromDb.setProjectDescription(projectFromClient.getProjectDescription());
+		projectFromDb.setDueDate(projectFromClient.getDueDate());
+		projectFromDb.setCustomerName(projectFromClient.getCustomerName());
+		projectFromDb.setAccountAddress(projectFromClient.getAccountAddress());
+		projectFromDb.setSalesOrder(projectFromClient.getSalesOrder());
 		if (projectFromClient.getOwner() != null) {
 			if (projectFromClient.getOwner().getId() != 0) {
-				projectfromdb.setOwner(userDetailsRepository.getOne(projectFromClient.getOwner().getId()));
+				projectFromDb.setOwner(userDetailsRepository.getOne(projectFromClient.getOwner().getId()));
 			}
 		}
 
 		// update ProjectFollower
 		// Removing existing followers
-		if (!projectfromdb.getProjectFollowers().isEmpty())
-			projectFollwerRepository.deleteAll(projectfromdb.getProjectFollowers());
+		if (!projectFromDb.getProjectFollowers().isEmpty())
+			projectFollwerRepository.deleteAll(projectFromDb.getProjectFollowers());
 
 		// Adding Followers
 		if (!projectFromClient.getProjectFollowers().isEmpty()) {
-			Set<ProjectFollower> pf = createProjectFollower(projectFromClient, projectfromdb);
-			projectfromdb.setProjectFollowers(pf);
+			Set<ProjectFollower> pf = createProjectFollower(projectFromClient, projectFromDb);
+			projectFromDb.setProjectFollowers(pf);
 		}
-		createUpdatePhase(projectFromClient, projectfromdb);
-//		// update Phases
-//		for (Phase phases : projectFromClient.getPhases()) {
-//			if (phases.getId() == 0) {
-//				phases.setProjectFk(projectfromdb);
-//				projectRepository.save(phases);
-//			} else {
-//				Phase phaseFromDb = phaseRepository.getOne(phases.getId());
-//				// phaseFromDb.setProjectFk(projectFromClient.getProjectName());
-//			}
-//		}
-
-		// update Documents
+		
+		//Removing existing phases
+		if(!projectFromClient.getPhases().isEmpty())
+			phaseRepository.deleteAll(projectFromDb.getPhases());
+		
+		//updating with new phases
+		if(!projectFromClient.getPhases().isEmpty()) {
+			Set<Phase> phases = createUpdatePhase(projectFromClient, projectFromDb);
+			projectFromDb.setPhases(phases);// update Documents
+		}
+		
 		/*for (Documents documents : projectFromClient.getDocuments()) {
 			if (documents.getId() == 0) {
 				documents.setProjectFk(projectfromdb);
@@ -205,7 +201,7 @@ public class ProjectServiceImpl {
 				Documents docFrmDb = documentRepository.getOne(documents.getId());
 			}
 		}*/
-		Project updatedProject = projectRepository.save(projectfromdb);
+		Project updatedProject = projectRepository.save(projectFromDb);
 		if (updatedProject != null) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Oops!!, Project Update failed", null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
