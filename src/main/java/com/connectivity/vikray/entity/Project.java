@@ -170,7 +170,7 @@ public class Project extends Auditable<Long> implements Serializable {
 		this.projectFollowers = projectFollowers;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectFk", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectFk")
 	public Set<Phase> getPhases() {
 		return phases;
 	}

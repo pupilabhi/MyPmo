@@ -109,7 +109,7 @@ public class Phase extends Auditable<Long> implements Serializable {
 		this.dueDate = dueDate;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PROJECT_FK")
 	@JsonBackReference(value = "project_ref")
 	public Project getProjectFk() {
