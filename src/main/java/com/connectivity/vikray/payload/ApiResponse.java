@@ -1,18 +1,29 @@
 package com.connectivity.vikray.payload;
 
-/**
- * Created by rajeevkumarsingh on 19/08/17.
- */
+
 public class ApiResponse {
     private Boolean success;
     private String message;
+    private Object data;
 
-    public ApiResponse(Boolean success, String message) {
+    public ApiResponse(Boolean success, String message, Object data) {
         this.success = success;
         this.message = message;
+        this.data = data;
     }
 
-    public Boolean getSuccess() {
+    
+    public Object getData() {
+		return data;
+	}
+
+
+	public void setData(Object data) {
+		this.data = data;
+	}
+
+
+	public Boolean getSuccess() {
         return success;
     }
 

@@ -3,6 +3,9 @@ package com.connectivity.vikray.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {
     
@@ -10,6 +13,14 @@ public class ResourceNotFoundException extends RuntimeException {
 	private String resourceName;
     private String fieldName;
     private Object fieldValue;
+   
+    @Getter@Setter
+    private long id;
+    
+    public ResourceNotFoundException(long id) {
+    	super("Data Not found with id : "+id);
+    	this.id = id;
+    }
 
     public ResourceNotFoundException( String resourceName, String fieldName, Object fieldValue) {
         super(String.format("%s not found with %s : '%s'", resourceName, fieldName, fieldValue));

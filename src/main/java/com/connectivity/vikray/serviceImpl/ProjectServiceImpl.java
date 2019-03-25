@@ -1,14 +1,23 @@
 package com.connectivity.vikray.serviceImpl;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.connectivity.vikray.constant.VikrayPmoConstant;
 import com.connectivity.vikray.entity.Documents;
@@ -16,12 +25,14 @@ import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.Project;
 import com.connectivity.vikray.entity.ProjectFollower;
 import com.connectivity.vikray.entity.UserDetails;
+import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
 import com.connectivity.vikray.repository.ProjectFollwerRepository;
 import com.connectivity.vikray.repository.ProjectRepository;
 import com.connectivity.vikray.repository.StatusRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
+import com.connectivity.vikray.resource.ProjectResource;
 import com.connectivity.vikray.summary.ProjectSummary;
 
 @Repository
@@ -45,9 +56,11 @@ public class ProjectServiceImpl {
 	@Autowired
 	StatusRepository statusRepo;
 
-	// create Project
-
-	public Project createProject(Project projectFrmClient) {
+	/**
+	 * @param Project
+	 * @return Project Object on success Persisting project to data base
+	 **/
+	public ResponseEntity<ApiResponse> createProject(Project projectFrmClient) {
 		Project toDb = new Project();
 		toDb.setProjectName(projectFrmClient.getProjectName());
 		toDb.setProjectDescription(projectFrmClient.getProjectDescription());
@@ -57,21 +70,32 @@ public class ProjectServiceImpl {
 		toDb.setAccountAddress(projectFrmClient.getAccountAddress());
 		toDb.setSalesOrder(projectFrmClient.getSalesOrder());
 		toDb.setProjectStatus(statusRepo.getOne(VikrayPmoConstant.PROJ_NEW));
-		if(projectFrmClient.getOwner()!=null) {
-			if(projectFrmClient.getOwner().getId()!=0) {
-				toDb.setOwner(userDetailsRepository.getOne(projectFrmClient.getOwner().getId()));
-			}
+		if (projectFrmClient.getOwner() == null) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Owner Required!", null),
+					HttpStatus.BAD_REQUEST);
+		} else {
+			toDb.setOwner(userDetailsRepository.getOne(projectFrmClient.getOwner().getId()));
 		}
 		toDb.setCustomerName(projectFrmClient.getCustomerName());
 		toDb.setGuid(UUID.randomUUID().toString());
+		if (projectFrmClient.getProjectFollowers().isEmpty()) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Followers Required!", null),
+					HttpStatus.BAD_REQUEST);
+		}
+		if (projectFrmClient.getPhases().isEmpty()) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Phases Required!", null),
+					HttpStatus.BAD_REQUEST);
+		}
+
 		projectRepository.save(toDb);
 		Set<ProjectFollower> pf = createProjectFollower(projectFrmClient, toDb);
-		Set<Phase> ph = createPhase(projectFrmClient, toDb);
-		Set<Documents> doc = createDocuments(projectFrmClient, toDb);
+		Set<Phase> ph = createUpdatePhase(projectFrmClient, toDb);
+//		Set<Documents> doc = createDocuments(projectFrmClient, toDb);
 		toDb.setProjectFollowers(pf);
 		toDb.setPhases(ph);
-		toDb.setDocuments(doc);
-		return toDb;
+//		toDb.setDocuments(doc);
+		URI uri = MvcUriComponentsBuilder.fromController(getClass()).path("/{id}").buildAndExpand(toDb.getId()).toUri();
+		return ResponseEntity.created(uri).body(new ApiResponse(true, "", new ProjectResource(toDb)));
 	}
 
 	// create Project Follower
@@ -81,7 +105,7 @@ public class ProjectServiceImpl {
 		Iterator<ProjectFollower> itr = followerFromClient.iterator();
 		while (itr.hasNext()) {
 			ProjectFollower followerToDb = new ProjectFollower();
-			ProjectFollower	followerfrmClient = (ProjectFollower) itr.next();
+			ProjectFollower followerfrmClient = (ProjectFollower) itr.next();
 			followerToDb.setUserDetails(userDetailsRepository.getOne(followerfrmClient.getUserDetails().getId()));
 			followerToDb.setProject(project);
 			projectFollwerRepository.save(followerToDb);
@@ -91,17 +115,24 @@ public class ProjectServiceImpl {
 	}
 
 	// create Phases
-	public Set<Phase> createPhase(Project frmClient, Project project) {
-		Set<Phase> phaseFrmClient = frmClient.getPhases();
+	public Set<Phase> createUpdatePhase(Project frmClient, Project project) {
+		Set<Phase> phasesFrmClient = frmClient.getPhases();
 		Set<Phase> newPhases = new HashSet<Phase>();
-		Iterator<Phase> itr = phaseFrmClient.iterator();
+		Iterator<Phase> itr = phasesFrmClient.iterator();
 		while (itr.hasNext()) {
-			Phase phaseTodb = new Phase();
-			phaseTodb = (Phase) itr.next();
-			phaseTodb.setProjectFk(project);
-			phaseTodb.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PHASE_NEW));
-			phaseRepository.save(phaseTodb);
-			newPhases.add(phaseTodb);
+			Phase phaseFrmClient = (Phase) itr.next();
+			if (phaseFrmClient.getId() == 0) {
+				Phase newPhaseTodb = new Phase();
+				newPhaseTodb.setProjectFk(project);
+				newPhaseTodb.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PHASE_NEW));
+				phaseRepository.save(newPhaseTodb);
+				newPhases.add(newPhaseTodb);
+			} else {
+//				phaseFrmClient.setProjectFk(project);
+//				phaseFrmClient.setPhaseStatus(statusRepo.getOne(VikrayPmoConstant.PHASE_NEW));
+				phaseRepository.save(phaseFrmClient);
+				newPhases.add(phaseFrmClient);
+			}
 		}
 		return newPhases;
 	}
@@ -124,67 +155,69 @@ public class ProjectServiceImpl {
 	}
 
 	// update Project
-	public Project updateProject(Project projectFromClient) {
-		Project projectfromdb = projectRepository.getOne(projectFromClient.getId());
-		if (projectfromdb == null) {
-			return null;
+	public ResponseEntity<ApiResponse> updateProject(Project projectFromClient) {
+		
+		if (!projectRepository.existsById(projectFromClient.getId())) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Not Found!", null),
+					HttpStatus.BAD_REQUEST);
 		}
+		Project projectfromdb = projectRepository.getOne(projectFromClient.getId());
 		projectfromdb.setProjectName(projectFromClient.getProjectName());
 		projectfromdb.setProjectDescription(projectFromClient.getProjectDescription());
 		projectfromdb.setDueDate(projectFromClient.getDueDate());
 		projectfromdb.setCustomerName(projectFromClient.getCustomerName());
 		projectfromdb.setAccountAddress(projectFromClient.getAccountAddress());
 		projectfromdb.setSalesOrder(projectFromClient.getSalesOrder());
-		if(projectFromClient.getOwner()!=null) {
-			if(projectFromClient.getOwner().getId()!=0) {
+		if (projectFromClient.getOwner() != null) {
+			if (projectFromClient.getOwner().getId() != 0) {
 				projectfromdb.setOwner(userDetailsRepository.getOne(projectFromClient.getOwner().getId()));
 			}
 		}
-			
-		
-		//update ProjectFollower
-		//Removing existing followers
-		if(!projectfromdb.getProjectFollowers().isEmpty())
+
+		// update ProjectFollower
+		// Removing existing followers
+		if (!projectfromdb.getProjectFollowers().isEmpty())
 			projectFollwerRepository.deleteAll(projectfromdb.getProjectFollowers());
-		
-		//Adding Followers
-		if(!projectFromClient.getProjectFollowers().isEmpty()) {
+
+		// Adding Followers
+		if (!projectFromClient.getProjectFollowers().isEmpty()) {
 			Set<ProjectFollower> pf = createProjectFollower(projectFromClient, projectfromdb);
 			projectfromdb.setProjectFollowers(pf);
 		}
-		
-		
-
-		// update Phases
-		for (Phase phases : projectFromClient.getPhases()) {
-			if (phases.getId() == 0) {
-				phases.setProjectFk(projectfromdb);
-				projectRepository.save(phases);
-			} else {
-				Phase phaseFromDb = phaseRepository.getOne(phases.getId());
-				// phaseFromDb.setProjectFk(projectFromClient.getProjectName());
-			}
-		}
+		createUpdatePhase(projectFromClient, projectfromdb);
+//		// update Phases
+//		for (Phase phases : projectFromClient.getPhases()) {
+//			if (phases.getId() == 0) {
+//				phases.setProjectFk(projectfromdb);
+//				projectRepository.save(phases);
+//			} else {
+//				Phase phaseFromDb = phaseRepository.getOne(phases.getId());
+//				// phaseFromDb.setProjectFk(projectFromClient.getProjectName());
+//			}
+//		}
 
 		// update Documents
-		for (Documents documents : projectFromClient.getDocuments()) {
+		/*for (Documents documents : projectFromClient.getDocuments()) {
 			if (documents.getId() == 0) {
 				documents.setProjectFk(projectfromdb);
 				documentRepository.save(documents);
 			} else {
 				Documents docFrmDb = documentRepository.getOne(documents.getId());
 			}
-		}
+		}*/
 		Project updatedProject = projectRepository.save(projectfromdb);
 		if (updatedProject != null) {
-			return updatedProject;
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Oops!!, Project Update failed", null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		} else {
-			return null;
+			ProjectResource project = new ProjectResource(updatedProject); 
+			 URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+		    return ResponseEntity.created(uri).body(new ApiResponse(true, "", project));
 		}
 	}
 
 	// getListOfProjects
-	public List<ProjectSummary> getAllProject() {
+	public ResponseEntity<Resources<?>> getAllProject() {
 		List<Project> projects = null;
 		projects = projectRepository.findAll();
 		List<ProjectSummary> summary = null;
@@ -193,10 +226,14 @@ public class ProjectServiceImpl {
 		while (itr.hasNext()) {
 			Project project = itr.next();
 			ProjectSummary ps = new ProjectSummary(project);
-
 			summary.add(ps);
 		}
-		return summary;
+		List<ProjectResource> projectResource = null;
+		projectResource = summary.stream().map(ProjectResource::new).collect(Collectors.toList());
+		Resources<ProjectResource> resources = new Resources<>(projectResource);
+		final String uriString = ServletUriComponentsBuilder.fromCurrentRequest().build().toUriString();
+		resources.add(new Link(uriString, "self"));
+		return ResponseEntity.ok(resources);
 
 	}
 
@@ -206,9 +243,24 @@ public class ProjectServiceImpl {
 	}
 
 	// get project by ID
-	public Object getProjectById(Long id) {
+	public ResponseEntity<ApiResponse> getProjectById(Long id) {
+//		return  projectRepository
+//				.findById(id)
+//				.map(
+//					p ->{
+//						return ResponseEntity.ok(new ApiResponse(true, "",new ProjectResource(p)));
+//					})
+//				.orElseThrow(()->new ResourceNotFoundException(id));
+
+		if (!projectRepository.existsById(id)) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Not Found!", null),
+					HttpStatus.BAD_REQUEST);
+		}
 		Project proFrmDb = projectRepository.getOne(id);
-		return proFrmDb;
+		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/project/getProjectById/{id}")
+				.buildAndExpand(proFrmDb.getId()).toUri();
+
+		return ResponseEntity.created(location).body(new ApiResponse(true, "", new ProjectResource(proFrmDb)));
 	}
 
 }

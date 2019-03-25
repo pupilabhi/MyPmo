@@ -1,10 +1,13 @@
 package com.connectivity.vikray.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resources;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.connectivity.vikray.constant.VikrayPmoMessageConstant;
 import com.connectivity.vikray.entity.Project;
+import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.serviceImpl.ProjectServiceImpl;
 
@@ -18,54 +21,30 @@ public class ProjectService {
 	@Autowired
 	ValidResult result;
 
-	public ValidResult createProject(Project project) {
-		Project cp = projectServiceImpl.createProject(project);
-		if (cp != null) {
-			result.setErrorCode((long) 101);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
-			result.setData(cp);
-		} else {
-			result.setErrorCode((long) 102);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
-		}
-		return result;
+	public ResponseEntity<ApiResponse> createProject(Project project) {
+		ResponseEntity<ApiResponse> response = projectServiceImpl.createProject(project);
+		return response;
 	}
 
-	public ValidResult updateProject(Project project) {
-		Object rt = projectServiceImpl.updateProject(project);
-		if (rt != null) {
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
-			result.setData(rt);
-		} else {
-			result.setErrorCode((long) 102);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
-		}
-		return result;
+	public ResponseEntity<ApiResponse> updateProject(Project project) {
+		 ResponseEntity<ApiResponse> response = projectServiceImpl.updateProject(project);
+		 return response;
+		
 	}
 
-	public ValidResult getAllProject() {
-		result.setData(projectServiceImpl.getAllProject());
-		result.setErrorCode((long) 101);
-		result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
-		return result;
+	public ResponseEntity<Resources<?>> getAllProject() {
+		ResponseEntity<Resources<?>> response =	projectServiceImpl.getAllProject();
+		return response;
 	}
 
+	public ResponseEntity<ApiResponse> getProjectById(Long id) {
+		ResponseEntity<ApiResponse> response = projectServiceImpl.getProjectById(id);
+		return response;
+	}
 	public ValidResult getAllUserList() {
 		result.setData(projectServiceImpl.getAllUsersList());
 		result.setErrorCode((long) 101);
 		result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
-		return result;
-	}
-
-	public ValidResult getProjectById(Long id) {
-		Object rt = projectServiceImpl.getProjectById(id);
-		if (rt != null) {
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
-			result.setData(rt);
-		} else {
-			result.setErrorCode((long) 102);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
-		}
 		return result;
 	}
 	

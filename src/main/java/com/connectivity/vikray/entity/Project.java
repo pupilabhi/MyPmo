@@ -45,7 +45,6 @@ public class Project extends Auditable<Long> implements Serializable {
 	private StatusItem projectStatus;
 	private String guid;
 	private String customerName;
-	//private long customerId;
 	
 	@Column(name = "customer_name")
 	public String getCustomerName() {
@@ -55,15 +54,6 @@ public class Project extends Auditable<Long> implements Serializable {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-
-/*	@Column(name = "customer_id")
-	public long getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(long customerId) {
-		this.customerId = customerId;
-	}*/
 
 	@Column
 	public String getGuid() {
@@ -84,21 +74,28 @@ public class Project extends Auditable<Long> implements Serializable {
 
 	
 
-	public Project(long id, String projectName, String projectDescription, Date dueDate, String accountAddress,
-			String salesOrder, UserDetails owner, Set<ProjectFollower> projectFollowers, Set<Phase> phases,
-			Set<Documents> documents, StatusItem projectStatus) {
-		super();
+	public Project(Project project) {
+		this.projectName = project.getProjectName();
+		this.projectDescription = project.getProjectDescription();
+		this.dueDate = project.getDueDate();
+		this.accountAddress = project.getAccountAddress();
+		this.salesOrder = project.getSalesOrder();
+		if(project.getOwner()!=null)
+			this.owner = project.getOwner();
+		this.projectFollowers = project.getProjectFollowers();
+		this.phases = project.getPhases();
+	}
+	public Project(Project project,long id) {
 		this.id = id;
-		this.projectName = projectName;
-		this.projectDescription = projectDescription;
-		this.dueDate = dueDate;
-		this.accountAddress = accountAddress;
-		this.salesOrder = salesOrder;
-		this.owner = owner;
-		this.projectFollowers = projectFollowers;
-		this.phases = phases;
-		this.documents = documents;
-		this.projectStatus = projectStatus;
+		this.projectName = project.getProjectName();
+		this.projectDescription = project.getProjectDescription();
+		this.dueDate = project.getDueDate();
+		this.accountAddress = project.getAccountAddress();
+		this.salesOrder = project.getSalesOrder();
+		if(project.getOwner()!=null)
+			this.owner = project.getOwner();
+		this.projectFollowers = project.getProjectFollowers();
+		this.phases = project.getPhases();
 	}
 
 	@Id
