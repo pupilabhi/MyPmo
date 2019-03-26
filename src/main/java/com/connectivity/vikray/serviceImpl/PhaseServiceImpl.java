@@ -1,25 +1,41 @@
 package com.connectivity.vikray.serviceImpl;
 
+import java.net.URI;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resources;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriBuilder;
 
+import com.connectivity.vikray.controller.PhaseController;
 import com.connectivity.vikray.entity.Documents;
 import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.PhaseFollower;
+import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.PhaseFollowerRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
 import com.connectivity.vikray.repository.ProjectRepository;
 import com.connectivity.vikray.repository.TaskRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
+import com.connectivity.vikray.resource.PhaseResource;
+import com.connectivity.vikray.resource.ProjectResource;
+
+import javassist.expr.NewArray;
 
 @Repository
 public class PhaseServiceImpl {
@@ -44,21 +60,26 @@ public class PhaseServiceImpl {
 
 	// Create Phases
 	@Transactional
-	public Phase createPhase(Phase phaseFrmClent) {
-		Phase todb = new Phase();
-		todb.setPhaseName(phaseFrmClent.getPhaseName());
-		todb.setDueDate(phaseFrmClent.getDueDate());
-		todb.setGuid(UUID.randomUUID().toString());
+	public ResponseEntity<ApiResponse> createPhase(Phase phaseFrmClent) {
+		Phase toDb = new Phase();
+		toDb.setPhaseName(phaseFrmClent.getPhaseName());
+		toDb.setDueDate(phaseFrmClent.getDueDate());
+		toDb.setGuid(UUID.randomUUID().toString());
 		if (phaseFrmClent.getProjectFk() != null) {
-			todb.setProjectFk(projectRepository.getOne(phaseFrmClent.getProjectFk().getId()));
+			toDb.setProjectFk(projectRepository.getOne(phaseFrmClent.getProjectFk().getId()));
 		}
-		todb.setAccountAddress(phaseFrmClent.getAccountAddress());
+		toDb.setAccountAddress(phaseFrmClent.getAccountAddress());
 		
-		Set<Documents> docs = createDocuments(phaseFrmClent, todb);
-		todb.setDocuments(docs);
-		
-		phaseRepository.save(todb);
-		return todb;
+		Set<Documents> docs = createDocuments(phaseFrmClent, toDb);
+		toDb.setDocuments(docs);
+		Phase newPhase = phaseRepository.save(toDb);
+		if(newPhase == null) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Success", null),
+					HttpStatus.EXPECTATION_FAILED);
+		}
+		URI uri = MvcUriComponentsBuilder.fromController(PhaseController.class).path("/{id}")
+				.buildAndExpand(toDb.getId()).toUri();
+		return ResponseEntity.created(uri).body(new ApiResponse(true, "", new PhaseResource(toDb)));
 	}
 
 	// create Documents
@@ -77,21 +98,6 @@ public class PhaseServiceImpl {
 		return documents;
 	}
 	
-
-	/*public Set<Task> createTask(Phase phasefrmClent, Phase phase){
-		Set<Task> taskfrmClient= phasefrmClent.getTasks();
-		Set<Task> newTask= new HashSet<Task>();
-		Iterator<Task> itr= taskfrmClient.iterator();
-		while (itr.hasNext()) {
-			Task tasktodb= new Task();
-			tasktodb= (Task)itr.next();
-			tasktodb.setPhaseFk(phase);
-			taskRepository.save(tasktodb);
-			newTask.add(tasktodb);
-		}
-		return newTask;
-		
-	}
 	// Create PhaseFollower
 	public Set<PhaseFollower> createPhaseFollower(Phase phaseFrmClent, Phase phase) {
 		Set<PhaseFollower> phasefrmClent = phaseFrmClent.getPhaseFollowers();
@@ -107,14 +113,17 @@ public class PhaseServiceImpl {
 		}
 		return newPhases;
 	}
-*/
+
 	
 	// Update Phases
-	public Phase updatePhase(Phase phasefrmclient) {
-		Phase phasefrmdb = phaseRepository.getOne(phasefrmclient.getId());
-		if (phasefrmdb == null) {
-			return null;
+	public ResponseEntity<ApiResponse> updatePhase(Phase phasefrmclient) {
+		
+		if (!phaseRepository.existsById(phasefrmclient.getId())) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Phase Not Found", null),
+					HttpStatus.BAD_REQUEST);
 		}
+		
+		Phase phasefrmdb = phaseRepository.getOne(phasefrmclient.getId());
 		phasefrmdb.setPhaseName(phasefrmclient.getPhaseName());
 		phasefrmdb.setDueDate(phasefrmclient.getDueDate());
 		phasefrmdb.setAccountAddress(phasefrmclient.getAccountAddress());
@@ -137,38 +146,40 @@ public class PhaseServiceImpl {
 			}
 		}
 
-		// update Phase Followers
-		for (PhaseFollower phaseFollower : phasefrmclient.getPhaseFollowers()) {
-			if (phaseFollower.getId() == 0) {
-				PhaseFollower newFollower = new PhaseFollower();
-				newFollower.setPhaseFk(phasefrmdb);
-				newFollower.setUserDetailsFk(userDetailsRepository.getOne(phaseFollower.getUserDetailsFk().getId()));
-				phaseFollowerRepository.save(phaseFollower);
-			} else {
-				PhaseFollower follFrmDb = phaseFollowerRepository.getOne(phaseFollower.getId());
-				follFrmDb.setUserDetailsFk(userDetailsRepository.getOne(phaseFollower.getUserDetailsFk().getId()));
-			}
-		}
 
 		Phase updatePhase = phaseRepository.save(phasefrmdb);
-		if (updatePhase != null) {
-			return updatePhase;
+		if (updatePhase == null) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Phase not updated", null),
+					HttpStatus.EXPECTATION_FAILED);
 		} else {
-			return null;
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().build().toUri();
+			return ResponseEntity.created(uri).body(new ApiResponse(true, "", new PhaseResource(updatePhase)));
 		}
 	}
 
-	// getList of All Phases
-	public List<Phase> getAllPhase() {
-		return phaseRepository.findAll();
+	public ResponseEntity<ApiResponse> getPhasesByProjectId(Long projectId) {
+		List<Phase> phases = phaseRepository.findByProjectFk(projectRepository.getOne(projectId));
+		if(phases.isEmpty()) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, 
+					"No phases found for project with id : "+projectId, null),
+					HttpStatus.ACCEPTED);
+		}
+		List<PhaseResource> phaseResource = null;
+		phaseResource = phases.stream().map(PhaseResource::new).collect(Collectors.toList());
+		Resources<PhaseResource> resources = new Resources<>(phaseResource);
+		 URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().build("/phases/{}");
+		resources.add(new Link(uri.toString(),"Self"));
+		return ResponseEntity.created(uri).body(new ApiResponse(true, "", resources));
 	}
 
-	public Object getPhasesByProjectId(Long projectId) {
-		return phaseRepository.findByProjectFk(projectRepository.getOne(projectId));
-	}
-
-	public Object getPhaseById(Long id) {
-		return phaseRepository.getOne(id);
+	public ResponseEntity<ApiResponse> getPhaseById(Long id) {
+		if (!phaseRepository.existsById(id)){
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false,"Phase With ID : "+id+" Not found",null),
+					HttpStatus.BAD_REQUEST);
+		}
+		Phase phase = phaseRepository.getOne(id);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().buildAndExpand("/{id}").toUri();
+		return ResponseEntity.created(uri).body(new ApiResponse(true, "", new PhaseResource(phase)));
 	}
 
 	

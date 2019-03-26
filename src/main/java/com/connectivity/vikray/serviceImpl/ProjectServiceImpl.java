@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.connectivity.vikray.constant.VikrayPmoConstant;
+import com.connectivity.vikray.controller.ProjectController;
 import com.connectivity.vikray.entity.Documents;
 import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.Project;
@@ -93,7 +94,8 @@ public class ProjectServiceImpl {
 		toDb.setProjectFollowers(pf);
 		toDb.setPhases(ph);
 //		toDb.setDocuments(doc);
-		URI uri = MvcUriComponentsBuilder.fromController(getClass()).path("/{id}").buildAndExpand(toDb.getId()).toUri();
+		URI uri = MvcUriComponentsBuilder.fromController(ProjectController.class).path("/{id}")
+				.buildAndExpand(toDb.getId()).toUri();
 		return ResponseEntity.created(uri).body(new ApiResponse(true, "", new ProjectResource(toDb)));
 	}
 

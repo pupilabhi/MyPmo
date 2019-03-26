@@ -1,6 +1,7 @@
 package com.connectivity.vikray.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,39 +10,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.connectivity.vikray.entity.Phase;
-import com.connectivity.vikray.pojo.ValidResult;
+import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.service.PhaseService;
 
 @RestController
-@RequestMapping(value= "/pmo/phase")
+@RequestMapping(value= "/pmo/phase",produces = "application/hal+json")
 public class PhaseController {
 
 	@Autowired
 	PhaseService phaseService;
 	
-	@GetMapping("/getAllPhases")
-	public ValidResult getAllPhases() {
-		return phaseService.getAllPhase();
-	}
 	
 	@PostMapping("/creatPhase")
-	public ValidResult createProjects(@RequestBody Phase phase) {
+	public ResponseEntity<ApiResponse> createProjects(@RequestBody Phase phase) {
 		return phaseService.createPhase(phase);
 	}
 	
 	
 	@PostMapping("/updatePhase")
-	public ValidResult updatePhase(@RequestBody Phase phase) {
+	public ResponseEntity<ApiResponse> updatePhase(@RequestBody Phase phase) {
 		return phaseService.updatePhase(phase);
 	}
 	
 	@GetMapping("/phases/{id}")
-	public ValidResult getPhasesByProjectID(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<ApiResponse> getPhasesByProjectID(@PathVariable(value = "id") Long id) {
 		return phaseService.getPhasesByProjectId(id);
 	}
 	
-	@GetMapping("/phase/{id}")
-	public ValidResult getPhaseById(@PathVariable(value = "id") Long id) {
+	@GetMapping("/{id}")
+	public ResponseEntity<ApiResponse> getPhaseById(@PathVariable(value = "id") Long id) {
 		return phaseService.getPhaseById(id);
 	}
 }
