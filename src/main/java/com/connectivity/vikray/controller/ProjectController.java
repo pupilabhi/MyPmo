@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value= "/pmo/project", produces = "application/hal+json")
-@Api(value = "Project Related API's")
+@Api(value = "Project Services")
 public class ProjectController {
 
 	@Autowired
@@ -52,8 +52,12 @@ public class ProjectController {
 	
 	@GetMapping("/getProjectById/{id}")
 	@ApiOperation(value = "Find Project by id")
-	public ResponseEntity<?> getProjectById(@PathVariable("id") Long id) {
+	public ResponseEntity<ApiResponse> getProjectById(@PathVariable("id") Long id) {
 		return projectService.getProjectById(id);
-		
+	}
+	
+	@GetMapping("/validate/{name}")
+	public ResponseEntity<ApiResponse> checkDuplicate(@PathVariable String name){
+		return projectService.validateDuplicateProject(name);
 	}
 }

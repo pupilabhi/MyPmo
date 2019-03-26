@@ -47,5 +47,10 @@ public class ProjectService {
 		result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
 		return result;
 	}
+
+	public ResponseEntity<ApiResponse> validateDuplicateProject(String name) {
+		ResponseEntity<ApiResponse> response = projectServiceImpl.validateProjectName(name);
+		return response;
+	}
 	
 }

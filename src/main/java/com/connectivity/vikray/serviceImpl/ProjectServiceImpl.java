@@ -87,13 +87,15 @@ public class ProjectServiceImpl {
 					HttpStatus.BAD_REQUEST);
 		}
 
-		projectRepository.save(toDb);
+		Project newProject = projectRepository.save(toDb);
+		if(newProject == null) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Creation Failed", null),
+					HttpStatus.EXPECTATION_FAILED);
+		}
 		Set<ProjectFollower> pf = createProjectFollower(projectFrmClient, toDb);
 		Set<Phase> ph = createUpdatePhase(projectFrmClient, toDb);
-//		Set<Documents> doc = createDocuments(projectFrmClient, toDb);
 		toDb.setProjectFollowers(pf);
 		toDb.setPhases(ph);
-//		toDb.setDocuments(doc);
 		URI uri = MvcUriComponentsBuilder.fromController(ProjectController.class).path("/{id}")
 				.buildAndExpand(toDb.getId()).toUri();
 		return ResponseEntity.created(uri).body(new ApiResponse(true, "", new ProjectResource(toDb)));
@@ -252,6 +254,15 @@ public class ProjectServiceImpl {
 				.buildAndExpand(proFrmDb.getId()).toUri();
 
 		return ResponseEntity.created(location).body(new ApiResponse(true, "", new ProjectResource(proFrmDb)));
+	}
+
+	public ResponseEntity<ApiResponse> validateProjectName(String name) {
+		if (projectRepository.existsByProjectName(name)) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Name already taken, Chose another", null),
+					HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<ApiResponse>(new ApiResponse(true, "", null),
+				HttpStatus.ACCEPTED);
 	}
 
 }

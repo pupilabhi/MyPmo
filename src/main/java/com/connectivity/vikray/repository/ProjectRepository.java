@@ -14,5 +14,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long>{
 	public void  save(ProjectFollower projectFollower);
 	public void  save(Phase phases);
 	public void  save(Documents docsTodb);
+	public boolean existsByProjectName(String name);
 
 }
