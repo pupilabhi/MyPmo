@@ -247,7 +247,7 @@ public class ProjectServiceImpl {
 
 		if (!projectRepository.existsById(id)) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Not Found!", null),
-					HttpStatus.BAD_REQUEST);
+					HttpStatus.ACCEPTED);
 		}
 		Project proFrmDb = projectRepository.getOne(id);
 		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/project/getProjectById/{id}")
@@ -259,7 +259,7 @@ public class ProjectServiceImpl {
 	public ResponseEntity<ApiResponse> validateProjectName(String name) {
 		if (projectRepository.existsByProjectName(name)) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Name already taken, Chose another", null),
-					HttpStatus.BAD_REQUEST);
+					HttpStatus.ACCEPTED);
 		}
 		return new ResponseEntity<ApiResponse>(new ApiResponse(true, "", null),
 				HttpStatus.ACCEPTED);
