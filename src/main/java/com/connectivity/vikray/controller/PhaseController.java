@@ -49,4 +49,13 @@ public class PhaseController {
 	public ResponseEntity<ApiResponse> getPhaseById(@PathVariable(value = "id") Long id) {
 		return phaseService.getPhaseById(id);
 	}
+	
+	@ApiOperation(value = "Returns Phase By guid")
+	@GetMapping("/{guid}")
+	public ResponseEntity<ApiResponse> getPhaseByGuId(@PathVariable(value = "id") String guid) {
+		return phaseService.getPhaseByGuId(guid);
+	}
+	
+	
+	
 }

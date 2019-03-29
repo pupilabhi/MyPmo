@@ -16,11 +16,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-//New Entity class added for vikray-PMO by Pawan @18-01-2019
 @Entity
-@Table(name = "PHASE_FOLLOWER", catalog = "vikrayPmo")
+@Table(name = "Team_Member", catalog = "vikrayPmo")
 @EntityListeners(AuditingEntityListener.class)
-public class PhaseFollower extends Auditable<String> implements Serializable{
+public class TeamMember extends Auditable<Long> implements Serializable{
 
 	/**
 	 * 
@@ -32,16 +31,16 @@ public class PhaseFollower extends Auditable<String> implements Serializable{
 	private Phase phaseFk;
 	private UserDetails userDetailsFk;
 	
-	public PhaseFollower() {
+	public TeamMember() {
 		
 	}
 	
-	public PhaseFollower(long id) {
+	public TeamMember(long id) {
 		this.id= id;
 	}
 	
 
-	public PhaseFollower(long id, Phase phaseFk, UserDetails userDetailsFk) {
+	public TeamMember(long id, Phase phaseFk, UserDetails userDetailsFk) {
 		super();
 		this.id = id;
 		this.phaseFk = phaseFk;

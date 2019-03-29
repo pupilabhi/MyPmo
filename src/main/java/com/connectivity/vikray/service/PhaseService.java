@@ -39,4 +39,9 @@ public class PhaseService {
 		ResponseEntity<ApiResponse> response= phaseServiceImpl.getPhaseById(id);
 		return response;
 	}
+
+	public ResponseEntity<ApiResponse> getPhaseByGuId(String guid) {
+		ResponseEntity<ApiResponse> response= phaseServiceImpl.getPhaseByGuId(guid);
+		return response;
+	}
 }

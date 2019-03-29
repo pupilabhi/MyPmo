@@ -1,6 +1,7 @@
 package com.connectivity.vikray.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.connectivity.vikray.entity.Task;
 import com.connectivity.vikray.entity.TaskComment;
+import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.service.TaskService;
 
@@ -26,7 +28,7 @@ public class TaskController {
 	}
 	
 	@PostMapping("/createTask")
-	public ValidResult createTask(@RequestBody Task task) {
+	public ResponseEntity<ApiResponse> createTask(@RequestBody Task task) {
 		return taskService.createTask(task);
 	}
 	

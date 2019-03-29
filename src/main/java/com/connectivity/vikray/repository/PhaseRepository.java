@@ -12,4 +12,7 @@ import com.connectivity.vikray.entity.Project;
 public interface PhaseRepository extends JpaRepository<Phase, Long>{
 
 	public List<Phase>  findByProjectFk(Project projectFk);
+	public Phase findByGuid(String guid);
+	public boolean existsByGuid(String guid);
+	
 }

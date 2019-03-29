@@ -28,7 +28,6 @@ public class TaskStatus implements java.io.Serializable {
 	private long id;
 	private String constByName;
 	private String label;
-	private Set<Task> tasks = new HashSet<Task>(0);
 	
 	public TaskStatus() {
 	}
@@ -37,12 +36,11 @@ public class TaskStatus implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public TaskStatus(long id, String constByName, String label, Set<Task> tasks) {
+	public TaskStatus(long id, String constByName, String label) {
 		super();
 		this.id = id;
 		this.constByName = constByName;
 		this.label = label;
-		this.tasks = tasks;
 	}
 
 	@Id
@@ -73,15 +71,5 @@ public class TaskStatus implements java.io.Serializable {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "taskStatus")
-	public Set<Task> getTasks() {
-		return this.tasks;
-	}
-
-	public void setTasks(Set<Task> tasks) {
-		this.tasks = tasks;
-	}
-
 }

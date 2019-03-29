@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -19,23 +18,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriBuilder;
 
 import com.connectivity.vikray.controller.PhaseController;
 import com.connectivity.vikray.entity.Documents;
 import com.connectivity.vikray.entity.Phase;
-import com.connectivity.vikray.entity.PhaseFollower;
+import com.connectivity.vikray.entity.TeamMember;
 import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.repository.DocumentRepository;
-import com.connectivity.vikray.repository.PhaseFollowerRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
 import com.connectivity.vikray.repository.ProjectRepository;
-import com.connectivity.vikray.repository.TaskRepository;
+import com.connectivity.vikray.repository.TeamMemberRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
 import com.connectivity.vikray.resource.PhaseResource;
-import com.connectivity.vikray.resource.ProjectResource;
-
-import javassist.expr.NewArray;
 
 @Repository
 public class PhaseServiceImpl {
@@ -53,10 +47,8 @@ public class PhaseServiceImpl {
 	UserDetailsRepository userDetailsRepository;
 
 	@Autowired
-	PhaseFollowerRepository phaseFollowerRepository;
+	TeamMemberRepository phaseFollowerRepository;
 
-	@Autowired
-	TaskRepository taskRepository;
 
 	// Create Phases
 	@Transactional
@@ -99,17 +91,17 @@ public class PhaseServiceImpl {
 	}
 	
 	// Create PhaseFollower
-	public Set<PhaseFollower> createPhaseFollower(Phase phaseFrmClent, Phase phase) {
-		Set<PhaseFollower> phasefrmClent = phaseFrmClent.getPhaseFollowers();
-		Set<PhaseFollower> newPhases = new HashSet<PhaseFollower>();
-		Iterator<PhaseFollower> itr = phasefrmClent.iterator();
+	public Set<TeamMember> createTeamMember(Phase phaseFrmClent, Phase phase) {
+		Set<TeamMember> phasefrmClent = phaseFrmClent.getTeamMembers();
+		Set<TeamMember> newPhases = new HashSet<TeamMember>();
+		Iterator<TeamMember> itr = phasefrmClent.iterator();
 		while (itr.hasNext()) {
-			PhaseFollower ptodb = new PhaseFollower();
-			ptodb = (PhaseFollower) itr.next();
-			ptodb.setUserDetailsFk(userDetailsRepository.getOne(ptodb.getUserDetailsFk().getId()));
-			ptodb.setPhaseFk(phase);
-			phaseFollowerRepository.save(ptodb);
-			newPhases.add(ptodb);
+			TeamMember teamToDb = new TeamMember();
+			teamToDb = (TeamMember) itr.next();
+			teamToDb.setUserDetailsFk(userDetailsRepository.getOne(teamToDb.getUserDetailsFk().getId()));
+			teamToDb.setPhaseFk(phase);
+			phaseFollowerRepository.save(teamToDb);
+			newPhases.add(teamToDb);
 		}
 		return newPhases;
 	}
@@ -125,7 +117,9 @@ public class PhaseServiceImpl {
 		
 		Phase phasefrmdb = phaseRepository.getOne(phasefrmclient.getId());
 		phasefrmdb.setPhaseName(phasefrmclient.getPhaseName());
-		phasefrmdb.setDueDate(phasefrmclient.getDueDate());
+		if(phasefrmclient.getDueDate() != null)
+			phasefrmdb.setDueDate(phasefrmclient.getDueDate());
+		
 		phasefrmdb.setAccountAddress(phasefrmclient.getAccountAddress());
 		if(phasefrmclient.getPhaseDescription() != null)
 			phasefrmdb.setPhaseDescription(phasefrmclient.getPhaseDescription());
@@ -182,6 +176,14 @@ public class PhaseServiceImpl {
 		return ResponseEntity.created(uri).body(new ApiResponse(true, "", new PhaseResource(phase)));
 	}
 
-	
+	public ResponseEntity<ApiResponse> getPhaseByGuId(String guid) {
+		if (!phaseRepository.existsByGuid(guid)){
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false,"Phase With ID : "+guid+" Not found",null),
+					HttpStatus.BAD_REQUEST);
+		}
+		Phase phase = phaseRepository.findByGuid(guid);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().buildAndExpand("/{id}").toUri();
+		return ResponseEntity.created(uri).body(new ApiResponse(true, "", new PhaseResource(phase)));
+	}
 
 }

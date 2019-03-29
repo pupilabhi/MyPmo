@@ -3,9 +3,9 @@ package com.connectivity.vikray.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.connectivity.vikray.entity.TaskCcUser;
+import com.connectivity.vikray.entity.TeamMember;
 
 @Repository
-public interface TaskCcUserRepository extends JpaRepository<TaskCcUser, Long>{
+public interface TeamMemberRepository extends JpaRepository<TeamMember, Long> {
 
 }

@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -43,24 +42,15 @@ public class UserDetails extends Auditable<Long> implements java.io.Serializable
 	private String firstName;
 	private String forgotPassGuid;
 	private String guid;
-	private String inviteGuid;
 	private String lastName;
 	private String userLoginId;
 	private String password;
-	private String sessionId;
 	private String userEmail;
 	private String userPhone;
 	private long userRole;
 	private boolean isInactive;
 	private long expertise;
 	private String accessToken;
-	
-
-	private Set<TaskComment> taskComments = new HashSet<TaskComment>(0);
-	private Set<TaskCcUser> taskCcUsers = new HashSet<TaskCcUser>(0);
-	private Set<Task> tasksForAssigneeUserFk = new HashSet<Task>(0);
-	private Set<Task> tasksForCreatorUserFk = new HashSet<Task>(0);
-	
 	
     private Set<Role> roles = new HashSet<>();
 
@@ -79,37 +69,6 @@ public class UserDetails extends Auditable<Long> implements java.io.Serializable
         this.password = password;
 	}
 
-	/*public UserDetails(long id, Domain domain, String organisation, String orgLocation, UserDetails userDetails,
-			String dotPath, String firstName, String forgotPassGuid, String guid, String inviteGuid, String lastName,
-			String userLoginId, String password, String sessionId, String userEmail, String userPhone, long userRole,
-			boolean isInactive, long expertise, String accessToken, String accountDetails,
-			Set<TaskComment> taskComments, Set<TaskCcUser> taskCcUsers, Set<Task> tasksForAssigneeUserFk,
-			Set<Task> tasksForCreatorUserFk) {
-		super();
-		this.id = id;
-		this.domain = domain;
-		this.managerFk = managerFk;
-		this.dotPath = dotPath;
-		this.firstName = firstName;
-		this.forgotPassGuid = forgotPassGuid;
-		this.guid = guid;
-		this.inviteGuid = inviteGuid;
-		this.lastName = lastName;
-		this.userLoginId = userLoginId;
-		this.password = password;
-		this.sessionId = sessionId;
-		this.userEmail = userEmail;
-		this.userPhone = userPhone;
-		this.userRole = userRole;
-		this.isInactive = isInactive;
-		this.expertise = expertise;
-		this.accessToken = accessToken;
-		this.taskComments = taskComments;
-		this.taskCcUsers = taskCcUsers;
-		this.tasksForAssigneeUserFk = tasksForAssigneeUserFk;
-		this.tasksForCreatorUserFk = tasksForCreatorUserFk;
-	}
-*/
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
@@ -178,14 +137,6 @@ public class UserDetails extends Auditable<Long> implements java.io.Serializable
 		this.guid = guid;
 	}
 
-	@Column(name = "INVITE_GUID")
-	public String getInviteGuid() {
-		return this.inviteGuid;
-	}
-
-	public void setInviteGuid(String inviteGuid) {
-		this.inviteGuid = inviteGuid;
-	}
 
 	@Column(name = "LAST_NAME")
 	public String getLastName() {
@@ -212,15 +163,6 @@ public class UserDetails extends Auditable<Long> implements java.io.Serializable
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	@Column(name = "SESSION_ID")
-	public String getSessionId() {
-		return this.sessionId;
-	}
-
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
 	}
 
 	@Column(name = "USER_EMAIL")
@@ -264,7 +206,6 @@ public class UserDetails extends Auditable<Long> implements java.io.Serializable
 		return this.expertise;
 	}
 
-	
 
 	public void setExpertise(long expertise) {
 		this.expertise = expertise;
@@ -279,43 +220,6 @@ public class UserDetails extends Auditable<Long> implements java.io.Serializable
 		this.accessToken = accessToken;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
-	public Set<TaskComment> getTaskComments() {
-		return this.taskComments;
-	}
-
-	public void setTaskComments(Set<TaskComment> taskComments) {
-		this.taskComments = taskComments;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetails")
-	public Set<TaskCcUser> getTaskCcUsers() {
-		return this.taskCcUsers;
-	}
-
-	public void setTaskCcUsers(Set<TaskCcUser> taskCcUsers) {
-		this.taskCcUsers = taskCcUsers;
-	}
-	
-	
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByAssigneeUserFk")
-	public Set<Task> getTasksForAssigneeUserFk() {
-		return this.tasksForAssigneeUserFk;
-	}
-
-	public void setTasksForAssigneeUserFk(Set<Task> tasksForAssigneeUserFk) {
-		this.tasksForAssigneeUserFk = tasksForAssigneeUserFk;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userDetailsByCreatorUserFk")
-	public Set<Task> getTasksForCreatorUserFk() {
-		return this.tasksForCreatorUserFk;
-	}
-
-	public void setTasksForCreatorUserFk(Set<Task> tasksForCreatorUserFk) {
-		this.tasksForCreatorUserFk = tasksForCreatorUserFk;
-	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",

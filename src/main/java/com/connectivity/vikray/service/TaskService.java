@@ -1,11 +1,13 @@
 package com.connectivity.vikray.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.connectivity.vikray.constant.VikrayPmoMessageConstant;
 import com.connectivity.vikray.entity.Task;
 import com.connectivity.vikray.entity.TaskComment;
+import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.serviceImpl.TaskServiceImpl;
 
@@ -25,17 +27,9 @@ public class TaskService {
 		return result;
 	}
 
-	public ValidResult createTask(Task task) {
-		Task ct = taskServiceImpl.createTask(task);
-		if (ct != null) {
-			result.setErrorCode((long) 101);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
-			result.setData(ct);
-		} else {
-			result.setErrorCode((long) 102);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
-		}
-		return result;
+	public ResponseEntity<ApiResponse> createTask(Task task) {
+		ResponseEntity<ApiResponse> response = taskServiceImpl.createTask(task);
+		return response;
 	}
 
 	public ValidResult updateTask(Task task) {

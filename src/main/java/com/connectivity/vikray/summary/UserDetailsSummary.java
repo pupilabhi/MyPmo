@@ -20,7 +20,6 @@ public class UserDetailsSummary {
 		this.setFirstName(userDetails.getFirstName());
 		this.setForgotPassGuid(userDetails.getForgotPassGuid());
 		this.setGuid(userDetails.getGuid());
-		this.setInviteGuid(userDetails.getInviteGuid());
 		this.setLastName(userDetails.getLastName());
 		this.setUserLoginId(userDetails.getUserLoginId());
 		this.setPassword(userDetails.getPassword());

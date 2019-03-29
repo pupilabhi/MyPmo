@@ -40,7 +40,7 @@ public class Phase extends Auditable<Long> implements Serializable {
 	private Project projectFk;
 	private String accountAddress;
 	private Set<Documents> documents = new HashSet<Documents>(0);
-	private Set<PhaseFollower> phaseFollowers = new HashSet<PhaseFollower>(0);
+	private Set<TeamMember> teamMembers = new HashSet<TeamMember>(0);
 	private Set<Task> tasks = new HashSet<Task>(0);
 	private StatusItem phaseStatus;
 	private String guid;
@@ -67,7 +67,7 @@ public class Phase extends Auditable<Long> implements Serializable {
 
 	public Phase(long id, String phaseName, Date dueDate,
 			Project projectFk, String accountAddress, Set<Documents> documents,
-			Set<PhaseFollower> phaseFollowers, Set<Task> tasks) {
+			Set<TeamMember> teamMembers, Set<Task> tasks) {
 		super();
 		this.id = id;
 		this.phaseName = phaseName;
@@ -75,7 +75,7 @@ public class Phase extends Auditable<Long> implements Serializable {
 		this.projectFk = projectFk;
 		this.accountAddress = accountAddress;
 		this.documents = documents;
-		this.phaseFollowers = phaseFollowers;
+		this.teamMembers = teamMembers;
 		this.tasks = tasks;
 	}
 
@@ -139,18 +139,20 @@ public class Phase extends Auditable<Long> implements Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "phaseFk")
-	public Set<PhaseFollower> getPhaseFollowers() {
-		return phaseFollowers;
+	public Set<TeamMember> getTeamMembers() {
+		return teamMembers;
 	}
 
-	public void setPhaseFollowers(Set<PhaseFollower> phaseFollowers) {
-		this.phaseFollowers = phaseFollowers;
+	public void setTeamMembers(Set<TeamMember> teamMembers) {
+		this.teamMembers = teamMembers;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "phaseFk")
 	public Set<Task> getTasks() {
 		return tasks;
 	}
+
+	
 
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;

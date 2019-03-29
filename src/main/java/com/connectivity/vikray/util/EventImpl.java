@@ -84,16 +84,16 @@ public class EventImpl {
 		String[] recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=2" };
 		event.setRecurrence(Arrays.asList(recurrence));
 		UserDetails user;
-		if (task.getUserDetailsByAssigneeUserFk() != null) {
-			user = userRepository.getOne(task.getUserDetailsByAssigneeUserFk().getId());
+		if (task.getAssignee() != null) {
+			user = userRepository.getOne(task.getAssignee().getId());
 
 		/*
-		 * First EventAttendee is organizer and after all are the Participent(),
-		 * AssigneeUserFk will be participent
+		 * First EventAttendee is organizer and after all are the Participant(),
+		 * AssigneeUserFk will be participant
 		 */
 		EventAttendee[] attendees = new EventAttendee[] { 
 				new EventAttendee().setEmail(user.getUserEmail()),
-				new EventAttendee().setEmail(task.getUserDetailsByAssigneeUserFk().getUserEmail()), };
+				new EventAttendee().setEmail(task.getAssignee().getUserEmail()), };
 		event.setAttendees(Arrays.asList(attendees));
 
 		EventReminder[] reminderOverrides = new EventReminder[] {

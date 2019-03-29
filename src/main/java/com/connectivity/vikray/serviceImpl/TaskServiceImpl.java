@@ -1,6 +1,7 @@
 package com.connectivity.vikray.serviceImpl;
 
 import java.io.IOException;
+import java.net.URI;
 import java.security.GeneralSecurityException;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -9,28 +10,35 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskRejectedException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import com.connectivity.vikray.controller.PhaseController;
+import com.connectivity.vikray.controller.TaskController;
 import com.connectivity.vikray.entity.Documents;
-import com.connectivity.vikray.entity.Domain;
 import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.Task;
-import com.connectivity.vikray.entity.TaskCcUser;
 import com.connectivity.vikray.entity.TaskComment;
+import com.connectivity.vikray.entity.TaskFollower;
 import com.connectivity.vikray.entity.TaskPriority;
 import com.connectivity.vikray.entity.TaskStatus;
 import com.connectivity.vikray.entity.UserDetails;
+import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.repository.DocumentRepository;
 import com.connectivity.vikray.repository.DomainRepository;
 import com.connectivity.vikray.repository.PhaseRepository;
-import com.connectivity.vikray.repository.TaskCcUserRepository;
 import com.connectivity.vikray.repository.TaskCommentRepository;
 import com.connectivity.vikray.repository.TaskPriorityRepository;
 import com.connectivity.vikray.repository.TaskRepository;
 import com.connectivity.vikray.repository.TaskStatusRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
-import com.connectivity.vikray.util.LoggedInUser;
+import com.connectivity.vikray.resource.PhaseResource;
+import com.connectivity.vikray.resource.TaskResource;
 import com.connectivity.vikray.util.EventImpl;
+import com.connectivity.vikray.util.LoggedInUser;
 
 @Repository
 public class TaskServiceImpl {
@@ -59,8 +67,6 @@ public class TaskServiceImpl {
 	@Autowired
 	TaskCommentRepository taskCommentRepository;
 
-	@Autowired
-	TaskCcUserRepository taskCcUserRepository;
 
 	@Autowired
 	TaskStatusRepository taskStatusRepository;
@@ -69,50 +75,36 @@ public class TaskServiceImpl {
 	LoggedInUser currentUser;
 	
 	// create Task
-	public Task createTask(Task taskfrmclint) {
+	public ResponseEntity<ApiResponse> createTask(Task taskfrmclint) {
+		
 		Task toDb = new Task();
-		toDb.setComments(taskfrmclint.getComments());
-		toDb.setReplies(taskfrmclint.getReplies());
-		if (taskfrmclint.getDomain() != null) {
-			toDb.setDomain(domainRepository.getOne(taskfrmclint.getDomain().getId()));
-		}
-
-		if (taskfrmclint.getTaskPriority() != null) {
-			toDb.setTaskPriority(taskPriorityRepository.getOne(taskfrmclint.getTaskPriority().getId()));
-		}
-
-		if (taskfrmclint.getUserDetailsByAssigneeUserFk() != null) {
-			toDb.setUserDetailsByAssigneeUserFk(
-					userDetailsRepository.getOne(taskfrmclint.getUserDetailsByAssigneeUserFk().getId()));
-		}
-		if (taskfrmclint.getUserDetailsByCreatorUserFk() != null) {
-			toDb.setUserDetailsByCreatorUserFk(
-					userDetailsRepository.getOne(taskfrmclint.getUserDetailsByCreatorUserFk().getId()));
-		}
 		toDb.setDueDate(taskfrmclint.getDueDate());
 		toDb.setGuid(UUID.randomUUID().toString());
 		toDb.setTaskName(taskfrmclint.getTaskName());
-//		toDb.setTaskUrl(taskfrmclint.getTaskUrl());
-		toDb.setVerifiedOn(taskfrmclint.getVerifiedOn());
+		toDb.setDescription(taskfrmclint.getDescription());
+		toDb.setAccountAddress(taskfrmclint.getAccountAddress());
+		if(taskfrmclint.getAssignee() != null)
+			toDb.setAssignee(userDetailsRepository.getOne(taskfrmclint.getAssignee().getId()));
+		if(taskfrmclint.getDueDate() != null)
+			toDb.setDueDate(taskfrmclint.getDueDate());
+		if(taskfrmclint.getTaskPriority() != null)
+			toDb.setTaskPriority(taskPriorityRepository.getOne(taskfrmclint.getTaskPriority().getId()));
 		if (taskfrmclint.getPhaseFk() != null) {
 			toDb.setPhaseFk(phaseRepository.getOne(taskfrmclint.getPhaseFk().getId()));
 		}
-		toDb.setDescription(taskfrmclint.getDescription());
-		toDb.setInstruction(taskfrmclint.getInstruction());
-		toDb.setAccountAddress(taskfrmclint.getAccountAddress());
 		taskRepository.save(toDb);
 		Set<Documents> docs = createDocument(taskfrmclint, toDb);
 		toDb.setDocuments(docs);
-		Set<TaskComment> tcomments = createTaskComments(taskfrmclint, toDb);
-		toDb.setTaskComments(tcomments);
-		Set<TaskCcUser> taskCcUsers = createTaskCCUser(taskfrmclint, toDb);
-		toDb.setTaskCcUsers(taskCcUsers);
+		Set<TaskFollower> taskFollowers = createTaskFollower(taskfrmclint, toDb);
+		toDb.setTaskFollowers(taskFollowers);
 		try {
 			eventImpl.createEvent(toDb);
 		} catch (GeneralSecurityException | IOException e) {
 			e.printStackTrace();
 		}
-		return toDb;
+		URI uri = MvcUriComponentsBuilder.fromController(TaskController.class).path("/{id}")
+				.buildAndExpand(toDb.getId()).toUri();
+		return ResponseEntity.created(uri).body(new ApiResponse(true, "", new TaskResource(toDb)));
 	}
 
 	// create Documents
@@ -147,15 +139,15 @@ public class TaskServiceImpl {
 	}
 
 	// createTaskCCUser
-	private Set<TaskCcUser> createTaskCCUser(Task taskfrmclint, Task task) {
-		Set<TaskCcUser> taskCcUsers = taskfrmclint.getTaskCcUsers();
-		Set<TaskCcUser> newTask = new HashSet<TaskCcUser>();
-		Iterator<TaskCcUser> itr = taskCcUsers.iterator();
+	private Set<TaskFollower> createTaskFollower(Task taskfrmclint, Task task) {
+		Set<TaskFollower> taskCcUsers = taskfrmclint.getTaskFollowers();
+		Set<TaskFollower> newTask = new HashSet<TaskFollower>();
+		Iterator<TaskFollower> itr = taskCcUsers.iterator();
 		while (itr.hasNext()) {
-			TaskCcUser taskCcUserToDb = new TaskCcUser();
+			TaskFollower taskCcUserToDb = new TaskFollower();
 			taskCcUserToDb = itr.next();
 			taskCcUserToDb.setTask(taskCcUserToDb.getTask());
-			taskCcUserRepository.save(taskCcUserToDb);
+//			taskCcUserRepository.save(taskCcUserToDb);
 			newTask.add(taskCcUserToDb);
 		}
 		return newTask;
@@ -167,15 +159,7 @@ public class TaskServiceImpl {
 		if (taskfromDb == null) {
 			return null;
 		}
-		taskfromDb.setComments(taskfromClient.getComments());
-		taskfromDb.setReplies(taskfromClient.getReplies());
-		if (taskfromClient.getDomain() != null) {
-			if (taskfromClient.getDomain().getId() == 0) {
-				taskfromClient.setDomain(taskfromClient.getDomain());
-			} else {
-				Domain domainTodb = domainRepository.getOne(taskfromClient.getDomain().getId());
-			}
-		}
+
 
 		if (taskfromClient.getTaskPriority() != null) {
 			if (taskfromClient.getTaskPriority().getId() == 0) {
@@ -193,27 +177,10 @@ public class TaskServiceImpl {
 			}
 		}
 
-		if (taskfromClient.getUserDetailsByAssigneeUserFk() != null) {
-			if (taskfromClient.getUserDetailsByAssigneeUserFk().getId() == 0) {
-				taskfromClient.setUserDetailsByAssigneeUserFk(taskfromClient.getUserDetailsByAssigneeUserFk());
-			} else {
-				UserDetails detailsTodb = userDetailsRepository
-						.getOne(taskfromClient.getUserDetailsByAssigneeUserFk().getId());
-
-			}
-
-			if (taskfromClient.getUserDetailsByCreatorUserFk() != null) {
-				if (taskfromClient.getUserDetailsByCreatorUserFk().getId() == 0) {
-					taskfromClient.setUserDetailsByCreatorUserFk(taskfromClient.getUserDetailsByCreatorUserFk());
-				} else {
-					UserDetails detailsToDb = userDetailsRepository
-							.getOne(taskfromClient.getUserDetailsByCreatorUserFk().getId());
-				}
-			}
+		
 
 			taskfromDb.setDueDate(taskfromClient.getDueDate());
 			taskfromDb.setGuid(taskfromClient.getGuid());
-			taskfromDb.setTaskUrl(taskfromClient.getTaskUrl());
 			taskfromDb.setVerifiedOn(taskfromClient.getVerifiedOn());
 
 			if (taskfromClient.getPhaseFk() != null) {
@@ -225,7 +192,6 @@ public class TaskServiceImpl {
 			}
 
 			taskfromDb.setDescription(taskfromClient.getDescription());
-			taskfromDb.setInstruction(taskfromClient.getInstruction());
 			taskfromDb.setAccountAddress(taskfromClient.getAccountAddress());
 
 			for (Documents documents : taskfromClient.getDocuments()) {
@@ -246,19 +212,18 @@ public class TaskServiceImpl {
 				}
 			}
 
-			for (TaskCcUser taskCcUser : taskfromClient.getTaskCcUsers()) {
+			/*for (TaskCcUser taskCcUser : taskfromClient.getTaskFollowers()) {
 				if (taskCcUser.getId() == 0) {
 					taskCcUser.setTask(taskfromDb);
 				} else {
 					TaskCcUser users = taskCcUserRepository.getOne(taskCcUser.getId());
 				}
-			}
+			}*/
 			taskfromDb.setEventId(taskfromClient.getEventId());
-		}
 		try {
 			eventImpl.updateEvent(taskfromDb);
 		} catch (GeneralSecurityException | IOException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch blocksetTaskUrl
 			e.printStackTrace();
 		}
 		Task updateTask = taskRepository.save(taskfromDb);
@@ -268,6 +233,7 @@ public class TaskServiceImpl {
 			return null;
 		}
 	}
+
 
 	public List<Task> getAllTask() {
 		return taskRepository.findAll();
