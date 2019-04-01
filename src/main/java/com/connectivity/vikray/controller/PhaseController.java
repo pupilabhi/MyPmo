@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.connectivity.vikray.entity.Phase;
+import com.connectivity.vikray.entity.TeamMember;
 import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.service.PhaseService;
 
@@ -56,6 +57,9 @@ public class PhaseController {
 		return phaseService.getPhaseByGuId(guid);
 	}
 	
-	
+	@PostMapping("/addTeamMember")
+	public ResponseEntity<ApiResponse> addTeamMember(@RequestBody TeamMember member){
+		return phaseService.addTeamMember(member);
+	}
 	
 }

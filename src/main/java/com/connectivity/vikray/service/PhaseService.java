@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.connectivity.vikray.constant.VikrayPmoMessageConstant;
 import com.connectivity.vikray.entity.Phase;
+import com.connectivity.vikray.entity.TeamMember;
 import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.serviceImpl.PhaseServiceImpl;
@@ -42,6 +43,11 @@ public class PhaseService {
 
 	public ResponseEntity<ApiResponse> getPhaseByGuId(String guid) {
 		ResponseEntity<ApiResponse> response= phaseServiceImpl.getPhaseByGuId(guid);
+		return response;
+	}
+
+	public ResponseEntity<ApiResponse> addTeamMember(TeamMember member) {
+		ResponseEntity<ApiResponse> response= phaseServiceImpl.createTeamMember(member);
 		return response;
 	}
 }

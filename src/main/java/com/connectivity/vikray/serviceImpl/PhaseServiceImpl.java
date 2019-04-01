@@ -47,8 +47,9 @@ public class PhaseServiceImpl {
 	UserDetailsRepository userDetailsRepository;
 
 	@Autowired
-	TeamMemberRepository phaseFollowerRepository;
+	TeamMemberRepository teamMeberRepository;
 
+	
 
 	// Create Phases
 	@Transactional
@@ -100,7 +101,7 @@ public class PhaseServiceImpl {
 			teamToDb = (TeamMember) itr.next();
 			teamToDb.setUserDetailsFk(userDetailsRepository.getOne(teamToDb.getUserDetailsFk().getId()));
 			teamToDb.setPhaseFk(phase);
-			phaseFollowerRepository.save(teamToDb);
+			teamMeberRepository.save(teamToDb);
 			newPhases.add(teamToDb);
 		}
 		return newPhases;
@@ -184,6 +185,15 @@ public class PhaseServiceImpl {
 		Phase phase = phaseRepository.findByGuid(guid);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().buildAndExpand("/{id}").toUri();
 		return ResponseEntity.created(uri).body(new ApiResponse(true, "", new PhaseResource(phase)));
+	}
+
+	public ResponseEntity<ApiResponse> createTeamMember(TeamMember member) {
+		TeamMember tm = new TeamMember();
+		tm.setPhaseFk(phaseRepository.getOne(member.getPhaseFk().getId()));
+		tm.setUserDetailsFk(userDetailsRepository.getOne(member.getUserDetailsFk().getId()));
+		teamMeberRepository.save(tm);
+		URI uri = MvcUriComponentsBuilder.fromController(PhaseController.class).path("/{id}").buildAndExpand(tm.getPhaseFk().getId()).toUri();
+		return ResponseEntity.created(uri).body(new ApiResponse(true, "", tm));
 	}
 
 }
