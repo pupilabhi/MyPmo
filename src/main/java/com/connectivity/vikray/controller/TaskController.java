@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.connectivity.vikray.entity.Task;
 import com.connectivity.vikray.entity.TaskComment;
+import com.connectivity.vikray.entity.TaskStatus;
 import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.service.TaskService;
@@ -33,8 +34,8 @@ public class TaskController {
 		return taskService.createTask(task);
 	}
 	
-	@GetMapping("{guid}")
-	public ResponseEntity<ApiResponse> getTaskByGuId(@PathVariable("id") String guid) {
+	@GetMapping("/{guid}")
+	public ResponseEntity<ApiResponse> getTaskByGuId(@PathVariable("guid") String guid) {
 		return taskService.getTaskByGuId(guid);	
 	}
 	
@@ -56,5 +57,10 @@ public class TaskController {
 	@GetMapping("/getTaskByCreatorUser")
 	public ResponseEntity<ApiResponse> getTaskByCreatorUser() {
 		return taskService.getTaskBycreatorUser();
+	}
+	
+	@PostMapping("/addStatus")
+	public ResponseEntity<ApiResponse> addNewStatus(@RequestBody TaskStatus status){
+		return taskService.createNewStatus(status);
 	}
 }

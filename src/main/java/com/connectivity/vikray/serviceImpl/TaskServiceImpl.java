@@ -296,5 +296,22 @@ public class TaskServiceImpl {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(guid).toUri();
 		return ResponseEntity.created(uri).body(new ApiResponse(true, "", task));
 	}
+
+	public ResponseEntity<ApiResponse> creatStatus(TaskStatus status) {
+		TaskStatus newStatus = null;
+		newStatus = new TaskStatus();
+		newStatus.setLabel(status.getLabel());
+		newStatus.setConstByName(status.getLabel().toUpperCase());
+		newStatus.setPhase(phaseRepository.getOne(status.getPhase().getId()));
+		TaskStatus createdStatus = taskStatusRepository.save(newStatus);
+		if(createdStatus == null) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Falied to create Status", null),
+					HttpStatus.ACCEPTED);
+		}
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+		return ResponseEntity.created(uri).body(new ApiResponse(true, "", newStatus));
+		
+	}
 	
 }

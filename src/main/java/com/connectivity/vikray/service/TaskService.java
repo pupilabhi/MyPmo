@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.connectivity.vikray.constant.VikrayPmoMessageConstant;
 import com.connectivity.vikray.entity.Task;
 import com.connectivity.vikray.entity.TaskComment;
+import com.connectivity.vikray.entity.TaskStatus;
 import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.pojo.ValidResult;
 import com.connectivity.vikray.serviceImpl.TaskServiceImpl;
@@ -60,6 +61,11 @@ public class TaskService {
 	public ResponseEntity<ApiResponse> getTaskByGuId(String guid) {
 		ResponseEntity<ApiResponse> response = taskServiceImpl.getTaskByGuid(guid);
 		return response;
+	}
+
+	public ResponseEntity<ApiResponse> createNewStatus(TaskStatus status) {
+		ResponseEntity<ApiResponse> response = taskServiceImpl.creatStatus(status);
+		return null;
 	}
 
 }

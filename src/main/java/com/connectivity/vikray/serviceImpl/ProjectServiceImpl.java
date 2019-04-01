@@ -57,18 +57,22 @@ public class ProjectServiceImpl {
 
 	@Autowired
 	StatusRepository statusRepository;
-	
+
 	@Autowired
 	TaskStatusRepository taskStatusRepository;
+
+	private static String INProgres = "In Progress";
+	private static String ToDo = "ToDo";
+	private static String Completed = "Completed";
 
 	/**
 	 * @param Project
 	 * @return Project Object on success Persisting project to data base
 	 **/
 	public ResponseEntity<ApiResponse> createProject(Project projectFrmClient) {
-		if(projectRepository.existsByProjectName(projectFrmClient.getProjectName())) {
-			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project name Already taken chose another", null),
-					HttpStatus.ACCEPTED);
+		if (projectRepository.existsByProjectName(projectFrmClient.getProjectName())) {
+			return new ResponseEntity<ApiResponse>(
+					new ApiResponse(false, "Project name Already taken chose another", null), HttpStatus.ACCEPTED);
 		}
 		Project toDb = new Project();
 		toDb.setProjectName(projectFrmClient.getProjectName());
@@ -97,7 +101,7 @@ public class ProjectServiceImpl {
 		}
 
 		Project newProject = projectRepository.save(toDb);
-		if(newProject == null) {
+		if (newProject == null) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Creation Failed", null),
 					HttpStatus.EXPECTATION_FAILED);
 		}
@@ -141,6 +145,7 @@ public class ProjectServiceImpl {
 				newPhaseTodb.setPhaseStatus(statusRepository.getOne(VikrayPmoConstant.PHASE_NEW));
 				phaseRepository.save(newPhaseTodb);
 				newPhases.add(newPhaseTodb);
+				createDefaultTaskStatus(newPhaseTodb);
 			} else {
 				phaseRepository.save(phaseFrmClient);
 				newPhases.add(phaseFrmClient);
@@ -149,10 +154,28 @@ public class ProjectServiceImpl {
 		return newPhases;
 	}
 
-	public void createDefaultTaskStatus() {
-		TaskStatus ts = new TaskStatus();
-		
+	public void createDefaultTaskStatus(Phase phase) {
+
+		TaskStatus todo = new TaskStatus();
+		todo.setConstByName("TO DO");
+		todo.setLabel("To do");
+		todo.setPhase(phase);
+		taskStatusRepository.save(todo);
+
+		TaskStatus inProgress = new TaskStatus();
+		inProgress.setConstByName("IN PROGRESS");
+		inProgress.setLabel("In Progress");
+		inProgress.setPhase(phase);
+		taskStatusRepository.save(inProgress);
+
+		TaskStatus completed = new TaskStatus();
+		completed.setConstByName("COMPLETED");
+		completed.setLabel("Completed");
+		completed.setPhase(phase);
+		taskStatusRepository.save(completed);
+
 	}
+
 	// create Documents
 	public Set<Documents> createDocuments(Project frmClient, Project project) {
 		Set<Documents> documentsFrmClient = frmClient.getDocuments();
@@ -172,10 +195,10 @@ public class ProjectServiceImpl {
 
 	// update Project
 	public ResponseEntity<ApiResponse> updateProject(Project projectFromClient) {
-		
-		if(projectRepository.existsByProjectName(projectFromClient.getProjectName())) {
-			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project name Already taken chose another", null),
-					HttpStatus.ACCEPTED);
+
+		if (projectRepository.existsByProjectName(projectFromClient.getProjectName())) {
+			return new ResponseEntity<ApiResponse>(
+					new ApiResponse(false, "Project name Already taken chose another", null), HttpStatus.ACCEPTED);
 		}
 		if (!projectRepository.existsById(projectFromClient.getId())) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Not Found!", null),
@@ -204,25 +227,25 @@ public class ProjectServiceImpl {
 			Set<ProjectFollower> pf = createProjectFollower(projectFromClient, projectFromDb);
 			projectFromDb.setProjectFollowers(pf);
 		}
-		
-		//Removing existing phases
-		if(!projectFromClient.getPhases().isEmpty())
+
+		// Removing existing phases
+		if (!projectFromClient.getPhases().isEmpty())
 			phaseRepository.deleteInBatch(projectFromDb.getPhases());
-		
-		//updating with new phases
-		if(!projectFromClient.getPhases().isEmpty()) {
+
+		// updating with new phases
+		if (!projectFromClient.getPhases().isEmpty()) {
 			Set<Phase> phases = createUpdatePhase(projectFromClient, projectFromDb);
 			projectFromDb.setPhases(phases);// update Documents
 		}
-		
+
 		Project updatedProject = projectRepository.save(projectFromDb);
 		if (updatedProject == null) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Oops!!, Project Update failed", null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		} else {
-			ProjectResource project = new ProjectResource(updatedProject); 
-			 URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
-		    return ResponseEntity.created(uri).body(new ApiResponse(true, "", project));
+			ProjectResource project = new ProjectResource(updatedProject);
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+			return ResponseEntity.created(uri).body(new ApiResponse(true, "", project));
 		}
 	}
 
@@ -275,11 +298,10 @@ public class ProjectServiceImpl {
 
 	public ResponseEntity<ApiResponse> validateProjectName(String name) {
 		if (projectRepository.existsByProjectName(name)) {
-			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Name already taken, Choose another", null),
-					HttpStatus.ACCEPTED);
+			return new ResponseEntity<ApiResponse>(
+					new ApiResponse(false, "Project Name already taken, Choose another", null), HttpStatus.ACCEPTED);
 		}
-		return new ResponseEntity<ApiResponse>(new ApiResponse(true, "", null),
-				HttpStatus.ACCEPTED);
+		return new ResponseEntity<ApiResponse>(new ApiResponse(true, "", null), HttpStatus.ACCEPTED);
 	}
 
 }
