@@ -8,4 +8,6 @@ import com.connectivity.vikray.entity.Task;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
+	public boolean existsByGuid(String guid);
+	public Task findByGuid(String guid);
 }

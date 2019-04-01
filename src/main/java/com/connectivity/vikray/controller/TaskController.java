@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,28 +33,28 @@ public class TaskController {
 		return taskService.createTask(task);
 	}
 	
-	@GetMapping("/getTaskById/{id}")
-	public ValidResult getTaskById(@PathVariable("id") Long id) {
-		return taskService.getTaskById(id);	
+	@GetMapping("{guid}")
+	public ResponseEntity<ApiResponse> getTaskByGuId(@PathVariable("id") String guid) {
+		return taskService.getTaskByGuId(guid);	
 	}
 	
-	@PostMapping("/updateTask")
-	public ValidResult updateTask(@RequestBody Task task) {
+	@PutMapping("/updateTask")
+	public ResponseEntity<ApiResponse> updateTask(@RequestBody Task task) {
 		return taskService.updateTask(task);
 	}
 	
 	@PostMapping("/addTaskComments")
-	public ValidResult addTaskComments(@RequestBody TaskComment comment) {
+	public ResponseEntity<ApiResponse> addTaskComments(@RequestBody TaskComment comment) {
 		return taskService.addTaskComments(comment);
 	}
 	
 	@PostMapping("/updateTaskComments")
-	public ValidResult updateTaskComments(@RequestBody TaskComment comment) {
+	public ResponseEntity<ApiResponse> updateTaskComments(@RequestBody TaskComment comment) {
 		return taskService.updateTaskComments(comment);
 	}
 	
 	@GetMapping("/getTaskByCreatorUser")
-	public ValidResult getTaskByCreatorUser() {
+	public ResponseEntity<ApiResponse> getTaskByCreatorUser() {
 		return taskService.getTaskBycreatorUser();
 	}
 }

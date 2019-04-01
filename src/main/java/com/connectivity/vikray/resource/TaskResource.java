@@ -18,9 +18,9 @@ public class TaskResource extends ResourceSupport{
 	
 	public TaskResource(Task task) {
 		this.task = task;
-		long id = task.getId();
+		String guid = task.getGuid();
 		add(linkTo(TaskController.class).withSelfRel());
-		add(linkTo(methodOn(TaskController.class).getTaskById(id)).withSelfRel());
+		add(linkTo(methodOn(TaskController.class).getTaskByGuId(guid)).withSelfRel());
 		// TODO Auto-generated constructor stub
 	}
 	

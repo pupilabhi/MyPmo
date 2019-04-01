@@ -43,7 +43,6 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 	private String description;
 	private TaskPriority taskPriority;
 	private UserDetails assignee;
-	private TaskStatus taskStatus;
 	private Date dueDate;
 	private Date completedOn;
 	private Date verifiedOn;
@@ -56,6 +55,7 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 	private Domain domain;
 	private String eventId;
 	private String guid;
+	private TaskStatus currentStatus;
 	
 
 	
@@ -116,16 +116,7 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 		this.taskPriority = taskPriority;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TASK_STATUS_FK")
-	@JsonBackReference(value = "status_ref")
-	public TaskStatus getTaskStatus() {
-		return this.taskStatus;
-	}
-
-	public void setTaskStatus(TaskStatus taskStatus) {
-		this.taskStatus = taskStatus;
-	}
+	
 
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -243,6 +234,16 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 
 	public void setVerifiedBy(UserDetails verifiedBy) {
 		this.verifiedBy = verifiedBy;
+	}
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "current_status_fk")
+	public TaskStatus getCurrentStatus() {
+		return currentStatus;
+	}
+
+	public void setCurrentStatus(TaskStatus currentStatus) {
+		this.currentStatus = currentStatus;
 	}
 	
 	

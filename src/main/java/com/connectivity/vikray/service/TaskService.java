@@ -32,69 +32,34 @@ public class TaskService {
 		return response;
 	}
 
-	public ValidResult updateTask(Task task) {
-		Object rt = taskServiceImpl.updateTask(task);
-		if (rt != null) {
-			result.setErrorCode((long) 101);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
-			result.setData(rt);
-		} else {
-			result.setErrorCode((long) 102);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
-		}
-		return result;
+	public ResponseEntity<ApiResponse> updateTask(Task task) {
+		ResponseEntity<ApiResponse> response = taskServiceImpl.updateTask(task);
+		return response;
 	}
 
-	public ValidResult addTaskComments(TaskComment comments) {
-		TaskComment comm= taskServiceImpl.addTaskComment(comments);
-		if (comm != null) {
-			result.setErrorCode((long) 101);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
-			result.setData(comm);
-		} else {
-			result.setErrorCode((long) 102);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
-		}
-		return result;
+	public ResponseEntity<ApiResponse> addTaskComments(TaskComment comments) {
+		ResponseEntity<ApiResponse> response = taskServiceImpl.addTaskComment(comments);
+		return response;
 	}
 
-	public ValidResult updateTaskComments(TaskComment comments) {
-		Object tc= taskServiceImpl.updateTaskComment(comments);
-		if (tc != null) {
-			result.setErrorCode((long) 101);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
-			result.setData(tc);
-		} else {
-			result.setErrorCode((long) 102);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
-		}
-		return result;
+	public ResponseEntity<ApiResponse> updateTaskComments(TaskComment comments) {
+		ResponseEntity<ApiResponse> response = taskServiceImpl.updateTaskComment(comments);
+		return response;
 	}
 
-	public ValidResult getTaskById(Long id) {
-		Object rt= taskServiceImpl.getTaskById(id);
-		if (rt != null) {
-			result.setErrorCode((long) 101);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
-			result.setData(rt);
-		} else {
-			result.setErrorCode((long) 102);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
-		}
-		return result;
+	public ResponseEntity<ApiResponse> getTaskById(Long id) {
+		ResponseEntity<ApiResponse> response = taskServiceImpl.getTaskById(id);
+		return response;
 	}
 
-	public ValidResult getTaskBycreatorUser() {
-		Object rt= taskServiceImpl.getTaskByCreatorUser();
-		if (rt != null) {
-			result.setErrorCode((long) 101);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_101);
-			result.setData(rt);
-		} else {
-			result.setErrorCode((long) 102);
-			result.setErrorMsg(VikrayPmoMessageConstant.KEY_102);
-		}
-		return result;
+	public ResponseEntity<ApiResponse> getTaskBycreatorUser() {
+		ResponseEntity<ApiResponse> response = taskServiceImpl.getTaskByCreatorUser();
+		return response;
+	}
+
+	public ResponseEntity<ApiResponse> getTaskByGuId(String guid) {
+		ResponseEntity<ApiResponse> response = taskServiceImpl.getTaskByGuid(guid);
+		return response;
 	}
 
 }

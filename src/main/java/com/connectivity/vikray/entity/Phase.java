@@ -46,6 +46,8 @@ public class Phase extends Auditable<Long> implements Serializable {
 	private String guid;
 	private String phaseDescription;
 	
+	private Set<TaskStatus> taskStatus = new HashSet<TaskStatus>();
+	
 	
 	
 	@Column
@@ -176,5 +178,12 @@ public class Phase extends Auditable<Long> implements Serializable {
 		this.phaseDescription = phaseDescription;
 	}
 
-	
+	@OneToMany(fetch = FetchType.LAZY , mappedBy = "phase")
+	public Set<TaskStatus> getTaskStatus() {
+		return this.taskStatus;
+	}
+
+	public void setTaskStatus(Set<TaskStatus> taskStatus) {
+		this.taskStatus = taskStatus;
+	}
 }

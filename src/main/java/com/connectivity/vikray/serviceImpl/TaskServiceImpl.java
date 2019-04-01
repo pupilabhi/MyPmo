@@ -10,13 +10,12 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.task.TaskRejectedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.connectivity.vikray.controller.PhaseController;
 import com.connectivity.vikray.controller.TaskController;
 import com.connectivity.vikray.entity.Documents;
 import com.connectivity.vikray.entity.Phase;
@@ -35,7 +34,6 @@ import com.connectivity.vikray.repository.TaskPriorityRepository;
 import com.connectivity.vikray.repository.TaskRepository;
 import com.connectivity.vikray.repository.TaskStatusRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
-import com.connectivity.vikray.resource.PhaseResource;
 import com.connectivity.vikray.resource.TaskResource;
 import com.connectivity.vikray.util.EventImpl;
 import com.connectivity.vikray.util.LoggedInUser;
@@ -93,7 +91,7 @@ public class TaskServiceImpl {
 			toDb.setPhaseFk(phaseRepository.getOne(taskfrmclint.getPhaseFk().getId()));
 		}
 		taskRepository.save(toDb);
-		Set<Documents> docs = createDocument(taskfrmclint, toDb);
+		Set<Documents> docs = createUpdateDocument(taskfrmclint, toDb);
 		toDb.setDocuments(docs);
 		Set<TaskFollower> taskFollowers = createTaskFollower(taskfrmclint, toDb);
 		toDb.setTaskFollowers(taskFollowers);
@@ -108,35 +106,30 @@ public class TaskServiceImpl {
 	}
 
 	// create Documents
-	private Set<Documents> createDocument(Task taskfrmclint, Task task) {
+	private Set<Documents> createUpdateDocument(Task taskfrmclint, Task task) {
 		Set<Documents> docsfrmclint = taskfrmclint.getDocuments();
 		Set<Documents> newdocs = new HashSet<Documents>();
 		Iterator<Documents> itr = docsfrmclint.iterator();
 		while (itr.hasNext()) {
-			Documents docsToDb = new Documents();
-			docsToDb = itr.next();
-			docsToDb.setPath(docsToDb.getPath());
-			docsToDb.setTaskFk(docsToDb.getTaskFk());
-			documentRepository.save(docsToDb);
-			newdocs.add(docsToDb);
+			Documents doc = itr.next();
+			if(doc.getId()==0) {
+				Documents docsToDb = new Documents();
+				docsToDb.setPath(doc.getPath());
+				docsToDb.setTaskFk(doc.getTaskFk());
+				documentRepository.save(doc);
+				newdocs.add(doc);
+			}else {
+				Documents frmDb = documentRepository.getOne(doc.getId());
+				frmDb.setPath(doc.getPath());
+				frmDb.setTaskFk(doc.getTaskFk());
+				documentRepository.save(frmDb);
+				newdocs.add(frmDb);
+			}
+			
 		}
 		return newdocs;
 	}
 
-	// create TaskComments
-	private Set<TaskComment> createTaskComments(Task taskfrmclint, Task task) {
-		Set<TaskComment> tCommentsFromClient = taskfrmclint.getTaskComments();
-		Set<TaskComment> newTask = new HashSet<TaskComment>();
-		Iterator<TaskComment> itr = tCommentsFromClient.iterator();
-		while (itr.hasNext()) {
-			TaskComment tcommentTodb = new TaskComment();
-			tcommentTodb = itr.next();
-			tcommentTodb.setTask(tcommentTodb.getTask());
-			taskCommentRepository.save(tcommentTodb);
-			newTask.add(tcommentTodb);
-		}
-		return newTask;
-	}
 
 	// createTaskCCUser
 	private Set<TaskFollower> createTaskFollower(Task taskfrmclint, Task task) {
@@ -154,13 +147,11 @@ public class TaskServiceImpl {
 
 	}
 
-	public Task updateTask(Task taskfromClient) {
+	public ResponseEntity<ApiResponse> updateTask(Task taskfromClient) {
 		Task taskfromDb = taskRepository.getOne(taskfromClient.getId());
 		if (taskfromDb == null) {
 			return null;
 		}
-
-
 		if (taskfromClient.getTaskPriority() != null) {
 			if (taskfromClient.getTaskPriority().getId() == 0) {
 				taskfromClient.setTaskPriority(taskfromClient.getTaskPriority());
@@ -169,15 +160,13 @@ public class TaskServiceImpl {
 			}
 		}
 
-		if (taskfromClient.getTaskStatus() != null) {
-			if (taskfromClient.getTaskStatus().getId() == 0) {
+		if (taskfromClient.getCurrentStatus() != null) {
+			if (taskfromClient.getCurrentStatus().getId() == 0) {
 				taskfromClient.setTaskPriority(taskfromClient.getTaskPriority());
 			} else {
 				TaskStatus statusToDb = taskStatusRepository.getOne(taskfromClient.getTaskPriority().getId());
 			}
 		}
-
-		
 
 			taskfromDb.setDueDate(taskfromClient.getDueDate());
 			taskfromDb.setGuid(taskfromClient.getGuid());
@@ -212,13 +201,6 @@ public class TaskServiceImpl {
 				}
 			}
 
-			/*for (TaskCcUser taskCcUser : taskfromClient.getTaskFollowers()) {
-				if (taskCcUser.getId() == 0) {
-					taskCcUser.setTask(taskfromDb);
-				} else {
-					TaskCcUser users = taskCcUserRepository.getOne(taskCcUser.getId());
-				}
-			}*/
 			taskfromDb.setEventId(taskfromClient.getEventId());
 		try {
 			eventImpl.updateEvent(taskfromDb);
@@ -228,9 +210,12 @@ public class TaskServiceImpl {
 		}
 		Task updateTask = taskRepository.save(taskfromDb);
 		if (updateTask != null) {
-			return updateTask;
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Update Failed", null),
+					HttpStatus.EXPECTATION_FAILED);
 		} else {
-			return null;
+			URI uri = MvcUriComponentsBuilder.fromController(TaskController.class).path("/{id}")
+					.buildAndExpand(updateTask.getId()).toUri();
+			return ResponseEntity.created(uri).body(new ApiResponse(true, "", new TaskResource(updateTask)));
 		}
 	}
 
@@ -239,22 +224,26 @@ public class TaskServiceImpl {
 		return taskRepository.findAll();
 	}
 	
-	public TaskComment addTaskComment(TaskComment commentsFrmClient) {
+	public ResponseEntity<ApiResponse> addTaskComment(TaskComment commentsFrmClient) {
 		TaskComment toDb= new TaskComment();
+		Task task = null;
 		if (commentsFrmClient.getTask() != null) {
-			toDb.setTask(taskRepository.getOne(commentsFrmClient.getTask().getId()));
+			task = taskRepository.getOne(commentsFrmClient.getTask().getId());
+			task.getTaskComments().add(toDb);
+			toDb.setTask(task);
 		}
 		if(commentsFrmClient.getUserDetails() != null) {
 			toDb.setUserDetails(userDetailsRepository.getOne(commentsFrmClient.getUserDetails().getId()));
 		}
 		toDb.setComment(commentsFrmClient.getComment());
-		toDb.setDateTime(commentsFrmClient.getDateTime());
+		toDb.setDateTime(System.currentTimeMillis());
 		taskCommentRepository.save(toDb);
-		return toDb;
+		URI uri = MvcUriComponentsBuilder.fromController(TaskController.class).path("/").build().toUri();
+		return ResponseEntity.created(uri).body(new ApiResponse(true, "", toDb));
 		
 	}
 	
-	public TaskComment updateTaskComment(TaskComment commentsFrmClient) {
+	public ResponseEntity<ApiResponse> updateTaskComment(TaskComment commentsFrmClient) {
 		TaskComment fDb= taskCommentRepository.getOne(commentsFrmClient.getId());
 		if (fDb == null) {
 			return null;
@@ -277,21 +266,35 @@ public class TaskServiceImpl {
 		fDb.setComment(commentsFrmClient.getComment());
 		fDb.setDateTime(commentsFrmClient.getDateTime());
 		TaskComment updateComment = taskCommentRepository.save(fDb);
-		if (updateComment != null) {
-			return updateComment;
+		if(updateComment == null){
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Update Failed", null),
+					HttpStatus.EXPECTATION_FAILED);
 		} else {
-			return null;
+			URI uri = MvcUriComponentsBuilder.fromController(TaskController.class).path("/{id}")
+					.buildAndExpand(updateComment.getId()).toUri();
+			return ResponseEntity.created(uri).body(new ApiResponse(true, "", updateComment));
 		}
 	}
 
-	public Object getTaskById(Long id) {
+	public ResponseEntity<ApiResponse> getTaskById(Long id) {
 		Task fromDb= taskRepository.getOne(id);
-		return fromDb;
+		return null;
 	}
 
-	public Object getTaskByCreatorUser() {
-		long id= LoggedInUser.getCurrentUserId();
-		return taskRepository.findById(id);
+	public ResponseEntity<ApiResponse> getTaskByCreatorUser() {
+		long id = currentUser.getCurrentUser().getId();
+		return null;
+//		return taskRepository.findById(id);
+	}
+
+	public ResponseEntity<ApiResponse> getTaskByGuid(String guid) {
+		if(taskRepository.existsByGuid(guid)) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Task not found by guid : "+guid, null),
+					HttpStatus.EXPECTATION_FAILED);
+		}
+		Task task = taskRepository.findByGuid(guid);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(guid).toUri();
+		return ResponseEntity.created(uri).body(new ApiResponse(true, "", task));
 	}
 	
 }

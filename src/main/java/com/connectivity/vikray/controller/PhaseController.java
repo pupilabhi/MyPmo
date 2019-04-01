@@ -51,8 +51,8 @@ public class PhaseController {
 	}
 	
 	@ApiOperation(value = "Returns Phase By guid")
-	@GetMapping("/{guid}")
-	public ResponseEntity<ApiResponse> getPhaseByGuId(@PathVariable(value = "id") String guid) {
+	@GetMapping("get/{guid}")
+	public ResponseEntity<ApiResponse> getPhaseByGuId(@PathVariable(value = "guid") String guid) {
 		return phaseService.getPhaseByGuId(guid);
 	}
 	

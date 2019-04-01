@@ -24,6 +24,7 @@ import com.connectivity.vikray.entity.Documents;
 import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.Project;
 import com.connectivity.vikray.entity.ProjectFollower;
+import com.connectivity.vikray.entity.TaskStatus;
 import com.connectivity.vikray.entity.UserDetails;
 import com.connectivity.vikray.payload.ApiResponse;
 import com.connectivity.vikray.repository.DocumentRepository;
@@ -31,6 +32,7 @@ import com.connectivity.vikray.repository.PhaseRepository;
 import com.connectivity.vikray.repository.ProjectFollwerRepository;
 import com.connectivity.vikray.repository.ProjectRepository;
 import com.connectivity.vikray.repository.StatusRepository;
+import com.connectivity.vikray.repository.TaskStatusRepository;
 import com.connectivity.vikray.repository.UserDetailsRepository;
 import com.connectivity.vikray.resource.ProjectResource;
 import com.connectivity.vikray.summary.ProjectSummary;
@@ -55,12 +57,19 @@ public class ProjectServiceImpl {
 
 	@Autowired
 	StatusRepository statusRepository;
+	
+	@Autowired
+	TaskStatusRepository taskStatusRepository;
 
 	/**
 	 * @param Project
 	 * @return Project Object on success Persisting project to data base
 	 **/
 	public ResponseEntity<ApiResponse> createProject(Project projectFrmClient) {
+		if(projectRepository.existsByProjectName(projectFrmClient.getProjectName())) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project name Already taken chose another", null),
+					HttpStatus.ACCEPTED);
+		}
 		Project toDb = new Project();
 		toDb.setProjectName(projectFrmClient.getProjectName());
 		toDb.setProjectDescription(projectFrmClient.getProjectDescription());
@@ -140,6 +149,10 @@ public class ProjectServiceImpl {
 		return newPhases;
 	}
 
+	public void createDefaultTaskStatus() {
+		TaskStatus ts = new TaskStatus();
+		
+	}
 	// create Documents
 	public Set<Documents> createDocuments(Project frmClient, Project project) {
 		Set<Documents> documentsFrmClient = frmClient.getDocuments();
@@ -160,6 +173,10 @@ public class ProjectServiceImpl {
 	// update Project
 	public ResponseEntity<ApiResponse> updateProject(Project projectFromClient) {
 		
+		if(projectRepository.existsByProjectName(projectFromClient.getProjectName())) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project name Already taken chose another", null),
+					HttpStatus.ACCEPTED);
+		}
 		if (!projectRepository.existsById(projectFromClient.getId())) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Not Found!", null),
 					HttpStatus.BAD_REQUEST);
