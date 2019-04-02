@@ -299,7 +299,8 @@ public class ProjectServiceImpl {
 	}
 
 	public ResponseEntity<ApiResponse> validateProjectName(String name) {
-		if (projectRepository.existsByProjectName(name)) {
+		String n = name.trim();
+		if (projectRepository.existsByProjectName(n)) {
 			return new ResponseEntity<ApiResponse>(
 					new ApiResponse(false, "Project Name already taken, Choose another", null), HttpStatus.ACCEPTED);
 		}
