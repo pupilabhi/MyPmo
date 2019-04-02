@@ -1,8 +1,10 @@
 package com.connectivity.vikray.entity;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -50,7 +52,7 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 	private Phase phaseFk;
 	private String accountAddress;
 	private Set<Documents> documents = new HashSet<Documents>(0);
-	private Set<TaskComment> taskComments = new HashSet<TaskComment>(0);
+	private List<TaskComment> taskComments = new ArrayList<TaskComment>(0);
 	private Set<TaskFollower> taskFollowers = new HashSet<TaskFollower>(0);
 	private Domain domain;
 	private String eventId;
@@ -159,11 +161,11 @@ public class Task extends Auditable<Long> implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "task")
-	public Set<TaskComment> getTaskComments() {
+	public List<TaskComment> getTaskComments() {
 		return this.taskComments;
 	}
 
-	public void setTaskComments(Set<TaskComment> taskComments) {
+	public void setTaskComments(List<TaskComment> taskComments) {
 		this.taskComments = taskComments;
 	}
 

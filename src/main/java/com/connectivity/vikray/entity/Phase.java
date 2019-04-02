@@ -1,8 +1,10 @@
 package com.connectivity.vikray.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -45,7 +47,7 @@ public class Phase extends Auditable<Long> implements Serializable {
 	private String guid;
 	private String phaseDescription;
 	
-	private Set<TaskStatus> taskStatus = new HashSet<TaskStatus>();
+	private List<TaskStatus> taskStatus = new ArrayList<TaskStatus>();
 	
 	
 	
@@ -178,11 +180,11 @@ public class Phase extends Auditable<Long> implements Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY , mappedBy = "phase")
-	public Set<TaskStatus> getTaskStatus() {
+	public List<TaskStatus> getTaskStatus() {
 		return this.taskStatus;
 	}
 
-	public void setTaskStatus(Set<TaskStatus> taskStatus) {
+	public void setTaskStatus(List<TaskStatus> taskStatus) {
 		this.taskStatus = taskStatus;
 	}
 }

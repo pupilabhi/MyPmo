@@ -152,24 +152,29 @@ public class ProjectServiceImpl {
 		return newPhases;
 	}
 
+	
 	public void createDefaultTaskStatus(Phase phase) {
 
 		TaskStatus todo = new TaskStatus();
 		todo.setConstByName("TO DO");
 		todo.setLabel("To do");
 		todo.setPhase(phase);
+		phase.getTaskStatus().add(0,todo);
 		taskStatusRepository.save(todo);
+		
 
 		TaskStatus inProgress = new TaskStatus();
 		inProgress.setConstByName("IN PROGRESS");
 		inProgress.setLabel("In Progress");
 		inProgress.setPhase(phase);
+		phase.getTaskStatus().add(0,inProgress);
 		taskStatusRepository.save(inProgress);
 
 		TaskStatus completed = new TaskStatus();
 		completed.setConstByName("COMPLETED");
 		completed.setLabel("Completed");
 		completed.setPhase(phase);
+		phase.getTaskStatus().add(0,completed);
 		taskStatusRepository.save(completed);
 
 	}
@@ -255,6 +260,17 @@ public class ProjectServiceImpl {
 	public ResponseEntity<Resources<?>> getAllProject() {
 		List<Project> projects = null;
 		projects = projectRepository.findAll();
+		/*for(Project p: projects) {
+			if(!p.getPhases().isEmpty()) {
+				Iterator<Phase> itr = p.getPhases().iterator();
+				while(itr.hasNext()) {
+					Phase ph = itr.next();
+					if(ph.getTaskStatus().isEmpty()) {
+						createDefaultTaskStatus(ph);
+					}
+				}
+			}
+		}*/
 		List<ProjectSummary> summary = null;
 		summary = new ArrayList<ProjectSummary>();
 		Iterator<Project> itr = projects.iterator();
