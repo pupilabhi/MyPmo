@@ -61,9 +61,6 @@ public class ProjectServiceImpl {
 	@Autowired
 	TaskStatusRepository taskStatusRepository;
 
-	private static String INProgres = "In Progress";
-	private static String ToDo = "ToDo";
-	private static String Completed = "Completed";
 
 	/**
 	 * @param Project
@@ -147,6 +144,7 @@ public class ProjectServiceImpl {
 				newPhases.add(newPhaseTodb);
 				createDefaultTaskStatus(newPhaseTodb);
 			} else {
+				phaseFrmClient.setProjectFk(project);
 				phaseRepository.save(phaseFrmClient);
 				newPhases.add(phaseFrmClient);
 			}
@@ -195,16 +193,20 @@ public class ProjectServiceImpl {
 
 	// update Project
 	public ResponseEntity<ApiResponse> updateProject(Project projectFromClient) {
-
-		if (projectRepository.existsByProjectName(projectFromClient.getProjectName())) {
-			return new ResponseEntity<ApiResponse>(
-					new ApiResponse(false, "Project name Already taken chose another", null), HttpStatus.ACCEPTED);
-		}
+		
 		if (!projectRepository.existsById(projectFromClient.getId())) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Not Found!", null),
 					HttpStatus.BAD_REQUEST);
 		}
+		
 		Project projectFromDb = projectRepository.getOne(projectFromClient.getId());
+		if(!projectFromClient.getProjectName().equals(projectFromDb.getProjectName())) {
+			if (projectRepository.existsByProjectName(projectFromClient.getProjectName())) {
+				return new ResponseEntity<ApiResponse>(
+						new ApiResponse(false, "Project name Already taken chose another", null), HttpStatus.ACCEPTED);
+			}
+		}
+		
 		projectFromDb.setProjectName(projectFromClient.getProjectName());
 		projectFromDb.setProjectDescription(projectFromClient.getProjectDescription());
 		projectFromDb.setDueDate(projectFromClient.getDueDate());
