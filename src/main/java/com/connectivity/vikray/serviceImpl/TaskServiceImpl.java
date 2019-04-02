@@ -156,7 +156,7 @@ public class TaskServiceImpl {
 			if (taskfromClient.getTaskPriority().getId() == 0) {
 				taskfromClient.setTaskPriority(taskfromClient.getTaskPriority());
 			} else {
-				TaskPriority priorityToDb = taskPriorityRepository.getOne(taskfromClient.getTaskPriority().getId());
+//				TaskPriority priorityToDb = taskPriorityRepository.getOne(taskfromClient.getTaskPriority().getId());
 			}
 		}
 
@@ -208,14 +208,14 @@ public class TaskServiceImpl {
 			// TODO Auto-generated catch blocksetTaskUrl
 			e.printStackTrace();
 		}
-		Task updateTask = taskRepository.save(taskfromDb);
-		if (updateTask != null) {
+		Task updatedTask = taskRepository.save(taskfromDb);
+		if (updatedTask == null) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Update Failed", null),
 					HttpStatus.EXPECTATION_FAILED);
 		} else {
 			URI uri = MvcUriComponentsBuilder.fromController(TaskController.class).path("/{id}")
-					.buildAndExpand(updateTask.getId()).toUri();
-			return ResponseEntity.created(uri).body(new ApiResponse(true, "", new TaskResource(updateTask)));
+					.buildAndExpand(updatedTask.getId()).toUri();
+			return ResponseEntity.created(uri).body(new ApiResponse(true, "", new TaskResource(updatedTask)));
 		}
 	}
 

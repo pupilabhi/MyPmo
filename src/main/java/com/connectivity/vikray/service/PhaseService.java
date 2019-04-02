@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.connectivity.vikray.constant.VikrayPmoMessageConstant;
 import com.connectivity.vikray.entity.Phase;
 import com.connectivity.vikray.entity.TeamMember;
 import com.connectivity.vikray.payload.ApiResponse;
@@ -48,6 +47,11 @@ public class PhaseService {
 
 	public ResponseEntity<ApiResponse> addTeamMember(TeamMember member) {
 		ResponseEntity<ApiResponse> response= phaseServiceImpl.createTeamMember(member);
+		return response;
+	}
+
+	public ResponseEntity<ApiResponse> deletePhase(Long id) {
+		ResponseEntity<ApiResponse> response= phaseServiceImpl.removePhase(id);
 		return response;
 	}
 }

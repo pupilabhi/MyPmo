@@ -2,7 +2,6 @@ package com.connectivity.vikray.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,7 +14,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "PROJECT_FOLLOWER", catalog = "vikrayPmo")
+@Table(name = "PROJECT_FOLLOWER")
 public class ProjectFollower implements Serializable{
 
 	/**

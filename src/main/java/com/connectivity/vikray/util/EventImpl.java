@@ -106,7 +106,7 @@ public class EventImpl {
 		
 		String calendarId = "primary";
 		event = service.events().insert(calendarId, event).execute();
-		String evur = event.getHtmlLink();
+//		String evur = event.getHtmlLink();
 		task.setEventId(event.getId());
 		taskRepository.save(task);
 	}

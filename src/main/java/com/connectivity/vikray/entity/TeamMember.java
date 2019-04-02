@@ -17,7 +17,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "Team_Member", catalog = "vikrayPmo")
+@Table(name = "Team_Member")
 @EntityListeners(AuditingEntityListener.class)
 public class TeamMember extends Auditable<Long> implements Serializable{
 

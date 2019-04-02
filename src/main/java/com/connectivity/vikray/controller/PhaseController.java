@@ -2,6 +2,7 @@ package com.connectivity.vikray.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,4 +63,13 @@ public class PhaseController {
 		return phaseService.addTeamMember(member);
 	}
 	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<ApiResponse> deletePhase(@PathVariable(value = "id") Long id){
+		return phaseService.deletePhase(id);
+	}
+	
+	@PostMapping("/add")
+	public ResponseEntity<ApiResponse> addPhase(@RequestBody Phase phase ){
+		return phaseService.createPhase(phase);
+	}
 }

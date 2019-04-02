@@ -3,7 +3,6 @@ package com.connectivity.vikray.summary;
 import java.util.Date;
 
 import com.connectivity.vikray.entity.Project;
-import com.connectivity.vikray.entity.UserDetails;
 
 public class ProjectSummary {
 	private long id;

@@ -196,4 +196,18 @@ public class PhaseServiceImpl {
 		return ResponseEntity.created(uri).body(new ApiResponse(true, "", tm));
 	}
 
+	public ResponseEntity<ApiResponse> removePhase(Long id) {
+		if(!phaseRepository.existsById(id)) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Phase with id : "+id+" Not Found", null),
+					HttpStatus.BAD_REQUEST);
+		}
+		Phase _phaseFrmDb = phaseRepository.getOne(id);
+		if(!_phaseFrmDb.getTasks().isEmpty()) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Phase with id : "+id+" Cannot be deleted Since Task has been created against this Phase", null),
+					HttpStatus.ACCEPTED);
+		}
+		phaseRepository.delete(_phaseFrmDb);
+		return ResponseEntity.accepted().body(new ApiResponse(true, "Phase deleted successfully", null));
+	}
+
 }
