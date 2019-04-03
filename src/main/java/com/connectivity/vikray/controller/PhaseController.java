@@ -72,4 +72,9 @@ public class PhaseController {
 	public ResponseEntity<ApiResponse> addPhase(@RequestBody Phase phase ){
 		return phaseService.createPhase(phase);
 	}
+	
+	@DeleteMapping("/removeMember/{id}")
+	public ResponseEntity<ApiResponse> removeMember(@PathVariable(value = "id") Long id){
+		return phaseService.removeMember(id);
+	}
 }

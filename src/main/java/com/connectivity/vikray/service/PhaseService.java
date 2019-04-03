@@ -54,4 +54,9 @@ public class PhaseService {
 		ResponseEntity<ApiResponse> response= phaseServiceImpl.removePhase(id);
 		return response;
 	}
+
+	public ResponseEntity<ApiResponse> removeMember(Long id) {
+		ResponseEntity<ApiResponse> response = phaseServiceImpl.removeMember(id);
+		return response;
+	}
 }

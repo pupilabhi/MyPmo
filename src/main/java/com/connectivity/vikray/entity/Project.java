@@ -22,6 +22,9 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "PROJECT", catalog = "vikrayPmo")
 @EntityListeners(AuditingEntityListener.class)
@@ -44,8 +47,28 @@ public class Project extends Auditable<Long> implements Serializable {
 	private Set<Documents> documents = new HashSet<Documents>(0);
 	private StatusItem projectStatus;
 	private String guid;
-	private String customerName;
 	
+	private String customerName;
+	private String custStateName;
+	private long customerId;
+
+
+	public String getCustStateName() {
+		return custStateName;
+	}
+
+	public void setCustStateName(String custStateName) {
+		this.custStateName = custStateName;
+	}
+
+	public long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(long customerId) {
+		this.customerId = customerId;
+	}
+
 	@Column(name = "customer_name")
 	public String getCustomerName() {
 		return customerName;
@@ -197,4 +220,6 @@ public class Project extends Auditable<Long> implements Serializable {
 	public void setProjectStatus(StatusItem projectStatus) {
 		this.projectStatus = projectStatus;
 	}
+
+	
 }

@@ -210,4 +210,13 @@ public class PhaseServiceImpl {
 		return ResponseEntity.accepted().body(new ApiResponse(true, "Phase deleted successfully", null));
 	}
 
+	public ResponseEntity<ApiResponse> removeMember(Long id) {
+		if(!teamMeberRepository.existsById(id)) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Team Member with id : "+id+" Not Found", null),
+					HttpStatus.BAD_REQUEST);
+		}
+		teamMeberRepository.delete(teamMeberRepository.getOne(id));
+		return ResponseEntity.accepted().body(new ApiResponse(true, "Team Member deleted successfully", null));
+	}
+
 }

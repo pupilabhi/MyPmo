@@ -72,21 +72,27 @@ public class ProjectServiceImpl {
 					new ApiResponse(false, "Project name Already taken chose another", null), HttpStatus.ACCEPTED);
 		}
 		Project toDb = new Project();
-		toDb.setProjectName(projectFrmClient.getProjectName());
-		toDb.setProjectDescription(projectFrmClient.getProjectDescription());
-		if (projectFrmClient.getDueDate() != null)
-			toDb.setDueDate(projectFrmClient.getDueDate());
-
-		toDb.setAccountAddress(projectFrmClient.getAccountAddress());
-		toDb.setSalesOrder(projectFrmClient.getSalesOrder());
-		toDb.setProjectStatus(statusRepository.getOne(VikrayPmoConstant.PROJ_NEW));
 		if (projectFrmClient.getOwner() == null) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Owner Required!", null),
 					HttpStatus.BAD_REQUEST);
 		} else {
 			toDb.setOwner(userDetailsRepository.getOne(projectFrmClient.getOwner().getId()));
 		}
+		
+		toDb.setProjectName(projectFrmClient.getProjectName());
+		toDb.setProjectDescription(projectFrmClient.getProjectDescription());
+		if (projectFrmClient.getDueDate() != null)
+			toDb.setDueDate(projectFrmClient.getDueDate());
+
+		toDb.setAccountAddress(projectFrmClient.getAccountAddress());
+		toDb.setCustomerId(projectFrmClient.getCustomerId());
+		toDb.setCustStateName(projectFrmClient.getCustStateName());
+		toDb.setSalesOrder(projectFrmClient.getSalesOrder());
 		toDb.setCustomerName(projectFrmClient.getCustomerName());
+		
+		toDb.setProjectStatus(statusRepository.getOne(VikrayPmoConstant.PROJ_NEW));
+		
+		
 		toDb.setGuid(UUID.randomUUID().toString());
 		if (projectFrmClient.getProjectFollowers().isEmpty()) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Project Followers Required!", null),
@@ -216,6 +222,9 @@ public class ProjectServiceImpl {
 		projectFromDb.setProjectDescription(projectFromClient.getProjectDescription());
 		projectFromDb.setDueDate(projectFromClient.getDueDate());
 		projectFromDb.setCustomerName(projectFromClient.getCustomerName());
+		projectFromDb.setCustomerId(projectFromClient.getCustomerId());
+		projectFromDb.setCustStateName(projectFromClient.getCustStateName());
+		
 		projectFromDb.setAccountAddress(projectFromClient.getAccountAddress());
 		projectFromDb.setSalesOrder(projectFromClient.getSalesOrder());
 		if (projectFromClient.getOwner() != null) {
@@ -235,15 +244,15 @@ public class ProjectServiceImpl {
 			projectFromDb.setProjectFollowers(pf);
 		}
 
-		// Removing existing phases
-		if (!projectFromClient.getPhases().isEmpty())
-			phaseRepository.deleteInBatch(projectFromDb.getPhases());
+//		// Removing existing phases
+//		if (!projectFromClient.getPhases().isEmpty())
+//			phaseRepository.deleteInBatch(projectFromDb.getPhases());
 
-		// updating with new phases
-		if (!projectFromClient.getPhases().isEmpty()) {
-			Set<Phase> phases = createUpdatePhase(projectFromClient, projectFromDb);
-			projectFromDb.setPhases(phases);// update Documents
-		}
+//		// updating with new phases
+//		if (!projectFromClient.getPhases().isEmpty()) {
+//			Set<Phase> phases = createUpdatePhase(projectFromClient, projectFromDb);
+//			projectFromDb.setPhases(phases);// update Documents
+//		}
 
 		Project updatedProject = projectRepository.save(projectFromDb);
 		if (updatedProject == null) {

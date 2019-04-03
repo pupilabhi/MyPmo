@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.xml.stream.events.Comment;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -226,13 +228,13 @@ public class TaskServiceImpl {
 	}
 
 	public void _processTaskStatus(Task taskfromDb, Task taskfromClient, UserDetails loggedInUser) {
-		if(taskfromClient.getCurrentStatus().getConstByName().equals("COMPLETED")) {
-			if(loggedInUser.getId()==taskfromDb.getAssignee().getId()) {
-				_verifyTask(taskfromDb, taskfromClient, loggedInUser);
-			}
-		}else {
-			
-		}
+		TaskStatus ts = taskStatusRepository.getOne(taskfromClient.getId());
+		
+		taskfromDb.setCurrentStatus(ts);
+		TaskComment comment = new TaskComment();
+		comment.setComment("Task Moved to sttaus "+ts.getLabel()+" status on "
+				+ format.format(new Date(System.currentTimeMillis()))+" by "+ loggedInUser.getFirstName());
+//		comment.set
 	}
 
 	public void _verifyTask(Task taskfromDb, Task taskfromClient, UserDetails loggedInUser) {
