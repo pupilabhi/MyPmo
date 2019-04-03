@@ -65,7 +65,7 @@ public class TaskService {
 
 	public ResponseEntity<ApiResponse> createNewStatus(TaskStatus status) {
 		ResponseEntity<ApiResponse> response = taskServiceImpl.creatStatus(status);
-		return null;
+		return response;
 	}
 
 }

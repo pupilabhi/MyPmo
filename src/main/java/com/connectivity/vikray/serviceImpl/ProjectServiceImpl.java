@@ -148,7 +148,7 @@ public class ProjectServiceImpl {
 				newPhaseTodb.setPhaseStatus(statusRepository.getOne(VikrayPmoConstant.PHASE_NEW));
 				phaseRepository.save(newPhaseTodb);
 				newPhases.add(newPhaseTodb);
-				createDefaultTaskStatus(newPhaseTodb);
+				_createDefaultTaskStatus(newPhaseTodb);
 			} else {
 				phaseFrmClient.setProjectFk(project);
 				phaseRepository.save(phaseFrmClient);
@@ -159,7 +159,7 @@ public class ProjectServiceImpl {
 	}
 
 	
-	public void createDefaultTaskStatus(Phase phase) {
+	public void _createDefaultTaskStatus(Phase phase) {
 
 		TaskStatus todo = new TaskStatus();
 		todo.setConstByName("TO DO");
@@ -212,7 +212,8 @@ public class ProjectServiceImpl {
 		
 		Project projectFromDb = projectRepository.getOne(projectFromClient.getId());
 		if(!projectFromClient.getProjectName().equals(projectFromDb.getProjectName())) {
-			if (projectRepository.existsByProjectName(projectFromClient.getProjectName())) {
+			String name = projectFromClient.getProjectName().trim();
+			if (projectRepository.existsByProjectName(name)) {
 				return new ResponseEntity<ApiResponse>(
 						new ApiResponse(false, "Project name Already taken chose another", null), HttpStatus.ACCEPTED);
 			}
@@ -244,16 +245,6 @@ public class ProjectServiceImpl {
 			projectFromDb.setProjectFollowers(pf);
 		}
 
-//		// Removing existing phases
-//		if (!projectFromClient.getPhases().isEmpty())
-//			phaseRepository.deleteInBatch(projectFromDb.getPhases());
-
-//		// updating with new phases
-//		if (!projectFromClient.getPhases().isEmpty()) {
-//			Set<Phase> phases = createUpdatePhase(projectFromClient, projectFromDb);
-//			projectFromDb.setPhases(phases);// update Documents
-//		}
-
 		Project updatedProject = projectRepository.save(projectFromDb);
 		if (updatedProject == null) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Oops!!, Project Update failed", null),
@@ -269,17 +260,6 @@ public class ProjectServiceImpl {
 	public ResponseEntity<Resources<?>> getAllProject() {
 		List<Project> projects = null;
 		projects = projectRepository.findAll();
-		/*for(Project p: projects) {
-			if(!p.getPhases().isEmpty()) {
-				Iterator<Phase> itr = p.getPhases().iterator();
-				while(itr.hasNext()) {
-					Phase ph = itr.next();
-					if(ph.getTaskStatus().isEmpty()) {
-						createDefaultTaskStatus(ph);
-					}
-				}
-			}
-		}*/
 		List<ProjectSummary> summary = null;
 		summary = new ArrayList<ProjectSummary>();
 		Iterator<Project> itr = projects.iterator();
